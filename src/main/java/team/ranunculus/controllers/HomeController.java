@@ -13,4 +13,10 @@ public class HomeController {
         modelAndView.setViewName("home/index");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ModelAndView postIndex(ModelAndView modelAndView) {
+        modelAndView.setViewName("home/index");
+        return modelAndView;
+    }
 }
