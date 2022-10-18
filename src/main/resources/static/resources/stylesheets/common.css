@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 :root {
-    --concept-color-pink : 250, 219, 216;
+    --concept-color-pink : 245, 195, 190;
     --content-width-default: 73.75rem;
 }
 
@@ -13,3 +13,4 @@ html {
 body {
     margin: 0;
 }
+
