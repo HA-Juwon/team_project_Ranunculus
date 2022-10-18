@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <th:block th:fragment="content">
-        <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css"/>
-        <link rel="stylesheet" href="/resources/stylesheets/common.css">
-    </th:block>
-</head>
+<th:block th:fragment="content">
+    <link th:href="@{/resources/stylesheets/common.css}" rel="stylesheet">
+    <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css" rel="stylesheet">
+    <script defer th:src="@{/resources/scripts/common.js}"></script>
+    <script src="https://kit.fontawesome.com/edde7eca48.js" crossorigin="anonymous"></script>
+</th:block>
 </html>

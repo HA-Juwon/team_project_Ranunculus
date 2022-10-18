@@ -13,3 +13,80 @@ html {
 body {
     margin: 0;
 }
+
+._header{
+    top: 0;
+    width: 100%;
+    height: 5rem;
+    align-items: stretch;
+    background-color: white;
+/*rgb(250, 219, 216);*/
+    box-shadow: 0 0 1rem 0.0625rem rgba(250, 219, 216, 20%);
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: center;
+    position: sticky;
+    z-index: 8;
+}
+
+._header>.hd-sec01{
+    width: 1260px;
+    margin: 0 auto;
+}
+
+._header>.hd-sec01 a{
+    color: rgb(40,40,40);
+    font-size: 16px;
+}
+._header>.hd-sec01>.left-area{
+    float: left;
+    width: 330px
+}
+
+._header>.hd-sec01>.left-area>ul>li{
+    float: left;
+}
+
+._header>.hd-sec01>.left-area>ul>li>a{
+    font-weight: 500;
+    padding: 0 9px;
+    height: 88px;
+    line-height: 88px;
+}
+._header>.hd-sec01>.logo-container{
+    float: left;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 88px;
+    line-height: 88px;
+}
+
+._header>.hd-sec01>.right-area{
+    float: right;
+    width: 330px;
+}
+._header>.hd-sec01>.right-area>.square-manu{
+    margin: 0;
+    padding: 0;
+}
+
+._header>.hd-sec01>.right-area>.square-manu li:nth-child(1){
+    border-right: 1px solid var(--concept-color-pink);
+}
+
+._header>.hd-sec01>.right-area>.square-manu li{
+    float: right;
+    border-left: 1px solid rgb(var(--concept-color-pink));
+    vertical-align: top;
+}
+
+._header>.hd-sec02{
+    width: 100%;
+    height: 37px;
+    margin: 0 auto;
+    border-top: 1px solid rgb(var(--concept-color-pink));
+    border-bottom: 1px solid rgb(var(--concept-color-pink));
+    position: relative;
+}
