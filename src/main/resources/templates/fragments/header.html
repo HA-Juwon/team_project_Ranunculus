@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<header class="_header _content-wrapper" th:fragment="content">
+<head>
+<script defer th:src="@{/resources/scripts/common.js}"></script>
+</head>
+    <header class="_header _content-wrapper" th:fragment="content">
     <div class="_content-container hd-sec01">
         <div class="left-area">
             <ul class="menu">
@@ -17,30 +20,48 @@
         </div>
         <a class="logo-container" th:href="@{/}">
             <!--    로고 생기면 넣기      -->
-            <img alt="라넌큘러스 로고" class="logo" th:src="@{/}">
+            <img alt="라넌큘러스 로고" class="logo" th:src="@{/resources/images/logo.png}">
         </a>
         <div class="right-area">
             <ul class="square-manu">
-                <li>
-                    <a class="icon sc">
+                <li id="search-button">
+                    <div class="atag sc">
+                    <a class="icon">
                         <i class="icon fa-solid fa-magnifying-glass"></i>
                     </a>
+                    </div>
                 </li>
                 <li>
-                    <a class="icon myp">
-                        <i class="fa-regular fa-user"></i>
-                    </a>
+                    <div class="atag myp" id="my-button">
+                        <a class="icon">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                    </div>
+                    <ul class="menu-container" id="menu-container">
+                        <li class="my-menu">
+                            <div>
+                                <a class="link" th:href="@{/member/userRegister}">회원가입</a>
+                            </div>
+                        </li>
+                        <li class="my-menu">
+                            <div>
+                                <a class="link" th:href="@{/member/userLogin}">로그인</a>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a class="icon cart link" th:href="@{/cart/}">
-                        <i class="fa-regular fa-cart-circle-arrow-down"></i>
+                    <div class="atag cart">
+                    <a class="icon link" th:href="@{/cart/}">
+                        <i class="fa-solid fa-cart-shopping"></i>
                     </a>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
     <div class="hd-sec02">
-        <ul class="categories line-separated">
+        <ul class="categories-wrapper line-separated">
             <li class="category">
                 <a class="value" th:href="@{/}">여성향수</a>
             </li>
@@ -52,7 +73,7 @@
             </li>
         </ul>
     </div>
-    <div class="hd-sec-search">
+    <div class="hd-sec-search" id="hd-sec-search">
         <form class="search_area" method="get">
             <label class="input-container">
                 <div class="typ-container">
