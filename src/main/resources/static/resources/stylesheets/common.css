@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+:root {
+    --concept-color-pink : 250, 219, 216;
+    --content-width-default: 73.75rem;
+}
+
+html {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-weight: 300;
+}
+
+body {
+    margin: 0;
+}
