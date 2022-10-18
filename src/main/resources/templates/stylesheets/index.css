@@ -1,0 +1,87 @@
+
+body {
+    background-color: rgb(250, 219, 216);
+}
+
+.hero-header{
+    height: 450px;
+   background-image: url("https://s3.ap-northeast-2.amazonaws.com/om-public-static/media/images/products/2020/03/IMG_1272-01_FlP68NK.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin-top: 100px;
+
+}
+
+.navbar #logo{
+    line-height: 60px;
+}
+
+.navbar img{
+    vertical-align: top;
+    border: blanchedalmond 5px solid;
+}
+
+.navbar #menu{
+    float: right;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar #menu li{
+    float: left;
+    margin-left: 50px;
+    line-height: 60px;
+}
+
+.navbar #menu li a{
+    color: #545454;
+    font-size: 13px;
+    text-decoration: none;
+}
+.product-list{
+    width: 735px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.products h3{
+    font-size: 24px;
+    color: #545454;
+    margin-top:60px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.product{
+    display: block;
+    width: 225px;
+    text-align: center;
+    text-decoration:none;
+    color: black;
+    float:left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+.product-name{
+    margin-top: 20px;
+    margin-bottom: 4px;
+}
+
+.clearfix{
+    clear: both;
+}
+.footer{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.footer a{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration:none;
+}
+
