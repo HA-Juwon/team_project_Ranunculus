@@ -1,6 +1,48 @@
 <!DOCTYPE html>
-<html lang="ko">
-<footer>
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<footer class="_footer _content-wrapper" th:fragment="content">
+    <div class="ft_sec01">
+        <ul class="enumerator line-separated">
+            <li class="item">
+                <a class="value" th:href="@{/misc/policy (tab='introduce')}">회사소개</a>
+                <span class="bt_bar">|</span>
+            </li>
+            <li class="item">
+                <a class="value" th:href="@{/misc/policy (tab='guide')}">쇼핑가이드</a>
+                <span class="bt_bar">|</span>
+            </li>
+            <li class="item">
+                <a class="value" th:href="@{/misc/policy (tab='privacy')}">개인정보 처리방침</a>
+                <span class="bt_bar">|</span>
+            </li>
+            <li class="item">
+                <a class="value" th:href="@{/misc/policy (tab='terms')}">이용약관</a>
+            </li>
+        </ul>
+    </div>
+    <div class="ft_sec02">
+        <div class="fleft cs_area">
+            <div class="tit_cs">고객센터</div>
+            <div class="fleft ft_phone">010.0000.0000</div>
+            <div class="fleft cs_info">
+                <span class="small_letter">평일: 10:00~18:00/점심: 12:00~13:00</span>
+                <span class="small_letter">토/일요일과 공휴일은 휴무입니다.</span>
+            </div>
+        </div>
+        <div class="fleft bank_area">
+            <div class="tit_bank">입금계좌안내</div>
+            <div class="fleft bank_info">
+                <span class="small_letter">농협은행 00000000000</span>
+                <span class="small_letter">국민은행 00000000000</span>
+            </div>
+        </div>
+    </div>
+    <div class="ft_sec03">
+        <div class="bt_inner">
+            <div class="flete com_info">회사명 : Ranunculus / 대표 : 권기태 / 주소 : 대구광역시, 1층 0000호 / 전화 : 070-4322-0021 / FAX : 031-624-4904
+                사업자등록번호 : 000-00-00000 [사업자정보확인] / 개인정보담당자 : X / 통신판매업신고번호 : 0000000000 호</div>
+            <div class="copyright">COPYRIGHT BY Ranunculus ALL RIGHTS RESERVED.</div>
+        </div>
+    </div>
 </footer>
 </html>

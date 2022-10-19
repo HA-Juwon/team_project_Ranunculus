@@ -1,6 +1,88 @@
 <!DOCTYPE html>
-<html lang="ko">
-<header>
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<script defer th:src="@{/resources/scripts/common.js}"></script>
+</head>
+    <header class="_header _content-wrapper" th:fragment="content">
+    <div class="_content-container hd-sec01">
+        <div class="left-area">
+            <ul class="menu">
+                <li class="item">
+                    <a class="link" th:href="@{/qna/}">Q&A</a>
+                </li>
+                <li class="item">
+                    <a class="link" th:href="@{/review/}">상품후기</a>
+                </li>
+                <li class="item">
+                    <a class="link" th:href="@{/notice/}">공지사항</a>
+                </li>
+            </ul>
+        </div>
+        <a class="logo-container" th:href="@{/}">
+            <!--    로고 생기면 넣기      -->
+            <img alt="라넌큘러스 로고" class="logo" th:src="@{/resources/images/logo.png}">
+        </a>
+        <div class="right-area">
+            <ul class="square-manu">
+                <li id="search-button">
+                    <div class="atag sc">
+                    <a class="icon">
+                        <i class="icon fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="atag myp" id="my-button">
+                        <a class="icon">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                    </div>
+                    <ul class="menu-container" id="menu-container">
+                        <li class="my-menu">
+                            <div>
+                                <a class="link" th:href="@{/member/userRegister}">회원가입</a>
+                            </div>
+                        </li>
+                        <li class="my-menu">
+                            <div>
+                                <a class="link" th:href="@{/member/userLogin}">로그인</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="atag cart">
+                    <a class="icon link" th:href="@{/cart/}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="hd-sec02">
+        <ul class="categories-wrapper line-separated">
+            <li class="category">
+                <a class="value" th:href="@{/}">여성향수</a>
+            </li>
+            <li class="category">
+                <a class="value" th:href="@{/}">남성항수</a>
+            </li>
+            <li class="category">
+                <a class="value" th:href="@{/}">남여공용</a>
+            </li>
+        </ul>
+    </div>
+    <div class="hd-sec-search" id="hd-sec-search">
+        <form class="search_area" method="get">
+            <label class="input-container">
+                <div class="typ-container">
+                    <span hidden>원하시는 향수를 찾아보세요</span>
+                    <i class="icon fa-solid fa-magnifying-glass"></i>
+                    <input class="input" maxlength="50" name="keyword" placeholder="원하시는 향수를 찾아보세요" type="text">
+                </div>
+            </label>
+        </form>
+    </div>
 </header>
 </html>
