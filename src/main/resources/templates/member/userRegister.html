@@ -15,12 +15,12 @@
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="main">
     <h1 class="title">회원가입</h1>
-    <div class="terms-container visible" id="termsContainer">
+    <div class="terms-container" id="termsContainer">
         <section class="section-container">
             <label class="check-container">
                 <input class="check-input" hidden name="agreeAll" type="checkbox">
                 <span class="checker-container">
-                    <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
+                    <i class="checker fa fa-check"></i>
                 </span>
                 <span class="text">모두 동의합니다</span>
             </label>
@@ -138,8 +138,8 @@
             <label class="check-container">
                 <input class="check-input" hidden name="agreeService" type="checkbox">
                 <span class="checker-container">
-                <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
-            </span>
+                    <i class="checker fa fa-check"></i>
+                </span>
                 <span class="text">동의합니다</span>
             </label>
         </section>
@@ -162,8 +162,8 @@
             <label class="check-container">
                 <input class="check-input" hidden name="agreeShare" type="checkbox">
                 <span class="checker-container">
-                <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
-            </span>
+                    <i class="checker fa fa-check"></i>
+                </span>
                 <span class="text">동의합니다</span>
             </label>
         </section>
@@ -183,8 +183,8 @@
             <label class="check-container">
                 <input class="check-input" hidden name="agreeAd" type="checkbox">
                 <span class="checker-container">
-                <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
-            </span>
+                    <i class="checker fa fa-check"></i>
+                </span>
                 <span class="text">동의합니다</span>
             </label>
         </section>
@@ -195,58 +195,71 @@
     </div>
 
 
-        <form class="register-form" id="registerForm">
-            <!--    필수 항목    -->
-            <label class="input-container">
-                <span class="text">아이디</span>
-                <input autofocus class="_object-input input" maxlength="50" pattern="^[a-zA-Z0-9]*$" name="id" placeholder="아이디" type="text">
-            </label>
-            <label class="input-container">
-                <span class="text">비밀번호</span>
-                <input class="_object-input input" maxlength="50" name="password" placeholder="비밀번호" type="password">
-            </label>
-            <label class="input-container">
-                <span class="text">비밀번호 확인</span>
-                <input class="_object-input input" maxlength="50" name="passwordCheck" placeholder="비밀번호 확인" type="password">
-            </label>
-            <label class="input-container">
-                <span class="text">이름</span>
-                <input class="_object-input input" maxlength="5" pattern="^([가-힣]{2,5})$" name="name" placeholder="이름" type="text">
-            </label>
+    <form class="register-form visible" id="registerForm">
+        <!--    필수 항목    -->
+        <label class="input-container">
+            <span class="text">아이디</span>
+            <input autofocus class="_object-input input" maxlength="50" pattern="^[a-zA-Z0-9]*$" name="memberId"
+                   placeholder="아이디" type="text">
+        </label>
+        <label class="input-container">
+            <span class="text">비밀번호</span>
+            <input class="_object-input input" maxlength="50" name="password" placeholder="비밀번호" type="password">
+        </label>
+        <label class="input-container">
+            <span class="text">비밀번호 확인</span>
+            <input class="_object-input input" maxlength="50" name="passwordCheck" placeholder="비밀번호 확인"
+                   type="password">
+        </label>
+        <label class="input-container">
+            <span class="text">이름</span>
+            <input class="_object-input input" maxlength="5" pattern="^([가-힣]{2,5})$" name="name" placeholder="이름"
+                   type="text">
+        </label>
 
-            <!-- 선택 항목 // 카카오 맵 사용예정 -->
-            <label class="input-container">
-                <span class="text">주소</span>
-                <input class="_object-input input" maxlength="50" name="streetAddress" placeholder="주소" type="text">
-            </label>
-            <label class="input-container">
-                <span class="text">상세 주소</span>
-                <input class="_object-input input" maxlength="50" name="streetAddress2" placeholder="상세 주소" type="text">
-            </label>
-
-            <label class="input-container">
-                <span class="text">연락처 통신사</span>
-                <select class="_object-input input">
-                    <option selected value="-1">통신사</option>
-                    <option value="1">SKT</option>
-                    <option value="2">KT</option>
-                    <option value="3">LGU+</option>
-                    <option value="4">알뜰폰</option>
-                </select>
-            </label>
-            <label class="input-container">
-                <span class="text">연락처</span>
-                <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)" type="text">
-            </label>
-            <label class="input-container">
-                <span class="text">이메일</span>
-                <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
-            </label>
-            <div class="button-container">
+        <!-- 선택 항목 // 카카오 맵 사용예정 -->
+        <label class="input-container">
+            <span class="text">주소</span>
+            <input type="text" id="sample6_postcode" placeholder="우편번호">
+            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+            <input type="text" id="sample6_address" placeholder="주소"><br>
+        </label>
+        <label class="input-container">
+            <span class="text">상세 주소</span>
+            <input class="_object-input input" maxlength="50" name="streetAddress2" placeholder="상세 주소" type="text">
+            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+        </label>
+        <!---->
+        <label class="input-container">
+            <span class="text">연락처 통신사</span>
+            <select class="_object-input input" name="contactTelecom">
+                <option selected value="-1">통신사</option>
+                <option value="1">SKT</option>
+                <option value="2">KT</option>
+                <option value="3">LGU+</option>
+                <option value="4">알뜰폰</option>
+            </select>
+        </label>
+        <label class="input-container">
+            <span class="text">연락처</span>
+            <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)"
+                   type="text">
+        </label>
+        <label class="input-container">
+            <span class="text">이메일</span>
+            <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
+        </label>
+        <section class="section-container">
+            <span class="login-container">
+                <span class="text">이미 계정이 있으신가요?</span>
+                <a class="text link" th:href="@{/member/userLogin}">로그인</a>
+            </span>
+            <span class="button-container">
                 <input class="button cancel-button" id="returnButton" type="button" value="이전">
-                <input class="button next-button" type="submit" value="다음">
-            </div>
-        </form>
+                <input class="button next-button" type="submit" value="회원가입">
+            </span>
+        </section>
+    </form>
 </main>
 <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>

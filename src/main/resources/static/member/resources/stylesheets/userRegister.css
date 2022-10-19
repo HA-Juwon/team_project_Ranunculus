@@ -48,7 +48,8 @@ body > .main > .terms-container > .section-container > .check-container > .check
     width: 1.25rem;
     height: 1.25rem;
     align-items: center;
-    border: 0.0625rem solid rgb(0, 0, 0);
+    background-color: rgb(215, 215, 215);
+    border: none;
     border-radius: 0.25rem;
     display: flex;
     flex-direction: row;
@@ -56,17 +57,21 @@ body > .main > .terms-container > .section-container > .check-container > .check
 }
 
 body > .main > .terms-container > .section-container > .check-container > .check-input:checked ~ .checker-container {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(var(--concept-color-pink));
+
 }
 
 body > .main > .terms-container > .section-container > .check-container > .checker-container > .checker {
-    /*display: none;*/
-    width: 85%;
+    width: 1.25rem;
+    height: 1.25rem;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    border-radius: 0.15rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-body > .main > .terms-container > .section-container > .check-container > .check-input:checked ~ .checker-container > .checker {
-    display: block;
-}
 
 body > .main > .terms-container > .section-container > .check-container > .text {
     margin-left: 0.5rem;
@@ -124,8 +129,16 @@ body > .main > .terms-container > .button-container > .button.cancel-button {
     background-color: rgb(180, 180, 180);
 }
 
+body > .main > .terms-container > .button-container > .button.cancel-button:hover {
+    background-color: rgb(150, 150, 150);
+}
+
 body > .main > .terms-container > .button-container > .button.next-button {
     background-color: rgb(var(--concept-color-pink));
+}
+
+body > .main > .terms-container > .button-container > .button.next-button:hover {
+    background-color: rgb(var(--concept-color-pink-dim));
 }
 
 body > .main > .register-form {
@@ -154,32 +167,58 @@ body > .main > .register-form > .input-container:last-of-type {
 body > .main > .register-form > .input-container > .text {
     font-size: 1.25rem;
     font-weight: 500;
-    margin-left: 0.75rem;
+    margin-left: 0.625rem;
 }
 
 body > .main > .register-form > .input-container > .input {
     border: 0.125rem solid rgb(var(--concept-color-pink));
 }
 
-body > .main > .register-form > .input-container > .input:focus {
-    background-color: rgb(253, 237, 236);
-}
-
 body > .main > .register-form > .input-container > .input:not(:placeholder-shown) {
     background-color: rgb(253, 237, 236);
 }
 
-body > .main > .register-form > .button-container {
+body > .main > .register-form > .input-container > .input:focus {
+    background-color: rgb(var(--concept-color-blue));
+}
+
+body > .main > .register-form > .section-container {
     width: var(--content-width-default);
     align-items: stretch;
     border-top: 0.2rem solid rgb(var(--concept-color-pink));
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+body > .main > .register-form > .section-container > .login-container,
+body > .main > .register-form > .section-container > .button-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     padding: 1.25rem 0 5rem 0;
 }
 
-body > .main > .register-form > .button-container > .button {
+body > .main > .register-form > .section-container > .login-container {
+    margin-right: 5rem;
+}
+
+body > .main > .register-form > .section-container > .login-container > * {
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+body > .main > .register-form > .section-container > .login-container > .link {
+    color: rgb(255, 51, 0);
+}
+
+body > .main > .register-form > .section-container > .login-container > .link:hover {
+    text-decoration: underline;
+}
+
+body > .main > .register-form > .section-container > .button-container > .button {
     border: unset;
     border-radius: 0.25rem;
     color: rgb(255, 255, 255);
@@ -189,14 +228,22 @@ body > .main > .register-form > .button-container > .button {
     padding: 1rem 4.25rem;
 }
 
-body > .main > .register-form > .button-container > .button + .button {
+body > .main > .register-form > .section-container > .button-container > .button + .button {
     margin-left: 0.75rem;
 }
 
-body > .main > .register-form > .button-container > .button.cancel-button {
+body > .main > .register-form > .section-container > .button-container > .button.cancel-button {
     background-color: rgb(180, 180, 180);
 }
 
-body > .main > .register-form > .button-container > .button.next-button {
+body > .main > .register-form > .section-container > .button-container > .button.cancel-button:hover {
+    background-color: rgb(150, 150, 150);
+}
+
+body > .main > .register-form > .section-container > .button-container > .button.next-button {
     background-color: rgb(var(--concept-color-pink));
+}
+
+body > .main > .register-form > .section-container > .button-container > .button.next-button:hover {
+    background-color: rgb(var(--concept-color-pink-dim));
 }

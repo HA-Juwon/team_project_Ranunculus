@@ -4,7 +4,6 @@ const searchForm = window.document.getElementById('hd-sec-search');
 const myButton = window.document.getElementById('my-button');
 const myMenu = window.document.getElementById('menu-container');
 
-
 searchButton.addEventListener('click', () => {
     console.log("작동함");
     if(searchForm.classList.contains("visible")){
