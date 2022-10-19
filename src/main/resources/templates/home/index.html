@@ -1,19 +1,126 @@
-<!doctype html>
-<html lang="ko">
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/resources/stylesheets/index.css">
-    <title>Ranunculus</title>
+    <title>Shop</title>
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/templates/stylesheets/index.css">
+    <script defer src="/templates/scripts/index.js"></script>
 </head>
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
-<main class="_main">
-    sdfsdf
-</main>
-<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+
+
+<div class="hero-header"></div>
+<div class="wrapper">
+    <div class="container">
+        <ul class="slider">
+            <li class="item"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MDlfODcg%2FMDAxNjIzMjAxNzIwMjU2.Dz1Ns1yRYgxTaD1oDctuzzec8uiROBmPmPoltrIsGbAg.PJ3Os_Z98oAQk75rcl_GrnemL0yCsIbMEZ0nEnNHKPkg.JPEG.romimi0422%2Foutput_2685589158.jpg&type=sc960_832"></li>
+            <li class="item"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjFfMTg4%2FMDAxNjA1OTYwMzc0MjIw.hxWeBsse93EnjCCm5pke7XDpZAXnIzrb4OZ_YeEiLfMg.8R06_h0dj6eBWg8n3RU47HPxNb1pe8gtfJ5ujqQl_Bgg.JPEG.lovervn%2FIMG_4455_%25282%2529.JPG&type=sc960_832"></li>
+            <li class="item"><img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fdnvefa72aowie.cloudfront.net%2Forigin%2Farticle%2F202207%2Fd9abd7a28b1bd6d691c377b4181a4e75ec0b87b8ddd22f0e5942d50adde44f00.webp%3Fq%3D95%26s%3D1440x1440%26t%3Dinside&type=sc960_832"></li>
+        </ul>
+    </div>
+
+<div class="products">
+    <h3>향수</h3>
+
+    <div class="product-list">
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16"  width="225px" height="225px">
+            <div class="product-name">
+                향수1
+            </div>
+            <div class="product-price">
+               1,000
+            </div>
+            <a href="#" class="product">
+                <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수2
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수 3
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수4
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수5
+            </div>
+            <div class="product-price">
+               1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수6
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수7
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수8
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수9
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+        <div class="clearfix"></div>
+    </div>
+
+    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
 </html>
+

@@ -9,15 +9,16 @@
 
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/member/resources/stylesheets/userRegister.css}">
+    <script defer th:src="@{/member/resources/scripts/userRegister.js}"></script>
 </head>
 <body>
-<!--<th:block th:replace="~{fragments/header.html :: content}"></th:block>-->
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="main">
     <h1 class="title">회원가입</h1>
-    <div class="terms-container" id="termsContainer">
+    <div class="terms-container visible" id="termsContainer">
         <section class="section-container">
             <label class="check-container">
-                <input class="check-input" data-func="agreeAll" hidden name="agreeAll" type="checkbox">
+                <input class="check-input" hidden name="agreeAll" type="checkbox">
                 <span class="checker-container">
                     <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
                 </span>
@@ -135,7 +136,7 @@
                 (시행일) 이 약관은 2015년 01월부터 시행합니다.
             </pre>
             <label class="check-container">
-                <input class="check-input" data-func="agreeService" hidden name="agreeService" type="checkbox">
+                <input class="check-input" hidden name="agreeService" type="checkbox">
                 <span class="checker-container">
                 <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
             </span>
@@ -159,7 +160,7 @@
                 5. 동의를 거부할 수 있으며, 동의 거부시 일부 서비스가 제공되지 않습니다.
             </pre>
             <label class="check-container">
-                <input class="check-input" data-func="agreeShare" hidden name="agreeShare" type="checkbox">
+                <input class="check-input" hidden name="agreeShare" type="checkbox">
                 <span class="checker-container">
                 <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
             </span>
@@ -180,7 +181,7 @@
             ② Ranunculus 서비스를 운용함에 있어 각종 정보를 이메일로 회원에게 제공할 수 있으며,
             결제안내 등 의무적으로 안내되어야 하는 정보성 내용 및 일부 혜택성 정보는 수신동의 여부와 무관하게 제공합니다.            </pre>
             <label class="check-container">
-                <input class="check-input" data-func="agreeAd" hidden name="agreeAd" type="checkbox">
+                <input class="check-input" hidden name="agreeAd" type="checkbox">
                 <span class="checker-container">
                 <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
             </span>
@@ -188,34 +189,65 @@
             </label>
         </section>
         <div class="button-container">
-            <input class="button cancel-button" type="button" value="취소">
-            <input class="button next-button" type="button" value="다음">
+            <input class="button cancel-button" id="cancelButton" type="button" value="취소">
+            <input class="button next-button" id="nextButton" type="button" value="다음">
         </div>
     </div>
 
 
-    <!--    <form class="register-form" id="registerForm">-->
-    <!--        &lt;!&ndash;    필수 항목    &ndash;&gt;-->
-    <!--        <span>아이디</span>-->
-    <!--        <span>비밀번호</span>-->
-    <!--        <span>비밀번호 확인</span>-->
-    <!--        <span>닉네임</span>-->
+        <form class="register-form" id="registerForm">
+            <!--    필수 항목    -->
+            <label class="input-container">
+                <span class="text">아이디</span>
+                <input autofocus class="_object-input input" maxlength="50" pattern="^[a-zA-Z0-9]*$" name="id" placeholder="아이디" type="text">
+            </label>
+            <label class="input-container">
+                <span class="text">비밀번호</span>
+                <input class="_object-input input" maxlength="50" name="password" placeholder="비밀번호" type="password">
+            </label>
+            <label class="input-container">
+                <span class="text">비밀번호 확인</span>
+                <input class="_object-input input" maxlength="50" name="passwordCheck" placeholder="비밀번호 확인" type="password">
+            </label>
+            <label class="input-container">
+                <span class="text">이름</span>
+                <input class="_object-input input" maxlength="5" pattern="^([가-힣]{2,5})$" name="name" placeholder="이름" type="text">
+            </label>
 
-    <!--        &lt;!&ndash;    선택 항목    &ndash;&gt;-->
-    <!--        <span>주소</span>-->
-    <!--        <span>상세주소</span>-->
-    <!--        <span>연락처 통신사</span>-->
-    <!--        <span>연락처</span>-->
-    <!--        <span>이메일</span>-->
-    <!--        <span>필수 약관</span>-->
-    <!--        <span>선택 약관</span>-->
-    <!--        <span>마케팅 약관 여부</span>-->
+            <!-- 선택 항목 // 카카오 맵 사용예정 -->
+            <label class="input-container">
+                <span class="text">주소</span>
+                <input class="_object-input input" maxlength="50" name="streetAddress" placeholder="주소" type="text">
+            </label>
+            <label class="input-container">
+                <span class="text">상세 주소</span>
+                <input class="_object-input input" maxlength="50" name="streetAddress2" placeholder="상세 주소" type="text">
+            </label>
 
-    <!--        &lt;!&ndash;        얘는 백엔드에서 구현&ndash;&gt;-->
-    <!--        &lt;!&ndash;        <span>스테이터스 벨류</span>&ndash;&gt;-->
-    <!--        &lt;!&ndash;        <span>어드민 벨류</span>&ndash;&gt;-->
-    <!--    </form>-->
+            <label class="input-container">
+                <span class="text">연락처 통신사</span>
+                <select class="_object-input input">
+                    <option selected value="-1">통신사</option>
+                    <option value="1">SKT</option>
+                    <option value="2">KT</option>
+                    <option value="3">LGU+</option>
+                    <option value="4">알뜰폰</option>
+                </select>
+            </label>
+            <label class="input-container">
+                <span class="text">연락처</span>
+                <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)" type="text">
+            </label>
+            <label class="input-container">
+                <span class="text">이메일</span>
+                <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
+            </label>
+            <div class="button-container">
+                <input class="button cancel-button" id="returnButton" type="button" value="이전">
+                <input class="button next-button" type="submit" value="다음">
+            </div>
+        </form>
 </main>
-<!--<th:block th:replace="~{fragments/header.html :: content}"></th:block>-->
+<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
 </html>

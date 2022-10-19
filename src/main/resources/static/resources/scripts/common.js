@@ -1,8 +1,8 @@
 const searchButton = window.document.getElementById('search-button');
-const searchForm=window.document.getElementById('hd-sec-search');
+const searchForm = window.document.getElementById('hd-sec-search');
 
 const myButton = window.document.getElementById('my-button');
-const myMenu=window.document.getElementById('menu-container');
+const myMenu = window.document.getElementById('menu-container');
 
 
 searchButton.addEventListener('click', () => {
