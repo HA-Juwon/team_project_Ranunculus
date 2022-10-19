@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 :root {
-    --concept-color-pink : 250, 219, 216;
+    --concept-color-pink: 250, 219, 216;
+    --concept-color-pink-dim: 241, 148, 138;
     --content-width-default: 73.75rem;
 }
 
@@ -12,7 +13,6 @@ html {
 
 body {
     margin: 0;
-
 }
 
 a:link, a:visited {
@@ -124,6 +124,10 @@ ol, ul {
     justify-content: center;
     position: sticky;
     z-index: 8;
+}
+
+header ._content-container.hd-sec01{
+    margin: 0.625rem;
 }
 
 ._header li{
@@ -283,6 +287,9 @@ ol, ul {
     border-top: 1px solid rgb(var(--concept-color-pink));
     border-bottom: 1px solid rgb(var(--concept-color-pink));
 }
+._footer>.ft_sec01 .enumerator{
+    margin: 0.625rem;
+}
 
 ._footer>.ft_sec01 a{
     font-size: 11px;
@@ -306,7 +313,7 @@ ol, ul {
 
 ._footer>.ft_sec02 .tit_cs{
     font-size: 19px;
-    color: firebrick;
+    color: rgb(var(--concept-color-pink-dim));
     margin-top: 29px;
     margin-bottom: 8px;
 }
@@ -316,6 +323,7 @@ ol, ul {
     font-weight: bold;
     color: black;
 }
+
 ._footer>.ft_sec02 .cs_info{
     font-size: 11px;
     line-height: 16px;
@@ -328,7 +336,7 @@ ol, ul {
 
 ._footer>.ft_sec03 .bt_inner {
     width: 1260px;
-    margin: 0 auto;
+    margin: 18px;
     position: relative;
 }
 
@@ -340,12 +348,9 @@ ol, ul {
     margin-top: 31px;
 }
 
-
 ._footer .ft_sec03 .copyright {
     font-size: 11px;
-    color: #5a5a5a;
+    color: rgb(120,120,120);
     text-align: left;
-    padding-top: 15px;
-    letter-spacing: 0.5px;
-
+    letter-spacing: 0.5rem;
 }
