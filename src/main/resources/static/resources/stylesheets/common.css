@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 :root {
-
     --concept-color-pink: 250, 219, 216;
     --concept-color-pink-dim: 241, 148, 138;
     --content-width-default: 73.75rem;
@@ -389,4 +388,5 @@ header ._content-container.hd-sec01{
     color: rgb(120,120,120);
     text-align: left;
     letter-spacing: 0.5px;
+
 }
