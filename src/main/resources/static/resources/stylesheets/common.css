@@ -17,6 +17,7 @@ body {
 
 a:link, a:visited {
     color: inherit;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -112,7 +113,10 @@ ol, ul {
 ._object-button:hover {
     background-color: rgb(var(--concept-color-pink-dim));
 }
-
+._object-button:disabled {
+    background-color: rgb(215, 215, 215);
+    cursor: default;
+}
 ._header{
     top: 0;
     width: 100%;
@@ -139,7 +143,7 @@ header ._content-container.hd-sec01{
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     position: sticky;
     align-items:center;
     z-index: 7;
@@ -153,6 +157,7 @@ header ._content-container.hd-sec01{
     float: left;
     width: 330px;
     bottom: 0;
+    flex-grow: 1;
 }
 
 ._header>.hd-sec01>.left-area>ul>li{
@@ -176,6 +181,7 @@ header ._content-container.hd-sec01{
     height: 88px;
     line-height: 88px;
     bottom: 0;
+    flex-grow: 3;
 }
 
 ._header>.hd-sec01>.right-area{
@@ -183,6 +189,7 @@ header ._content-container.hd-sec01{
     display: inline;
     width: 330px;
     bottom: 0;
+    flex-grow: 1;
 
 }
 
@@ -226,11 +233,26 @@ header ._content-container.hd-sec01{
     flex-direction: column;
     position: absolute;
     align-items: flex-start;
+    margin-top: 9.25rem;
+    background-color: rgba(250, 219, 215,60%);
 }
+
+
 ._header .atag.myp + .menu-container a{
     cursor: pointer;
     text-decoration: none;
 }
+._header .atag.myp + .menu-container div:nth-child(1){
+    padding: 1rem;
+}
+._header .atag.myp + .menu-container div:nth-child(2){
+    padding: 0 1rem 1rem;
+}
+
+._header .atag.myp + .menu-container a:hover{
+    text-decoration: underline;
+}
+
 ._header .atag + .menu-container:not(.visible){
     display: none;
 }
@@ -262,6 +284,11 @@ header ._content-container.hd-sec01{
     line-height: 37px;
     text-decoration: none;
     padding: 0 34px;
+}
+._header .search_area{
+    padding: 2rem;
+    background-color: rgb(var(--concept-color-pink),30%);
+    transition: display 2s;
 }
 
 ._footer{
@@ -331,9 +358,17 @@ header ._content-container.hd-sec01{
 }
 
 ._footer>.ft_sec02 .bank_area{
-    margin: 60px 0 8px 18px;
+    margin: 30px 0 8px 60px;
 }
 
+._footer>.ft_sec02 .bank_area .tit_bank{
+    color: rgb(var(--concept-color-pink-dim));
+}
+
+._footer>.ft_sec02 .bank_area .bank_info{
+    display: inline-grid;
+    margin-top: 1.25rem;
+}
 ._footer>.ft_sec03 .bt_inner {
     width: 1260px;
     margin: 18px;
@@ -352,5 +387,6 @@ header ._content-container.hd-sec01{
     font-size: 11px;
     color: rgb(120,120,120);
     text-align: left;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.5px;
+
 }

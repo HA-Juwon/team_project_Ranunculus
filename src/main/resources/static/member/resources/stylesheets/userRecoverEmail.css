@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+label.contact {
+    display: flex;
+
+    flex-direction: row;
+}
+body > .main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main > .recoverEmail-form {
+    width: 25rem;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .recoverEmail-form > * + * {
+    margin-top: 0.625rem;
+}
+
+body > .main > .recoverEmail-form > .title {
+    align-self: center;
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    margin-top: 1.5rem;
+}
