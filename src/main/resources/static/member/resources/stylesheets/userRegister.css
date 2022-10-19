@@ -158,7 +158,15 @@ body > .main > .register-form > .input-container > .text {
 }
 
 body > .main > .register-form > .input-container > .input {
-    background-color: rgb(var(--concept-color-pink));
+    border: 0.125rem solid rgb(var(--concept-color-pink));
+}
+
+body > .main > .register-form > .input-container > .input:focus {
+    background-color: rgb(253, 237, 236);
+}
+
+body > .main > .register-form > .input-container > .input:not(:placeholder-shown) {
+    background-color: rgb(253, 237, 236);
 }
 
 body > .main > .register-form > .button-container {
