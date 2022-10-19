@@ -1,14 +1,53 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ranunculus userLogin</title>
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ranunculus 로그인</title>
+    <script defer th:src="@{/member/resources/scripts/userLogin.js}"></script>
+    <link rel="stylesheet" th:href="@{/member/resources/stylesheets/userLogin.css}">
+    <script src="https://kit.fontawesome.com/ac2617ecb2.js" crossorigin="anonymous"></script>
+
+
 </head>
 <body>
-
+<!--<th:block th:replace="~{fragments/header.html :: content}"></th:block>-->
+<main class="_main main">
+    <form class="login-form" id="form">
+        <h2 class="title">로그인</h2>
+        <label class="_object-label">
+            <span hidden>이메일</span>
+            <input autofocus class="_object-input" maxlength="50" name="email" placeholder="이메일 주소" type="email">
+        </label>
+        <label class="_object-label">
+            <span hidden>비밀번호</span>
+            <input class="_object-input" maxlength="50" name="password" placeholder="비밀번호" type="password">
+        </label>
+        <label class="_object-check-container">
+            <input hidden name="autosign" type="checkbox">
+            <span class="_object-check" >
+                <i class="_object-check-icon fa fa-check"></i>
+            </span>
+            <span>로그인 상태 유지</span>
+        </label>
+        <input class="_object-button login-button" type="submit" value="로그인">
+        <ul class="menu">
+            <li class="item">
+                <a class="link" th:href="@{/member/userRecoverEmail}">이메일 찾기</a>
+            </li>
+            <li class="item">
+                <a class="link" th:href="@{/member/userRecoverPassword}">비밀번호 찾기</a>
+            </li>
+            <li class="spring"></li>
+            <li class="item">
+                <a class="link" th:href="@{/member/userRegister}">회원가입</a>
+            </li>
+        </ul>
+    </form>
+</main>
+<!--<th:block th:replace="~{fragments/footer.html :: content}"></th:block>-->
 </body>
 </html>
