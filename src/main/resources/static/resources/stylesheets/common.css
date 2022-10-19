@@ -126,6 +126,10 @@ ol, ul {
     z-index: 8;
 }
 
+header ._content-container.hd-sec01{
+    margin: 0.625rem;
+}
+
 ._header li{
     display: inline-block;
 }
@@ -283,6 +287,9 @@ ol, ul {
     border-top: 1px solid rgb(var(--concept-color-pink));
     border-bottom: 1px solid rgb(var(--concept-color-pink));
 }
+._footer>.ft_sec01 .enumerator{
+    margin: 0.625rem;
+}
 
 ._footer>.ft_sec01 a{
     font-size: 11px;
@@ -306,7 +313,7 @@ ol, ul {
 
 ._footer>.ft_sec02 .tit_cs{
     font-size: 19px;
-    color: firebrick;
+    color: rgb(var(--concept-color-pink-dim));
     margin-top: 29px;
     margin-bottom: 8px;
 }
@@ -343,7 +350,7 @@ ol, ul {
 
 ._footer .ft_sec03 .copyright {
     font-size: 11px;
-    color: #5a5a5a;
+    color: rgb(120,120,120);
     text-align: left;
     padding-top: 15px;
     letter-spacing: 0.5px;
