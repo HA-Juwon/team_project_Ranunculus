@@ -64,6 +64,7 @@ body {
     line-height: 88px;
     text-decoration: none;
 }
+
 ._header>.hd-sec01>.logo-container{
     float: left;
     width: 600px;
@@ -82,9 +83,11 @@ body {
     bottom: 0;
 
 }
+
 ._header>.hd-sec01>.right-area>.square-manu>{
     display: inline-block;
 }
+
 ._header>.hd-sec01>.right-area>.square-manu>li{
     float: left;
     width: 90px;
@@ -159,13 +162,91 @@ body {
     padding: 0 34px;
 }
 
-
 ._footer{
     background-color: white;
-    border-top: 0.0625rem solid rgb(233, 233, 233);
-    color: rgb(var(--concept-color-pink));
+    color: rgb(120,120,120);
     padding: 2.5rem 0;
 }
+
+._footer>.fleft{
+    float: left;
+}
+
 ._footer li{
     display: inline-block;
+}
+
+._footer li>a{
+    text-decoration: none;
+    color: rgb(120,120,120);
+}
+
+._footer>.ft_sec01 {
+    border-top: 1px solid rgb(var(--concept-color-pink));
+    border-bottom: 1px solid rgb(var(--concept-color-pink));
+}
+
+._footer>.ft_sec01 a{
+    font-size: 11px;
+}
+
+._footer>.ft_sec01 a+.bt_bar{
+    font-size: 11px;
+    color: rgb(100,100,100);
+    padding: 0 7px;
+}
+
+._footer>.ft_sec02 {
+    text-align: left;
+    height: 118px;
+    display: inline-flex;
+}
+
+._footer>.ft_sec02 .cs_area{
+    margin: 4px 0 0 18px;
+}
+
+._footer>.ft_sec02 .tit_cs{
+    font-size: 19px;
+    color: firebrick;
+    margin-top: 29px;
+    margin-bottom: 8px;
+}
+
+._footer>.ft_sec02 .ft_phone{
+    font-size: 33px;
+    font-weight: bold;
+    color: black;
+}
+._footer>.ft_sec02 .cs_info{
+    font-size: 11px;
+    line-height: 16px;
+    color: rgb(120,120,120);
+}
+
+._footer>.ft_sec02 .bank_area{
+    margin: 60px 0 8px 18px;
+}
+
+._footer>.ft_sec03 .bt_inner {
+    width: 1260px;
+    margin: 0 auto;
+    position: relative;
+}
+
+._footer .ft_sec03 .bt_inner>.com_info{
+    font-size: 12px;
+    color: rgb(120,120,120);
+    line-height: 20px;
+    text-align: left;
+    margin-top: 31px;
+}
+
+
+._footer .ft_sec03 .copyright {
+    font-size: 11px;
+    color: #5a5a5a;
+    text-align: left;
+    padding-top: 15px;
+    letter-spacing: 0.5px;
 }
