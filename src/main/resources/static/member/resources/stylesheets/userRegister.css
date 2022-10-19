@@ -32,10 +32,6 @@ body > .main > .terms-container > .section-container {
     padding-bottom: 2.25rem;
 }
 
-body > .main > .terms-container > .section-container:last-of-type {
-    border-bottom: 0.2rem solid rgb(var(--concept-color-pink));
-}
-
 body > .main > .terms-container > .section-container > .check-container {
     max-width: 10rem;
     align-items: center;
@@ -103,10 +99,11 @@ body > .main > .terms-container > .section-container:not(:first-of-type) > .comm
 body > .main > .terms-container > .button-container {
     width: var(--content-width-default);
     align-items: stretch;
+    border-top: 0.2rem solid rgb(var(--concept-color-pink));
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin: 1.25rem 0 5rem 0;
+    padding: 1.25rem 0 5rem 0;
 }
 
 body > .main > .terms-container > .button-container > .button {
@@ -128,5 +125,70 @@ body > .main > .terms-container > .button-container > .button.cancel-button {
 }
 
 body > .main > .terms-container > .button-container > .button.next-button {
+    background-color: rgb(var(--concept-color-pink));
+}
+
+body > .main > .register-form {
+    align-items: center;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main > .register-form.visible {
+    display: flex;
+}
+
+body > .main > .register-form > .input-container {
+    width: 20rem;
+}
+
+body > .main > .register-form > .input-container:not(:first-of-type) {
+    margin-top: 1rem;
+}
+
+body > .main > .register-form > .input-container:last-of-type {
+    margin: 1.25rem 0 5rem 0;
+}
+
+body > .main > .register-form > .input-container > .text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-left: 0.75rem;
+}
+
+body > .main > .register-form > .input-container > .input {
+    background-color: rgb(var(--concept-color-pink));
+}
+
+body > .main > .register-form > .button-container {
+    width: var(--content-width-default);
+    align-items: stretch;
+    border-top: 0.2rem solid rgb(var(--concept-color-pink));
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 1.25rem 0 5rem 0;
+}
+
+body > .main > .register-form > .button-container > .button {
+    border: unset;
+    border-radius: 0.25rem;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 1rem 4.25rem;
+}
+
+body > .main > .register-form > .button-container > .button + .button {
+    margin-left: 0.75rem;
+}
+
+body > .main > .register-form > .button-container > .button.cancel-button {
+    background-color: rgb(180, 180, 180);
+}
+
+body > .main > .register-form > .button-container > .button.next-button {
     background-color: rgb(var(--concept-color-pink));
 }

@@ -12,7 +12,7 @@
     <script defer th:src="@{/member/resources/scripts/userRegister.js}"></script>
 </head>
 <body>
-<!--<th:block th:replace="~{fragments/header.html :: content}"></th:block>-->
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="main">
     <h1 class="title">회원가입</h1>
     <div class="terms-container visible" id="termsContainer">
@@ -197,26 +197,57 @@
 
         <form class="register-form" id="registerForm">
             <!--    필수 항목    -->
-            <span>아이디</span>
-            <span>비밀번호</span>
-            <span>비밀번호 확인</span>
-            <span>닉네임</span>
+            <label class="input-container">
+                <span class="text">아이디</span>
+                <input autofocus class="_object-input input" maxlength="50" pattern="^[a-zA-Z0-9]*$" name="id" placeholder="아이디" type="text">
+            </label>
+            <label class="input-container">
+                <span class="text">비밀번호</span>
+                <input class="_object-input input" maxlength="50" name="password" placeholder="비밀번호" type="password">
+            </label>
+            <label class="input-container">
+                <span class="text">비밀번호 확인</span>
+                <input class="_object-input input" maxlength="50" name="passwordCheck" placeholder="비밀번호 확인" type="password">
+            </label>
+            <label class="input-container">
+                <span class="text">이름</span>
+                <input class="_object-input input" maxlength="5" pattern="^([가-힣]{2,5})$" name="name" placeholder="이름" type="text">
+            </label>
 
-            <!--    선택 항목    -->
-            <span>주소</span>
-            <span>상세주소</span>
-            <span>연락처 통신사</span>
-            <span>연락처</span>
-            <span>이메일</span>
-            <span>필수 약관</span>
-            <span>선택 약관</span>
-            <span>마케팅 약관 여부</span>
+            <!-- 선택 항목 // 카카오 맵 사용예정 -->
+            <label class="input-container">
+                <span class="text">주소</span>
+                <input class="_object-input input" maxlength="50" name="streetAddress" placeholder="주소" type="text">
+            </label>
+            <label class="input-container">
+                <span class="text">상세 주소</span>
+                <input class="_object-input input" maxlength="50" name="streetAddress2" placeholder="상세 주소" type="text">
+            </label>
 
-            <!--        얘는 백엔드에서 구현-->
-            <!--        <span>스테이터스 벨류</span>-->
-            <!--        <span>어드민 벨류</span>-->
+            <label class="input-container">
+                <span class="text">연락처 통신사</span>
+                <select class="_object-input input">
+                    <option selected value="-1">통신사</option>
+                    <option value="1">SKT</option>
+                    <option value="2">KT</option>
+                    <option value="3">LGU+</option>
+                    <option value="4">알뜰폰</option>
+                </select>
+            </label>
+            <label class="input-container">
+                <span class="text">연락처</span>
+                <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)" type="text">
+            </label>
+            <label class="input-container">
+                <span class="text">이메일</span>
+                <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
+            </label>
+            <div class="button-container">
+                <input class="button cancel-button" id="returnButton" type="button" value="이전">
+                <input class="button next-button" type="submit" value="다음">
+            </div>
         </form>
 </main>
-<!--<th:block th:replace="~{fragments/header.html :: content}"></th:block>-->
+<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
 </html>
