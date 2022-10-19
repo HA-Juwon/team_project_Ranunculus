@@ -20,4 +20,10 @@ public class MemberController {
         modelAndView.setViewName("member/userRegister");
         return modelAndView;
     }
+
+    @RequestMapping(value = "userRecoverEmail", method = RequestMethod.GET)
+    public ModelAndView getUserRecoverEmail (ModelAndView modelAndView) {
+        modelAndView.setViewName("member/userRecoverEmail");
+        return modelAndView;
+    }
 }
