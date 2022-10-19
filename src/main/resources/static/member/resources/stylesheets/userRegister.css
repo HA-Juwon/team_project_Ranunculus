@@ -19,9 +19,13 @@ body > .main > .title {
 
 body > .main > .terms-container {
     align-items: flex-start;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+body > .main > .terms-container.visible {
+    display: flex;
 }
 
 body > .main > .terms-container > .section-container {
