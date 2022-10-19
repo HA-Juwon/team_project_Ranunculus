@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 :root {
-    --concept-color-pink: 250, 219, 216;
-    --concept-color-pink-dim: 241, 148, 138;
+    --concept-color-pink : 250, 219, 216;
     --content-width-default: 73.75rem;
 }
 
@@ -13,6 +12,7 @@ html {
 
 body {
     margin: 0;
+
 }
 
 a:link, a:visited {
@@ -354,4 +354,5 @@ header ._content-container.hd-sec01{
     text-align: left;
     padding-top: 15px;
     letter-spacing: 0.5px;
+
 }
