@@ -1,12 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Shop</title>
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/templates/stylesheets/index.css">
     <script defer src="/templates/scripts/index.js"></script>
 </head>
-<body>
+<body class="_layout-hmf">
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
 
 
 <div class="hero-header"></div>
@@ -117,9 +120,7 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="footer">
-<!-- 여기 푸터 나뚜면되요-->
-    </div>
-</div>
+    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
 </html>
+
