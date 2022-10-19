@@ -14,6 +14,11 @@ public class MemberController {
         modelAndView.setViewName("member/userLogin");
         return modelAndView;
     }
+    @RequestMapping(value = "userLogin", method = RequestMethod.POST)
+    public ModelAndView postUserLogin (ModelAndView modelAndView) {
+        modelAndView.setViewName("member/userLogin");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
     public ModelAndView getUserRegister (ModelAndView modelAndView) {
