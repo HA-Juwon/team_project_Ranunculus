@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+body > .main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    background-color: rgb(0,255,255);
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-transition: background-color 9999s ease-out;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+body > .main > .login-form {
+    width: 20rem;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .login-form > * + * {
+    margin-top: 0.625rem;
+}
+
+body > .main > .login-form > .title {
+    align-self: center;
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+}
+
+body > .main > .login-form > .warning.visible {
+    display: block;
+}
+
+body > .main > .login-form > .login-button {
+    margin: 1rem 0;
+}
+
+body > .main > .login-form > .menu {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .main > .login-form > .menu > .item + .item {
+    margin-left: 1rem;
+}
+
+body > .main > .login-form > .menu > .spring {
+    flex: 1;
+}
