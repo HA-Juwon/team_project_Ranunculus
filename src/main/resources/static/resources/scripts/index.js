@@ -20,7 +20,7 @@ function showSlides() {
         slideIndex = 0;
     }
     setTimeout(showSlides, 2000);
-}
+
 var slideWrapper = document.querySelector('.container');
 var slides = document.querySelectorAll('.item');
 var totalSlides = slides.length; // item의 갯수
@@ -43,4 +43,3 @@ function showSlides() {
         slideIndex = 0;
     }
     setTimeout(showSlides, 2000);
-}
