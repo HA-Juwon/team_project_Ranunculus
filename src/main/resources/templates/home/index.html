@@ -3,10 +3,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Shop</title>
-    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/templates/stylesheets/index.css">
-    <script defer src="/templates/scripts/index.js"></script>
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/index.css}">
+    <script defer th:src="@{/resources/scripts/index.js}"></script>
 </head>
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
@@ -34,6 +35,7 @@
             <div class="product-price">
                1,000
             </div>
+        </a>
             <a href="#" class="product">
                 <img src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
             <div class="product-name">
@@ -118,9 +120,12 @@
             </div>
         </a>
         <div class="clearfix"></div>
-    </div>
 
-    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</div>
+</div></div></body>
 </body>
+<footer>
+    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</footer>
 </html>
 

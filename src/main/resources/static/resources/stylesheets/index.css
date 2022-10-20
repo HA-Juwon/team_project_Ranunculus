@@ -1,0 +1,125 @@
+
+ul{
+    list-style:none;
+}
+.wrapper{
+    /*     height:700px; */
+    /* background-color: lightgray; */
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+
+}
+.container{
+    width:550px;
+    height:400px;
+    position: relative;
+    overflow: hidden;
+    left: 30%;
+    padding-top: 100px;
+
+}
+.slider{
+    display: flex;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.item{
+    width:100%;
+    height:100%;
+    text-align: center;
+}
+
+
+.container ul{
+    -webkit-transition: all 0.25s cubic-bezier(1, .01, .32, 1);
+    -o-transition: all 0.25s cubic-bezier(1, .01, .32, 1);
+    transition: all 0.25s cubic-bezier(1, .01, .32, 1);
+}
+
+.hero-header{
+    height: 500px;
+    background-image: url("https://s3.ap-northeast-2.amazonaws.com/om-public-static/media/images/products/2020/03/IMG_1272-01_FlP68NK.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top: 200px;
+
+
+}
+
+.navbar #logo{
+    line-height: 60px;
+}
+
+.navbar img{
+    vertical-align: top;
+    border: blanchedalmond 5px solid;
+}
+
+.navbar #menu{
+    float: right;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar #menu li{
+    float: left;
+    margin-left: 50px;
+    line-height: 60px;
+}
+
+.navbar #menu li a{
+    color: #545454;
+    font-size: 13px;
+    text-decoration: none;
+}
+.product-list{
+    width: 735px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.products h3{
+    font-size: 24px;
+    color: #545454;
+    margin-top:60px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.product{
+    display: block;
+    width: 225px;
+    text-align: center;
+    text-decoration:none;
+    color: black;
+    float:left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+.product-name{
+    margin-top: 20px;
+    margin-bottom: 4px;
+}
+
+.clearfix{
+    clear: both;
+}
+.footer{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.footer a{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration:none;
+}
+
+
