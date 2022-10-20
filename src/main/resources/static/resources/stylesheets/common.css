@@ -132,6 +132,7 @@ ol, ul {
 
 header ._content-container.hd-sec01{
     margin: 0.625rem;
+
 }
 
 ._header li{
@@ -157,7 +158,6 @@ header ._content-container.hd-sec01{
     float: left;
     width: 330px;
     bottom: 0;
-    flex-grow: 1;
 }
 
 ._header>.hd-sec01>.left-area>ul>li{
@@ -179,9 +179,9 @@ header ._content-container.hd-sec01{
     justify-content: center;
     align-items: center;
     height: 88px;
+    flex-shrink: 1;
     line-height: 88px;
     bottom: 0;
-    flex-grow: 3;
 }
 
 ._header>.hd-sec01>.right-area{
@@ -315,7 +315,7 @@ header ._content-container.hd-sec01{
     border-bottom: 1px solid rgb(var(--concept-color-pink));
 }
 ._footer>.ft_sec01 .enumerator{
-    margin: 0.625rem;
+    margin-bottom: 0.625rem;
 }
 
 ._footer>.ft_sec01 a{
