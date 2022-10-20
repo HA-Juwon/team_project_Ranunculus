@@ -10,10 +10,16 @@
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/member/resources/stylesheets/userRegister.css}">
     <script defer th:src="@{/member/resources/scripts/userRegister.js}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="main">
+<!--    주소창 -->
+    <div id="addressSearchContainer" class="address-search-container" data-func="closeAddressSearch">
+        <div class="dialog"></div>
+    </div>
+
     <h1 class="title">회원가입</h1>
     <div class="terms-container" id="termsContainer">
         <section class="section-container">
@@ -145,19 +151,23 @@
         </section>
 
         <section class="section-container">
-            <span class="text">개인정보 제3자 제공 동의 (선택)</span>
+            <span class="text">개인정보 수집•이용 동의</span>
             <pre class="comment">
-                개인정보보호법 제22조 제4항에 의해 선택정보 사항에 대해서는 기재하지 않으셔도 서비스를 이용하실 수 있습니다.
-
-                1. 개인정보를 제공받는 자 : 협력업체
-
-                2. 개인정보를 제공받는 자의 개인정보 이용 목적 : 신규 고개 유치 및 포인트 관리
-
-                3. 제공하는 개인정보의 항목 : 성명, 전화번호, 생년월일
-
-                4. 개인정보를 제공받는 자의 개인정보 보유 및 이용 기간 : 제공 후 1년
-
-                5. 동의를 거부할 수 있으며, 동의 거부시 일부 서비스가 제공되지 않습니다.
+            Ⅰ. 개인정보의 수집 및 이용 동의서
+            - 이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.
+            ① 개인정보 수집 항목 및 수집·이용 목적
+            가) 수집 항목 (필수항목)
+            - 성명, 주소, 전화번호(휴대전화), 이메일 등 지원
+            신청서에 기재된 정보 또는 신청자가 제공한 정보
+            나) 수집 및 이용 목적
+            - 하이트진로 장학생 선발 전형 진행
+            - 하이트진로 장학생과의 연락 및 자격확인
+            - 하이트진로 장학생 자원관리
+            ② 개인정보 보유 및 이용기간
+            - 수집·이용 동의일로부터 개인정보의 수집·이용목적을 달성할 때까지
+            ③ 동의거부관리
+            - 귀하께서는 본 안내에 따른 개인정보 수집, 이용에 대하여 동의를 거부하실 권리가 있습니다. 다만,
+            귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 Ranunculus 서비스 일부분이 불가 할 수 있습니다.
             </pre>
             <label class="check-container">
                 <input class="check-input" hidden name="agreeShare" type="checkbox">
@@ -217,19 +227,25 @@
                    type="text">
         </label>
 
-        <!-- 선택 항목 // 카카오 맵 사용예정 -->
-        <label class="input-container">
+
+<!--        TODO : 주소 설정-->
+        <section class="section-container">
             <span class="text">주소</span>
-            <input type="text" id="sample6_postcode" placeholder="우편번호">
-            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" id="sample6_address" placeholder="주소"><br>
-        </label>
-        <label class="input-container">
-            <span class="text">상세 주소</span>
-            <input class="_object-input input" maxlength="50" name="streetAddress2" placeholder="상세 주소" type="text">
-            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-        </label>
-        <!---->
+
+            <div class="address-container address-postal-wrapper">
+                <input class="input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text">
+                <input class="input address-postal-button" type="button" value="주소 찾기">
+            </div>
+
+            <div class="address-container">
+                <input class="input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text">
+            </div>
+            <div class="address-container">
+                <input class="input address-secondary" maxlength="100" name="addressSecondary" placeholder="상세주소" type="text">
+            </div>
+        </section>
+
+
         <label class="input-container">
             <span class="text">연락처 통신사</span>
             <select class="_object-input input" name="contactTelecom">

@@ -152,7 +152,7 @@ body > .main > .register-form.visible {
     display: flex;
 }
 
-body > .main > .register-form > .input-container {
+body > .main > .register-form > .input-container{
     width: 20rem;
 }
 
@@ -164,25 +164,73 @@ body > .main > .register-form > .input-container:last-of-type {
     margin: 1.25rem 0 5rem 0;
 }
 
-body > .main > .register-form > .input-container > .text {
+body > .main > .register-form > .input-container > .text,
+body > .main > .register-form > .section-container > .text{
     font-size: 1.25rem;
     font-weight: 500;
     margin-left: 0.625rem;
 }
 
-body > .main > .register-form > .input-container > .input {
+body > .main > .register-form > .input-container > .input,
+body > .main > .register-form > .section-container .input {
     border: 0.125rem solid rgb(var(--concept-color-pink));
 }
 
-body > .main > .register-form > .input-container > .input:not(:placeholder-shown) {
-    background-color: rgb(253, 237, 236);
+body > .main > .register-form > .input-container > .input:not(:placeholder-shown),
+body > .main > .register-form > .section-container .input:not(:placeholder-shown) {
+    background-color: rgba(var(--concept-color-pink), 50%);
 }
 
-body > .main > .register-form > .input-container > .input:focus {
-    background-color: rgb(var(--concept-color-blue));
+body > .main > .register-form > .input-container > .input:focus,
+body > .main > .register-form > .section-container .input:focus {
+    background-color: rgba(var(--concept-color-blue), 50%);
 }
 
+
+
+
+/* todo : css 작성 필요 이후 html[] 예정 */
 body > .main > .register-form > .section-container {
+    width: 20rem;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main > .register-form > .section-container > .address-postal-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button {
+    margin-left: 0.325rem;
+}
+
+body > .main > .register-form > .section-container > .address-container {
+    margin-top: 0.325rem;
+}
+
+body > .main > .register-form > .section-container > .address-container > .address-primary,
+body > .main > .register-form > .section-container > .address-container > .address-secondary {
+    border-radius: 0.25rem;
+    font: inherit;
+    outline: none;
+    padding: 0.925rem 1.125rem;
+}
+
+
+
+
+
+
+
+
+
+
+body > .main > .register-form > .section-container:last-of-type {
     width: var(--content-width-default);
     align-items: stretch;
     border-top: 0.2rem solid rgb(var(--concept-color-pink));

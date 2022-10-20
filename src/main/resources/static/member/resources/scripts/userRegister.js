@@ -18,7 +18,6 @@ cancelButton.addEventListener('click', () => {
 nextButton.addEventListener('click', e => {
    e.preventDefault();
 
-   // TODO: 이거 수정해야해 ㅠ 체크여부 반환이 안되넹;
    // if (!termsContainer['agreeService'].checked) {
    //     alert('서비스 이용약관을 동의하지 않을시 회원가입 진행이 불가합니다.');
    //     termsContainer['agreeService'].focus();
@@ -30,15 +29,7 @@ nextButton.addEventListener('click', e => {
 });
 
 returnButton.addEventListener('click', () => {
-    registerForm['memberId'].innerText = "";
-    registerForm['password'].innerText = "";
-    registerForm['passwordCheck'].innerText = "";
-    registerForm['name'].innerText = "";
-    registerForm['streetAddress'].innerText = "";
-    registerForm['streetAddress2'].innerText = "";
-    registerForm['contact'].innerText = "";
-    registerForm[''].innerText = "";
-    registerForm[''].innerText = "";
+    registerForm.reset();
 
    termsContainer.classList.add('visible');
    registerForm.classList.remove('visible');
@@ -74,13 +65,32 @@ registerForm.onsubmit = e => {
 
   if (registerForm['name'].value === "") {
       alert('이름을 입력해 주세요.');
+      return ['name'].focus();
       return false;
   }
 
   if (!RegExp("^([가-힣]{2,5})$").test(registerForm['name'].value)) {
       alert('올바른 이름을 입력해 주세요.');
+      registerForm['name'].focusAndSelect();
       return false;
   }
 
+    if (registerForm['addressPrimary'].value === "") {
+        alert('주소 찾기를 진행해주세요.');
+        registerForm['addressPrimary'].focus();
+        return false;
+    }
+
+    if (registerForm['contact'].value === "") {
+        alert('연락처를 입력해 주세요.');
+        registerForm['contact'].focus();
+        return false;
+    }
+
+    if (registerForm['email'].value === "") {
+        alert('이메일을 입력해 주세요.');
+        registerForm['email'].focus();
+        return false;
+    }
 
 };
