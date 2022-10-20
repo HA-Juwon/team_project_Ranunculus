@@ -43,3 +43,4 @@ function showSlides() {
         slideIndex = 0;
     }
     setTimeout(showSlides, 2000);
+}
