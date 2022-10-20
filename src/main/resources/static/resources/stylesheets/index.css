@@ -40,7 +40,7 @@ ul{
 
 .hero-header{
     height: 500px;
-   background-image: url("https://s3.ap-northeast-2.amazonaws.com/om-public-static/media/images/products/2020/03/IMG_1272-01_FlP68NK.jpg");
+    background-image: url("https://s3.ap-northeast-2.amazonaws.com/om-public-static/media/images/products/2020/03/IMG_1272-01_FlP68NK.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
