@@ -140,7 +140,6 @@ header ._content-container.hd-sec01{
 }
 
 ._header>.hd-sec01{
-    width: 1260px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -189,8 +188,6 @@ header ._content-container.hd-sec01{
     display: inline;
     width: 330px;
     bottom: 0;
-    flex-grow: 1;
-
 }
 
 ._header>.hd-sec01>.right-area>.square-manu>{
@@ -287,8 +284,9 @@ header ._content-container.hd-sec01{
 }
 ._header .search_area{
     padding: 2rem;
-    background-color: rgb(var(--concept-color-pink),30%);
-    transition: display 2s;
+    background-color: rgb(var(--concept-color-pink),70%);
+    position: absolute;
+    width: 100%;
 }
 
 ._footer{
