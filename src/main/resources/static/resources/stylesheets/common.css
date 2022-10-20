@@ -17,7 +17,6 @@ body {
 
 a:link, a:visited {
     color: inherit;
-    color: inherit;
     text-decoration: none;
 }
 
@@ -132,6 +131,7 @@ ol, ul {
 
 header ._content-container.hd-sec01{
     margin: 0.625rem;
+
 }
 
 ._header li{
@@ -139,7 +139,6 @@ header ._content-container.hd-sec01{
 }
 
 ._header>.hd-sec01{
-    width: 1260px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -157,7 +156,6 @@ header ._content-container.hd-sec01{
     float: left;
     width: 330px;
     bottom: 0;
-    flex-grow: 1;
 }
 
 ._header>.hd-sec01>.left-area>ul>li{
@@ -179,9 +177,9 @@ header ._content-container.hd-sec01{
     justify-content: center;
     align-items: center;
     height: 88px;
+    flex-shrink: 1;
     line-height: 88px;
     bottom: 0;
-    flex-grow: 3;
 }
 
 ._header>.hd-sec01>.right-area{
@@ -189,8 +187,6 @@ header ._content-container.hd-sec01{
     display: inline;
     width: 330px;
     bottom: 0;
-    flex-grow: 1;
-
 }
 
 ._header>.hd-sec01>.right-area>.square-manu>{
@@ -287,8 +283,9 @@ header ._content-container.hd-sec01{
 }
 ._header .search_area{
     padding: 2rem;
-    background-color: rgb(var(--concept-color-pink),30%);
-    transition: display 2s;
+    background-color: rgb(var(--concept-color-pink),70%);
+    position: absolute;
+    width: 100%;
 }
 
 ._footer{
