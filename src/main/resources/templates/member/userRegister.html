@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -16,7 +16,7 @@
 <main class="main">
     <h1 class="title">회원가입</h1>
     <div class="terms-container visible" id="termsContainer">
-        <section class="section-container">
+        <section class="section-container" id="agreeTest">
             <label class="check-container">
                 <input class="check-input" hidden name="agreeAll" type="checkbox">
                 <span class="checker-container">
@@ -136,7 +136,7 @@
                 (시행일) 이 약관은 2015년 01월부터 시행합니다.
             </pre>
             <label class="check-container">
-                <input class="check-input" hidden name="agreeService" type="checkbox">
+                <input class="check-input" hidden name="agreeService" id="agreeService" type="checkbox">
                 <span class="checker-container">
                 <img alt="checker" class="checker" th:src="@{/resources/images/checker.png}">
             </span>
