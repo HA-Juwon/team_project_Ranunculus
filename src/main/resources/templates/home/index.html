@@ -3,8 +3,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Shop</title>
-    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+
     <meta charset="utf-8">
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/index.css}">
+    <script defer th:src="@{/resources/scripts/index.js}"></script>
 
     <link rel="stylesheet" href="/static/resources/stylesheets/index.css">
     <script defer src="/resources/scripts/index.js"></script>
