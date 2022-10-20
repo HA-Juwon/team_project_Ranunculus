@@ -313,7 +313,7 @@ header ._content-container.hd-sec01{
     border-bottom: 1px solid rgb(var(--concept-color-pink));
 }
 ._footer>.ft_sec01 .enumerator{
-    margin-bottom: 0.625rem;
+    margin: 0.625rem;
 }
 
 ._footer>.ft_sec01 a{
