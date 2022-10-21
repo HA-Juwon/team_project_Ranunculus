@@ -11,7 +11,6 @@ public class MemberEntity {
         return new MemberEntity();
     }
 
-    private String id;
     private String password;
     private String name;
     private String addressPostal;
@@ -32,7 +31,6 @@ public class MemberEntity {
 
     public MemberEntity(String id, String password, String name, String addressPostal, String addressPrimary, String addressSecondary, String telecomValue, String contact, String email, Date policyTermsAt, Date policyPrivacyAt, Date policyMarketingAt, String statusValue, Date registeredAt, boolean isAdmin) {
 
-        this.id = id;
         this.password = password;
         this.name = name;
         this.addressPostal = addressPostal;
@@ -49,14 +47,6 @@ public class MemberEntity {
         this.isAdmin = isAdmin;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public MemberEntity setId(String id) {
-        this.id = id;
-        return this;
-    }
 
     public String getPassword() {
         return password;
