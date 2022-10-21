@@ -102,12 +102,13 @@
 }
 
 .hero-header{
-    height: 500px;
+    height: 200px;
     background-image: url("https://s3.ap-northeast-2.amazonaws.com/om-public-static/media/images/products/2020/03/IMG_1272-01_FlP68NK.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     margin-top: 200px;
+    font-size: 100px;
 
 
 }
