@@ -73,7 +73,7 @@ body > .main > .terms-container > .section-container > .check-container > .check
 }
 
 body > .main > .terms-container > .section-container > .check-container > .check-input:checked ~ .checker-container > .checker {
-    display: block;
+    display: flex;
 }
 
 body > .main > .terms-container > .section-container > .check-container > .text {
@@ -156,9 +156,10 @@ body > .main > .register-form.visible {
 }
 
 body > .main > .register-form > .input-container{
-    width: 20rem;
+    width: 22rem;
     align-items: stretch;
     display: flex;
+
     flex-direction: column;
     justify-content: flex-start;
 }
@@ -198,7 +199,7 @@ body > .main > .register-form > .section-container ._object-input:focus {
 }
 
 body > .main > .register-form > .section-container {
-    width: 20rem;
+    width: 22rem;
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -235,7 +236,7 @@ body > .main > .register-form > .section-container > .address-postal-wrapper > .
 
 body > .main > .register-form > .section-container > .address-container > .address-primary,
 body > .main > .register-form > .section-container > .address-container > .address-secondary {
-    width: 20rem;
+    width: 22rem;
     border-radius: 0.25rem;
     font: inherit;
     outline: none;
@@ -266,7 +267,7 @@ body > .main > .register-form > .section-container > .login-container {
 
 body > .main > .register-form > .section-container > .login-container > * {
     margin-right: 0.5rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 400;
 }
 

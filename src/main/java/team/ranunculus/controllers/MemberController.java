@@ -1,12 +1,15 @@
 package team.ranunculus.controllers;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import team.ranunculus.entities.member.MemberEntity;
+import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
+import team.ranunculus.mappers.IMemberMapper;
 import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
@@ -18,23 +21,36 @@ import java.util.Optional;
 public class MemberController {
     private final MemberService memberService;
 
+    @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
 
+//    TODO: 이메일 체크 만들어야함
+    @RequestMapping(value = "userEmailCheck", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getUserEmailCheck (UserEntity user) {
+
+//        IResult result = memberService.(user);
+        JSONObject responseJson = new JSONObject();
+//        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        return responseJson.toString();
+    }
+
     @RequestMapping(value = "userLogin", method = RequestMethod.GET)
-    public ModelAndView getUserLogin (@SessionAttribute(value = MemberEntity.ATTRIBUTE_NAME, required = false)MemberEntity member,  ModelAndView modelAndView) {
+    public ModelAndView getUserLogin(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity member, ModelAndView modelAndView) {
         if (member != null) {
             modelAndView.setViewName("redirect:/");
         }
-        modelAndView.setViewName("member/userLogin");
+        modelAndView.setViewName("member/memberLogin");
         return modelAndView;
     }
+
     @RequestMapping(value = "userLogin", method = RequestMethod.POST)
     @ResponseBody
-    public String postUserLogin (@RequestParam(value = "autosign", required = false) Optional<Boolean> autosignOptional,
-                                       HttpSession session,
-                                       MemberEntity member) throws NoSuchAlgorithmException {
+    public String postUserLogin(@RequestParam(value = "autosign", required = false) Optional<Boolean> autosignOptional,
+                                HttpSession session,
+                                UserEntity member) throws NoSuchAlgorithmException {
         boolean autosign = autosignOptional.orElse(false);
         member.setName(null)
                 .setAddressPostal(null)
@@ -49,7 +65,7 @@ public class MemberController {
                 .setRegisteredAt(null);
         IResult result = this.memberService.loginUser(member);
         if (result == CommonResult.SUCCESS) {
-            session.setAttribute(MemberEntity.ATTRIBUTE_NAME, member);
+            session.setAttribute(UserEntity.ATTRIBUTE_NAME, member);
             if (autosign) {
                 //구현하기
             }
@@ -60,14 +76,25 @@ public class MemberController {
     }
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
-    public ModelAndView getUserRegister (ModelAndView modelAndView) {
-        modelAndView.setViewName("member/userRegister");
+    public ModelAndView getUserRegister(ModelAndView modelAndView) {
+        modelAndView.setViewName("member/memberRegister");
         return modelAndView;
     }
 
-    @RequestMapping(value = "userRecoverEmail", method = RequestMethod.GET)
-    public ModelAndView getUserRecoverEmail (ModelAndView modelAndView) {
-        modelAndView.setViewName("member/userRecoverEmail");
+    // TODO : 유저 레지스터 관련 Service, MyBatis, Mapper 구현 및 동작 확인 필요
+    @RequestMapping(value = "memberRegister", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postUserRegister (UserEntity user) {
+
+//        IResult result = memberService.(user);
+        JSONObject responseJson = new JSONObject();
+//        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        return responseJson.toString();
+    }
+
+    @RequestMapping(value = "memberRecoverEmail", method = RequestMethod.GET)
+    public ModelAndView getUserRecoverEmail(ModelAndView modelAndView) {
+        modelAndView.setViewName("member/memberRecoverEmail");
         return modelAndView;
     }
 }

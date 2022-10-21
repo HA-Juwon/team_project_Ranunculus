@@ -169,6 +169,13 @@ header ._content-container.hd-sec01{
     bottom: 0;
 }
 
+._header>.hd-sec01>.left-area>ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 ._header>.hd-sec01>.left-area>ul>li{
     float: left;
 }
