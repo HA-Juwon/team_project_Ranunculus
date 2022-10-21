@@ -3,7 +3,6 @@
 const recoverEmailForm = window.document.getElementById('recoverEmailForm');
 
 const contactAuthRequestButton=window.document.getElementById('contactAuthRequestButton');
-
 const contactAuthCheckButton=window.document.getElementById('contactAuthCheckButton');
 
 
@@ -14,25 +13,29 @@ contactAuthRequestButton.addEventListener('click',()=>{
         recoverEmailForm['name'].focus();
         return;
     }
+
     if (!new RegExp('^([가-힣]{2,5})$').test(recoverEmailForm['name'].value)) {
         alert('올바른 이름을 입력해 주세요.');
         recoverEmailForm['name'].focus();
         return;
     }
+
     if (recoverEmailForm['contact'].value === '') {
         alert('연락처를 입력해 주세요.');
         recoverEmailForm['contact'].focus();
         return;
     }
+
     if (!new RegExp('^(\\d{8,12})$').test(recoverEmailForm['contact'].value)) {
         alert('올바른 연락처를 입력해 주세요.');
         recoverEmailForm['contact'].focus();
         return;
     }
-    // 커버 아직 안 만듦
+
+    //커버 아직 안 만듦
     // cover.show('인증번호를 전송하고 있습니다.\n\n잠시만 기다려 주세요.');
 
-//     const xhr = new XMLHttpRequest();
+     // const xhr = new XMLHttpRequest();
 //     xhr.open('GET', `./userRecoverEmailAuth?name=${recoverEmailForm['name'].value}&contact=${recoverEmailForm['contact'].value}`);
 //     xhr.onreadystatechange = () => {
 //         if (xhr.readyState === XMLHttpRequest.DONE) {
