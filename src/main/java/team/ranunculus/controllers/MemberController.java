@@ -1,15 +1,12 @@
 package team.ranunculus.controllers;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import team.ranunculus.entities.member.UserEntity;
+import team.ranunculus.entities.member.MemberEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
-import team.ranunculus.mappers.IMemberMapper;
 import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
@@ -73,6 +70,14 @@ public class MemberController {
         JSONObject responseJson = new JSONObject();
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
+    }
+
+    @RequestMapping(value = "userLogout", method = RequestMethod.GET)
+    public ModelAndView getUserLogout(ModelAndView modelAndView,
+                                      HttpSession session) {
+        session.removeAttribute(UserEntity.ATTRIBUTE_NAME);
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
     }
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
