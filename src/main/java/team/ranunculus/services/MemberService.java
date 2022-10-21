@@ -83,7 +83,7 @@ public class MemberService {
         Date expiresAt = DateUtils.addMinutes(createdAt, 5);
 
         String code = RandomStringUtils.randomNumeric(6);
-//        String salt = CryptoUtils .hashSha512(String.format("%s%s%d%f%f",
+//        String salt = CryptoUtils.hashSha512(String.format("%s%s%d%f%f",
 //                contactAuth.getContact(),
 //                code,
 //                createdAt.getTime(),
