@@ -14,17 +14,15 @@
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<div class="address-search-container" id="addressSearchContainer">
+    <div class="dialog"></div>
+</div>
 <main class="main">
-<!--    주소창 -->
-    <div id="addressSearchContainer" class="address-search-container" data-func="closeAddressSearch">
-        <div class="dialog"></div>
-    </div>
-
     <h1 class="title">회원가입</h1>
-    <div class="terms-container" id="termsContainer">
+    <div class="terms-container visible" id="termsContainer">
         <section class="section-container">
             <label class="check-container">
-                <input class="check-input" hidden name="agreeAll" type="checkbox">
+                <input class="check-input" hidden id="agreeAll" name="agreeAll" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -142,7 +140,7 @@
                 (시행일) 이 약관은 2015년 01월부터 시행합니다.
             </pre>
             <label class="check-container">
-                <input class="check-input" hidden name="agreeService" type="checkbox">
+                <input class="check-input" hidden id="agreeService" name="agreeService" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -170,7 +168,7 @@
             귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 Ranunculus 서비스 일부분이 불가 할 수 있습니다.
             </pre>
             <label class="check-container">
-                <input class="check-input" hidden name="agreeShare" type="checkbox">
+                <input class="check-input" hidden id="agreePrivacy" name="agreePrivacy" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -191,7 +189,7 @@
             ② Ranunculus 서비스를 운용함에 있어 각종 정보를 이메일로 회원에게 제공할 수 있으며,
             결제안내 등 의무적으로 안내되어야 하는 정보성 내용 및 일부 혜택성 정보는 수신동의 여부와 무관하게 제공합니다.            </pre>
             <label class="check-container">
-                <input class="check-input" hidden name="agreeAd" type="checkbox">
+                <input class="check-input" hidden id="agreeAd" name="agreeAd" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -205,12 +203,10 @@
     </div>
 
 
-    <form class="register-form visible" id="registerForm">
-        <!--    필수 항목    -->
+    <form class="register-form" id="registerForm">
         <label class="input-container">
-            <span class="text">아이디</span>
-            <input autofocus class="_object-input input" maxlength="50" pattern="^[a-zA-Z0-9]*$" name="memberId"
-                   placeholder="아이디" type="text">
+            <span class="text">이메일</span>
+            <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
         </label>
         <label class="input-container">
             <span class="text">비밀번호</span>
@@ -223,29 +219,22 @@
         </label>
         <label class="input-container">
             <span class="text">이름</span>
-            <input class="_object-input input" maxlength="5" pattern="^([가-힣]{2,5})$" name="name" placeholder="이름"
+            <input class="_object-input input" maxlength="5" name="name" placeholder="이름"
                    type="text">
         </label>
-
-
-<!--        TODO : 주소 설정-->
         <section class="section-container">
             <span class="text">주소</span>
-
             <div class="address-container address-postal-wrapper">
-                <input class="input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text">
-                <input class="input address-postal-button" type="button" value="주소 찾기">
-            </div>
-
-            <div class="address-container">
-                <input class="input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text">
+                <input class="_object-input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text">
+                <input class="_object-input address-postal-button" id="addressButton" type="button" value="주소 찾기">
             </div>
             <div class="address-container">
-                <input class="input address-secondary" maxlength="100" name="addressSecondary" placeholder="상세주소" type="text">
+                <input class="_object-input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text">
+            </div>
+            <div class="address-container">
+                <input class="_object-input address-secondary" maxlength="100" name="addressSecondary" placeholder="상세주소" type="text">
             </div>
         </section>
-
-
         <label class="input-container">
             <span class="text">연락처 통신사</span>
             <select class="_object-input input" name="contactTelecom">
@@ -260,10 +249,6 @@
             <span class="text">연락처</span>
             <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)"
                    type="text">
-        </label>
-        <label class="input-container">
-            <span class="text">이메일</span>
-            <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
         </label>
         <section class="section-container">
             <span class="login-container">
