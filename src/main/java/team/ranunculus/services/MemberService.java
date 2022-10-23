@@ -23,7 +23,42 @@ public class MemberService {
     }
 
     @Transactional
-    public IResult loginUser(UserEntity member) throws NoSuchAlgorithmException {
+    public IResult checkUserEmail(UserEntity user) {
+        if (user.getEmail() == null ||
+        !user.getEmail().matches(MemberRegex.USER_EMAIL)) {
+            return CommonResult.FAILURE;
+        }
+        user = this.memberMapper.selectUserByEmail(user);
+        return user == null
+                ? CommonResult.SUCCESS
+                : CommonResult.DUPLICATE;
+    }
+
+    @Transactional
+    public IResult createUser(UserEntity user) {
+        if (user.getEmail() == null ||
+                user.getPassword() == null ||
+                user.getName() == null ||
+                user.getAddressPostal() == null ||
+                user.getAddressPrimary() == null ||
+                user.getAddressSecondary() == null ||
+                user.getTelecomValue() == "-1" ||
+                user.getContact() == null ||
+                !user.getEmail().matches(MemberRegex.USER_EMAIL) ||
+                !user.getPassword().matches(MemberRegex.USER_PASSWORD) ||
+                !user.getName().matches(MemberRegex.USER_NAME) ||
+                !user.getContact().matches(MemberRegex.USER_CONTACT)) {
+            return CommonResult.FAILURE;
+        }
+            user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+        if (this.memberMapper.insertUser(user) == 0) {
+            return CommonResult.FAILURE;
+        }
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public IResult loginUser(UserEntity member) {
         if (member.getEmail() == null ||
                 member.getPassword() == null ||
                 !member.getEmail().matches(MemberRegex.USER_EMAIL) ||

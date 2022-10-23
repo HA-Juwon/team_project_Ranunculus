@@ -13,6 +13,7 @@ import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller(value = "team.ranunculus.controllers.MemberContainer")
@@ -25,14 +26,12 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-//    TODO: 이메일 체크 만들어야함
-    @RequestMapping(value = "userEmailCheck", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "userEmailCheck", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getUserEmailCheck (UserEntity user) {
-
-//        IResult result = memberService.(user);
+    public String getUserEmailCheck(UserEntity user) {
+        IResult result = this.memberService.checkUserEmail(user);
         JSONObject responseJson = new JSONObject();
-//        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
     }
 
@@ -41,7 +40,7 @@ public class MemberController {
         if (member != null) {
             modelAndView.setViewName("redirect:/");
         }
-        modelAndView.setViewName("member/memberLogin");
+        modelAndView.setViewName("member/userLogin");
         return modelAndView;
     }
 
@@ -84,24 +83,29 @@ public class MemberController {
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
     public ModelAndView getUserRegister(ModelAndView modelAndView) {
-        modelAndView.setViewName("member/memberRegister");
+        modelAndView.setViewName("member/userRegister");
         return modelAndView;
     }
 
-    // TODO : 유저 레지스터 관련 Service, MyBatis, Mapper 구현 및 동작 확인 필요
-    @RequestMapping(value = "memberRegister", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "userRegister", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postUserRegister (UserEntity user) {
-
-//        IResult result = memberService.(user);
+    public String postUserRegister(@RequestParam(value = "policyMarketing") boolean policyMarketing,
+                                   UserEntity user) {
+        user.setPolicyTermsAt(new Date())
+                .setPolicyPrivacyAt(new Date())
+                .setPolicyMarketingAt(policyMarketing ? new Date() : null)
+                .setStatusValue("OKY")
+                .setRegisteredAt(new Date())
+                .setAdmin(false);
+        IResult result = this.memberService.createUser(user);
         JSONObject responseJson = new JSONObject();
-//        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
     }
 
     @RequestMapping(value = "memberRecoverEmail", method = RequestMethod.GET)
     public ModelAndView getUserRecoverEmail(ModelAndView modelAndView) {
-        modelAndView.setViewName("member/memberRecoverEmail");
+        modelAndView.setViewName("member/userRecoverEmail");
         return modelAndView;
     }
 }

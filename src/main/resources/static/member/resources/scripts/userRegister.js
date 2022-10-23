@@ -1,88 +1,90 @@
 const termsContainer = window.document.getElementById('termsContainer');
 const registerForm = window.document.getElementById('registerForm');
-const cancelButton = window.document.getElementById('cancelButton');
-const nextButton = window.document.getElementById('nextButton');
-const returnButton = window.document.getElementById('returnButton');
-const agreeAll = window.document.getElementById('agreeAll');
 const agreeService = window.document.getElementById('agreeService');
 const agreePrivacy = window.document.getElementById('agreePrivacy');
 const agreeAd = window.document.getElementById('agreeAd');
-const addressButton = window.document.getElementById('addressButton');
 
-agreeAll.addEventListener('click', () => {
-    if (!agreeService.checked || !agreePrivacy.checked) {
-        agreeService.checked = "true";
-        agreePrivacy.checked = "true";
-        agreeAd.checked = "true";
-    } else {
-        agreeService.checked = false;
-        agreePrivacy.checked = false;
-        agreeAd.checked = false;
-    }
-});
-
-cancelButton.addEventListener('click', () => {
-    if (window.confirm('정말 회원가입을 취소 하시겠어요?\n일부 서비스 이용이 불가 할 수 있습니다.')) {
-        window.location.href = "/";
-    }
-});
-
-nextButton.addEventListener('click', e => {
-    e.preventDefault();
-
-    // TODO : 얘는 왜 안될까용? 밑에 구현하긴했는데 문의필요
-    // if (!termsContainer['agreeService'].checked) {
-    //     alert('서비스 이용약관을 동의하지 않을시 회원가입 진행이 불가합니다.');
-    //     termsContainer['agreeService'].focus();
-    //     return false;
-    // }
-
-    if (!agreeService.checked || !agreePrivacy.checked) {
-        alert('필수 이용약관을 동의하지 않을 시 \n회원가입 진행이 불가합니다.');
-        return false;
-    }
-
-    termsContainer.classList.remove('visible');
-    registerForm.classList.add('visible');
-});
-
-addressButton.addEventListener('click', () => {
-    const addressSearchContainer = window.document.getElementById('addressSearchContainer');
-    const dialog = addressSearchContainer.querySelector(':scope > .dialog');
-    dialog.innerHTML = '';
-
-    new daum.Postcode({
-        oncomplete: (data) => {
-            registerForm['addressPostal'].value = data.zonecode;
-            registerForm['addressPrimary'].value = data.address;
-            registerForm['addressSecondary'].focus();
-            registerForm['addressSecondary'].select();
-
-            window.document.body.classList.remove('searching');
+const functions = {
+    termsAllCheck : (params) => {
+        if (!agreeService.checked || !agreePrivacy.checked) {
+            agreeService.checked = "true";
+            agreePrivacy.checked = "true";
+            agreeAd.checked = "true";
+        } else {
+            agreeService.checked = false;
+            agreePrivacy.checked = false;
+            agreeAd.checked = false;
         }
-    }).embed(dialog);
+    },
+    termsCancelButton : (params) => {
+        if (window.confirm('정말 회원가입을 취소 하시겠어요?\n일부 서비스 이용이 불가 할 수 있습니다.')) {
+            window.location.href = "/";
+        }
+    },
+    termsNextButton : (params) => {
+        // TODO : 얘는 왜 안될까용? 밑에 구현하긴했는데 문의필요
+        // if (!termsContainer['agreeService'].checked) {
+        //     alert('서비스 이용약관을 동의하지 않을시 회원가입 진행이 불가합니다.');
+        //     termsContainer['agreeService'].focus();
+        //     return false;
+        // }
 
-    window.document.body.classList.add('searching');
-});
+        if (!agreeService.checked || !agreePrivacy.checked) {
+            alert('필수 이용약관을 동의하지 않을 시 \n회원가입 진행이 불가합니다.');
+            return false;
+        }
 
-// TODO : 얘 구현해야해여
-// addressButton.addEventListener('focusout', () => {
-//     window.document.body.classList.remove('searching');
-// });
+        termsContainer.classList.remove('visible');
+        registerForm.classList.add('visible');
+    },
+    closeAddressSearch : (params) => {
+        window.document.body.classList.remove('searching');
+    },
+    openAddressSearch : (params) => {
+        const searchContainer = window.document.body.querySelector(':scope > .address-search-container');
+        const dialog = searchContainer.querySelector(':scope > .dialog');
+        dialog.innerHTML = '';
 
-returnButton.addEventListener('click', () => {
-    registerForm.reset();
+        new daum.Postcode({
+            oncomplete: (data) => {
+                registerForm['addressPostal'].value = data.zonecode;
+                registerForm['addressPrimary'].value = data.address;
+                registerForm['addressSecondary'].focus();
+                registerForm['addressSecondary'].select();
 
-    termsContainer.classList.add('visible');
-    registerForm.classList.remove('visible');
+                window.document.body.classList.remove('searching');
+            }
+        }).embed(dialog);
+
+        window.document.body.classList.add('searching');
+    },
+    returnButton : (params) => {
+        registerForm.reset();
+
+        termsContainer.classList.add('visible');
+        registerForm.classList.remove('visible');
+    }
+};
+
+window.document.body.querySelectorAll('[data-func]').forEach(element => {
+    element.addEventListener('click', event => {
+        const dataFunc = element.dataset.func;
+        if (typeof(dataFunc) === 'string' && typeof(functions[dataFunc]) === 'function') {
+            functions[dataFunc] ({
+                element : element,
+                event : event
+            });
+        }
+    });
 });
 
 let emailChecked = false;
 
 registerForm['email'].addEventListener('focusout', () => {
     if (registerForm['email'].value === '' || !new RegExp('^(?=.{7,50})([\\da-zA-Z_.]{4,})@([\\da-z\\-]{2,}\\.)?([\\da-z\\-]{2,})\\.([a-z]{2,10})(\\.[a-z]{2})?$').test(registerForm['email'].value)) {
+        registerForm['email'].focusAndSelect();
         emailChecked = false;
-        return;
+        return false;
     }
 
     const xhr = new XMLHttpRequest();
@@ -180,7 +182,7 @@ registerForm.onsubmit = e => {
         return false;
     }
 
-    if (registerForm['contactTelecom'].value === '-1') {
+    if (registerForm['telecomValue'].value === '-1') {
         alert('통신사를 선택해 주세요.');
         return false;
     }
@@ -207,9 +209,7 @@ registerForm.onsubmit = e => {
     formData.append('addressSecondary', registerForm['addressSecondary'].value);
     formData.append('telecomValue', registerForm['telecomValue'].value);
     formData.append('contact', registerForm['contact'].value);
-    formData.append('policyTermsAt', agreeService.checked);
-    formData.append('policyPrivacyAt', agreePrivacy.checked);
-    formData.append('policyMarketingAt', agreeAd.checked);
+    formData.append('policyMarketing', agreeAd.checked);
 
     xhr.open('POST', './userRegister');
     xhr.onreadystatechange = () => {
@@ -218,14 +218,15 @@ registerForm.onsubmit = e => {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
                     case 'success' :
+                        alert('회원가입 성공');
                         window.location.href = "/";
                         break;
                     default :
                         alert('알 수 없는 이유로 회원가입을 실패했습니다. 잠시 후 다시 시도해 주세요.');
                 }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
             }
-        } else {
-            alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
         }
     };
     xhr.send(formData);
