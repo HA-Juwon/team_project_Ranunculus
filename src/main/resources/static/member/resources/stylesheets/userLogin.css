@@ -7,7 +7,6 @@ body > .main {
     justify-content: center;
 }
 
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -35,7 +34,6 @@ body > .main > .login-form > .title {
     font-size: 1.875rem;
     font-weight: 600;
     margin-bottom: 2.5rem;
-    margin-top: 2.5rem;
 }
 
 body > .main > .login-form > .warning.visible {
