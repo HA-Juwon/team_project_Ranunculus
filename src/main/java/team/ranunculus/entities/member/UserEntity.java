@@ -3,15 +3,15 @@ package team.ranunculus.entities.member;
 import java.util.Date;
 import java.util.Objects;
 
-public class MemberEntity {
+public class UserEntity {
     public static final String ATTRIBUTE_NAME = "memberUser";
     public static final String ATTRIBUTE_NAME_PLURAL = "memberUsers";
 
-    public static MemberEntity build() {
-        return new MemberEntity();
+    public static UserEntity build() {
+        return new UserEntity();
     }
 
-    private String id;
+    private String email;
     private String password;
     private String name;
     private String addressPostal;
@@ -19,20 +19,19 @@ public class MemberEntity {
     private String addressSecondary;
     private String telecomValue;
     private String contact;
-    private String email;
     private Date policyTermsAt = new Date();
     private Date policyPrivacyAt = new Date();
-    private Date policyMarketingAt = new Date();
+    private Date policyMarketingAt;
     private String statusValue;
     private Date registeredAt = new Date();
     private boolean isAdmin = false;
 
-    public MemberEntity() {
+    public UserEntity() {
     }
 
-    public MemberEntity(String id, String password, String name, String addressPostal, String addressPrimary, String addressSecondary, String telecomValue, String contact, String email, Date policyTermsAt, Date policyPrivacyAt, Date policyMarketingAt, String statusValue, Date registeredAt, boolean isAdmin) {
+    public UserEntity(String email, String password, String name, String addressPostal, String addressPrimary, String addressSecondary, String telecomValue, String contact, Date policyTermsAt, Date policyPrivacyAt, Date policyMarketingAt, String statusValue, Date registeredAt, boolean isAdmin) {
 
-        this.id = id;
+        this.email = email;
         this.password = password;
         this.name = name;
         this.addressPostal = addressPostal;
@@ -40,7 +39,6 @@ public class MemberEntity {
         this.addressSecondary = addressSecondary;
         this.telecomValue = telecomValue;
         this.contact = contact;
-        this.email = email;
         this.policyTermsAt = policyTermsAt;
         this.policyPrivacyAt = policyPrivacyAt;
         this.policyMarketingAt = policyMarketingAt;
@@ -49,12 +47,12 @@ public class MemberEntity {
         this.isAdmin = isAdmin;
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public MemberEntity setId(String id) {
-        this.id = id;
+    public UserEntity setEmail(String email) {
+        this.email = email;
         return this;
     }
 
@@ -62,7 +60,7 @@ public class MemberEntity {
         return password;
     }
 
-    public MemberEntity setPassword(String password) {
+    public UserEntity setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -71,7 +69,7 @@ public class MemberEntity {
         return name;
     }
 
-    public MemberEntity setName(String name) {
+    public UserEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -80,7 +78,7 @@ public class MemberEntity {
         return addressPostal;
     }
 
-    public MemberEntity setAddressPostal(String addressPostal) {
+    public UserEntity setAddressPostal(String addressPostal) {
         this.addressPostal = addressPostal;
         return this;
     }
@@ -89,7 +87,7 @@ public class MemberEntity {
         return addressPrimary;
     }
 
-    public MemberEntity setAddressPrimary(String addressPrimary) {
+    public UserEntity setAddressPrimary(String addressPrimary) {
         this.addressPrimary = addressPrimary;
         return this;
     }
@@ -98,7 +96,7 @@ public class MemberEntity {
         return addressSecondary;
     }
 
-    public MemberEntity setAddressSecondary(String addressSecondary) {
+    public UserEntity setAddressSecondary(String addressSecondary) {
         this.addressSecondary = addressSecondary;
         return this;
     }
@@ -107,7 +105,7 @@ public class MemberEntity {
         return telecomValue;
     }
 
-    public MemberEntity setTelecomValue(String telecomValue) {
+    public UserEntity setTelecomValue(String telecomValue) {
         this.telecomValue = telecomValue;
         return this;
     }
@@ -116,25 +114,17 @@ public class MemberEntity {
         return contact;
     }
 
-    public MemberEntity setContact(String contact) {
+    public UserEntity setContact(String contact) {
         this.contact = contact;
         return this;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public MemberEntity setEmail(String email) {
-        this.email = email;
-        return this;
-    }
 
     public Date getPolicyTermsAt() {
         return policyTermsAt;
     }
 
-    public MemberEntity setPolicyTermsAt(Date policyTermsAt) {
+    public UserEntity setPolicyTermsAt(Date policyTermsAt) {
         this.policyTermsAt = policyTermsAt;
         return this;
     }
@@ -143,7 +133,7 @@ public class MemberEntity {
         return policyPrivacyAt;
     }
 
-    public MemberEntity setPolicyPrivacyAt(Date policyPrivacyAt) {
+    public UserEntity setPolicyPrivacyAt(Date policyPrivacyAt) {
         this.policyPrivacyAt = policyPrivacyAt;
         return this;
     }
@@ -152,7 +142,7 @@ public class MemberEntity {
         return policyMarketingAt;
     }
 
-    public MemberEntity setPolicyMarketingAt(Date policyMarketingAt) {
+    public UserEntity setPolicyMarketingAt(Date policyMarketingAt) {
         this.policyMarketingAt = policyMarketingAt;
         return this;
     }
@@ -161,7 +151,7 @@ public class MemberEntity {
         return statusValue;
     }
 
-    public MemberEntity setStatusValue(String statusValue) {
+    public UserEntity setStatusValue(String statusValue) {
         this.statusValue = statusValue;
         return this;
     }
@@ -170,7 +160,7 @@ public class MemberEntity {
         return registeredAt;
     }
 
-    public MemberEntity setRegisteredAt(Date registeredAt) {
+    public UserEntity setRegisteredAt(Date registeredAt) {
         this.registeredAt = registeredAt;
         return this;
     }
@@ -179,7 +169,7 @@ public class MemberEntity {
         return isAdmin;
     }
 
-    public MemberEntity setAdmin(boolean admin) {
+    public UserEntity setAdmin(boolean admin) {
         isAdmin = admin;
         return this;
     }
@@ -188,7 +178,7 @@ public class MemberEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MemberEntity that = (MemberEntity) o;
+        UserEntity that = (UserEntity) o;
         return Objects.equals(email, that.email);
     }
 

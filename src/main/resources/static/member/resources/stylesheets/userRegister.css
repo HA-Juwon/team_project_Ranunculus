@@ -72,6 +72,9 @@ body > .main > .terms-container > .section-container > .check-container > .check
     justify-content: center;
 }
 
+body > .main > .terms-container > .section-container > .check-container > .check-input:checked ~ .checker-container > .checker {
+    display: flex;
+}
 
 body > .main > .terms-container > .section-container > .check-container > .text {
     margin-left: 0.5rem;
@@ -138,7 +141,7 @@ body > .main > .terms-container > .button-container > .button.next-button {
 }
 
 body > .main > .terms-container > .button-container > .button.next-button:hover {
-    background-color: rgb(var(--concept-color-pink-dim));
+    background-color: rgba(var(--concept-color-pink-dim));
 }
 
 body > .main > .register-form {
@@ -152,8 +155,17 @@ body > .main > .register-form.visible {
     display: flex;
 }
 
-body > .main > .register-form > .input-container {
-    width: 20rem;
+body > .main > .register-form > .input-container{
+    width: 22rem;
+    align-items: stretch;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .register-form > .input-container > * {
+    margin-top: 0.325rem;
 }
 
 body > .main > .register-form > .input-container:not(:first-of-type) {
@@ -164,25 +176,74 @@ body > .main > .register-form > .input-container:last-of-type {
     margin: 1.25rem 0 5rem 0;
 }
 
-body > .main > .register-form > .input-container > .text {
+body > .main > .register-form > .input-container > .text,
+body > .main > .register-form > .section-container > .text{
     font-size: 1.25rem;
     font-weight: 500;
     margin-left: 0.625rem;
 }
 
-body > .main > .register-form > .input-container > .input {
+body > .main > .register-form > .input-container > .input,
+body > .main > .register-form > .section-container ._object-input {
     border: 0.125rem solid rgb(var(--concept-color-pink));
 }
 
-body > .main > .register-form > .input-container > .input:not(:placeholder-shown) {
-    background-color: rgb(253, 237, 236);
+body > .main > .register-form > .input-container > .input:not(:placeholder-shown),
+body > .main > .register-form > .section-container ._object-input:not(:placeholder-shown) {
+    background-color: rgba(var(--concept-color-pink), 50%);
 }
 
-body > .main > .register-form > .input-container > .input:focus {
-    background-color: rgb(var(--concept-color-blue));
+body > .main > .register-form > .input-container > .input:focus,
+body > .main > .register-form > .section-container ._object-input:focus {
+    background-color: rgba(var(--concept-color-blue), 50%);
 }
 
 body > .main > .register-form > .section-container {
+    width: 22rem;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+body > .main > .register-form > .section-container > * {
+    margin-top: 0.325rem;
+}
+body > .main > .register-form > .section-container > .address-postal-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal,
+body > .main > .register-form > .section-container > .address-container > .address-primary {
+    background-color: unset;
+}
+
+body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button {
+    margin-left: 0.325rem;
+}
+
+body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button:focus {
+    background-color: rgba(var(--concept-color-pink), 50%);
+}
+
+body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button:active {
+    background-color: rgba(var(--concept-color-pink-dim));
+}
+
+body > .main > .register-form > .section-container > .address-container > .address-primary,
+body > .main > .register-form > .section-container > .address-container > .address-secondary {
+    width: 22rem;
+    border-radius: 0.25rem;
+    font: inherit;
+    outline: none;
+    padding: 0.925rem 1.125rem;
+}
+
+body > .main > .register-form > .section-container:last-of-type {
     width: var(--content-width-default);
     align-items: stretch;
     border-top: 0.2rem solid rgb(var(--concept-color-pink));
@@ -206,7 +267,7 @@ body > .main > .register-form > .section-container > .login-container {
 
 body > .main > .register-form > .section-container > .login-container > * {
     margin-right: 0.5rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 400;
 }
 
@@ -242,6 +303,39 @@ body > .main > .register-form > .section-container > .button-container > .button
 
 body > .main > .register-form > .section-container > .button-container > .button.next-button {
     background-color: rgb(var(--concept-color-pink));
+}
+
+body > .main > .register-form > .section-container > .button-container > .button.next-button:hover {
+    background-color: rgba(var(--concept-color-pink-dim));
+}
+
+body > .address-search-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 80%);
+    display: none;
+    position: fixed;
+    z-index: 8;
+}
+
+body > .address-search-container > .dialog {
+    top: 50%;
+    left: 50%;
+    max-width: calc(100% - 2rem);
+    max-height: calc(100% - 2rem);
+    background-color: rgb(255, 255, 255);
+    overflow: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+body.searching {
+    overflow: hidden;
+}
+body.searching > .address-search-container {
+    display: block;
 }
 
 body > .main > .register-form > .section-container > .button-container > .button.next-button:hover {

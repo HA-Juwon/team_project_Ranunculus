@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.ranunculus.mappers.IMemberMapper">
+    <insert id="insertUser"
+            parameterType="team.ranunculus.entities.member.UserEntity">
+        INSERT INTO `ranunculus_members`.`member`(`email`, `password`, `name`, `address_postal`, `address_primary`,
+                                                  `address_secondary`, `telecom_value`, `contact`, `policy_terms_at`,
+                                                  `policy_privacy_at`, `policy_marketing_at`, `status_value`,
+                                                  `registered_at`, `admin_flag`)
+        VALUES (#{email}, #{password}, #{name}, #{addressPostal}, #{addressPrimary}, #{addressSecondary},
+                #{telecomValue}, #{contact}, #{policyTermsAt}, #{policyPrivacyAt}, #{policyMarketingAt}, #{statusValue},
+                #{registeredAt}, #{isAdmin})
+    </insert>
+
+    <select id="selectUserByEmailPassword"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `address_postal`      AS `addressPostal`,
+               `address_primary`     AS `addressPrimary`,
+               `address_secondary`   AS `addressSecondary`,
+               `telecom_value`       AS `telecomValue`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`
+        FROM `ranunculus_members`.`member`
+        WHERE `email` = #{email}
+          AND `password` = #{password}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByEmail"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `address_postal`      AS `addressPostal`,
+               `address_primary`     AS `addressPrimary`,
+               `address_secondary`   AS `addressSecondary`,
+               `telecom_value`       AS `telecomValue`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`
+        FROM `ranunculus_members`.`member`
+        WHERE `email` = #{email}
+        LIMIT 1;
+    </select>
+</mapper>

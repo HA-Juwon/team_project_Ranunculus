@@ -10,15 +10,19 @@
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/member/resources/stylesheets/userRegister.css}">
     <script defer th:src="@{/member/resources/scripts/userRegister.js}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<div class="address-search-container" data-func="closeAddressSearch">
+    <div class="dialog"></div>
+</div>
 <main class="main">
     <h1 class="title">회원가입</h1>
-    <div class="terms-container" id="termsContainer">
+    <div class="terms-container visible" id="termsContainer">
         <section class="section-container">
             <label class="check-container">
-                <input class="check-input" hidden name="agreeAll" type="checkbox">
+                <input class="check-input" hidden name="agreeAll" type="checkbox" data-func="termsAllCheck">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -136,7 +140,7 @@
                 (시행일) 이 약관은 2015년 01월부터 시행합니다.
             </pre>
             <label class="check-container">
-                <input class="check-input" hidden name="agreeService" type="checkbox">
+                <input class="check-input" hidden id="agreeService" name="agreeService" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -145,22 +149,26 @@
         </section>
 
         <section class="section-container">
-            <span class="text">개인정보 제3자 제공 동의 (선택)</span>
+            <span class="text">개인정보 수집•이용 동의 (필수)</span>
             <pre class="comment">
-                개인정보보호법 제22조 제4항에 의해 선택정보 사항에 대해서는 기재하지 않으셔도 서비스를 이용하실 수 있습니다.
-
-                1. 개인정보를 제공받는 자 : 협력업체
-
-                2. 개인정보를 제공받는 자의 개인정보 이용 목적 : 신규 고개 유치 및 포인트 관리
-
-                3. 제공하는 개인정보의 항목 : 성명, 전화번호, 생년월일
-
-                4. 개인정보를 제공받는 자의 개인정보 보유 및 이용 기간 : 제공 후 1년
-
-                5. 동의를 거부할 수 있으며, 동의 거부시 일부 서비스가 제공되지 않습니다.
+            Ⅰ. 개인정보의 수집 및 이용 동의서
+            - 이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.
+            ① 개인정보 수집 항목 및 수집·이용 목적
+            가) 수집 항목 (필수항목)
+            - 성명, 주소, 전화번호(휴대전화), 이메일 등 지원
+            신청서에 기재된 정보 또는 신청자가 제공한 정보
+            나) 수집 및 이용 목적
+            - 하이트진로 장학생 선발 전형 진행
+            - 하이트진로 장학생과의 연락 및 자격확인
+            - 하이트진로 장학생 자원관리
+            ② 개인정보 보유 및 이용기간
+            - 수집·이용 동의일로부터 개인정보의 수집·이용목적을 달성할 때까지
+            ③ 동의거부관리
+            - 귀하께서는 본 안내에 따른 개인정보 수집, 이용에 대하여 동의를 거부하실 권리가 있습니다. 다만,
+            귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 Ranunculus 서비스 일부분이 불가 할 수 있습니다.
             </pre>
             <label class="check-container">
-                <input class="check-input" hidden name="agreeShare" type="checkbox">
+                <input class="check-input" hidden id="agreePrivacy" name="agreePrivacy" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -181,7 +189,7 @@
             ② Ranunculus 서비스를 운용함에 있어 각종 정보를 이메일로 회원에게 제공할 수 있으며,
             결제안내 등 의무적으로 안내되어야 하는 정보성 내용 및 일부 혜택성 정보는 수신동의 여부와 무관하게 제공합니다.            </pre>
             <label class="check-container">
-                <input class="check-input" hidden name="agreeAd" type="checkbox">
+                <input class="check-input" hidden id="agreeAd" name="agreeAd" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -189,22 +197,20 @@
             </label>
         </section>
         <div class="button-container">
-            <input class="button cancel-button" id="cancelButton" type="button" value="취소">
-            <input class="button next-button" id="nextButton" type="button" value="다음">
+            <input class="button cancel-button" type="button" value="취소" data-func="termsCancelButton">
+            <input class="button next-button" type="button" value="다음" data-func="termsNextButton">
         </div>
     </div>
 
 
-    <form class="register-form visible" id="registerForm">
-        <!--    필수 항목    -->
+    <form class="register-form" id="registerForm">
         <label class="input-container">
-            <span class="text">아이디</span>
-            <input autofocus class="_object-input input" maxlength="50" pattern="^[a-zA-Z0-9]*$" name="memberId"
-                   placeholder="아이디" type="text">
+            <span class="text">이메일</span>
+            <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
         </label>
         <label class="input-container">
             <span class="text">비밀번호</span>
-            <input class="_object-input input" maxlength="50" name="password" placeholder="비밀번호" type="password">
+            <input class="_object-input input" maxlength="50"  name="password" placeholder="비밀번호(8자~50자, 영문/숫자/특수문자 가능)" type="password">
         </label>
         <label class="input-container">
             <span class="text">비밀번호 확인</span>
@@ -213,27 +219,26 @@
         </label>
         <label class="input-container">
             <span class="text">이름</span>
-            <input class="_object-input input" maxlength="5" pattern="^([가-힣]{2,5})$" name="name" placeholder="이름"
+            <input class="_object-input input" maxlength="5" name="name" placeholder="이름"
                    type="text">
         </label>
-
-        <!-- 선택 항목 // 카카오 맵 사용예정 -->
-        <label class="input-container">
+        <section class="section-container">
             <span class="text">주소</span>
-            <input type="text" id="sample6_postcode" placeholder="우편번호">
-            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" id="sample6_address" placeholder="주소"><br>
-        </label>
-        <label class="input-container">
-            <span class="text">상세 주소</span>
-            <input class="_object-input input" maxlength="50" name="streetAddress2" placeholder="상세 주소" type="text">
-            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-        </label>
-        <!---->
+            <div class="address-container address-postal-wrapper">
+                <input class="_object-input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text">
+                <input class="_object-input address-postal-button" type="button" value="주소 찾기" data-func="openAddressSearch">
+            </div>
+            <div class="address-container">
+                <input class="_object-input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text">
+            </div>
+            <div class="address-container">
+                <input class="_object-input address-secondary" maxlength="100" name="addressSecondary" placeholder="상세주소" type="text">
+            </div>
+        </section>
         <label class="input-container">
             <span class="text">연락처 통신사</span>
-            <select class="_object-input input" name="contactTelecom">
-                <option selected value="-1">통신사</option>
+            <select class="_object-input input" name="telecomValue">
+                <option disabled selected redonly value="-1">통신사</option>
                 <option value="1">SKT</option>
                 <option value="2">KT</option>
                 <option value="3">LGU+</option>
@@ -245,17 +250,13 @@
             <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)"
                    type="text">
         </label>
-        <label class="input-container">
-            <span class="text">이메일</span>
-            <input class="_object-input input" maxlength="50" name="email" placeholder="이메일" type="email">
-        </label>
         <section class="section-container">
             <span class="login-container">
                 <span class="text">이미 계정이 있으신가요?</span>
                 <a class="text link" th:href="@{/member/userLogin}">로그인</a>
             </span>
             <span class="button-container">
-                <input class="button cancel-button" id="returnButton" type="button" value="이전">
+                <input class="button cancel-button" type="button" value="이전" data-func="returnButton">
                 <input class="button next-button" type="submit" value="회원가입">
             </span>
         </section>

@@ -7,16 +7,10 @@ body > .main {
     justify-content: center;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    background-color: rgb(0,255,255);
-    transition: background-color 5000s ease-in-out 0s;
-    -webkit-transition: background-color 9999s ease-out;
-    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-}
+<<<<<<<<< Temporary merge branch 1
+=========
 
+>>>>>>>>> Temporary merge branch 2
 body > .main > .login-form {
     width: 20rem;
     align-items: stretch;
@@ -34,6 +28,7 @@ body > .main > .login-form > .title {
     font-size: 1.875rem;
     font-weight: 600;
     margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
 }
 
 body > .main > .login-form > .warning.visible {

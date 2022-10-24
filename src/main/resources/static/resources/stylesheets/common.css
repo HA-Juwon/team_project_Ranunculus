@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 :root {
-    --concept-color-blue: 235, 245, 251;
+    --concept-color-blue: 214, 234, 248;
     --concept-color-pink: 250, 219, 216;
-    --concept-color-pink-dim: 248, 187, 208;
+    --concept-color-pink-dim: 241, 148, 138, 50%;
     --content-width-default: 73.75rem;
 }
 
@@ -169,6 +169,13 @@ header ._content-container.hd-sec01{
     bottom: 0;
 }
 
+._header>.hd-sec01>.left-area>ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 ._header>.hd-sec01>.left-area>ul>li{
     float: left;
 }
@@ -323,7 +330,7 @@ header ._content-container.hd-sec01{
     border-bottom: 1px solid rgb(var(--concept-color-pink));
 }
 ._footer>.ft_sec01 .enumerator{
-    margin: 0.625rem;
+    margin-bottom: 0.625rem;
 }
 
 ._footer>.ft_sec01 a{
@@ -396,5 +403,5 @@ header ._content-container.hd-sec01{
     color: rgb(120,120,120);
     text-align: left;
     letter-spacing: 0.5px;
-
 }
+

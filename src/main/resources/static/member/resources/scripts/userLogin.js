@@ -32,11 +32,11 @@ form.onsubmit = e => {
     formData.append('email', form['email'].value);
     formData.append('password', form['password'].value);
     formData.append('autosign', form['autosign'].value);
-    xhr.open('POST', '/userLogin');
+    xhr.open('POST', './userLogin');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                const responseJson = new JSON.parse(xhr.responseText);
+                const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
                     case 'success':
                         window.location.href = '/';
