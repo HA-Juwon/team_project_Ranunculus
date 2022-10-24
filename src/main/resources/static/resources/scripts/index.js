@@ -1,51 +1,46 @@
-var slideIndex = 0; //slide index
-
-// HTML 로드가 끝난 후 동작
-window.onload=function(){
-    showSlides(slideIndex);
-
-    // Auto Move Slide
-    var sec = 3000;
-    setInterval(function(){
-        slideIndex++;
-        showSlides(slideIndex);
-
-    }, sec);
-}
+var slideWrapper = document.querySelector('.container');
+var slides = document.querySelectorAll('.item');
+var totalSlides = slides.length; // item의 갯수
 
 
-// Next/previous controls
-function moveSlides(n) {
-    slideIndex = slideIndex + n
-    showSlides(slideIndex);
-}
+var sliderWidth = slideWrapper.clientWidth; // container의 width
+var slideIndex = 0;
+var slider = document.querySelector('.slider');
 
-// Thumbnail image controls
-function currentSlide(n) {
-    slideIndex = n;
-    showSlides(slideIndex);
-}
+slider.style.width = sliderWidth * totalSlides + 'px';
 
-function showSlides(n) {
+showSlides()
 
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    var size = slides.length;
-
-    if ((n+1) > size) {
-        slideIndex = 0; n = 0;
-    }else if (n < 0) {
-        slideIndex = (size-1);
-        n = (size-1);
+function showSlides() {
+    for(var i=0;i<slides.length;i++){
+        slider.style.left = -(sliderWidth * slideIndex) + 'px';
     }
-
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    slideIndex++;
+    if (slideIndex === totalSlides) {
+        slideIndex = 0;
     }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
+    setTimeout(showSlides, 2000);
 
-    slides[n].style.display = "block";
-    dots[n].className += " active";
+var slideWrapper = document.querySelector('.container');
+var slides = document.querySelectorAll('.item');
+var totalSlides = slides.length; // item의 갯수
+
+
+var sliderWidth = slideWrapper.clientWidth; // container의 width
+var slideIndex = 0;
+var slider = document.querySelector('.slider');
+
+slider.style.width = sliderWidth * totalSlides + 'px';
+
+showSlides()
+
+function showSlides() {
+    for(var i=0;i<slides.length;i++){
+        slider.style.left = -(sliderWidth * slideIndex) + 'px';
+    }
+    slideIndex++;
+    if (slideIndex === totalSlides) {
+        slideIndex = 0;
+    }
+    setTimeout(showSlides, 2000);
 }
