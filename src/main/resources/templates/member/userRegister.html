@@ -14,15 +14,15 @@
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
-<div class="address-search-container" data-func="closeAddressSearch">
+<div class="address-search-container" id="addressSearchContainer">
     <div class="dialog"></div>
 </div>
 <main class="main">
     <h1 class="title">회원가입</h1>
     <div class="terms-container visible" id="termsContainer">
-        <section class="section-container">
+        <section class="section-container" id="agreeTest">
             <label class="check-container">
-                <input class="check-input" hidden name="agreeAll" type="checkbox" data-func="termsAllCheck">
+                <input class="check-input" hidden id="agreeAll" name="agreeAll" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
                 </span>
@@ -140,6 +140,8 @@
                 (시행일) 이 약관은 2015년 01월부터 시행합니다.
             </pre>
             <label class="check-container">
+
+                <input class="check-input" hidden name="agreeService" id="agreeService" type="checkbox">
                 <input class="check-input" hidden id="agreeService" name="agreeService" type="checkbox">
                 <span class="checker-container">
                     <i class="checker fa fa-check"></i>
@@ -149,7 +151,7 @@
         </section>
 
         <section class="section-container">
-            <span class="text">개인정보 수집•이용 동의 (필수)</span>
+            <span class="text">개인정보 수집•이용 동의</span>
             <pre class="comment">
             Ⅰ. 개인정보의 수집 및 이용 동의서
             - 이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.
@@ -197,8 +199,8 @@
             </label>
         </section>
         <div class="button-container">
-            <input class="button cancel-button" type="button" value="취소" data-func="termsCancelButton">
-            <input class="button next-button" type="button" value="다음" data-func="termsNextButton">
+            <input class="button cancel-button" id="cancelButton" type="button" value="취소">
+            <input class="button next-button" id="nextButton" type="button" value="다음">
         </div>
     </div>
 
@@ -210,7 +212,7 @@
         </label>
         <label class="input-container">
             <span class="text">비밀번호</span>
-            <input class="_object-input input" maxlength="50"  name="password" placeholder="비밀번호(8자~50자, 영문/숫자/특수문자 가능)" type="password">
+            <input class="_object-input input" maxlength="50" name="password" placeholder="비밀번호" type="password">
         </label>
         <label class="input-container">
             <span class="text">비밀번호 확인</span>
@@ -226,7 +228,7 @@
             <span class="text">주소</span>
             <div class="address-container address-postal-wrapper">
                 <input class="_object-input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text">
-                <input class="_object-input address-postal-button" type="button" value="주소 찾기" data-func="openAddressSearch">
+                <input class="_object-input address-postal-button" id="addressButton" type="button" value="주소 찾기">
             </div>
             <div class="address-container">
                 <input class="_object-input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text">
@@ -237,8 +239,8 @@
         </section>
         <label class="input-container">
             <span class="text">연락처 통신사</span>
-            <select class="_object-input input" name="telecomValue">
-                <option disabled selected redonly value="-1">통신사</option>
+            <select class="_object-input input" name="contactTelecom">
+                <option selected value="-1">통신사</option>
                 <option value="1">SKT</option>
                 <option value="2">KT</option>
                 <option value="3">LGU+</option>
@@ -256,7 +258,7 @@
                 <a class="text link" th:href="@{/member/userLogin}">로그인</a>
             </span>
             <span class="button-container">
-                <input class="button cancel-button" type="button" value="이전" data-func="returnButton">
+                <input class="button cancel-button" id="returnButton" type="button" value="이전">
                 <input class="button next-button" type="submit" value="회원가입">
             </span>
         </section>

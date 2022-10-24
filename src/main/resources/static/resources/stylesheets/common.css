@@ -321,6 +321,10 @@ header ._content-container.hd-sec01{
 
 ._footer li{
     display: inline-block;
+    border-right: solid 1px rgb(var(--concept-color-pink));
+}
+._footer li:nth-child(4){
+    border-right: none;
 }
 
 ._footer li>a{
@@ -333,8 +337,12 @@ header ._content-container.hd-sec01{
     border-bottom: 1px solid rgb(var(--concept-color-pink));
 }
 ._footer>.ft_sec01 .enumerator{
+<<<<<<<<< Temporary merge branch 1
     margin: 0.625rem 1.3rem;
     display: flex;
+=========
+    margin-bottom: 0.625rem;
+>>>>>>>>> Temporary merge branch 2
 }
 
 ._footer>.ft_sec01 a{
@@ -409,3 +417,4 @@ header ._content-container.hd-sec01{
     letter-spacing: 0.5px;
 
 }
+
