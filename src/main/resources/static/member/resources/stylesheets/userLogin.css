@@ -7,10 +7,7 @@ body > .main {
     justify-content: center;
 }
 
-<<<<<<<<< Temporary merge branch 1
-=========
 
->>>>>>>>> Temporary merge branch 2
 body > .main > .login-form {
     width: 20rem;
     align-items: stretch;
