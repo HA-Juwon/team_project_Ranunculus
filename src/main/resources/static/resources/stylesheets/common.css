@@ -1,9 +1,20 @@
 @charset "UTF-8";
 
 :root {
+    --concept-color-blue: 214, 234, 248;
     --concept-color-pink: 250, 219, 216;
-    --concept-color-pink-dim: 241, 148, 138;
+    --concept-color-pink-dim: 241, 148, 138, 50%;
     --content-width-default: 73.75rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    background-color: rgb(0,255,255);
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-transition: background-color 9999s ease-out;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
 html {
@@ -312,7 +323,7 @@ header ._content-container.hd-sec01{
     border-bottom: 1px solid rgb(var(--concept-color-pink));
 }
 ._footer>.ft_sec01 .enumerator{
-    margin: 0.625rem;
+    margin-bottom: 0.625rem;
 }
 
 ._footer>.ft_sec01 a{
@@ -387,3 +398,4 @@ header ._content-container.hd-sec01{
     letter-spacing: 0.5px;
 
 }
+

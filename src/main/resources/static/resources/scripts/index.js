@@ -48,4 +48,5 @@ function showSlides(n) {
 
     slides[n].style.display = "block";
     dots[n].className += " active";
+    setTimeout(showSlides, 2000);
 }
