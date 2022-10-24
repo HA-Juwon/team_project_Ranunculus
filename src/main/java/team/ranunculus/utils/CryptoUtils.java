@@ -7,13 +7,22 @@ import java.security.NoSuchAlgorithmException;
 
 public final class CryptoUtils {
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+    private static final String DEFAULT_FALLBACK = null;
 
-    public static String hashSha512(String input) throws NoSuchAlgorithmException {
-        return CryptoUtils.hashSha512(input, CryptoUtils.DEFAULT_CHARSET);
+    public static String hashSha512(String input) {
+        try {
+            return CryptoUtils.hashSha512Unsafe(input, CryptoUtils.DEFAULT_CHARSET);
+        } catch (NoSuchAlgorithmException ignored) {
+            return CryptoUtils.DEFAULT_FALLBACK;
+        }
     }
 
-    public static String hashSha512(String input, Charset charset) throws NoSuchAlgorithmException {
-        return CryptoUtils.hashSha512Unsafe(input, charset);
+    public static String hashSha512(String input, Charset charset) {
+        try {
+            return CryptoUtils.hashSha512Unsafe(input, charset);
+        } catch (NoSuchAlgorithmException ignored) {
+            return CryptoUtils.DEFAULT_FALLBACK;
+        }
     }
 
 

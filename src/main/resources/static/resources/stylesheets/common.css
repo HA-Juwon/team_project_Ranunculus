@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
 :root {
+    --concept-color-blue: 214, 234, 248;
     --concept-color-pink: 250, 219, 216;
-    --concept-color-pink-dim: 241, 148, 138;
+    --concept-color-pink-dim: 241, 148, 138, 50%;
     --content-width-default: 73.75rem;
 }
 
@@ -171,6 +172,13 @@ header ._content-container.hd-sec01{
 ._header>.hd-sec01 ul{
     display: flex;
 }
+._header>.hd-sec01>.left-area>ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 ._header>.hd-sec01>.left-area>ul>li{
     float: left;
 }
@@ -313,10 +321,6 @@ header ._content-container.hd-sec01{
 
 ._footer li{
     display: inline-block;
-    border-right: solid 1px rgb(var(--concept-color-pink));
-}
-._footer li:nth-child(4){
-    border-right: none;
 }
 
 ._footer li>a{

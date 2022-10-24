@@ -2,6 +2,7 @@ package team.ranunculus.services;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,25 +16,62 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import org.springframework.transaction.annotation.Transactional;
-import team.ranunculus.entities.member.MemberEntity;
+import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.enums.member.UserLoginResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.mappers.IMemberMapper;
 import team.ranunculus.regex.MemberRegex;
 import team.ranunculus.utils.CryptoUtils;
+
 import java.security.NoSuchAlgorithmException;
 
 @Service(value = "team.ranunculus.services.MemberService")
 public class MemberService {
     private final IMemberMapper memberMapper;
 
+    @Autowired
     public MemberService(IMemberMapper memberMapper) {
         this.memberMapper = memberMapper;
     }
 
     @Transactional
-    public IResult loginUser(MemberEntity member) throws NoSuchAlgorithmException {
+    public IResult checkUserEmail(UserEntity user) {
+        if (user.getEmail() == null ||
+        !user.getEmail().matches(MemberRegex.USER_EMAIL)) {
+            return CommonResult.FAILURE;
+        }
+        user = this.memberMapper.selectUserByEmail(user);
+        return user == null
+                ? CommonResult.SUCCESS
+                : CommonResult.DUPLICATE;
+    }
+
+    @Transactional
+    public IResult createUser(UserEntity user) {
+        if (user.getEmail() == null ||
+                user.getPassword() == null ||
+                user.getName() == null ||
+                user.getAddressPostal() == null ||
+                user.getAddressPrimary() == null ||
+                user.getAddressSecondary() == null ||
+                user.getTelecomValue() == "-1" ||
+                user.getContact() == null ||
+                !user.getEmail().matches(MemberRegex.USER_EMAIL) ||
+                !user.getPassword().matches(MemberRegex.USER_PASSWORD) ||
+                !user.getName().matches(MemberRegex.USER_NAME) ||
+                !user.getContact().matches(MemberRegex.USER_CONTACT)) {
+            return CommonResult.FAILURE;
+        }
+            user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+        if (this.memberMapper.insertUser(user) == 0) {
+            return CommonResult.FAILURE;
+        }
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public IResult loginUser(UserEntity member) {
         if (member.getEmail() == null ||
                 member.getPassword() == null ||
                 !member.getEmail().matches(MemberRegex.USER_EMAIL) ||
