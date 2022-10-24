@@ -12,7 +12,6 @@ import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -39,6 +38,7 @@ public class MemberController {
     public ModelAndView getUserLogin(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity member, ModelAndView modelAndView) {
         if (member != null) {
             modelAndView.setViewName("redirect:/");
+            return modelAndView;
         }
         modelAndView.setViewName("member/userLogin");
         return modelAndView;
@@ -48,7 +48,7 @@ public class MemberController {
     @ResponseBody
     public String postUserLogin(@RequestParam(value = "autosign", required = false) Optional<Boolean> autosignOptional,
                                 HttpSession session,
-                                UserEntity member) throws NoSuchAlgorithmException {
+                                UserEntity member) {
         boolean autosign = autosignOptional.orElse(false);
         member.setName(null)
                 .setAddressPostal(null)
@@ -82,7 +82,12 @@ public class MemberController {
     }
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
-    public ModelAndView getUserRegister(ModelAndView modelAndView) {
+    public ModelAndView getUserRegister(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
+                                        ModelAndView modelAndView) {
+        if (user != null) {
+            modelAndView.setViewName("redirect:/");
+            return modelAndView;
+        }
         modelAndView.setViewName("member/userRegister");
         return modelAndView;
     }
@@ -103,7 +108,13 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "memberRecoverEmail", method = RequestMethod.GET)
+    @RequestMapping(value = "userRegisterDone", method = RequestMethod.GET)
+    public ModelAndView getUserRegisterDone(ModelAndView modelAndView) {
+        modelAndView.setViewName("member/userRegisterDone");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "userRecoverEmail", method = RequestMethod.GET)
     public ModelAndView getUserRecoverEmail(ModelAndView modelAndView) {
         modelAndView.setViewName("member/userRecoverEmail");
         return modelAndView;

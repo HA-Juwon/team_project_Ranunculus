@@ -218,8 +218,7 @@ registerForm.onsubmit = e => {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
                     case 'success' :
-                        alert('회원가입 성공');
-                        window.location.href = "/";
+                        window.location.href = "./userRegisterDone";
                         break;
                     default :
                         alert('알 수 없는 이유로 회원가입을 실패했습니다. 잠시 후 다시 시도해 주세요.');
