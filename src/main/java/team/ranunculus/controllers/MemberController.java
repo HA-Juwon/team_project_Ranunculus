@@ -1,6 +1,8 @@
 package team.ranunculus.controllers;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,6 +13,7 @@ import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller(value = "team.ranunculus.controllers.MemberContainer")
@@ -18,23 +21,34 @@ import java.util.Optional;
 public class MemberController {
     private final MemberService memberService;
 
+    @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
 
+    @RequestMapping(value = "userEmailCheck", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getUserEmailCheck(UserEntity user) {
+        IResult result = this.memberService.checkUserEmail(user);
+        JSONObject responseJson = new JSONObject();
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        return responseJson.toString();
+    }
+
     @RequestMapping(value = "userLogin", method = RequestMethod.GET)
-    public ModelAndView getUserLogin (@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity member, ModelAndView modelAndView) {
+    public ModelAndView getUserLogin(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity member, ModelAndView modelAndView) {
         if (member != null) {
             modelAndView.setViewName("redirect:/");
         }
         modelAndView.setViewName("member/userLogin");
         return modelAndView;
     }
+
     @RequestMapping(value = "userLogin", method = RequestMethod.POST)
     @ResponseBody
-    public String postUserLogin (@RequestParam(value = "autosign", required = false) Optional<Boolean> autosignOptional,
-                                       HttpSession session,
-                                       UserEntity member) throws NoSuchAlgorithmException {
+    public String postUserLogin(@RequestParam(value = "autosign", required = false) Optional<Boolean> autosignOptional,
+                                HttpSession session,
+                                UserEntity member) throws NoSuchAlgorithmException {
         boolean autosign = autosignOptional.orElse(false);
         member.setName(null)
                 .setAddressPostal(null)
@@ -68,13 +82,29 @@ public class MemberController {
     }
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
-    public ModelAndView getUserRegister (ModelAndView modelAndView) {
+    public ModelAndView getUserRegister(ModelAndView modelAndView) {
         modelAndView.setViewName("member/userRegister");
         return modelAndView;
     }
 
-    @RequestMapping(value = "userRecoverEmail", method = RequestMethod.GET)
-    public ModelAndView getUserRecoverEmail (ModelAndView modelAndView) {
+    @RequestMapping(value = "userRegister", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postUserRegister(@RequestParam(value = "policyMarketing") boolean policyMarketing,
+                                   UserEntity user) {
+        user.setPolicyTermsAt(new Date())
+                .setPolicyPrivacyAt(new Date())
+                .setPolicyMarketingAt(policyMarketing ? new Date() : null)
+                .setStatusValue("OKY")
+                .setRegisteredAt(new Date())
+                .setAdmin(false);
+        IResult result = this.memberService.createUser(user);
+        JSONObject responseJson = new JSONObject();
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        return responseJson.toString();
+    }
+
+    @RequestMapping(value = "memberRecoverEmail", method = RequestMethod.GET)
+    public ModelAndView getUserRecoverEmail(ModelAndView modelAndView) {
         modelAndView.setViewName("member/userRecoverEmail");
         return modelAndView;
     }

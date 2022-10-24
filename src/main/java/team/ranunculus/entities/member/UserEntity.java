@@ -11,6 +11,7 @@ public class UserEntity {
         return new UserEntity();
     }
 
+    private String email;
     private String password;
     private String name;
     private String addressPostal;
@@ -18,10 +19,9 @@ public class UserEntity {
     private String addressSecondary;
     private String telecomValue;
     private String contact;
-    private String email;
     private Date policyTermsAt = new Date();
     private Date policyPrivacyAt = new Date();
-    private Date policyMarketingAt = new Date();
+    private Date policyMarketingAt;
     private String statusValue;
     private Date registeredAt = new Date();
     private boolean isAdmin = false;
@@ -29,8 +29,9 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String id, String password, String name, String addressPostal, String addressPrimary, String addressSecondary, String telecomValue, String contact, String email, Date policyTermsAt, Date policyPrivacyAt, Date policyMarketingAt, String statusValue, Date registeredAt, boolean isAdmin) {
+    public UserEntity(String email, String password, String name, String addressPostal, String addressPrimary, String addressSecondary, String telecomValue, String contact, Date policyTermsAt, Date policyPrivacyAt, Date policyMarketingAt, String statusValue, Date registeredAt, boolean isAdmin) {
 
+        this.email = email;
         this.password = password;
         this.name = name;
         this.addressPostal = addressPostal;
@@ -38,7 +39,6 @@ public class UserEntity {
         this.addressSecondary = addressSecondary;
         this.telecomValue = telecomValue;
         this.contact = contact;
-        this.email = email;
         this.policyTermsAt = policyTermsAt;
         this.policyPrivacyAt = policyPrivacyAt;
         this.policyMarketingAt = policyMarketingAt;
@@ -47,6 +47,14 @@ public class UserEntity {
         this.isAdmin = isAdmin;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public UserEntity setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
     public String getPassword() {
         return password;
@@ -111,14 +119,6 @@ public class UserEntity {
         return this;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public UserEntity setEmail(String email) {
-        this.email = email;
-        return this;
-    }
 
     public Date getPolicyTermsAt() {
         return policyTermsAt;

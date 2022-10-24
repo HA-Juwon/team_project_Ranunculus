@@ -4,6 +4,11 @@ const searchForm = window.document.getElementById('hd-sec-search');
 const myButton = window.document.getElementById('my-button');
 const myMenu = window.document.getElementById('menu-container');
 
+HTMLInputElement.prototype.focusAndSelect = function () {
+    this.focus();
+    this.select();
+}
+
 searchButton.addEventListener('click', () => {
     console.log("작동함");
     if(searchForm.classList.contains("visible")){
