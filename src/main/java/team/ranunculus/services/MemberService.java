@@ -15,7 +15,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import org.springframework.transaction.annotation.Transactional;
-import team.ranunculus.entities.member.MemberEntity;
+import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.enums.member.UserLoginResult;
 import team.ranunculus.interfaces.IResult;
@@ -33,7 +33,7 @@ public class MemberService {
     }
 
     @Transactional
-    public IResult loginUser(MemberEntity member) throws NoSuchAlgorithmException {
+    public IResult loginUser(UserEntity member) throws NoSuchAlgorithmException {
         if (member.getEmail() == null ||
                 member.getPassword() == null ||
                 !member.getEmail().matches(MemberRegex.USER_EMAIL) ||
@@ -41,7 +41,7 @@ public class MemberService {
             return CommonResult.FAILURE;
         }
         member.setPassword(CryptoUtils.hashSha512(member.getPassword()));
-        MemberEntity existingMember = this.memberMapper.selectUserByEmailPassword(member);
+        UserEntity existingMember = this.memberMapper.selectUserByEmailPassword(member);
         if (existingMember == null) {
             return CommonResult.FAILURE;
         }
