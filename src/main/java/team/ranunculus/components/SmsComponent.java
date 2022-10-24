@@ -61,6 +61,7 @@ public class SmsComponent {
             outputStream.write(bodyJson.toString().getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
         }
+        System.out.println(connection.getResponseCode());
         return connection.getResponseCode();
     }
 }

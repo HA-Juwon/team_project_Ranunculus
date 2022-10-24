@@ -6,12 +6,15 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import team.ranunculus.entities.member.ContactAuthEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
@@ -103,9 +106,63 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "memberRecoverEmail", method = RequestMethod.GET)
-    public ModelAndView getUserRecoverEmail(ModelAndView modelAndView) {
+    @RequestMapping(value = "userRecoverEmail", method = RequestMethod.GET)
+    public ModelAndView getUserRecoverEmail(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user, ModelAndView modelAndView) {
+        if (user != null) {
+            modelAndView.setViewName("redirect:/");
+            return modelAndView;
+        }
         modelAndView.setViewName("member/userRecoverEmail");
         return modelAndView;
     }
+
+    @RequestMapping(value = "userRecoverEmail", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String postUserRecoverEmail(ContactAuthEntity contactAuth) {
+        System.out.println("유저 리커버 이메일 포스트 작동");
+        contactAuth.setIndex(-1)
+                .setCreatedAt(null)
+                .setExpiresAt(null)
+                .setExpired(false);
+        UserEntity user = UserEntity.build();
+        IResult result = this.memberService.findUserEmail(contactAuth, user);
+        JSONObject responseJson = new JSONObject();
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        System.out.println("작동if");
+        if (result == CommonResult.SUCCESS) {
+            System.out.println("작동if");
+            responseJson.put("email", user.getEmail());
+        }
+        System.out.println(responseJson);
+        return responseJson.toString();
+    }
+
+    @RequestMapping(value = "userRecoverEmailAuth", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String getUserRecoverEmailAuth(UserEntity user) throws
+            IOException,
+            InvalidKeyException,
+            NoSuchAlgorithmException {
+        user.setEmail(null)
+                .setPassword(null)
+                .setPolicyTermsAt(null)
+                .setPolicyPrivacyAt(null)
+                .setPolicyMarketingAt(null)
+                .setStatusValue(null)
+                .setRegisteredAt(null)
+                .setAdmin(false);
+        IResult result;
+        ContactAuthEntity contactAuth = ContactAuthEntity.build();
+
+        result = this.memberService.recoverUserEmailAuth(user, contactAuth);
+        JSONObject responseJson = new JSONObject();
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        if (result == CommonResult.SUCCESS) {
+            responseJson.put("salt", contactAuth.getSalt());
+        }
+//        System.out.println(responseJson);
+        return responseJson.toString();
+    }
+
+
 }

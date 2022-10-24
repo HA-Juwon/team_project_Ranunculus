@@ -56,4 +56,21 @@
         WHERE `email` = #{email}
         LIMIT 1;
     </select>
+    <select id="selectUserByContact"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`
+        FROM `ranunculus_members`.member
+        WHERE `contact` = #{contact}
+        LIMIT 1
+    </select>
 </mapper>

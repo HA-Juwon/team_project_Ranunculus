@@ -6,16 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
+import team.ranunculus.components.SmsComponent;
 import team.ranunculus.entities.member.ContactAuthEntity;
-import team.ranunculus.entities.member.MemberEntity;
-import team.ranunculus.enums.CommonResult;
-import team.ranunculus.interfaces.IResult;
-import team.ranunculus.regex.MemberRegex;
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-import org.springframework.transaction.annotation.Transactional;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.enums.member.UserLoginResult;
@@ -24,21 +16,25 @@ import team.ranunculus.mappers.IMemberMapper;
 import team.ranunculus.regex.MemberRegex;
 import team.ranunculus.utils.CryptoUtils;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 @Service(value = "team.ranunculus.services.MemberService")
 public class MemberService {
     private final IMemberMapper memberMapper;
-
+    private final SmsComponent smsComponent;
     @Autowired
-    public MemberService(IMemberMapper memberMapper) {
+    public MemberService(IMemberMapper memberMapper, SmsComponent smsComponent) {
         this.memberMapper = memberMapper;
+        this.smsComponent = smsComponent;
     }
 
     @Transactional
     public IResult checkUserEmail(UserEntity user) {
         if (user.getEmail() == null ||
-        !user.getEmail().matches(MemberRegex.USER_EMAIL)) {
+                !user.getEmail().matches(MemberRegex.USER_EMAIL)) {
             return CommonResult.FAILURE;
         }
         user = this.memberMapper.selectUserByEmail(user);
@@ -63,7 +59,7 @@ public class MemberService {
                 !user.getContact().matches(MemberRegex.USER_CONTACT)) {
             return CommonResult.FAILURE;
         }
-            user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+        user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
         if (this.memberMapper.insertUser(user) == 0) {
             return CommonResult.FAILURE;
         }
@@ -79,7 +75,7 @@ public class MemberService {
             return CommonResult.FAILURE;
         }
         member.setPassword(CryptoUtils.hashSha512(member.getPassword()));
-        MemberEntity existingMember = this.memberMapper.selectUserByEmailPassword(member);
+        UserEntity existingMember = this.memberMapper.selectUserByEmailPassword(member);
         if (existingMember == null) {
             return CommonResult.FAILURE;
         }
@@ -102,10 +98,40 @@ public class MemberService {
         }
         return CommonResult.SUCCESS;
     }
-
-    //Mapper 만들어서 의존성 추가하고...전화번호 인증이랑 연동하기
     @Transactional
-    public IResult recoverUserEmailAuth(MemberEntity user, ContactAuthEntity contactAuth) throws
+    protected IResult createContactAuth(ContactAuthEntity contactAuth) throws
+            InvalidKeyException,
+            IOException,
+            NoSuchAlgorithmException{
+        if (contactAuth.getContact() == null || !contactAuth.getContact().matches(MemberRegex.USER_CONTACT)){
+            return CommonResult.FAILURE;
+        }
+
+        Date createdAt = new Date();
+        Date expiresAt = DateUtils.addMinutes(createdAt, 5);
+        String code = RandomStringUtils.randomNumeric(6);
+        String salt = CryptoUtils.hashSha512(String.format("%s%s%d%f%f",
+                contactAuth.getContact(),
+                code,
+                createdAt.getTime(),
+                Math.random(),
+                Math.random()));
+        contactAuth.setCode(code)
+                .setSalt(salt)
+                .setCreatedAt(createdAt)
+                .setExpiresAt(expiresAt)
+                .setExpired(false);
+        String smsContent = String.format("[라넌큘러스] 인증번호 [%s]를 입력해 주세요.", contactAuth.getCode());
+
+        if (this.smsComponent.sendMessage (contactAuth.getContact(), smsContent) != 202) {
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public IResult recoverUserEmailAuth(UserEntity user, ContactAuthEntity contactAuth) throws
             IOException,
             InvalidKeyException,
             NoSuchAlgorithmException,
@@ -121,18 +147,38 @@ public class MemberService {
         Date expiresAt = DateUtils.addMinutes(createdAt, 5);
 
         String code = RandomStringUtils.randomNumeric(6);
-//        String salt = CryptoUtils.hashSha512(String.format("%s%s%d%f%f",
-//                contactAuth.getContact(),
-//                code,
-//                createdAt.getTime(),
-//                Math.random(),
-//                Math.random()));
-//        contactAuth.setCode(code)
-//                .setSalt(salt)
-//                .setCreatedAt(createdAt)
-//                .setExpiresAt(expiresAt)
-//                .setExpired(false);
-
+        String salt = CryptoUtils.hashSha512(String.format("%s%s%d%f%f",
+                contactAuth.getContact(),
+                code,
+                createdAt.getTime(),
+                Math.random(),
+                Math.random()));
+        contactAuth.setCode(code)
+                .setSalt(salt)
+                .setCreatedAt(createdAt)
+                .setExpiresAt(expiresAt)
+                .setExpired(false);
+        return CommonResult.SUCCESS;
+    }
+    @Transactional
+    public IResult findUserEmail(ContactAuthEntity contactAuth, UserEntity user) {
+        if (contactAuth.getContact() == null ||
+                contactAuth.getCode() == null ||
+                contactAuth.getSalt() == null ||
+                !contactAuth.getContact().matches(MemberRegex.USER_CONTACT) ||
+                !contactAuth.getCode().matches(MemberRegex.CONTACT_AUTH_CODE) ||
+                !contactAuth.getSalt().matches(MemberRegex.CONTACT_AUTH_SALT)) {
+            return CommonResult.FAILURE;
+        }
+        contactAuth = this.memberMapper.selectContactAuthByContactCodeSalt(contactAuth);
+        if (contactAuth == null || !contactAuth.isExpired()) {
+            return CommonResult.FAILURE;
+        }
+        UserEntity foundUser = this.memberMapper.selectUserByContact(user.setContact(contactAuth.getContact()));
+        if (foundUser == null) {
+            return CommonResult.FAILURE;
+        }
+        user.setEmail(foundUser.getEmail());
         return CommonResult.SUCCESS;
     }
 }
