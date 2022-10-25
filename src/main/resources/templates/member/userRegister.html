@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>회원가입r</title>
+    <title>회원가입</title>
 
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/member/resources/stylesheets/userRegister.css}">
@@ -14,7 +14,7 @@
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
-<div class="address-search-container" data-func="closeAddressSearch">
+<div class="address--container" data-func="closeAddressSearch">
     <div class="dialog"></div>
 </div>
 <main class="main">
@@ -250,6 +250,7 @@
             <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)"
                    type="text">
         </label>
+        <span class="register-warning" id="registerWarning"></span>
         <section class="section-container">
             <span class="login-container">
                 <span class="text">이미 계정이 있으신가요?</span>
