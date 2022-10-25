@@ -119,7 +119,7 @@ public class MemberController {
     @RequestMapping(value = "userRecoverEmail", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String postUserRecoverEmail(ContactAuthEntity contactAuth) {
-        System.out.println("유저 리커버 이메일 포스트 작동");
+//        System.out.println("유저 리커버 이메일 포스트 작동");
         contactAuth.setIndex(-1)
                 .setCreatedAt(null)
                 .setExpiresAt(null)
@@ -128,9 +128,7 @@ public class MemberController {
         IResult result = this.memberService.findUserEmail(contactAuth, user);
         JSONObject responseJson = new JSONObject();
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
-        System.out.println("작동if");
         if (result == CommonResult.SUCCESS) {
-            System.out.println("작동if");
             responseJson.put("email", user.getEmail());
         }
         System.out.println(responseJson);
@@ -139,7 +137,7 @@ public class MemberController {
 
     @RequestMapping(value = "userRecoverEmailAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getUserRecoverEmailAuth(UserEntity user) throws
+    public String getUserRecoverEmailAuth(UserEntity user,ContactAuthEntity contactAuth) throws
             IOException,
             InvalidKeyException,
             NoSuchAlgorithmException {
@@ -152,17 +150,38 @@ public class MemberController {
                 .setRegisteredAt(null)
                 .setAdmin(false);
         IResult result;
-        ContactAuthEntity contactAuth = ContactAuthEntity.build();
 
-        result = this.memberService.recoverUserEmailAuth(user, contactAuth);
+//        System.out.println(contactAuth);
+
+        try {
+            result = this.memberService.recoverUserEmailAuth(user, contactAuth);
+        } catch (Exception ex) {
+            result = CommonResult.FAILURE;
+        }
+
         JSONObject responseJson = new JSONObject();
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         if (result == CommonResult.SUCCESS) {
             responseJson.put("salt", contactAuth.getSalt());
         }
-//        System.out.println(responseJson);
+        System.out.println(responseJson);
         return responseJson.toString();
     }
 
+    @RequestMapping(value = "userRecoverEmailAuth", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String postUserRecoverEmailAuth(ContactAuthEntity contactAuth) throws Exception {
+        System.out.println(contactAuth.getContact());
+        contactAuth.setIndex(-1)
+                .setCreatedAt(null)
+                .setExpiresAt(null)
+                .setExpired(false);
+        IResult result;
+        result = this.memberService.checkContactAuth(contactAuth);
+        JSONObject responseJson = new JSONObject();
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        System.out.println(responseJson);
+        return responseJson.toString();
+    }
 
 }

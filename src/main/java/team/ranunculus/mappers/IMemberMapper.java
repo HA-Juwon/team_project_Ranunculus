@@ -17,4 +17,6 @@ public interface IMemberMapper {
     UserEntity selectUserByEmail(UserEntity user);
 
     UserEntity selectUserByEmailPassword(UserEntity member);
+
+    int updateContactAuth(ContactAuthEntity contactAuth);
 }

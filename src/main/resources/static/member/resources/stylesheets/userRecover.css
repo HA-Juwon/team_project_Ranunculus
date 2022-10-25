@@ -2,7 +2,6 @@
 
 label.contact {
     display: flex;
-
     flex-direction: row;
 }
 body > .main {
@@ -10,6 +9,20 @@ body > .main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 4rem 1rem;
+}
+
+body>.main>.email-container:not(.visible){
+    display: none;
+}
+body>.main>.email-container.visible{
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+body > .main > .recoverEmail-form:not(.visible){
+    display: none;
 }
 
 body > .main > .recoverEmail-form {

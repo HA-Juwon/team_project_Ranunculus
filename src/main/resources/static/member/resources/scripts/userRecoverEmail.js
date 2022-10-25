@@ -42,6 +42,7 @@ contactAuthRequestButton.addEventListener('click',()=>{
              // cover.hide();
              if (xhr.status >= 200 && xhr.status < 300) {
                  const responseJson = JSON.parse(xhr.responseText);
+                 console.log(responseJson);
                  switch (responseJson['result']) {
                      case 'success':
                          // console.log(responseJson['salt']);
@@ -92,8 +93,10 @@ contactAuthCheckButton.addEventListener("click", ()=>{
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             // cover.hide();
+            console.log("작동됨");
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
+                console.log(responseJson);
                 switch (responseJson['result']) {
                     case 'expired':
                         alert('입력한 인증번호가 만료되었습니다. 인증번호를 다시 요청하여 인증해 주세요.');
@@ -127,7 +130,7 @@ recoverEmailForm.onsubmit = e =>{
     e.preventDefault();
 
     //contactAuthCheckButton가 비활성화 상태거나(인증번호 전송 버튼을 누른 적이 없으면)
-    if (recoverEmailForm['contactAuthCheckButton'].disabled || !recoverEmailForm['contactAuthRequestButton'].disabled) {
+    if (!recoverEmailForm['contactAuthCheckButton'].disabled || !recoverEmailForm['contactAuthRequestButton'].disabled) {
         alert('연락처 인증을 완료해 주세요.');
         return false;
     }
@@ -146,6 +149,7 @@ recoverEmailForm.onsubmit = e =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
             //아직 커버 없음
             // cover.hide();
+            console.log('되나?');
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
