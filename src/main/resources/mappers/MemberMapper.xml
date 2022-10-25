@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.ranunculus.mappers.IMemberMapper">
-
     <insert id="insertContactAuth"
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
             parameterType="team.ranunculus.entities.member.ContactAuthEntity">
-        INSERT INTO ranunculus_members.contact_auths (`contact`, `code`, `salt`, `created_at`, `expires_at`, `expired_flag`)
+        INSERT INTO ranunculus_members.contact_auths (`contact`, `code`, `salt`, `created_at`, `expires_at`, `expires_flag`)
         VALUES (#{contact}, #{code}, #{salt}, #{createdAt}, #{expiresAt}, #{isExpired})
     </insert>
 
@@ -93,7 +92,7 @@
                `salt`         AS `salt`,
                `created_at`   AS `createdAt`,
                `expires_at`   AS `expiresAt`,
-               `expired_flag` AS `isExpired`
+               `expires_flag` AS `isExpired`
         FROM ranunculus_members.contact_auths
         WHERE `contact` = #{contact}
           AND `code` = #{code}
@@ -108,7 +107,7 @@
             `salt`         = #{salt},
             `created_at`   = #{createdAt},
             `expires_at`   = #{expiresAt},
-            `expired_flag` = #{isExpired}
+            `expires_flag` = #{isExpired}
         WHERE `index` = #{index}
         LIMIT 1
     </update>

@@ -38,14 +38,24 @@
                         </a>
                     </div>
                     <ul class="menu-container" id="menu-container">
-                        <li class="my-menu">
+                        <li class="my-menu" th:if="${#request.getCookies()== null}">
                             <div>
                                 <a class="link" th:href="@{/member/userRegister}">회원가입</a>
                             </div>
                         </li>
-                        <li class="my-menu">
+                        <li class="my-menu" th:if="${#request.getCookies()== null}">
                             <div>
                                 <a class="link" th:href="@{/member/userLogin}">로그인</a>
+                            </div>
+                        </li>
+                        <li class="my-menu" th:if="${#request.getCookies()!= null}">
+                            <div>
+                                <a class="link" th:href="@{/member/userEdit}">회원정보 수정</a>
+                            </div>
+                        </li>
+                        <li class="my-menu" th:if="${#request.getCookies()!= null}">
+                            <div>
+                                <a class="link" th:href="@{/member/userLogout}">로그아웃</a>
                             </div>
                         </li>
                     </ul>
