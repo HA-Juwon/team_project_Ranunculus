@@ -184,3 +184,17 @@
     margin-right: 10px;
     text-decoration:none;
 }
+
+.soldout-container {
+    opacity: 0.6;
+    position: relative;
+
+}
+.main_image_text {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    color: darkred;
+
+    transform:rotate(25deg) translateY(15px);
+}
