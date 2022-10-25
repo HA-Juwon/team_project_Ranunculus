@@ -7,8 +7,7 @@ body > .main {
     justify-content: center;
 }
 
-<<<<<<<<< Temporary merge branch 1
-=========
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -18,7 +17,7 @@ input:-webkit-autofill:active {
     -webkit-transition: background-color 9999s ease-out;
     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
->>>>>>>>> Temporary merge branch 2
+
 
 body > .main > .login-form {
     width: 20rem;
