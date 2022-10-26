@@ -7,53 +7,47 @@
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ranunculus 로그인</title>
-    <script defer th:src="@{/member/resources/scripts/userLogin.js}"></script>
-    <link rel="stylesheet" th:href="@{/member/resources/stylesheets/userLogin.css}">
+    <script defer th:src="@{/board/resources/scripts/index.js}"></script>
+    <link rel="stylesheet" th:href="@{/board/resources/stylesheets/index.css}">
     <script src="https://kit.fontawesome.com/ac2617ecb2.js" crossorigin="anonymous"></script>
 </head>
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
-<div class="banner">
-    <span class="small-text">나와 맞는 여행동행과 이야기를 나누어 보세요.</span>
-    <span class="big-text">여행친구찾기</span>
-</div>
 <main class="_main main">
-    <form class="form" id="form">
-        <div class="geo-container">
-            <div class="continent-container" id="continentContainer"></div>
-            <div class="sub-container" id="subContainer"></div>
+    <div class="a">
+        <div class="b">
+            <h1 class="title">
+                <i class="icon fa-solid fa-headset"></i>
+                <span class="text">고객문의</span>
+            </h1>
         </div>
-        <div class="date-container">
-            <span class="text">날짜 선택</span>
-            <label class="date-container">
-                <span hidden>시작 날짜 선택</span>
-                <input class="_object-input" name="dateForm" placeholder="시작 날짜 선택" type="date">
-            </label>
-            <span class="dash">-</span>
-            <label class="date-container">
-                <span hidden>종료 날짜 선택</span>
-                <input class="_object-input" name="dateTo" placeholder="종료 날짜 선택" type="date">
-            </label>
-            <input class="_object-button button" type="submit" value="검색하기">
+        <div class="b">
+            <div class="fieldset">
+                <label class="icon-container">
+                    <input type="radio" name="search" id="searchName" class="search-name" >
+                    <a>이름</a>
+                </label>
+                <label class="icon-container">
+                    <input type="radio" name="search" id="searchTitle" class="search-title">
+                    <a>제목</a>
+                </label>
+                <label class="icon-container">
+                    <input type="radio" name="search" id="searchContent" class="search-content">
+                    <a>내용</a>
+                </label>
+                <label class="input-container">
+                    <div class="typ-container">
+                        <span hidden>원하시는 향수를 찾아보세요</span>
+                        <i class="icon fa-solid fa-magnifying-glass"></i>
+                        <input class="input" maxlength="50" name="keyword" placeholder="찾으시는 내용을 입력하세요." type="text">
+                    </div>
+                </label>
+            </div>
         </div>
-    </form>
-    <div class="accompany-container" id="accompanyContainer">
-        <a class="accompany" href="#">
-            <img alt="" class="cover-image" src="https://www.lottehotelmagazine.com/resources/4ceaf51f-8225-435b-b233-d79ecc5dc68d_img_travel_guam_detail01.jpg">
-            <span class="location-container">
-                <span class="icon-container"></span>
-                <span class="text">동아시아</span>
-                <span class="duration">10/11 - 10/13</span>
-            </span>
-            <span class="title-container">
-                <span class="status">모집중</span>
-                <span class="title">국내여행 같이 하실분!국내여행 같이 하실분!국내여행 같이 하실분!국내여행 같이 하실분!국내여행 같이 하실분!</span>
-            </span>
-            <span class="content">국내여행 같이 동행하실분 찾아요!국내여행 같이 동행하실분 찾아요!국내여행 같이 동행하실분 찾아요!국내여행 같이 동행하실분 찾아요!국내여행 같이 동행하실분 찾아요!</span>
-            <span class="name">srtleehyun</span>
-        </a>
     </div>
-    <div class="_object-button more" id="more"> 더보기</div>
+    <div class="division-line">
+
+    </div>
 </main>
 <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>

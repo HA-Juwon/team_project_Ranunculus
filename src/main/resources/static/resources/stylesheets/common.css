@@ -483,3 +483,9 @@ header ._content-container.hd-sec01{
         transform: rotate(360deg) translate(-50%, -50%);
     }
 }
+
+.division-line {
+    position: relative;
+    border-top: 3px solid rgb(var(--concept-color-pink));
+    margin: 30px auto;
+}
