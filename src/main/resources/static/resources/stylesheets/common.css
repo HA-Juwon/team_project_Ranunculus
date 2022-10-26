@@ -469,7 +469,7 @@ header ._content-container.hd-sec01{
     user-select: none;
     -webkit-user-drag: none;
 }
-/* TODO 폰트 포지션!!!과 디자인 수정*/
+/* TODO 폰트 포지션!!!과 디자인 수정부탁합니다*/
 .loading > .progress > .myFont {
     font-weight: 300;
     font-size: 10rem;
