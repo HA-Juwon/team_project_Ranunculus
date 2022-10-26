@@ -45,7 +45,7 @@ public class MemberController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "userLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "userLogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postUserLogin(@RequestParam(value = "autosign", required = false) Optional<Boolean> autosignOptional,
                                 HttpSession session,
