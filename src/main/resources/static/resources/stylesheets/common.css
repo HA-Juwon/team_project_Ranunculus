@@ -413,3 +413,74 @@ header ._content-container.hd-sec01{
     letter-spacing: 0.5px;
 
 }
+
+.loading {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(23, 32, 42, 90%);
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transition-duration: 250ms;
+    transition-property: opacity;
+    animation-timing-function: ease-in-out;
+    z-index: 9;
+}
+
+.loading.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.loading > .progress {
+    top: calc(50% + 1.25rem);
+    left: 50%;
+    width: 5rem;
+    height: 5rem;
+    background-color: rgba(252, 228, 236, 90%);
+    border-radius: 50%;
+    box-shadow: 0 0 1rem 0.0625rem rgba(23, 32, 42, 50%);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition-duration: 500ms;
+    transition-property: top, opacity;
+    animation-timing-function: ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.loading.visible > .progress {
+    top: 50%;
+    opacity: 1;
+}
+
+.loading > .progress > .image {
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    animation-name: animation-loading-progress-image;
+    animation-duration: 1500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transform-origin: top left;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+/* TODO 폰트 포지션!!!과 디자인 수정*/
+.loading > .progress > .myFont {
+    font-weight: 300;
+    font-size: 10rem;
+}
+
+@keyframes animation-loading-progress-image {
+    0% {
+        transform: rotate(0deg) translate(-50%, -50%);
+    }
+    100% {
+        transform: rotate(360deg) translate(-50%, -50%);
+    }
+}

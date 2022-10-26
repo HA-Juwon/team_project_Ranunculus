@@ -103,9 +103,15 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "memberRecoverEmail", method = RequestMethod.GET)
+    @RequestMapping(value = "userRecoverEmail", method = RequestMethod.GET)
     public ModelAndView getUserRecoverEmail(ModelAndView modelAndView) {
         modelAndView.setViewName("member/userRecoverEmail");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "userRecoverPassword", method = RequestMethod.GET)
+    public ModelAndView getUserRecoverPassword(ModelAndView modelAndView) {
+        modelAndView.setViewName("member/userRecoverPassword");
         return modelAndView;
     }
 }

@@ -170,7 +170,13 @@
         <div class="clearfix"></div>
 
     </div>
-</div></div></body>
+</div>
+<div class="loading">
+    <div class="progress">
+        <img class="image" th:src="@{/images/loading.progress.image.png}">
+        <a class="myFont">잠시만 기다려 주세요.</a>
+    </div>
+</div>
 </body>
 <footer>
     <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
