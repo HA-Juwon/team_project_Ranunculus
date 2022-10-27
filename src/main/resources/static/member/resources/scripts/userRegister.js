@@ -22,13 +22,6 @@ const functions = {
         }
     },
     termsNextButton : (params) => {
-        // TODO : 얘는 왜 안될까용? 밑에 구현하긴했는데 문의필요
-        // if (!termsContainer['agreeService'].checked) {
-        //     alert('서비스 이용약관을 동의하지 않을시 회원가입 진행이 불가합니다.');
-        //     termsContainer['agreeService'].focus();
-        //     return false;
-        // }
-
         if (!agreeService.checked || !agreePrivacy.checked) {
             alert('필수 이용약관을 동의하지 않을 시 \n회원가입 진행이 불가합니다.');
             return false;
@@ -64,6 +57,14 @@ const functions = {
         registerForm.classList.remove('visible');
     }
 };
+
+const registerWarning = {
+    getElement : () => window.document.getElementById('registerWarning'),
+    show : (text) => {
+        registerWarning.getElement().innerText = text;
+        registerWarning.getElement().classList.add('visible');
+    }
+}
 
 window.document.body.querySelectorAll('[data-func]').forEach(element => {
     element.addEventListener('click', event => {
@@ -118,82 +119,82 @@ registerForm.onsubmit = e => {
     e.preventDefault();
 
     if (registerForm['email'].value === "") {
-        alert('이메일을 입력해 주세요.');
+        registerWarning.show('이메일을 입력해 주세요.');
         registerForm['email'].focus();
         return false;
     }
 
     if (!new RegExp('^(?=.{7,50})([\\da-zA-Z_.]{4,})@([\\da-z\\-]{2,}\\.)?([\\da-z\\-]{2,})\\.([a-z]{2,10})(\\.[a-z]{2})?$').test(registerForm['email'].value)) {
-        alert('올바른 이메일 주소를 입력해 주세요.');
+        registerWarning.show('올바른 이메일 주소를 입력해 주세요.');
         registerForm['email'].focusAndSelect();
         return false;
     }
 
     if (!emailChecked) {
-        alert('이메일 중복 검사가 완료되지 않았습니다.');
+        registerWarning.show('이메일 중복 검사가 완료되지 않았습니다.');
         return false;
     }
 
     if (registerForm['password'].value === "") {
-        alert('비밀번호를 입력해 주세요.');
+        registerWarning.show('비밀번호를 입력해 주세요.');
         registerForm['password'].focus();
         return false;
     }
 
     if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(registerForm['password'].value)) {
-        alert('올바른 비밀번호를 입력해 주세요.');
+        registerWarning.show('올바른 비밀번호를 입력해 주세요.');
         form['password'].focusAndSelect();
         return false;
     }
 
     if (registerForm['passwordCheck'].value === "") {
-        alert('비밀번호를 입력해 주세요.');
+        registerWarning.show('비밀번호를 입력해 주세요.');
         registerForm['passwordCheck'].focus();
         return false;
     }
 
     if (registerForm['password'].value !== registerForm['passwordCheck'].value) {
-        alert('비밀번호가 일치하지 않습니다.');
+        registerWarning.show('비밀번호가 일치하지 않습니다.');
         registerForm['passwordCheck'].focusAndSelect();
         return false;
     }
 
     if (registerForm['name'].value === "") {
-        alert('이름을 입력해 주세요.');
+        registerWarning.show('이름을 입력해 주세요.');
         registerForm['name'].focus();
         return false;
     }
 
     if (!RegExp("^([가-힣]{2,5})$").test(registerForm['name'].value)) {
-        alert('올바른 이름을 입력해 주세요.');
+        registerWarning.show('올바른 이름을 입력해 주세요.');
         registerForm['name'].focusAndSelect();
         return false;
     }
 
     if (registerForm['addressPrimary'].value === "") {
-        alert('주소 찾기를 진행해 주세요.');
+        registerWarning.show('주소 찾기를 진행해 주세요.');
         return false;
     }
 
     if (registerForm['addressSecondary'].value === "") {
-        alert('상세주소를 입력해 주세요.');
+        registerWarning.show('상세주소를 입력해 주세요.');
         registerForm['addressSecondary'].focus();
         return false;
     }
 
     if (registerForm['telecomValue'].value === '-1') {
-        alert('통신사를 선택해 주세요.');
+        registerWarning.show('통신사를 선택해 주세요.');
         return false;
     }
 
     if (registerForm['contact'].value === "") {
-        alert('연락처를 입력해 주세요.');
+        registerWarning.show('연락처를 입력해 주세요.');
         registerForm['contact'].focus();
         return false;
     }
 
     if (!new RegExp('^(\\d{8,12})$').test(registerForm['contact'].value)) {
-        alert('올바른 연락처를 입력해 주세요.');
+        registerWarning.show('올바른 연락처를 입력해 주세요.');
         registerForm['contact'].focusAndSelect();
         return false;
     }
@@ -217,8 +218,7 @@ registerForm.onsubmit = e => {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
                     case 'success' :
-                        alert('회원가입 성공');
-                        window.location.href = "/";
+                        window.location.href = "./userRegisterDone";
                         break;
                     default :
                         alert('알 수 없는 이유로 회원가입을 실패했습니다. 잠시 후 다시 시도해 주세요.');

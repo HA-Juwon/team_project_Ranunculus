@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-<script defer th:src="@{/resources/scripts/common.js}"></script>
+    <script defer th:src="@{/resources/scripts/common.js}"></script>
 </head>
     <header class="_header _content-wrapper" th:fragment="content">
     <div class="_content-container hd-sec01">
@@ -38,24 +38,14 @@
                         </a>
                     </div>
                     <ul class="menu-container" id="menu-container">
-                        <li class="my-menu" th:if="${#request.getCookies()== null}">
+                        <li class="my-menu">
                             <div>
                                 <a class="link" th:href="@{/member/userRegister}">회원가입</a>
                             </div>
                         </li>
-                        <li class="my-menu" th:if="${#request.getCookies()== null}">
+                        <li class="my-menu">
                             <div>
                                 <a class="link" th:href="@{/member/userLogin}">로그인</a>
-                            </div>
-                        </li>
-                        <li class="my-menu" th:if="${#request.getCookies()!= null}">
-                            <div>
-                                <a class="link" th:href="@{/member/userEdit}">회원정보 수정</a>
-                            </div>
-                        </li>
-                        <li class="my-menu" th:if="${#request.getCookies()!= null}">
-                            <div>
-                                <a class="link" th:href="@{/member/userLogout}">로그아웃</a>
                             </div>
                         </li>
                     </ul>

@@ -39,6 +39,8 @@ form.onsubmit = e => {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
                     case 'success':
+                        // cover.show();
+                        // cover.hide();
                         window.location.href = '/';
                         break;
                     case 'suspended':

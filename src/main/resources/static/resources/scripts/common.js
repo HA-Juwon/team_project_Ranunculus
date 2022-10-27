@@ -9,24 +9,46 @@ HTMLInputElement.prototype.focusAndSelect = function () {
     this.select();
 }
 
+const cover = {
+    getElement: () => window.document.body.querySelector(':scope > .loading'),
+    show: () => {
+        const coverElementDiv = window.document.createElement('div');
+        coverElementDiv.classList.add('loading');
+        const coverElementDivTwo = window.document.createElement('div');
+        coverElementDivTwo.classList.add('progress');
+        const addImg = window.document.createElement('img');
+        addImg.classList.add('image');
+        addImg.setAttribute('src', '/images/loading.progress.image.png');
+        const coverElementA = window.document.createElement('a');
+        coverElementA.classList.add('myFont');
+        coverElementA.innerText ='잠시만 기다려 주세요.';
+        coverElementDiv.append(coverElementDivTwo);
+        coverElementDivTwo.append(addImg);
+        coverElementDivTwo.append(coverElementA);
+        window.document.body.append(coverElementDiv);
+        cover.getElement().classList.add('visible');
+
+    },
+    hide: () => cover.getElement().classList.remove('visible')
+}
+
+
 searchButton.addEventListener('click', () => {
     console.log("작동함");
-    if(searchForm.classList.contains("visible")){
+    if (searchForm.classList.contains("visible")) {
         searchForm.classList.remove("visible");
         console.log("작동함");
-    }
-    else {
+    } else {
         searchForm.classList.add("visible");
         console.log("작동함");
     }
 });
 myButton.addEventListener('click', () => {
     console.log("작동함");
-    if(myMenu.classList.contains("visible")){
+    if (myMenu.classList.contains("visible")) {
         myMenu.classList.remove("visible");
         console.log("작동함");
-    }
-    else {
+    } else {
         myMenu.classList.add("visible");
         console.log("작동함");
     }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 글쓰기</title>
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <link rel="stylesheet" th:href="@{/board/resources/stylesheets/write.css}">
+    <script defer th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
+    <script defer th:src="@{/resources/scripts/write.js}"></script>
+</head>
+<body class="_layout-hmf">
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<main class="main">
+<table>
+    <thead>
+
+    </thead>
+</table>
+</main>
+<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</body>
+</html>

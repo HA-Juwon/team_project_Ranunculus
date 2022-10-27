@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 body {
     align-items: center;
@@ -173,7 +174,7 @@ body > .main > .register-form > .input-container:not(:first-of-type) {
 }
 
 body > .main > .register-form > .input-container:last-of-type {
-    margin: 1.25rem 0 5rem 0;
+    margin: 1rem 0 1.75rem 0;
 }
 
 body > .main > .register-form > .input-container > .text,
@@ -340,4 +341,13 @@ body.searching > .address-search-container {
 
 body > .main > .register-form > .section-container > .button-container > .button.next-button:hover {
     background-color: rgb(var(--concept-color-pink-dim));
+}
+
+body > .main > .register-form > .register-warning {
+    color: rgb(231, 76, 60);
+    display: none;
+}
+
+body > .main > .register-form > .register-warning.visible {
+    display: flex;
 }
