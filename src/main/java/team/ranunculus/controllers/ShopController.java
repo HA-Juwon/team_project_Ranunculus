@@ -16,9 +16,8 @@ public class ShopController {
     }
 
     @RequestMapping(value = "/basket", method = RequestMethod.GET)
-    public ModelAndView getbasket(ModelAndView modelAndView) {
+    public ModelAndView getBasket(ModelAndView modelAndView) {
         modelAndView.setViewName("shop/basket");
         return modelAndView;
     }
-
 }
