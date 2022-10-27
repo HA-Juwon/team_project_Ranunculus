@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main {
+    width: var(--content-width-default);
+}
+
+body > .main > .category-title {
+    align-items: center;
+    display: flex;
+    font-size: 1.25rem;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1.25rem 0;
+}
