@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--/*@thymesVar id="paging" type="com.yhp.studydatabase.models.PagingModel"*/-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>고객문의</title>
+    <link crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css"
+          rel="stylesheet">
+    <link href="/resources/stylesheets/index.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2c11393372.js" crossorigin="anonymous"></script>
+    <script defer src="/resources/scripts/index.js"></script>
+</head>
+<body th:with="criteria = ${#request.getParameter('criteria')}, keyword = ${#request.getParameter('keyword')},
+ isSerch = ${criteria != null && keyword != null}">
+<main id="main">
+    <h1 class="title">
+        <i class="icon fa-solid fa-headset"></i>
+        <span class="text">고객문의</span>
+    </h1>
+    <table class="inquiry-container">
+        <thead>
+        <tr>
+            <th>순번</th>
+            <th>작성 일시</th>
+            <th>문의내용</th>
+            <th>작성자</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:if="${inquiries == null || inquiries.size() == 0}">
+            <td class="no-inquiry-td" colspan="4" th:text="${!isSerch ? '표시할 문의가 없습니다.' : '검색 결과가 없습니다.'}">표시할 문의가 없습니다.</td>
+        </tr>
+
+        <tr th:each="inquiry : ${inquiries}">
+            <td th:text="${inquiry.getIndex()}"></td>
+            <td th:text="${#dates.format(inquiry.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${inquiry.getContent()}"></td>
+            <td th:text="${inquiry.getWriter()}"></td>
+        </tr>
+        </tbody>
+
+        <tfoot>
+        <tr>
+            <td class="page-td" colspan="4">
+                <div class="page-container" th:if="${inquiries.size() > 0}">
+
+                    <a th:each="page : ${#numbers.sequence(paging.boundStartPage, paging.boundEndPage)}"
+                       th:class="${'page' + (page == paging.requestPage ? ' selected' : '')}"
+                       th:text="${page}"
+                       th:href="@{'./' (page = ${page})}"
+                       th:if="${criteria == null || keyword == null}"></a>
+
+                    <a th:each="page : ${#numbers.sequence(paging.boundStartPage, paging.boundEndPage)}"
+                       th:class="${'page' + (page == paging.requestPage ? ' selected' : '')}"
+                       th:text="${page}"
+                       th:href="@{'./' (page = ${page}, criteria = ${criteria}, keyword = ${keyword})}"
+                       th:if="${criteria != null && keyword != null}"></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="search-td" colspan="4">
+                <form class="search-form" id="search-form" method="get">
+                    <label class="input-container criteria">
+                        <span class="hint" hidden>검색기준</span>
+                        <select class="input criteria" name="criteria">
+                            <option selected value="byContent"
+                                    th:selected="${criteria == null || !criteria.equals('byWriter')}">문의내용
+                            </option>
+                            <option value="byWriter" th:selected="${criteria != null && criteria.equals('byWriter')}">
+                                작성자
+                            </option>
+                        </select>
+                    </label>
+                    <label class="input-container keyword">
+                        <span class="hint" hidden>키워드</span>
+                        <input class="input keyword" maxlength="10" name="keyword" placeholder="검색어를 입력해주세요."
+                               type="text" th:value="${keyword}">
+                    </label>
+                    <input class="button search" type="submit" value="검색">
+                    <input class="button reset" name="reset-button" type="button" value="검색 초기화"
+                           th:disabled="${criteria == null || keyword == null}">
+                </form>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</main>
+</body>
+</html>

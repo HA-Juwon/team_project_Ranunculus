@@ -185,3 +185,23 @@
     text-decoration:none;
 }
 
+.soldout-container {
+    opacity: 0.6;
+    position: relative;
+
+}
+.main_image_text {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 80%;
+    display: table;
+    background: rgba(0, 0, 0, 0.7);
+    border:6px solid red;
+    color: red;
+    border-radius: 10px;
+    background-image: url("https://cdn.discordapp.com/attachments/1009052147792482389/1034780455444168744/download.png");
+    background-size: contain;
+    opacity: 0.5;
+}
