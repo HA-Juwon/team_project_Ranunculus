@@ -7,15 +7,42 @@ body {
     justify-content: center;
 }
 
+body > .navigator-container,
 body > .main {
     width: var(--content-width-default);
 }
 
-body > .main > .category-title {
+body > .navigator-container {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1.75rem 0 3rem 0;
+}
+
+body > .navigator-container > .location > *,
+body > .navigator-container > .item-wrap > * {
+    color: rgb(180, 180, 180);
+    font-size: 0.75rem;
+}
+body > .navigator-container > .item-wrap > * {
+    padding: 0 0.825rem;
+}
+
+body > .navigator-container > .category-title {
+    align-self: center;
+    font-size: 1.175rem;
+    font-weight: 450;
+    padding: 2.75rem 0;
+}
+
+body > .navigator-container > .item-wrap {
     align-items: center;
     display: flex;
-    font-size: 1.25rem;
     flex-direction: row;
     justify-content: center;
-    padding: 1.25rem 0;
+}
+
+body > .navigator-container > .item-wrap > *:not(:last-of-type) {
+    border-right: 0.0625rem solid rgb(180, 180, 180);
 }

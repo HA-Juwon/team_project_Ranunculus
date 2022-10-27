@@ -22,13 +22,6 @@ const functions = {
         }
     },
     termsNextButton : (params) => {
-        // TODO : 얘는 왜 안될까용? 밑에 구현하긴했는데 문의필요
-        // if (!termsContainer['agreeService'].checked) {
-        //     alert('서비스 이용약관을 동의하지 않을시 회원가입 진행이 불가합니다.');
-        //     termsContainer['agreeService'].focus();
-        //     return false;
-        // }
-
         if (!agreeService.checked || !agreePrivacy.checked) {
             alert('필수 이용약관을 동의하지 않을 시 \n회원가입 진행이 불가합니다.');
             return false;

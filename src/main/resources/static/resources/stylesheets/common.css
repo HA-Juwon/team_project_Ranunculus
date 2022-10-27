@@ -54,14 +54,6 @@ input {
     padding: unset;
 }
 
-ol, ul {
-    list-style-type: none;
-    margin-block: unset;
-    margin-inline: unset;
-    padding-inline: unset;
-    padding-block: unset;
-}
-
 ._object-input {
     width: 100%;
     appearance: none;
@@ -347,6 +339,7 @@ header ._content-container.hd-sec01{
 
 ._footer>.ft_sec01 a{
     font-size: 11px;
+    padding: 0 0.75rem;
 }
 
 ._footer>.ft_sec01 a+.bt_bar{
@@ -473,7 +466,7 @@ header ._content-container.hd-sec01{
     user-select: none;
     -webkit-user-drag: none;
 }
-/* TODO 폰트 포지션!!!과 디자인 수정부탁합니다*/
+
 .loading > .progress > .myFont {
     font-weight: 300;
     font-size: 10rem;
