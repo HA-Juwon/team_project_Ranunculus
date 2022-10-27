@@ -10,8 +10,9 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+
 <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
+
     <input type="hidden" name="cmd" value="order">
     <div class="basketdiv" id="basket">
         <div class="row head">
@@ -121,6 +122,5 @@
         </div>
     </div>
 </form>
-<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
 </html>

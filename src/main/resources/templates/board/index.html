@@ -6,9 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ranunculus 로그인</title>
-    <script defer th:src="@{/board/resources/scripts/index.js}"></script>
+    <title>Q&A</title>
     <link rel="stylesheet" th:href="@{/board/resources/stylesheets/index.css}">
+    <script defer th:src="@{/board/resources/scripts/index.js}"></script>
     <script src="https://kit.fontawesome.com/ac2617ecb2.js" crossorigin="anonymous"></script>
 </head>
 <body class="_layout-hmf">
@@ -23,30 +23,63 @@
         </div>
         <div class="b">
             <div class="fieldset">
-                <label class="icon-container">
-                    <input type="radio" name="search" id="searchName" class="search-name" >
-                    <a>이름</a>
-                </label>
-                <label class="icon-container">
-                    <input type="radio" name="search" id="searchTitle" class="search-title">
-                    <a>제목</a>
-                </label>
-                <label class="icon-container">
-                    <input type="radio" name="search" id="searchContent" class="search-content">
-                    <a>내용</a>
-                </label>
-                <label class="input-container">
-                    <div class="typ-container">
-                        <span hidden>원하시는 향수를 찾아보세요</span>
-                        <i class="icon fa-solid fa-magnifying-glass"></i>
-                        <input class="input" maxlength="50" name="keyword" placeholder="찾으시는 내용을 입력하세요." type="text">
-                    </div>
-                </label>
+                <form class="submitForm" id="submitform" method="get">
+                    <label class="icon-container">
+                        <input value="name" type="radio" name="search" id="searchName" class="search-name">
+                        <a>이름</a>
+                    </label>
+                    <label class="icon-container">
+                        <input value="title" type="radio" name="search" id="searchTitle" class="search-title">
+                        <a>제목</a>
+                    </label>
+                    <label class="icon-container">
+                        <input value="content" type="radio" name="search" id="searchContent" class="search-content">
+                        <a>내용</a>
+                    </label>
+                    <label class="input-container">
+                        <div class="typ-container">
+                            <span hidden>찾으시는 내용을 입력하세요.</span>
+                            <i class="icon fa-solid fa-magnifying-glass"></i>
+                            <input id="searchInput" class="input" maxlength="50" name="keyword" placeholder="찾으시는 내용을 입력하세요." type="text">
+                        </div>
+                    </label>
+                </form>
+
             </div>
         </div>
     </div>
-    <div class="division-line">
+    <table class="division-line inquiry-container">
+        <thead>
+        <tr>
+            <th>NO.</th>
+            <th>DATE</th>
+            <th>CONTENT</th>
+            <th>NAME</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="no-inquiry-td" colspan="4">표시할 문의가 없습니다.</td>
+        </tr>
 
+        <tr>
+            <td>1</td>
+            <td>2222,11,22</td>
+            <td>너무 힘들어요 힘들어</td>
+            <td>김깔깔깔깔</td>
+        </tr>
+        </tbody>
+
+
+    </table>
+    <div class="page-container">
+        <div></div>
+        <div class="number-button">
+            123456789
+        </div>
+        <div class="write-container">
+            <a class="write" th:href="@{/board/write}">WRITE</a>
+        </div>
     </div>
 </main>
 <th:block th:replace="~{fragments/footer.html :: content}"></th:block>

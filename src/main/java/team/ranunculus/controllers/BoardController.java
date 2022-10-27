@@ -13,4 +13,9 @@ public class BoardController {
         modelAndView.setViewName("board/index");
         return modelAndView;
     }
+    @RequestMapping(value = "write", method = RequestMethod.GET)
+    public ModelAndView getWrite(ModelAndView modelAndView) {
+        modelAndView.setViewName("board/write");
+        return modelAndView;
+    }
 }
