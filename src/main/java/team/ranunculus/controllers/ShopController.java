@@ -15,4 +15,10 @@ public class ShopController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/basket", method = RequestMethod.GET)
+    public ModelAndView getbasket(ModelAndView modelAndView) {
+        modelAndView.setViewName("shop/basket");
+        return modelAndView;
+    }
+
 }

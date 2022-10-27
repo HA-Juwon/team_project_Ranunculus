@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>장바구니</title>
-    <script defer th:src="@{/shop/resources/scripts/basket.js}"></script>
+    <th:block th:replace="~{fragments/header.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/shop/resources/stylesheets/basket.css}">
     <script defer th:src="@{/shop/resources/scripts/basket.js}"></script>
-
-    <link rel="stylesheet" href="/shop/resources/stylesheets/basket.css">
-    <script defer src="/shop/resources/scripts/basket.js"></script>
-    <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 </head>
 <body>
 
@@ -94,38 +90,4 @@
                 <div class="basketprice"><input type="hidden" name="p_price" id="p_price3" class="p_price" value="15200">15,200원</div>
                 <div class="num">
                     <div class="updown">
-                        <input type="text" name="p_num3" id="p_num3" size="2" maxlength="4" class="p_num" value="1" onkeyup="javascript:basket.changePNum(3);">
-                        <span onclick="javascript:basket.changePNum(3);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-                        <span onclick="javascript:basket.changePNum(3);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
-                    </div>
-                </div>
-                <div class="sum">15,200원</div>
-            </div>
-            <div class="subdiv">
-                <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
-            </div>
-        </div>
 
-    </div>
-
-    <div class="right-align basketrowcmd">
-        <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
-        <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
-    </div>
-
-    <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 4개</div>
-    <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 74,200원</div>
-
-    <div id="goorder" class="">
-        <div class="clear"></div>
-        <div class="buttongroup center-align cmd">
-            <a href="javascript:void(0);">선택한 상품 주문</a>
-        </div>
-    </div>
-</form>
-
-</body>
-<footer>
-    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
-</footer>
-</html>
