@@ -303,10 +303,14 @@ header ._content-container.hd-sec01{
     padding: 0 34px;
 }
 ._header .search_area{
-    padding: 2rem;
+    padding: 1rem 2rem;
     background-color: rgb(var(--concept-color-pink),70%);
     position: absolute;
     width: 100%;
+}
+
+._header .search_area .icon {
+    margin-right: 0.75rem;
 }
 
 ._footer{
