@@ -86,11 +86,12 @@ registerForm['email'].addEventListener('focusout', () => {
         emailChecked = false;
         return false;
     }
-
+    cover.show();
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `./userEmailCheck?email=${registerForm['email'].value}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+            cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
@@ -211,9 +212,11 @@ registerForm.onsubmit = e => {
     formData.append('contact', registerForm['contact'].value);
     formData.append('policyMarketing', agreeAd.checked);
 
+    cover.show();
     xhr.open('POST', './userRegister');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+            cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {

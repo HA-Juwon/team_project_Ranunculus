@@ -73,10 +73,6 @@ body > .main > .terms-container > .section-container > .check-container > .check
     justify-content: center;
 }
 
-body > .main > .terms-container > .section-container > .check-container > .check-input:checked ~ .checker-container > .checker {
-    display: flex;
-}
-
 body > .main > .terms-container > .section-container > .check-container > .text {
     margin-left: 0.5rem;
     font-size: 1.25rem;

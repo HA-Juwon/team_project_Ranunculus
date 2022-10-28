@@ -54,6 +54,7 @@ input {
     padding: unset;
 }
 
+
 ._object-input {
     width: 100%;
     appearance: none;
@@ -296,14 +297,19 @@ header ._content-container.hd-sec01 {
     text-decoration: none;
     padding: 0 34px;
 }
-._header .search_area{
-    padding: 2rem;
-    background-color: rgb(var(--concept-color-pink),70%);
+
+._header .search_area {
+    padding: 1rem 2rem;
+    background-color: rgb(var(--concept-color-pink), 70%);
     position: absolute;
     width: 100%;
 }
 
-._footer{
+._header .search_area .icon {
+    margin-right: 0.75rem;
+}
+
+._footer {
     background-color: white;
     color: rgb(120,120,120);
     padding: 2.5rem 0;
