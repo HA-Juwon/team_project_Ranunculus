@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>장바구니</title>
-    <script defer th:src="@{/shop/resources/scripts/basket.js}"></script>
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/shop/resources/stylesheets/basket.css}">
-    <th:block th:replace="~{fragments/header.html :: content}"></th:block>
+    <script defer th:src="@{/shop/resources/scripts/basket.js}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
 
     <input type="hidden" name="cmd" value="order">
@@ -119,9 +120,6 @@
         </div>
     </div>
 </form>
-
+<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
-<footer>
-    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
-</footer>
 </html>
