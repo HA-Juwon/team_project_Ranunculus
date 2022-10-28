@@ -62,7 +62,7 @@ public class MemberService {
         if (contactAuth.isExpired() || new Date().compareTo(contactAuth.getExpiresAt()) > 0) {
             return CommonResult.EXPIRED;
         }
-        System.out.println("debug"+contactAuth.getIndex());
+//        System.out.println("debug"+contactAuth.getIndex());
         contactAuth.setExpired(true);
         if (this.memberMapper.updateContactAuth(contactAuth) == 0) {
            return CommonResult.FAILURE;
@@ -95,6 +95,7 @@ public class MemberService {
 
     @Transactional
     public IResult loginUser(UserEntity member) {
+//        System.out.println(member.getEmail());
         if (member.getEmail() == null ||
                 member.getPassword() == null ||
                 !member.getEmail().matches(MemberRegex.USER_EMAIL) ||
@@ -165,6 +166,7 @@ public class MemberService {
 
         return CommonResult.SUCCESS;
     }
+
     @Transactional
     public IResult findUserEmail(ContactAuthEntity contactAuth, UserEntity user) {
         if (contactAuth.getContact() == null ||
@@ -184,6 +186,24 @@ public class MemberService {
             return CommonResult.FAILURE;
         }
         user.setEmail(foundUser.getEmail());
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public IResult resetPassword(UserEntity user){
+        user.setEmail(user.getEmail());
+        System.out.println(user.getEmail());
+        UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
+        if (existingUser == null) {
+            return CommonResult.FAILURE;
+        }
+        existingUser.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+
+        if (this.memberMapper.updateUser(existingUser) == 0) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return CommonResult.FAILURE;
+        }
+
         return CommonResult.SUCCESS;
     }
 }

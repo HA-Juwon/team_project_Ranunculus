@@ -7,7 +7,6 @@ import team.ranunculus.entities.member.UserEntity;
 @Mapper
 public interface IMemberMapper {
     int insertContactAuth(ContactAuthEntity contactAuth);
-
     int insertUser(UserEntity user);
 
     ContactAuthEntity selectContactAuthByContactCodeSalt(ContactAuthEntity contactAuth);
@@ -16,7 +15,8 @@ public interface IMemberMapper {
 
     UserEntity selectUserByEmail(UserEntity user);
 
-    UserEntity selectUserByEmailPassword(UserEntity member);
+    UserEntity selectUserByEmailPassword(UserEntity user);
 
     int updateContactAuth(ContactAuthEntity contactAuth);
+    int updateUser(UserEntity user);
 }

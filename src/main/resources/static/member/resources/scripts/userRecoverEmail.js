@@ -1,10 +1,8 @@
 //이름과 전화번호 인증을 통해서 확인
 
 const recoverEmailForm = window.document.getElementById('recoverEmailForm');
-
 const contactAuthRequestButton=window.document.getElementById('contactAuthRequestButton');
 const contactAuthCheckButton=window.document.getElementById('contactAuthCheckButton');
-
 
 //인증번호 요청 버튼을 누르면
 contactAuthRequestButton.addEventListener('click',()=>{

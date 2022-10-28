@@ -12,20 +12,28 @@ body > .main {
     padding: 4rem 1rem;
 }
 
-body>.main>.email-container:not(.visible){
+body>.main>.email-container:not(.visible),
+body>.main>.result-container:not(.visible){
     display: none;
 }
-body>.main>.email-container.visible{
+
+body>.main>.email-container.visible,
+body>.main>.result-container.visible
+{
     flex-direction: column;
     justify-content: flex-start;
 }
 
 
-body > .main > .recoverEmail-form:not(.visible){
+body > .main > .recoverEmail-form:not(.visible),
+body>.main>.result-container:not(.visible){
     display: none;
 }
 
-body > .main > .recoverEmail-form {
+body > .main > .recoverEmail-form,
+body > .main > .recoverPassword-form,
+body > .main > .resetPassword-form
+{
     width: 25rem;
     align-items: stretch;
     display: flex;
@@ -33,11 +41,15 @@ body > .main > .recoverEmail-form {
     justify-content: flex-start;
 }
 
-body > .main > .recoverEmail-form > * + * {
+body > .main > .recoverEmail-form > * + *,
+body > .main > .recoverPassword-form > * + *,
+body > .main > .resetPassword-form > * + *{
     margin-top: 0.625rem;
 }
 
-body > .main > .recoverEmail-form > .title {
+body > .main > .recoverEmail-form > .title,
+body > .main > .recoverPassword-form > .title,
+body > .main > .resetPassword-form > .title{
     align-self: center;
     font-size: 1.875rem;
     font-weight: 600;

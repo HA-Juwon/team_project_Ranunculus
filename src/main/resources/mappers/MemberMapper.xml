@@ -111,4 +111,19 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
+    <update id="updateUser"
+            parameterType="team.ranunculus.entities.member.UserEntity">
+        UPDATE `ranunculus_members`.member
+        SET `password`              = #{password},
+            `name`                  = #{name},
+            `contact`               = #{contact},
+            `policy_terms_at`       = #{policyTermsAt},
+            `policy_privacy_at`     = #{policyPrivacyAt},
+            `policy_marketing_at`   = #{policyMarketingAt},
+            `status_value`          = #{statusValue},
+            `registered_at`         = #{registeredAt},
+            `admin_flag`            = #{isAdmin}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
 </mapper>
