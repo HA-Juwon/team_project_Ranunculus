@@ -13,7 +13,8 @@ body > .main {
 }
 
 body>.main>.email-container:not(.visible),
-body>.main>.result-container:not(.visible){
+body>.main>.result-container:not(.visible)
+{
     display: none;
 }
 
@@ -26,7 +27,9 @@ body>.main>.result-container.visible
 
 
 body > .main > .recoverEmail-form:not(.visible),
-body>.main>.result-container:not(.visible){
+body > .main > .recoverPassword-form:not(.visible),
+body>.main>.result-container:not(.visible),
+body>.main>.resetPassword-form:not(.visible){
     display: none;
 }
 
@@ -49,10 +52,27 @@ body > .main > .resetPassword-form > * + *{
 
 body > .main > .recoverEmail-form > .title,
 body > .main > .recoverPassword-form > .title,
-body > .main > .resetPassword-form > .title{
+body > .main > .resetPassword-form > .title
+{
     align-self: center;
     font-size: 1.875rem;
     font-weight: 600;
     margin-bottom: 2.5rem;
     margin-top: 2.5rem;
+}
+
+body > .main > .result-container > .title{
+    align-self: center;
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+}
+
+body > .main > .result-container > span:nth-child(2){
+    display: block;
+    margin: 1rem 0;
+}
+body > .main > .result-container >._object-button{
+    margin-top: 0.625rem;
+    display: table;
 }

@@ -187,7 +187,7 @@ public class MemberController {
     @RequestMapping(value = "userResetPassword", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String postUserResetPassword(UserEntity user) {
-        System.out.println(user.getEmail());
+        System.out.println("유저 이메일"+user.getEmail());
         user.setContact(null)
                 .setPolicyTermsAt(null)
                 .setPolicyPrivacyAt(null)
