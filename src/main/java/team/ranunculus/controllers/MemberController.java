@@ -12,7 +12,6 @@ import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
 
