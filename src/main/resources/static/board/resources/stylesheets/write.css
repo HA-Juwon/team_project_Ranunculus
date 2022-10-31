@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+
+body > .main {
+    padding: 3rem 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+body > .main > .form {
+    width: 80%;
+    height: 80%;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .form > * + * {
+    margin-top: 2rem;
+}
+
+body > .main > .form > .content-container > .content {
+    height: auto;
+    min-height: 20rem;
+    margin-top: -1rem;
+    resize: vertical;
+}
+
+body > .main > .form > .warning {
+    color: rgb(231, 76, 60);
+    display: none;
+}
+
+body > .main > .form > .warning.visible {
+    display: block;
+}
+
+body > .main > .form > .button-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-weight: 600;
+}
+
+body > .main > .form > .button-container > * {
+    flex: 1;
+}
+
+body > .main > .form > .button-container > * + * {
+    margin-left: 1rem;
+}
+
+body > .main > .form > .button-container > .back {
+    background-color: rgb(var(--concept-color-blue));
+}
+
+body > .main > .form > .button-container > .back:hover {
+    background-color: rgb(130, 130, 130);
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.rowbox {
+    width: 30rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.rowbox > * + * {
+    margin-right: 1rem;
+}
+
+.rowboxspan {
+    width: 5rem;
+}
+
+.a {
+    margin-left: 1rem;
+    margin-right: -1rem;
+}
+
+
+
+.title {
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1rem;
+
+}
+
+.title-box {
+    border-bottom: rgb(var(--concept-color-pink)) solid 1rem;
+
+}
