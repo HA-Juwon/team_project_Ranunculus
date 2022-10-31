@@ -29,27 +29,27 @@ resetPasswordForm.onsubmit = e => {
     }
     // cover.show('비밀번호를 다시 설정하고 있습니다.\n\n잠시만 기다려 주세요.');
 
-    const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    formData.append('password', resetPasswordForm['password'].value);
-    xhr.open('POST', './userResetPassword');
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
+     const xhr = new XMLHttpRequest();
+     const formData = new FormData();
+     formData.append('password', resetPasswordForm['password'].value);
+     xhr.open('POST', './userResetPassword');
+     xhr.onreadystatechange = () => {
+         if (xhr.readyState === XMLHttpRequest.DONE) {
             // cover.hide();
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseJson = JSON.parse(xhr.responseText);
-                switch (responseJson['result']) {
-                    case 'success':
-                        resetPasswordForm.classList.remove('visible');
-                        window.document.getElementById('result').classList.add('visible');
-                        break;
-                    default:
-                        alert('알 수 없는 이유로 비밀번호를 재설정하지 못하였습니다.')
-                }
-            } else {
-                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-            }
-        }
-    };
-    xhr.send(formData);
+             if (xhr.status >= 200 && xhr.status < 300) {
+                 const responseJson = JSON.parse(xhr.responseText);
+                 switch (responseJson['result']) {
+                     case 'success':
+                         resetPasswordForm.classList.remove('visible');
+                         window.document.getElementById('result').classList.add('visible');
+                         break;
+                     default:
+                         alert('알 수 없는 이유로 비밀번호를 재설정하지 못하였습니다.');
+                 }
+             } else {
+                 alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+             }
+         }
+     };
+     xhr.send(formData);
 };
