@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.ranunculus.mappers.IBoardMapper">
+    <insert id="insertArticle"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="team.ranunculus.entities.board.BoardEntity">
+        INSERT INTO `ranunculus_boards`.`qna` (`index`, `writer`, `password`, `title`,
+                                               `content`, `attachment`, `attachment_mime`,
+                                               `created_at`, `email_admin_flag`)
+        VALUES (#{index}, #{writer}, #{password}, #{title}, #{content}, #{attachment},
+                #{attachmentMime}, #{created_at}, #{emailAdminFlag})
+    </insert>
+
+</mapper>

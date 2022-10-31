@@ -304,6 +304,9 @@ header ._content-container.hd-sec01 {
     position: absolute;
     width: 100%;
 }
+._header .search_area .icon {
+    margin-right: 0.75rem;
+}
 
 ._header .search_area .icon {
     margin-right: 0.75rem;
