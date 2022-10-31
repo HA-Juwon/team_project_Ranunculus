@@ -19,6 +19,11 @@ public class ShopController {
         modelAndView.setViewName("shop/basket");
         return modelAndView;
     }
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public ModelAndView getDetail(ModelAndView modelAndView) {
+        modelAndView.setViewName("shop/detailpage");
+        return modelAndView;
+    }
 
 
 }
