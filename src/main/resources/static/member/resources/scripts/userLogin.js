@@ -32,7 +32,7 @@ form.onsubmit = e => {
     const formData = new FormData();
     formData.append('email', form['email'].value);
     formData.append('password', form['password'].value);
-    formData.append('autosign', form['autosign'].value);
+    formData.append('autosign', form['autosign'].checked);
     xhr.open('POST', './userLogin');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {

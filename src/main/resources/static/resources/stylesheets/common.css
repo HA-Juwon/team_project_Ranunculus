@@ -397,7 +397,7 @@ header ._content-container.hd-sec01 {
     margin-top: 1.25rem;
 }
 ._footer>.ft_sec03 .bt_inner {
-    width: 1260px;
+    width: 100%;
     margin: 18px;
     position: relative;
 }
