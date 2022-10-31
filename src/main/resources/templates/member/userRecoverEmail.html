@@ -14,23 +14,33 @@
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="_main main">
-    <form class="recoverEmail-form" id="form">
+    <div class="email-container" id="emailContainer" >
+        <h2 class="title">이메일 찾기</h2>
+        <span class="message">요청하신 이메일은 <b class="email" id="email">sample@sample.sample</b> 입니다.</span>
+        <a class="link _object-button" th:href="@{/member/userLogin}">로그인</a>
+    </div>
+
+    <form class="recoverEmail-form visible" id="recoverEmailForm">
         <h2 class="title">아이디 찾기</h2>
+
         <label class="_object-label">
             <span hidden>이름</span>
             <input autofocus class="_object-input" maxlength="5" name="name" placeholder="이름" type="text">
         </label>
+
         <label class="_object-label contact">
             <span hidden>연락처</span>
             <input class="_object-input input" maxlength="12" name="contact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text">
             <input name="contactAuthSalt" type="hidden">
-            <input class="_object-button" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
+            <input class="_object-button"id="contactAuthRequestButton" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
         </label>
+
         <label class="_object-label contact">
             <span hidden>연락처 인증번호</span>
             <input class="_object-input input" disabled maxlength="6" name="contactAuthCode" placeholder="인증번호" type="text">
-            <input class="_object-button" disabled name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
+            <input class="_object-button" disabled id="contactAuthCheckButton" name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
         </label>
+
         <input class="_object-button" name="emailRecoverButton" type="submit" value="이메일 찾기">
     </form>
 </main>

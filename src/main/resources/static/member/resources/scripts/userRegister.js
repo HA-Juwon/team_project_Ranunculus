@@ -44,7 +44,6 @@ const functions = {
                 registerForm['addressPrimary'].value = data.address;
                 registerForm['addressSecondary'].focus();
                 registerForm['addressSecondary'].select();
-
                 window.document.body.classList.remove('searching');
             }
         }).embed(dialog);
