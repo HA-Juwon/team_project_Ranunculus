@@ -5,7 +5,7 @@ form['back'].addEventListener('click', () => {
 });
 
 form.onsubmit = e => {
-    // e.preventDefault();
+    e.preventDefault();
 
     // warning.hide();
     if (form['name'].value === '') {
@@ -27,7 +27,7 @@ form.onsubmit = e => {
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    formData.append('write', form['name'].value);
+    formData.append('writer', form['name'].value);
     formData.append('password', form['password'].value);
     formData.append('title', form['title'].value);
     formData.append('content', form['content'].value);
@@ -59,6 +59,7 @@ ClassicEditor.create(form['content'], {
         uploadUrl: 'image'
     }
 });
+
 
 
 
