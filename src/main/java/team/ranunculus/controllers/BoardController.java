@@ -2,10 +2,8 @@ package team.ranunculus.controllers;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import team.ranunculus.entities.board.BoardEntity;
 import team.ranunculus.entities.member.UserEntity;
@@ -13,6 +11,7 @@ import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.BoardService;
 import team.ranunculus.services.MemberService;
+import team.ranunculus.utils.CryptoUtils;
 
 import java.util.Date;
 
@@ -42,17 +41,17 @@ public class BoardController {
 
     @RequestMapping(value = "write", method = RequestMethod.POST)
     @ResponseBody
-    public String postWrite(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME) UserEntity user,
-                            @RequestParam(value = "writer") String writer,
+    public String postWrite(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
+                            @RequestParam(value = "write") String write,
                             @RequestParam(value = "password") String password,
                             @RequestParam(value = "title") String title,
                             @RequestParam(value = "content") String content,
                             BoardEntity board) {
         board.setIndex(-1)
-                .setWriter(null)
-                .setPassword(null)
-                .setTitle(null)
-                .setContent(null)
+                .setWriter(write)
+                .setPassword(CryptoUtils.hashSha512(password))
+                .setTitle(title)
+                .setContent(content) // TODO: 값이 안넘어옴 체크 필요.
                 .setCreatedAt(new Date())
                 .setEmailAdminFlag(null);
         IResult result = this.boardService.putArticle(board);
@@ -62,7 +61,5 @@ public class BoardController {
             responseJson.put("id", board.getIndex());
         }
         return responseJson.toString();
-
-
     }
 }
