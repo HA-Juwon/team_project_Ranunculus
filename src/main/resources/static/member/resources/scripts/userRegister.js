@@ -22,13 +22,6 @@ const functions = {
         }
     },
     termsNextButton : (params) => {
-        // TODO : 얘는 왜 안될까용? 밑에 구현하긴했는데 문의필요
-        // if (!termsContainer['agreeService'].checked) {
-        //     alert('서비스 이용약관을 동의하지 않을시 회원가입 진행이 불가합니다.');
-        //     termsContainer['agreeService'].focus();
-        //     return false;
-        // }
-
         if (!agreeService.checked || !agreePrivacy.checked) {
             alert('필수 이용약관을 동의하지 않을 시 \n회원가입 진행이 불가합니다.');
             return false;
@@ -94,11 +87,12 @@ registerForm['email'].addEventListener('focusout', () => {
         emailChecked = false;
         return false;
     }
-
+    cover.show();
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `./userEmailCheck?email=${registerForm['email'].value}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+            cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
@@ -219,9 +213,11 @@ registerForm.onsubmit = e => {
     formData.append('contact', registerForm['contact'].value);
     formData.append('policyMarketing', agreeAd.checked);
 
+    cover.show();
     xhr.open('POST', './userRegister');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+            cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {

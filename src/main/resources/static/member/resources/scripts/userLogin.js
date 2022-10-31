@@ -26,6 +26,7 @@ form.onsubmit = e => {
         form['email'].select();
         return false;
     }
+    cover.show();
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
@@ -35,6 +36,7 @@ form.onsubmit = e => {
     xhr.open('POST', './userLogin');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+            cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {

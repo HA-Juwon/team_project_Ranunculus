@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 body {
     align-items: center;
@@ -70,10 +71,6 @@ body > .main > .terms-container > .section-container > .check-container > .check
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-body > .main > .terms-container > .section-container > .check-container > .check-input:checked ~ .checker-container > .checker {
-    display: flex;
 }
 
 body > .main > .terms-container > .section-container > .check-container > .text {

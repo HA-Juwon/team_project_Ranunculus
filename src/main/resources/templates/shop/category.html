@@ -6,17 +6,212 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>카테고리</title>
-
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
-    <link rel="stylesheet" th:href="@{/member/resources/stylesheets/userRegister.css}">
-    <script defer th:src="@{/member/resources/scripts/userRegister.js}"></script>
+    <link rel="stylesheet" th:href="@{/shop/resources/stylesheets/category.css}">
+    <script defer th:src="@{/shop/resources/scripts/category.js}"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
-<main>
+<nav class="navigator-container">
+    <div class="location">
+        <a class="link" th:href="@{/}">HOME</a>
+        <span>></span>
+        <a class="link" th:href="@{/shop/category}">남여공용</a>
+    </div>
     <div class="category-title">남여공용</div>
+    <ul class="item-container">
+        <li class="item-wrap">
+            <a class="link item" th:href="@{/shop/category}">신상품</a>
+        </li>
+        <li class="item-wrap">
+            <a class="link item" th:href="@{/shop/category}">베스트</a>
+        </li>
+        <li class="item-wrap">
+            <a class="link item" th:href="@{/shop/category}">높은가격</a>
+        </li>
+        <li class="item-wrap">
+            <a class="link item" th:href="@{/shop/category}">낮은가격</a>
+        </li>
+    </ul>
+</nav>
+<main class="main">
+    <div class="product-container">
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a class="link" href="#">
+            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <div class="product-name">
+                향수
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+    </div>
 </main>
+<ul class="page-container">
+    <li class="page-wrap">
+        <a class="link page selected" th:href="@{/shop/category}">1</a>
+    </li>
+    <li class="page-wrap">
+        <a class="link page" th:href="@{/shop/category}">2</a>
+    </li>
+    <li class="page-wrap">
+        <a class="link page" th:href="@{/shop/category}">3</a>
+    </li>
+    <li class="page-wrap">
+        <a class="link page" th:href="@{/shop/category}">4</a>
+    </li>
+</ul>
 <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
 </html>
