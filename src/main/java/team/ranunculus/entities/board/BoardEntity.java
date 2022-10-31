@@ -16,7 +16,7 @@ public class BoardEntity {
     private String password;
     private String title;
     private String content;
-    private Date createdAt;
+    private Date createdAt = new Date();
     private String emailAdminFlag;
 
     public BoardEntity() {

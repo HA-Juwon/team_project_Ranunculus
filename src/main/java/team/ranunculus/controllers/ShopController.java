@@ -24,5 +24,4 @@ public class ShopController {
         modelAndView.setViewName("shop/detailpage");
         return modelAndView;
     }
-
 }
