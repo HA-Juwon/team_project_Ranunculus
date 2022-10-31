@@ -11,13 +11,7 @@ import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -54,7 +48,7 @@ public class MemberController {
     public String postUserLogin(@RequestParam(value = "autosign", required = false)
                                     Optional<Boolean> autosignOptional,
                                 HttpSession session,
-                                UserEntity member) throws NoSuchAlgorithmException {
+                                UserEntity member) {
         boolean autosign = autosignOptional.orElse(false);
         member.setName(null)
                 .setAddressPostal(null)
@@ -135,7 +129,6 @@ public class MemberController {
         if (result == CommonResult.SUCCESS) {
             responseJson.put("email", user.getEmail());
         }
-//        System.out.println(responseJson);
         return responseJson.toString();
     }
 
@@ -153,9 +146,6 @@ public class MemberController {
     @RequestMapping(value = "userRecoverPassword", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String postUserRecoverPassword(ContactAuthEntity contactAuth ,UserEntity user) {
-//        System.out.println("리커버 패스워드 POST작동함");
-//        System.out.println(user.getEmail());
-//        System.out.println(user.getContact());
         user.setPolicyTermsAt(null)
                 .setPolicyPrivacyAt(null)
                 .setPolicyMarketingAt(null)
@@ -206,10 +196,7 @@ public class MemberController {
 
     @RequestMapping(value = "userRecoverAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getUserRecoverAuth(UserEntity user, ContactAuthEntity contactAuth) throws
-            IOException,
-            InvalidKeyException,
-            NoSuchAlgorithmException {
+    public String getUserRecoverAuth(UserEntity user, ContactAuthEntity contactAuth) {
         user.setEmail(null)
                 .setPassword(null)
                 .setPolicyTermsAt(null)
@@ -230,14 +217,12 @@ public class MemberController {
         if (result == CommonResult.SUCCESS) {
             responseJson.put("salt", contactAuth.getSalt());
         }
-//        System.out.println(responseJson);
         return responseJson.toString();
     }
 
     @RequestMapping(value = "userRecoverAuth", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String postUserRecoverAuth(ContactAuthEntity contactAuth) throws Exception {
-//        System.out.println(contactAuth.getContact());
         contactAuth.setIndex(-1)
                 .setCreatedAt(null)
                 .setExpiresAt(null)
@@ -246,7 +231,6 @@ public class MemberController {
         result = this.memberService.checkContactAuth(contactAuth);
         JSONObject responseJson = new JSONObject();
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
-//        System.out.println(responseJson);
         return responseJson.toString();
     }
 
