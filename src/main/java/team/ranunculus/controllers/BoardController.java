@@ -14,8 +14,6 @@ import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.BoardService;
 import team.ranunculus.services.MemberService;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller(value = "team.ranunculus.controllers.BoardController")
@@ -67,27 +65,4 @@ public class BoardController {
 
 
     }
-
-//    @RequestMapping(value = "image", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public String postImage(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME) UserEntity user,
-//                            @RequestParam(value = "upload") MultipartFile upload) throws
-//            IOException {
-//        ImageEntity image = ImageEntity.build()
-//                .setUserEmail(user.getEmail())
-//                .setCreatedAt(new Date())
-//                .setName(upload.getOriginalFilename())
-//                .setMime(upload.getContentType())
-//                .setData(upload.getBytes());
-//        IResult result = this.accompanyService.uploadImage(image);
-//        JSONObject responseJson = new JSONObject();
-//        if (result == CommonResult.SUCCESS) {
-//            responseJson.put("url", String.format("http://localhost:8080/accompany/image/%d", image.getIndex()));
-//        } else {
-//            JSONObject errorJson = new JSONObject();
-//            errorJson.put("message", "이미지 업로드에 실패하였습니다. 잠시 후 다시 시도해 주세요.");
-//            responseJson.put("error", errorJson);
-//        }
-//        return responseJson.toString();
-//    }
 }
