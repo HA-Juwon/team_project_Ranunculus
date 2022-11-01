@@ -70,7 +70,7 @@
                 <a th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
             </td>
             <td>
-                <a th:text="${list.getTitle()}" th:href="@{./read/(${list.getIndex()})}"></a>
+                <a id="readbutton" th:text="${list.getTitle()}"></a>
             </td>
             <td>
                 <a th:text="${list.getWriter()}"></a>
