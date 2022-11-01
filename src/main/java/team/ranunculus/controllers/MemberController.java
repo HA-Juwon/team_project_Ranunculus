@@ -236,4 +236,11 @@ public class MemberController {
         return responseJson.toString();
     }
 
+    @RequestMapping(value = "userEdit", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView getUserEdit(ModelAndView modelAndView) {
+        modelAndView.setViewName("member/userEdit");
+        return modelAndView;
+    }
+
 }
