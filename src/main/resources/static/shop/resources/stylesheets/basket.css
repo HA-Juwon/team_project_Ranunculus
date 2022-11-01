@@ -1,3 +1,7 @@
+body > * {
+    font: inherit;
+    line-height: 125%;
+}
 
 .basketdiv {
     width: 100%;
@@ -6,12 +10,14 @@
     font-size: 0.9375em;
     margin-bottom: 20px;
 }
+
 .basketdiv .row.head {
     border-bottom: 2px solid #888;
     box-sizing: border-box;
     background-color: #f4f4f4;
     font-weight: 500;
 }
+
 .basketdiv .data {
     border-bottom: 1px dashed #888;
     box-sizing: border-box;
@@ -19,32 +25,53 @@
     float: left;
     width: 100%;
 }
-.basketdiv .data .empty{
+
+.basketdiv .data .empty {
     text-align: center;
     padding: 12px 0;
 }
+
 .basketdiv .row.head .subdiv {
     background-color: #f4f4f4;
 }
+
 .basketdiv .row > .subdiv {
     display: block;
     float: left;
 }
+
 .basketdiv .row > .subdiv:nth-child(1) {
     width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
 .basketdiv .row > .subdiv:nth-child(2) {
-    width: 40%;
+    width: 25%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
+
 .basketdiv .row > .subdiv:nth-child(3) {
-    width: 10%;
+    width: 25%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
 .basketdiv2 .row > .subdiv:nth-child(1) {
     width: 60%;
 }
+
 .basketdiv2 .row > .subdiv:nth-child(2) {
     width: 40%;
 }
+
 .basketdiv .row > div > div {
     display: block;
     float: left;
@@ -52,45 +79,65 @@
     margin: 0;
     padding: 12px 0;
 }
+
+
 .basketdiv .row.data > div > div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     height: 60px;
-    line-height: 60px;
 }
+
 .basketdiv .data .num .updown {
-    color: #be7070;
+    color: rgb(var(--concept-color-pink-dim));
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     font-size: 2em;
     letter-spacing: -5px;
+    z-index: 1;
 }
-.basketdiv .check {
-    width: 10%;
+
+.basketdiv .data .num .updown > * {
+    margin: 0 0.25rem;
 }
-.basketdiv .check input[type=checkbox] {
-    transform: scale(1.5);
-}
-.basketdiv .img{
+
+.basketdiv .img {
     width: 20%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 1rem;
 }
-.basketdiv .pname{
+
+.basketdiv .pname {
     width: 70%;
 }
+
 .basketdiv2 .pname {
     width: 80%;
 }
-.basketdiv .basketprice {
-    width: 33%;
-}
+
+
 .basketdiv .num {
-    width: 33%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     min-width: 105px;
 }
+
 .basketdiv .sum {
-    width: 34%;
     max-width: 80px;
     color: #0000aa;
 }
+
 .basketdiv .point {
     width: 50%;
 }
+
 .basketdiv2 .basketprice {
     width: 25%;
 }
@@ -107,53 +154,64 @@
 .basketdiv2 .point {
     width: 25%;
 }
-.basketdiv .basketcmd{
-    width: 100%;
-}
+
 .basketdiv .data .pname {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: left !important;
     line-height: 1.2 !important;
 }
+
 .basketdiv .data .price, .basketdiv .data .sum, .basketdiv .data .point {
-    text-align: right;
+    text-align: center;
 }
+
 .baseform > tbody > tr > td:first-child {
     width: 100px;
 }
 
 .buttongroup {
     padding: 11px 0;
-    margin: 50px 0;
 }
-.narrowbuttongroup{
+
+.narrowbuttongroup {
     margin: 15px 0;
 }
+
 .buttongroup.center {
     text-align: center;
 }
+
 .buttongroup input[type=text], .buttongroup input[type=password] {
     height: 30px;
 }
+
 .buttongroup button, .buttongroup a {
     margin-right: 5px;
 }
+
 .buttongroup button:last-child, .buttongroup a:last-child {
     margin-right: 0;
 }
 
 .abutton, .abutton:link, .abutton:visited, .abutton:active, input[type=button] {
-    background-color: #383838;
-    border: 1px solid #888888;
+    background-color: rgb(var(--concept-color-pink));
     color: #ffffff;
     cursor: pointer;
     letter-spacing: -1px;
-    padding: 3px 5px;
+    padding: 0.25rem 0.325rem;
     margin: 2px 3px;
     width: auto;
     word-break: keep-all;
-    border-radius: 5px;
+    border-radius: 0.25rem;
     text-decoration: none;
     font-size: 0.9375em;
+}
+
+.abutton:hover{
+    background-color: rgb(var(--concept-color-pink-dim));
 }
 
 .abutton-alt {
@@ -161,42 +219,99 @@
 }
 
 .red {
-    color:#b00;
+    color: #b00;
 }
+
 .blue {
     color: #0075ff;
 }
-.basketrowcmd, .sumcount, .summoney{
+
+.basketrowcmd, .sumcount, .summoney {
     text-align: right;
-    margin-bottom: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 3rem;
 }
-.sumcount, .summoney{
+
+.sumcount, .summoney {
+    margin-right: 5rem;
     font-size: 1.25em;
     font-weight: bold;
 }
-.buttongroup{
+
+.buttongroup {
     text-align: center;
 }
-.buttongroup a{
+
+.buttongroup a {
+    border-radius: 0.25rem;
     text-decoration: none;
 }
+
 .cmd a, .cmd span {
     padding: 12px 30px;
     box-sizing: border-box;
     margin-top: 10px;
     font-size: 1.2em;
-    color: #000;
+    color: rgb(120, 120, 120);
     background-color: #f4f4f4;
     border: 1px solid #e0e0e0;
     text-align: center;
 }
+
+.right-align {
+    margin-right: 5rem;
+}
+
+.cmd a:hover  {
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+}
+
 .cmd.small a, .cmd.small span {
     padding: 6px 20px;
     font-size: 0.8125em;
 }
 
 .orderform .p_num {
-    text-align: right;
+    text-align: center;
     width: 40px;
     font-size: 1em;
+}
+
+body > .orderform > .basketdiv > .row.data > .subdiv > .check-container {
+    max-width: 10rem;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    user-select: none;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .orderform > .basketdiv > .row.data > .subdiv > .check-container > .checker-container {
+    align-items: center;
+    background-color: rgb(215, 215, 215);
+    border: none;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+body > .orderform > .basketdiv > .row.data > .subdiv > .check-container > .checker-container > .check-input:checked ~ .checker-wrap {
+    border-radius: 0.25rem;
+    background-color: rgb(var(--concept-color-pink));
+}
+
+body > .orderform > .basketdiv > .row.data > .subdiv > .check-container > .checker-container > .checker-wrap > .checker {
+    width: 1.25rem;
+    height: 1.25rem;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    border-radius: 0.15rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

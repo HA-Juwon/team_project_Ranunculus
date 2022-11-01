@@ -19,12 +19,10 @@ import java.util.Date;
 @RequestMapping(value = "/board")
 public class BoardController {
     private final BoardService boardService;
-    private final MemberService memberService;
 
     @Autowired
-    public BoardController(BoardService boardService, MemberService memberService) {
+    public BoardController(BoardService boardService) {
         this.boardService = boardService;
-        this.memberService = memberService;
     }
 
     @RequestMapping(value = "qna", method = RequestMethod.GET)
@@ -42,16 +40,10 @@ public class BoardController {
     @RequestMapping(value = "write", method = RequestMethod.POST)
     @ResponseBody
     public String postWrite(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
-                            @RequestParam(value = "write") String write,
-                            @RequestParam(value = "password") String password,
-                            @RequestParam(value = "title") String title,
-                            @RequestParam(value = "content") String content,
                             BoardEntity board) {
+        String hashPassword = CryptoUtils.hashSha512(board.getPassword());
         board.setIndex(-1)
-                .setWriter(write)
-                .setPassword(CryptoUtils.hashSha512(password))
-                .setTitle(title)
-                .setContent(content) // TODO: 값이 안넘어옴 체크 필요.
+                .setPassword(hashPassword)
                 .setCreatedAt(new Date())
                 .setEmailAdminFlag(null);
         IResult result = this.boardService.putArticle(board);
