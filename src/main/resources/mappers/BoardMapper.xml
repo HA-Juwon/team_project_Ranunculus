@@ -32,4 +32,12 @@
         WHERE `email` = #{email}
         LIMIT 1;
     </select>
+
+    <select id="getList"
+            resultType="team.ranunculus.entities.board.BoardEntity">
+        SELECT *
+                   FORM `ranunculus_boards`.`qna`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
 </mapper>

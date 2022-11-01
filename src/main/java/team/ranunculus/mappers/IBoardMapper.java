@@ -9,4 +9,6 @@ public interface IBoardMapper {
     int insertArticle(BoardEntity board);
 
     UserEntity selectUserAdminCheckByEmail(UserEntity user);
+
+    BoardEntity[] getList(BoardEntity boards);
 }

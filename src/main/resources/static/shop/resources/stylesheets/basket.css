@@ -42,26 +42,14 @@ body > * {
 
 .basketdiv .row > .subdiv:nth-child(1) {
     width: 50%;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }
 
 .basketdiv .row > .subdiv:nth-child(2) {
-    width: 25%;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    width: 40%;
 }
 
 .basketdiv .row > .subdiv:nth-child(3) {
-    width: 25%;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    width: 10%;
 }
 
 .basketdiv2 .row > .subdiv:nth-child(1) {
@@ -89,7 +77,7 @@ body > * {
 }
 
 .basketdiv .data .num .updown {
-    color: rgb(var(--concept-color-pink-dim));
+    color: #be7070;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -103,13 +91,20 @@ body > * {
     margin: 0 0.25rem;
 }
 
+.basketdiv .check {
+    width: 10%;
+}
+
+.basketdiv .check input[type=checkbox] {
+    transform: scale(1.5);
+}
+
 .basketdiv .img {
     width: 20%;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-left: 1rem;
 }
 
 .basketdiv .pname {
@@ -120,8 +115,12 @@ body > * {
     width: 80%;
 }
 
+.basketdiv .basketprice {
+    width: 33%;
+}
 
 .basketdiv .num {
+    width: 33%;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -130,6 +129,7 @@ body > * {
 }
 
 .basketdiv .sum {
+    width: 34%;
     max-width: 80px;
     color: #0000aa;
 }
@@ -153,6 +153,10 @@ body > * {
 
 .basketdiv2 .point {
     width: 25%;
+}
+
+.basketdiv .basketcmd {
+    width: 100%;
 }
 
 .basketdiv .data .pname {
@@ -197,7 +201,8 @@ body > * {
 }
 
 .abutton, .abutton:link, .abutton:visited, .abutton:active, input[type=button] {
-    background-color: rgb(var(--concept-color-pink));
+    background-color: #383838;
+    border: 1px solid #888888;
     color: #ffffff;
     cursor: pointer;
     letter-spacing: -1px;
@@ -208,10 +213,6 @@ body > * {
     border-radius: 0.25rem;
     text-decoration: none;
     font-size: 0.9375em;
-}
-
-.abutton:hover{
-    background-color: rgb(var(--concept-color-pink-dim));
 }
 
 .abutton-alt {
@@ -234,7 +235,6 @@ body > * {
 }
 
 .sumcount, .summoney {
-    margin-right: 5rem;
     font-size: 1.25em;
     font-weight: bold;
 }
@@ -259,10 +259,6 @@ body > * {
     text-align: center;
 }
 
-.right-align {
-    margin-right: 5rem;
-}
-
 .cmd a:hover  {
     color: rgb(0, 0, 0);
     border: 1px solid rgb(0, 0, 0);
@@ -277,41 +273,4 @@ body > * {
     text-align: center;
     width: 40px;
     font-size: 1em;
-}
-
-body > .orderform > .basketdiv > .row.data > .subdiv > .check-container {
-    max-width: 10rem;
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    user-select: none;
-    flex-direction: row;
-    justify-content: center;
-}
-
-body > .orderform > .basketdiv > .row.data > .subdiv > .check-container > .checker-container {
-    align-items: center;
-    background-color: rgb(215, 215, 215);
-    border: none;
-    border-radius: 0.25rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-
-body > .orderform > .basketdiv > .row.data > .subdiv > .check-container > .checker-container > .check-input:checked ~ .checker-wrap {
-    border-radius: 0.25rem;
-    background-color: rgb(var(--concept-color-pink));
-}
-
-body > .orderform > .basketdiv > .row.data > .subdiv > .check-container > .checker-container > .checker-wrap > .checker {
-    width: 1.25rem;
-    height: 1.25rem;
-    align-items: center;
-    color: rgb(255, 255, 255);
-    border-radius: 0.15rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }

@@ -17,14 +17,24 @@ public class BoardService {
         this.boardMapper = boardMapper;
     }
 
-    public String userAdminCheck(UserEntity user) {
+    //TODO : 댓글구현 할 때 참고
+    public IResult userAdminCheck(UserEntity user) {
         UserEntity existingUser = this.boardMapper.selectUserAdminCheckByEmail(user);
-        return null;
+        if (existingUser.getEmail() == null ||
+                existingUser.isAdmin() == false) {
+            return CommonResult.FAILURE;
+        }
+        return CommonResult.SUCCESS;
     }
+
 
     public IResult putArticle(BoardEntity board) {
         return this.boardMapper.insertArticle(board) > 0
                 ? CommonResult.SUCCESS
                 : CommonResult.FAILURE;
+    }
+
+    public BoardEntity[] getList(BoardEntity board) {
+        return this.boardMapper.getList(board);
     }
 }
