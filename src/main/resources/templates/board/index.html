@@ -1,87 +1,176 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Shop</title>
+    <meta charset="utf-8">
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Q&A</title>
-    <link rel="stylesheet" th:href="@{/board/resources/stylesheets/index.css}">
-    <script defer th:src="@{/board/resources/scripts/index.js}"></script>
-    <script src="https://kit.fontawesome.com/ac2617ecb2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/index.css}">
+    <script defer th:src="@{/resources/scripts/index.js}"></script>
 </head>
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
-<main class="_main main">
-    <div class="a">
-        <div class="b">
-            <h1 class="title">
-                <i class="icon fa-solid fa-headset"></i>
-                <span class="text">고객문의</span>
-            </h1>
-        </div>
-        <div class="b">
-            <div class="fieldset">
-                <form class="submitForm" id="submitform" method="get">
-                    <label class="icon-container">
-                        <input value="name" type="radio" name="search" id="searchName" class="search-name">
-                        <a>이름</a>
-                    </label>
-                    <label class="icon-container">
-                        <input value="title" type="radio" name="search" id="searchTitle" class="search-title">
-                        <a>제목</a>
-                    </label>
-                    <label class="icon-container">
-                        <input value="content" type="radio" name="search" id="searchContent" class="search-content">
-                        <a>내용</a>
-                    </label>
-                    <label class="input-container">
-                        <div class="typ-container">
-                            <span hidden>찾으시는 내용을 입력하세요.</span>
-                            <i class="icon fa-solid fa-magnifying-glass"></i>
-                            <input id="searchInput" class="input" maxlength="50" name="keyword" placeholder="찾으시는 내용을 입력하세요." type="text">
-                        </div>
-                    </label>
-                </form>
 
+
+<div class="hero-header"></div>
+<div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 6</div>
+        <img class="image" src="http://www.su-studio.co.kr/files/attach/images/239/134/058/09bb42e5273ceb66d6c7ee737d91eaca.jpg" style="width:100%">
+        <div class="text">ACNE STUDIO</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 6</div>
+        <img class="image" src="http://www.su-studio.co.kr/files/attach/images/239/134/058/70ee64ed99bc08f24b20df650855e8b5.jpg" style="width:100%">
+        <div class="text">ACNE STUDIO</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 6</div>
+        <img class="image" src="http://www.su-studio.co.kr/files/attach/images/239/134/058/03612bcd15f920c17aa9e11aefd2560c.jpg" style="width:100%">
+        <div class="text">ACNE STUDIO</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">4 / 6</div>
+        <img class="image" src="http://www.su-studio.co.kr/files/attach/images/239/134/058/b710fff053ba829e72953890d68fafaf.jpg" style="width:100%">
+        <div class="text">ACNE STUDIO</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">5 / 6</div>
+        <img class="image" src="http://www.su-studio.co.kr/files/attach/images/239/134/058/f4f23f8af68685f315e80998f8b25ca1.jpg" style="width:100%">
+        <div class="text">ACNE STUDIO</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">6 / 6</div>
+        <img class="image" src="http://www.su-studio.co.kr/files/attach/images/239/134/058/4644558401afed19d0becc0f0c2c132c.jpg" style="width:100%">
+        <div class="text">ACNE STUDIO</div>
+    </div>
+
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="moveSlides(-1)">&#10094;</a>
+    <a class="next" onclick="moveSlides(1)">&#10095;</a>
+</div>
+<br/>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+</div>
+
+<div class="products">
+    <h3>향수</h3>
+
+    <div class="product-list">
+        <a href="#" class="product soldout-container">
+
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16"  width="225px" height="225px">
+            <h1 class="main_image_text" ></h1>
+            <div class="product-name">
+                향수1
             </div>
-        </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수2
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수 3
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수4
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수5
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수6
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수7
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수8
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img class="image" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16" width="225px" height="225px">
+            <div class="product-name">
+                향수9
+            </div>
+            <div class="product-price">
+                1,000
+            </div>
+        </a>
+        <div class="clearfix"></div>
+
     </div>
-    <table class="division-line inquiry-container">
-        <thead>
-        <tr>
-            <th>NO.</th>
-            <th>DATE</th>
-            <th>CONTENT</th>
-            <th>NAME</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="no-inquiry-td" colspan="4">표시할 문의가 없습니다.</td>
-        </tr>
-
-        <tr>
-            <td>1</td>
-            <td>2222,11,22</td>
-            <td>너무 힘들어요 힘들어</td>
-            <td>김깔깔깔깔</td>
-        </tr>
-        </tbody>
-
-
-    </table>
-    <div class="page-container">
-        <div></div>
-        <div class="number-button">
-            123456789
-        </div>
-        <div class="write-container">
-            <a class="write" th:href="@{/board/write}">WRITE</a>
-        </div>
-    </div>
-</main>
-<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</div>
 </body>
+<footer>
+    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</footer>
 </html>

@@ -11,6 +11,9 @@ import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Optional;
@@ -48,7 +51,7 @@ public class MemberController {
     public String postUserLogin(@RequestParam(value = "autosign", required = false)
                                     Optional<Boolean> autosignOptional,
                                 HttpSession session,
-                                UserEntity member) {
+                                UserEntity member) throws NoSuchAlgorithmException {
         boolean autosign = autosignOptional.orElse(false);
         member.setName(null)
                 .setAddressPostal(null)
@@ -61,13 +64,13 @@ public class MemberController {
                 .setPolicyMarketingAt(null)
                 .setStatusValue(null)
                 .setRegisteredAt(null);
-
         IResult result = this.memberService.loginUser(member);
-
         if (result == CommonResult.SUCCESS) {
             session.setAttribute(UserEntity.ATTRIBUTE_NAME, member);
             if (autosign) {
-                //구현하기
+                session.setAttribute("id",session.getId());
+                System.out.println(session.getId());
+
             }
         }
         JSONObject responseJson = new JSONObject();
@@ -177,7 +180,6 @@ public class MemberController {
     @RequestMapping(value = "userResetPassword", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String postUserResetPassword(UserEntity user) {
-        System.out.println("유저 이메일"+user.getEmail());
         user.setContact(null)
                 .setPolicyTermsAt(null)
                 .setPolicyPrivacyAt(null)
