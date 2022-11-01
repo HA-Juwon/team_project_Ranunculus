@@ -51,7 +51,7 @@ public class MemberController {
     public String postUserLogin(@RequestParam(value = "autosign", required = false)
                                     Optional<Boolean> autosignOptional,
                                 HttpSession session,
-                                UserEntity member) throws NoSuchAlgorithmException {
+                                UserEntity member) {
         boolean autosign = autosignOptional.orElse(false);
         member.setName(null)
                 .setAddressPostal(null)
