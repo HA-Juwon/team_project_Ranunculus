@@ -24,7 +24,6 @@ submitForm.onsubmit = e => {
     if (submitForm['keyword'].value === '') {
         alert('찾을 내용을 입력하세요.');
         submitForm['searchInput'].focus();
-
         return false;
     }
 
