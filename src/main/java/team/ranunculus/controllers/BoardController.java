@@ -72,6 +72,13 @@ public class BoardController {
 
     }
 
+    @RequestMapping(value = "read/?{id}", method = RequestMethod.GET)
+    public ModelAndView getRead(@PathVariable(value = "id") int id,
+                                ModelAndView modelAndView) {
+        modelAndView.setViewName("board/read");
+        return modelAndView;
+    }
+
 //    @RequestMapping(value = "image", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseBody
 //    public String postImage(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME) UserEntity user,
