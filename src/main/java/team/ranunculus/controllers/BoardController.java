@@ -3,7 +3,6 @@ package team.ranunculus.controllers;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import team.ranunculus.entities.board.BoardEntity;
@@ -11,10 +10,10 @@ import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.BoardService;
-import team.ranunculus.services.MemberService;
 import team.ranunculus.utils.CryptoUtils;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller(value = "team.ranunculus.controllers.BoardController")
 @RequestMapping(value = "/board")
@@ -28,14 +27,19 @@ public class BoardController {
 
     @RequestMapping(value = "qna", method = RequestMethod.GET)
     public ModelAndView getIndex(ModelAndView modelAndView) {
+        List<BoardEntity> list = this.boardService.getList();
+        modelAndView.addObject("list",list);
+        modelAndView.setViewName("board/index");
+        return modelAndView;
+    }
+    @RequestMapping(value = "qna", method = RequestMethod.POST)
+    public ModelAndView postIndex(ModelAndView modelAndView) {
         modelAndView.setViewName("board/index");
         return modelAndView;
     }
 
     @RequestMapping(value = "write", method = RequestMethod.GET)
-    public ModelAndView getWrite(ModelAndView modelAndView,
-                                 Model model) {
-        model.addAttribute("list",boardService.getList((BoardEntity) model));
+    public ModelAndView getWrite(ModelAndView modelAndView) {
         modelAndView.setViewName("board/write");
         return modelAndView;
     }

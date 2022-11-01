@@ -39,9 +39,8 @@ form.onsubmit = e => {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
                     case 'success':
-                        alert('성공했어')
-                        // const id = responseJson['id'];
-                        // window.location.href = `./read/${id}`;
+                        const id = responseJson['id'];
+                        window.location.href = `./read/${id}`;
                         break;
                     default:
                         alert('알 수 없는 이유로 동행 글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
