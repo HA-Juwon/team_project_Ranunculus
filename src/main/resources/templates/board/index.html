@@ -59,14 +59,22 @@
         </thead>
         <tbody>
         <tr>
-            <td class="no-inquiry-td" colspan="4" th:if="${inquiries == null || inquiries.size() == 0}">표시할 문의가 없습니다.</td>
+            <td class="no-inquiry-td" colspan="4" th:if="${list == null || list.size() == 0}">표시할 문의가 없습니다.</td>
         </tr>
 
-        <tr class="disabled">
-            <td>1</td>
-            <td>2222,11,22</td>
-            <td>너무 힘들어요 힘들어</td>
-            <td>김깔깔깔깔</td>
+        <tr th:each="list : ${list}">
+            <td>
+                <a th:text="${list.getIndex()}" th:href="@{./read/(${list.getIndex()})}"></a>
+            </td>
+            <td>
+                <a th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
+            </td>
+            <td>
+                <a th:text="${list.getTitle()}"></a>
+            </td>
+            <td>
+                <a th:text="${list.getWriter()}"></a>
+            </td>
         </tr>
         </tbody>
 

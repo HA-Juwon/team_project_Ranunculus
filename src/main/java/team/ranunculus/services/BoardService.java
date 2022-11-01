@@ -8,6 +8,9 @@ import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.mappers.IBoardMapper;
 
+import java.sql.SQLException;
+import java.util.List;
+
 @Service
 public class BoardService {
     private final IBoardMapper boardMapper;
@@ -34,7 +37,7 @@ public class BoardService {
                 : CommonResult.FAILURE;
     }
 
-    public BoardEntity[] getList(BoardEntity board) {
-        return this.boardMapper.getList(board);
+    public List<BoardEntity> getList() {
+        return this.boardMapper.getList();
     }
 }

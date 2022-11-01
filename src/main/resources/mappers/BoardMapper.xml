@@ -35,9 +35,14 @@
 
     <select id="getList"
             resultType="team.ranunculus.entities.board.BoardEntity">
-        SELECT *
-                   FORM `ranunculus_boards`.`qna`
-        WHERE `index` = #{index}
-        LIMIT 1
+        SELECT `index`            AS `index`,
+               `writer`           AS `writer`,
+               `password`         AS `password`,
+               `title`            AS `title`,
+               `content`          AS `content`,
+               `created_at`       AS `createdAt`,
+               `email_admin_flag` AS `emailAdminFlag`
+        FROM `ranunculus_boards`.`qna`
+        ORDER BY `index` DESC
     </select>
 </mapper>
