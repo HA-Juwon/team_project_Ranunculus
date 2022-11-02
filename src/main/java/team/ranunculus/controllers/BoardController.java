@@ -62,7 +62,7 @@ public class BoardController {
                 .setWriter(writer)
                 .setPassword(CryptoUtils.hashSha512(password))
                 .setTitle(title)
-                .setContent(content) // TODO: 값이 안넘어옴 체크 필요.
+                .setContent(content)
                 .setPassword(hashPassword)
                 .setCreatedAt(new Date())
                 .setEmailAdminFlag(null);

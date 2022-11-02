@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main {
+    width: var(--content-width-default);
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    line-height: 125%;
+}
+
+body > .main > .nav {
+    width: 17.5rem;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*margin-right: 3rem;*/
+}
+
+body > .main > .nav > .profile-container {
+    cursor: default;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+body > .main > .nav > .item {
+    margin-top: 0.75rem;
+}

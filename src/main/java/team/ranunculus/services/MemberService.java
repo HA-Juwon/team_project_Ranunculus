@@ -94,6 +94,37 @@ public class MemberService {
     }
 
     @Transactional
+    public IResult registerUserEmailAuth(ContactAuthEntity contactAuth) throws
+            IOException,
+            InvalidKeyException,
+            NoSuchAlgorithmException,
+            UnexpectedRollbackException {
+        Date createdAt = new Date();
+        Date expiresAt = DateUtils.addMinutes(createdAt, 5);
+        String code = RandomStringUtils.randomNumeric(6);
+        String salt = CryptoUtils.hashSha512(String.format("%s%s%d%f%f",
+                contactAuth.getContact(),
+                code,
+                createdAt.getTime(),
+                Math.random(),
+                Math.random()));
+        contactAuth.setCode(code)
+                .setSalt(salt)
+                .setCreatedAt(createdAt)
+                .setExpiresAt(expiresAt)
+                .setExpired(false);
+        if (this.memberMapper.insertContactAuth(contactAuth) == 0) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return CommonResult.FAILURE;
+        }
+        String smsContent = String.format("[라넌큘러스] 인증번호 [%s]를 입력해 주세요.", contactAuth.getCode());
+        if (this.smsComponent.sendMessage(contactAuth.getContact(), smsContent) != 202) {
+            return CommonResult.FAILURE;
+        }
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
     public IResult loginUser(UserEntity member) {
 //        System.out.println(member.getEmail());
         if (member.getEmail() == null ||

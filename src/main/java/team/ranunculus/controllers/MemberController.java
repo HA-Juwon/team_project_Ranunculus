@@ -108,6 +108,30 @@ public class MemberController {
         return responseJson.toString();
     }
 
+    @RequestMapping(value = "userRegisterAuth", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String getUserRegisterAuth(ContactAuthEntity contactAuth) {
+        IResult result;
+        try {
+            result = this.memberService.registerUserEmailAuth(contactAuth);
+        } catch (Exception ex) {
+            result = CommonResult.FAILURE;
+        }
+
+        JSONObject responseJson = new JSONObject();
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        if (result == CommonResult.SUCCESS) {
+            responseJson.put("salt", contactAuth.getSalt());
+        }
+        return responseJson.toString();
+    }
+
+    @RequestMapping(value = "userRegisterAuth", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String postUserRegisterAuth(ContactAuthEntity contactAuth) throws Exception {
+        return this.postUserRecoverAuth(contactAuth);
+    }
+
     @RequestMapping(value = "userRecoverEmail", method = RequestMethod.GET)
     public ModelAndView getUserRecoverEmail(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user, ModelAndView modelAndView) {
         if (user != null) {

@@ -142,6 +142,7 @@ body > .main > .terms-container > .button-container > .button.next-button:hover 
 }
 
 body > .main > .register-form {
+    /*width: 25rem;*/
     align-items: center;
     display: none;
     flex-direction: column;
@@ -153,7 +154,7 @@ body > .main > .register-form.visible {
 }
 
 body > .main > .register-form > .input-container{
-    width: 22rem;
+    width: 25rem;
     align-items: stretch;
     display: flex;
 
@@ -161,7 +162,8 @@ body > .main > .register-form > .input-container{
     justify-content: flex-start;
 }
 
-body > .main > .register-form > .input-container > * {
+body > .main > .register-form > .input-container > *,
+body > .main > .register-form > .contact-container > * {
     margin-top: 0.325rem;
 }
 
@@ -174,6 +176,7 @@ body > .main > .register-form > .input-container:last-of-type {
 }
 
 body > .main > .register-form > .input-container > .text,
+body > .main > .register-form > .contact-container > .text,
 body > .main > .register-form > .section-container > .text{
     font-size: 1.25rem;
     font-weight: 500;
@@ -181,12 +184,14 @@ body > .main > .register-form > .section-container > .text{
 }
 
 body > .main > .register-form > .input-container > .input,
+body > .main > .register-form > .contact-container > .input-container > .input,
 body > .main > .register-form > .section-container ._object-input {
     border: 0.125rem solid rgb(var(--concept-color-pink));
 }
 
 body > .main > .register-form > .input-container > .input:not(:placeholder-shown),
 body > .main > .register-form > .section-container ._object-input:not(:placeholder-shown) {
+    text-align: flex-start;
     background-color: rgba(var(--concept-color-pink), 50%);
 }
 
@@ -196,7 +201,7 @@ body > .main > .register-form > .section-container ._object-input:focus {
 }
 
 body > .main > .register-form > .section-container {
-    width: 22rem;
+    width: 25rem;
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -208,6 +213,7 @@ body > .main > .register-form > .section-container > * {
     margin-top: 0.325rem;
 }
 body > .main > .register-form > .section-container > .address-postal-wrapper {
+    max-width: 75%;
     align-items: flex-start;
     display: flex;
     flex-direction: row;
@@ -233,11 +239,33 @@ body > .main > .register-form > .section-container > .address-postal-wrapper > .
 
 body > .main > .register-form > .section-container > .address-container > .address-primary,
 body > .main > .register-form > .section-container > .address-container > .address-secondary {
-    width: 22rem;
+    width: 25rem;
     border-radius: 0.25rem;
     font: inherit;
     outline: none;
     padding: 0.925rem 1.125rem;
+}
+
+body > .main > .register-form > .contact-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main > .register-form > .contact-container-first {
+    margin-top: 1rem;
+}
+
+body > .main > .register-form > .contact-container > .input-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .main > .register-form > .contact-container > .input-container > ._object-button {
+    margin-left: 0.325rem;
 }
 
 body > .main > .register-form > .section-container:last-of-type {
@@ -342,6 +370,7 @@ body > .main > .register-form > .section-container > .button-container > .button
 body > .main > .register-form > .register-warning {
     color: rgb(231, 76, 60);
     display: none;
+    margin-top: 1rem;
 }
 
 body > .main > .register-form > .register-warning.visible {

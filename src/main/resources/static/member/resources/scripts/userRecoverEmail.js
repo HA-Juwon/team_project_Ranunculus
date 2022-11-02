@@ -30,8 +30,7 @@ contactAuthRequestButton.addEventListener('click',()=>{
         return;
     }
 
-    //커버 아직 안 만듦
-    // cover.show('인증번호를 전송하고 있습니다.\n\n잠시만 기다려 주세요.');
+    cover.show('인증번호를 전송하고 있습니다.\n\n잠시만 기다려 주세요.');
 
      const xhr = new XMLHttpRequest();
      xhr.open('GET', `./userRecoverEmailAuth?name=${recoverEmailForm['name'].value}&contact=${recoverEmailForm['contact'].value}`);
@@ -132,8 +131,8 @@ recoverEmailForm.onsubmit = e =>{
         alert('연락처 인증을 완료해 주세요.');
         return false;
     }
-    // 아직 커버 안만듦
-    // cover.show('이메일을 찾고 있습니다.\n\n잠시만 기다려 주세요.');
+
+    cover.show('이메일을 찾고 있습니다.\n\n잠시만 기다려 주세요.');
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
@@ -145,8 +144,7 @@ recoverEmailForm.onsubmit = e =>{
     xhr.open('POST', './userRecoverEmail');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            //아직 커버 없음
-            // cover.hide();
+            cover.hide();
             console.log('되나?');
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
