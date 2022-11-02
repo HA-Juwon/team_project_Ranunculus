@@ -13,4 +13,6 @@ public interface IBoardMapper {
     UserEntity selectUserAdminCheckByEmail(UserEntity user);
 
     List<BoardEntity> getList();
+
+    List<BoardEntity> getIndex();
 }

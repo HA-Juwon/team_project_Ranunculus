@@ -40,4 +40,9 @@ public class BoardService {
     public List<BoardEntity> getList() {
         return this.boardMapper.getList();
     }
+
+    public List<BoardEntity> getIndex() {
+        return this.boardMapper.getIndex();
+    }
+
 }

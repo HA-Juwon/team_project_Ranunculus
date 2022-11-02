@@ -45,4 +45,11 @@
         FROM `ranunculus_boards`.`qna`
         ORDER BY `index` DESC
     </select>
+
+    <select id="getIndex"
+            resultType="team.ranunculus.entities.board.BoardEntity">
+        SELECT `index` AS `index`
+        FROM `ranunculus_boards`.`qna`
+        ORDER BY `index` DESC
+    </select>
 </mapper>

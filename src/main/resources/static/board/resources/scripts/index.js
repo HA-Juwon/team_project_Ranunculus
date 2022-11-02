@@ -28,22 +28,45 @@ submitForm.onsubmit = e => {
         return false;
     }
 
+    //TODO : 검색 구현
+    
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('POST', `./qna?search=${submitForm[''].value}&keyword=${submitForm['keyword'].value}`);
+    // xhr.onreadystatechange = () => {
+    //     if (xhr.readyState === XMLHttpRequest.DONE) {
+    //         if (xhr.status >= 200 && xhr.status < 300) {
+    //             const responseJson = JSON.parse(xhr.responseText);
+    //             switch (responseJson['result']) {
+    //                 case 'success':
+    //                     break;
+    //                 default:
+    //             }
+    //         } else {
+    //             alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+    //         }
+    //     }
+    // };
+    // xhr.send();
+
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `./qna?search=${submitForm[''].value}&keyword=${submitForm['keyword'].value}`);
+    xhr.open('GET', './qna');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.readyState)
+            cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
+                console.log(xhr.status)
                 const responseJson = JSON.parse(xhr.responseText);
-                switch (responseJson['result']) {
-                    case 'success':
-                        break;
-                    default:
-                }
-            } else {
-                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-            }
+                const readbutton = window.document.getElementById('readbutton');
+                const id = responseJson['id'];
+                readbutton.setAttribute('href', `./read/`+id);
+                console.log('sasclkhasdkavjsdfbvkjsdafvbkjsladfbvksdjafbvjksad')
+            } else
+                alert('게시글을 불러올 수 없습니다.')
+        } else {
+            alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
         }
-    };
+    }
     xhr.send();
 }
 

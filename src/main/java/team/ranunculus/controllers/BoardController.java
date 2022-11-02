@@ -26,10 +26,15 @@ public class BoardController {
     }
 
     @RequestMapping(value = "qna", method = RequestMethod.GET)
-    public ModelAndView getIndex(ModelAndView modelAndView) {
+    @ResponseBody
+    public ModelAndView getIndex(ModelAndView modelAndView,
+                                 BoardEntity board) {
         List<BoardEntity> list = this.boardService.getList();
         modelAndView.addObject("list",list);
+        JSONObject responseJson = new JSONObject();
+        responseJson.put("id", boardService.getIndex());
         modelAndView.setViewName("board/index");
+        System.out.println(responseJson);
         return modelAndView;
     }
     @RequestMapping(value = "qna", method = RequestMethod.POST)
@@ -70,6 +75,13 @@ public class BoardController {
         return responseJson.toString();
 
 
+    }
+
+    @RequestMapping(value = "read/{id}", method = RequestMethod.GET)
+    public ModelAndView getRead(@PathVariable(value = "id") int id,
+                                ModelAndView modelAndView) {
+        modelAndView.setViewName("board/read");
+        return modelAndView;
     }
 
 //    @RequestMapping(value = "image", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
