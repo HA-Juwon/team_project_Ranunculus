@@ -59,21 +59,21 @@
         </thead>
         <tbody>
         <tr>
-            <td class="no-inquiry-td" colspan="4" th:if="${list == null || list.size() == 0}">표시할 문의가 없습니다.</td>
+            <td id="list1" class="no-inquiry-td" colspan="4" th:if="${list == null || list.size() == 0}">표시할 문의가 없습니다.</td>
         </tr>
 
-        <tr th:each="list : ${list}">
+        <tr id="list2" th:each="list : ${list}">
             <td>
-                <a th:text="${list.getIndex()}"></a>
+                <a id="list3" th:text="${list.getIndex()}"></a>
             </td>
             <td>
-                <a th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
+                <a id="list4" th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
             </td>
             <td>
-                <a id="readbutton" th:text="${list.getTitle()}" th:href="@{'/board/read/' + ${list.getIndex()}}"></a>
+                <a id="list5" th:text="${list.getTitle()}" th:href="@{'/board/read/' + ${list.getIndex()}}"></a>
             </td>
             <td>
-                <a th:text="${list.getWriter()}"></a>
+                <a id="list6" th:text="${list.getWriter()}"></a>
             </td>
         </tr>
         </tbody>

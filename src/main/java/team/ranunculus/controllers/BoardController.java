@@ -40,8 +40,7 @@ public class BoardController {
                                   @RequestParam(value = "search", required = false) String search,
                                   @RequestParam(value = "keyword", required = false) String keyword) {
         List<BoardEntity> list = this.boardService.search(search, keyword);
-        System.out.println(search);
-        System.out.println(keyword);
+        modelAndView.clear();
         modelAndView.addObject("list", list);
         modelAndView.setViewName("board/index");
         return modelAndView;
@@ -88,6 +87,7 @@ public class BoardController {
         return modelAndView;
     }
 
+    //TODO : 이미지넣기 구현
 //    @RequestMapping(value = "image", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseBody
 //    public String postImage(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME) UserEntity user,

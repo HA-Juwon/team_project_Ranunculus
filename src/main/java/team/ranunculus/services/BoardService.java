@@ -46,9 +46,7 @@ public class BoardService {
     }
 
     public  List<BoardEntity> search(String search, String keyword) {
-        System.out.println(search);
         if (search.equals("name"))  {
-            System.out.println("서치네임작동");
             return this.boardMapper.searchName(keyword);
         } else if (search.equals("title")) {
             return this.boardMapper.searchTitle(keyword);
