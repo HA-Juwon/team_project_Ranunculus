@@ -15,4 +15,8 @@ public interface IBoardMapper {
     List<BoardEntity> getList();
 
     List<BoardEntity> getIndex();
+
+    List<BoardEntity> searchTitle(String keyword);
+    List<BoardEntity> searchContent(String keyword);
+    List<BoardEntity> searchName(String keyword);
 }

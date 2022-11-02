@@ -52,4 +52,40 @@
         FROM `ranunculus_boards`.`qna`
         ORDER BY `index` DESC
     </select>
+
+    <select id="searchName"
+            resultType="team.ranunculus.entities.board.BoardEntity">
+        SELECT `index`            AS `index`,
+               `writer`           AS `writer`,
+               `title`            AS `title`,
+               `created_at`       AS `createdAt`
+        FROM `ranunculus_boards`.`qna`
+        WHERE `writer` = #{keyword}
+        ORDER BY `index` DESC
+        LIMIT ? OFFSET ?
+    </select>
+
+    <select id="searchTitle"
+            resultType="team.ranunculus.entities.board.BoardEntity">
+        SELECT `index`            AS `index`,
+               `writer`           AS `writer`,
+               `title`            AS `title`,
+               `created_at`       AS `createdAt`
+        FROM `ranunculus_boards`.`qna`
+        WHERE `title` LIKE CONCAT('%',?,'%')
+        ORDER BY `index` DESC
+        LIMIT ? OFFSET ?
+    </select>
+
+    <select id="searchContent"
+            resultType="team.ranunculus.entities.board.BoardEntity">
+        SELECT `index`            AS `index`,
+               `writer`           AS `writer`,
+               `title`            AS `title`,
+               `created_at`       AS `createdAt`
+        FROM `ranunculus_boards`.`qna`
+        WHERE `content` LIKE CONCAT('%',?,'%')
+        ORDER BY `index` DESC
+        LIMIT ? OFFSET ?
+    </select>
 </mapper>

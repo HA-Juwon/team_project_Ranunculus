@@ -1,5 +1,6 @@
 package team.ranunculus.controllers;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,18 +28,21 @@ public class BoardController {
 
     @RequestMapping(value = "qna", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView getIndex(ModelAndView modelAndView,
-                                 BoardEntity board) {
+    public ModelAndView getIndex(ModelAndView modelAndView) {
         List<BoardEntity> list = this.boardService.getList();
-        modelAndView.addObject("list",list);
-        JSONObject responseJson = new JSONObject();
-        responseJson.put("id", boardService.getIndex());
+        modelAndView.addObject("list", list);
         modelAndView.setViewName("board/index");
-        System.out.println(responseJson);
         return modelAndView;
     }
+
     @RequestMapping(value = "qna", method = RequestMethod.POST)
-    public ModelAndView postIndex(ModelAndView modelAndView) {
+    public ModelAndView postIndex(ModelAndView modelAndView,
+                                  @RequestParam(value = "search", required = false) String search,
+                                  @RequestParam(value = "keyword", required = false) String keyword) {
+        List<BoardEntity> list = this.boardService.search(search, keyword);
+        System.out.println(search);
+        System.out.println(keyword);
+        modelAndView.addObject("list", list);
         modelAndView.setViewName("board/index");
         return modelAndView;
     }
@@ -62,7 +66,7 @@ public class BoardController {
                 .setWriter(writer)
                 .setPassword(CryptoUtils.hashSha512(password))
                 .setTitle(title)
-                .setContent(content) // TODO: 값이 안넘어옴 체크 필요.
+                .setContent(content)
                 .setPassword(hashPassword)
                 .setCreatedAt(new Date())
                 .setEmailAdminFlag(null);
