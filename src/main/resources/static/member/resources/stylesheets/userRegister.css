@@ -142,7 +142,6 @@ body > .main > .terms-container > .button-container > .button.next-button:hover 
 }
 
 body > .main > .register-form {
-    /*width: 25rem;*/
     align-items: center;
     display: none;
     flex-direction: column;
@@ -191,7 +190,6 @@ body > .main > .register-form > .section-container ._object-input {
 
 body > .main > .register-form > .input-container > .input:not(:placeholder-shown),
 body > .main > .register-form > .section-container ._object-input:not(:placeholder-shown) {
-    text-align: flex-start;
     background-color: rgba(var(--concept-color-pink), 50%);
 }
 
@@ -226,15 +224,16 @@ body > .main > .register-form > .section-container > .address-container > .addre
 }
 
 body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button {
+    background-color: rgb(var(--concept-color-pink));
     margin-left: 0.325rem;
 }
 
-body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button:focus {
-    background-color: rgba(var(--concept-color-pink), 50%);
+body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button:hover {
+    background-color: rgba(var(--concept-color-pink), 90%);
 }
 
 body > .main > .register-form > .section-container > .address-postal-wrapper > .address-postal-button:active {
-    background-color: rgba(var(--concept-color-pink-dim));
+    background-color: rgb(var(--concept-color-pink-dim));
 }
 
 body > .main > .register-form > .section-container > .address-container > .address-primary,

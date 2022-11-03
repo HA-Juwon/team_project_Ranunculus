@@ -9,11 +9,17 @@ body {
 
 body > .main {
     width: var(--content-width-default);
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    line-height: 125%;
+    padding: 2rem 0;
+}
+
+body > .main > .box {
+    border: 0.0625rem solid rgb(230, 230, 230);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
 }
 
 body > .main > .nav {
@@ -22,16 +28,149 @@ body > .main > .nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /*margin-right: 3rem;*/
+    margin-right: 3rem;
 }
 
 body > .main > .nav > .profile-container {
     cursor: default;
     font-size: 1.25rem;
     font-weight: 500;
-    margin-bottom: 0.75rem;
+    margin: 0 0 0.75rem 2rem;
 }
 
 body > .main > .nav > .item {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .nav > .item > .link {
+    border: 0.0625rem solid rgb(230, 230, 230);
+    border-radius: 0.5rem;
+    font-weight: 400;
     margin-top: 0.75rem;
+    padding: 1rem;
+}
+
+body > .main > .nav > .item[selected] > .link {
+    background-color: rgba(var(--concept-color-pink), 65%);
+    border: 0.0625rem solid rgba(var(--concept-color-pink), 100%);
+}
+
+body > .main > .nav > .item[selected] > .link > .text {
+    color: rgb(var(--concept-color-pink));
+    filter: brightness(90%);
+}
+
+body > .main > .info-section {
+    flex: 1;
+}
+
+body > .main > .info-section > .title {
+    border-bottom: 0.0625rem solid rgb(230, 230, 230);
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-bottom: 1rem;
+}
+
+body > .main > .info-section > .info-form > .table {
+    border-collapse: collapse;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr:not(:nth-last-child(1), :nth-last-child(2)) {
+    border-bottom: 0.0625rem solid rgb(230, 230, 230);
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr:not(:last-of-type) > * {
+    padding: 1rem;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .th {
+    font: inherit;
+    padding-right: 1rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .label > .text {
+    margin-top: 0.325rem;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .label > .text > .mark {
+    color: rgb(231, 76, 60);
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > *:not(:first-of-type),
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container:not(:first-of-type) > .input-container > * {
+    margin-top: 0.325rem;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-postal-wrapper {
+    max-width: 75%;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button {
+    background-color: rgb(var(--concept-color-pink));
+    margin-left: 0.325rem;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button:hover {
+    background-color: rgba(var(--concept-color-pink), 90%);
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button:active {
+    background-color: rgb(var(--concept-color-pink-dim));
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input {
+    border: 0.125rem solid rgb(var(--concept-color-pink));
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input:not(:placeholder-shown) {
+    background-color: rgba(var(--concept-color-pink), 65%);
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input:focus {
+    background-color: rgba(var(--concept-color-blue), 50%);
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > ._object-button {
+    margin-left: 0.325rem;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .warning-container {
+    display: none;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .warning-container.visible {
+    display: flex;
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .warning-container > .td > .warning {
+    color: rgb(231, 76, 60);
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .submit-container > .td > .submit-button {
+    margin-top: 0.325rem;
+    float: right;
 }
