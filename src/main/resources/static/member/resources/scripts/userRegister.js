@@ -159,6 +159,9 @@ const registerWarning = {
     show : (text) => {
         registerWarning.getElement().innerText = text;
         registerWarning.getElement().classList.add('visible');
+    },
+    hide : () => {
+      registerWarning.getElement().classList.remove('visible');
     }
 }
 
@@ -177,40 +180,43 @@ window.document.body.querySelectorAll('[data-func]').forEach(element => {
 let emailChecked = false;
 
 registerForm['email'].addEventListener('focusout', () => {
-    if (registerForm['email'].value === '' || !new RegExp('^(?=.{7,50})([\\da-zA-Z_.]{4,})@([\\da-z\\-]{2,}\\.)?([\\da-z\\-]{2,})\\.([a-z]{2,10})(\\.[a-z]{2})?$').test(registerForm['email'].value)) {
-        registerForm['email'].focusAndSelect();
-        registerWarning.show('올바른 이메일을 입력해 주세요.');
-        emailChecked = false;
-        return false;
-    }
-    cover.show();
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `./userEmailCheck?email=${registerForm['email'].value}`);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            cover.hide();
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseJson = JSON.parse(xhr.responseText);
-                switch (responseJson['result']) {
-                    case 'success':
-                        registerForm['password'].focus();
-                        emailChecked = true;
-                        break;
-                    case 'duplicate':
-                        alert('입력하신 이메일은 이미 사용 중입니다.');
-                        emailChecked = false;
-                        break;
-                    default:
-                        alert('알 수 없는 이유로 이메일 중복 검사를 완료하지 못 하였습니다. 잠시 후 다시 시도해 주세요.');
-                        emailChecked = false;
-                }
-            } else {
-                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                emailChecked = false;
-            }
+    if (registerForm['email'].value !== '') {
+        if (!new RegExp('^(?=.{7,50})([\\da-zA-Z_.]{4,})@([\\da-z\\-]{2,}\\.)?([\\da-z\\-]{2,})\\.([a-z]{2,10})(\\.[a-z]{2})?$').test(registerForm['email'].value)) {
+            registerForm['email'].focusAndSelect();
+            registerWarning.show('올바른 이메일을 입력해 주세요.');
+            emailChecked = false;
+            return false;
         }
-    };
-    xhr.send();
+        cover.show();
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `./userEmailCheck?email=${registerForm['email'].value}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                cover.hide();
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseJson = JSON.parse(xhr.responseText);
+                    switch (responseJson['result']) {
+                        case 'success':
+                            registerForm['password'].focus();
+                            emailChecked = true;
+                            registerWarning.hide();
+                            break;
+                        case 'duplicate':
+                            alert('입력하신 이메일은 이미 사용 중입니다.');
+                            emailChecked = false;
+                            break;
+                        default:
+                            alert('알 수 없는 이유로 이메일 중복 검사를 완료하지 못 하였습니다. 잠시 후 다시 시도해 주세요.');
+                            emailChecked = false;
+                    }
+                } else {
+                    alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                    emailChecked = false;
+                }
+            }
+        };
+        xhr.send();
+    }
 });
 
 registerForm.onsubmit = e => {

@@ -6,7 +6,7 @@
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
-            parameterType="team.ranunculus.entities.board.BoardEntity">
+            parameterType="team.ranunculus.entities.board.QnaEntity">
         INSERT INTO `ranunculus_boards`.`qna` (`writer`, `password`, `title`, `content`, `created_at`,
                                                `email_admin_flag`)
         VALUES (#{writer}, #{password}, #{title}, #{content}, #{createdAt}, #{emailAdminFlag})
@@ -34,7 +34,7 @@
     </select>
 
     <select id="getList"
-            resultType="team.ranunculus.entities.board.BoardEntity">
+            resultType="team.ranunculus.entities.board.QnaEntity">
         SELECT `index`            AS `index`,
                `writer`           AS `writer`,
                `password`         AS `password`,
@@ -47,14 +47,14 @@
     </select>
 
     <select id="getIndex"
-            resultType="team.ranunculus.entities.board.BoardEntity">
+            resultType="team.ranunculus.entities.board.QnaEntity">
         SELECT `index` AS `index`
         FROM `ranunculus_boards`.`qna`
         ORDER BY `index` DESC
     </select>
 
     <select id="searchName"
-            resultType="team.ranunculus.entities.board.BoardEntity"
+            resultType="team.ranunculus.entities.board.QnaEntity"
             parameterType="String">
         SELECT `index`      AS `index`,
                `writer`     AS `writer`,
@@ -66,7 +66,7 @@
     </select>
 
     <select id="searchTitle"
-            resultType="team.ranunculus.entities.board.BoardEntity"
+            resultType="team.ranunculus.entities.board.QnaEntity"
             parameterType="String">
         SELECT `index`      AS `index`,
                `writer`     AS `writer`,
@@ -78,7 +78,7 @@
     </select>
 
     <select id="searchContent"
-            resultType="team.ranunculus.entities.board.BoardEntity"
+            resultType="team.ranunculus.entities.board.QnaEntity"
             parameterType="String">
         SELECT `index`      AS `index`,
                `writer`     AS `writer`,

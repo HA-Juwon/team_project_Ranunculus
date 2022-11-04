@@ -31,7 +31,7 @@ body > .main > .nav {
     margin-right: 3rem;
 }
 
-body > .main > .nav > .profile-container {
+body > .main > .nav > .profile-wrap {
     cursor: default;
     font-size: 1.25rem;
     font-weight: 500;
@@ -152,6 +152,14 @@ body > .main > .info-section > .info-form > .table > .tbody > .tr > .td ._object
 
 body > .main > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input:focus {
     background-color: rgba(var(--concept-color-blue), 50%);
+}
+
+body > .main > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input[disabled] {
+    -webkit-touch-callout: none;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
 }
 
 body > .main > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > ._object-button {

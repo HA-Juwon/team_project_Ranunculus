@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import team.ranunculus.entities.member.ContactAuthEntity;
+import team.ranunculus.entities.member.TelecomEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
@@ -262,7 +263,16 @@ public class MemberController {
 
     @RequestMapping(value = "userEdit", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView getUserEdit(ModelAndView modelAndView) {
+    public ModelAndView getUserEdit(@SessionAttribute(UserEntity.ATTRIBUTE_NAME) UserEntity user,
+                                    @RequestParam(value = "tab", required = false, defaultValue = "info") String tab,
+                                    ModelAndView modelAndView) {
+        if (user == null) {
+            modelAndView.setViewName("redirect:/member/userLogin");
+        }
+        if (tab == null || tab.equals("info") || (!tab.equals("qna")) && (!tab.equals("review")) && (!tab.equals("shipping")) && (!tab.equals("truncate"))) {
+            TelecomEntity[] telecoms = this.memberService.getTelecoms();
+            modelAndView.addObject(TelecomEntity.ATTRIBUTE_NAME_PLURAL, telecoms);
+        }
         modelAndView.setViewName("member/userEdit");
         return modelAndView;
     }

@@ -14,34 +14,6 @@
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="main">
-    <ul class="nav box">
-        <li class="profile-container">임시이름</li>
-        <li class="item">
-            <a class="link" >
-                <span class="text">회원정보 관리</span>
-            </a>
-        </li>
-        <li class="item">
-            <a class="link">
-                <span class="text">작성한 Q&A</span>
-            </a>
-        </li>
-        <li class="item">
-            <a class="link">
-                <span class="text">작성한 상품 리뷰</span>
-            </a>
-        </li>
-        <li class="item">
-            <a class="link">
-                <span class="text">주문현황/배송조회</span>
-            </a>
-        </li>
-        <li class="item">
-            <a class="link">
-                <span class="text">회원탈퇴</span>
-            </a>
-        </li>
-    </ul>
     <section class="info-section box">
         <h2 class="title">회원정보</h2>
         <form class="info-form">
@@ -52,7 +24,7 @@
                         <td class="td">
                             <label class="label">
                                 <span hidden>이메일</span>
-                                <input class="_object-input" maxlength="50" name="email" placeholder="이메일" type="email">
+                                <input class="_object-input" th:value="${session.memberUser.getEmail()}" disabled>
                             </label>
                         </td>
                     </tr>
@@ -61,7 +33,7 @@
                         <td class="td">
                             <label class="label">
                                 <span hidden>현재 비밀번호</span>
-                                <input class="_object-input" maxlength="50" name="password" placeholder="현재 비밀번호" type="password">
+                                <input class="_object-input" maxlength="50" name="oldPassword" placeholder="현재 비밀번호" type="password">
                                 <div class="text">• 회원님의 <span class="mark">개인정보 보호를 위해 현재 비밀번호</span>를 입력해 주세요.</div>
                             </label>
                         </td>
@@ -71,7 +43,7 @@
                         <td class="td">
                             <label class="label">
                                 <span hidden>새 비밀번호</span>
-                                <input class="_object-input" maxlength="50" name="password" placeholder="새 비밀번호" type="password">
+                                <input class="_object-input" maxlength="50" name="newPassword" placeholder="새 비밀번호" type="password">
                             </label>
                         </td>
                     </tr>
@@ -80,7 +52,7 @@
                         <td class="td">
                             <label class="label">
                                 <span hidden>새 비밀번호 확인</span>
-                                <input class="_object-input" maxlength="50" name="passwordCheck" placeholder="새 비밀번호 확인" type="password">
+                                <input class="_object-input" maxlength="50" name="newPasswordCheck" placeholder="새 비밀번호 확인" type="password">
                             </label>
                         </td>
                     </tr>
@@ -89,7 +61,7 @@
                         <td class="td">
                             <label class="label">
                                 <span hidden>이름</span>
-                                <input class="_object-input" maxlength="50" name="name" placeholder="이름" type="text">
+                                <input class="_object-input" th:value="${session.memberUser.getName()}" disabled>
                                 <div class="text">• 개명으로 인한 이름 변경 시 <span class="mark">고객 센터</span>에 문의해 주세요.</div>
                             </label>
                         </td>
@@ -100,14 +72,14 @@
                             <section class="section-container">
                                 <span hidden>주소</span>
                                 <div class="address-container address-postal-wrapper">
-                                    <input class="_object-input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text">
-                                    <input class="_object-input button" type="button" value="주소 찾기" data-func="openAddressSearch">
+                                    <input class="_object-input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text" th:value="${session.memberUser.getAddressPostal()}">
+                                    <input class="_object-input button" type="button" value="주소 변경" data-func="openAddressSearch">
                                 </div>
                                 <div class="address-container">
-                                    <input class="_object-input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text">
+                                    <input class="_object-input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text" th:value="${session.memberUser.getAddressPrimary()}">
                                 </div>
                                 <div class="address-container">
-                                    <input class="_object-input address-secondary" maxlength="100" name="addressSecondary" placeholder="상세주소" type="text">
+                                    <input class="_object-input address-secondary" maxlength="100" name="addressSecondary" placeholder="상세주소" type="text" th:value="${session.memberUser.getAddressSecondary()}">
                                 </div>
                             </section>
                         </td>
@@ -118,11 +90,15 @@
                             <label class="label">
                                 <span hidden>연락처 통신사</span>
                                 <select class="_object-input" name="telecomValue">
-                                    <option disabled selected redonly value="-1">통신사</option>
-                                    <option value="1">SKT</option>
-                                    <option value="2">KT</option>
-                                    <option value="3">LGU+</option>
-                                    <option value="4">알뜰폰</option>
+                                    <option th:each="telecom : ${memberTelecoms}"
+                                    th:value="${telecom.getValue()}"
+                                    th:text="${telecom.getText()}"
+                                    th:selected="${telecom.getValue().equals(session.memberUser.getTelecomValue())}"></option>
+<!--                                    <option disabled selected redonly value="-1">통신사</option>-->
+<!--                                    <option value="1">SKT</option>-->
+<!--                                    <option value="2">KT</option>-->
+<!--                                    <option value="3">LGU+</option>-->
+<!--                                    <option value="4">알뜰폰</option>-->
                                 </select>
                             </label>
                         </td>
@@ -133,17 +109,18 @@
                             <label class="label contact-container contact-container-first">
                                 <span hidden class="text">연락처</span>
                                 <div class="input-container">
-                                    <input class="_object-input input" maxlength="12" name="contact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text">
+                                    <input class="_object-input input" maxlength="12" name="contact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text" th:value="${session.memberUser.getContact()}">
                                     <input name="contactAuthSalt" type="hidden">
                                     <input class="_object-button button" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
                                 </div>
                             </label>
-                            <label class="contact-container">
+                            <label class="label contact-container">
                                 <span hidden class="text">연락처 인증번호</span>
                                 <div class="input-container">
                                     <input class="_object-input input" disabled maxlength="6" name="contactAuthCode" placeholder="인증번호" type="text">
                                     <input class="_object-button button" disabled name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
                                 </div>
+                            <div class="text">• 연락처 변경 희망 시 <span class="mark">재인증</span>을 진행해 주세요.</div>
                             </label>
                         </td>
                     </tr>
