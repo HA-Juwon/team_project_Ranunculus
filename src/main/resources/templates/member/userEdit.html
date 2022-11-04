@@ -13,10 +13,41 @@
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<div class="address-search-container" data-func="closeAddressSearch">
+    <div class="dialog"></div>
+</div>
 <main class="main">
+    <ul class="nav box" th:with="tab = @{#request.getParameter('tab')}">
+        <li class="profile-wrap" th:text="${session.memberUser.getName()}"></li>
+        <!--        <li class="item" th:selected="${tab == null || tab.equals('info') || (!tab.equals('qna')) && (!tab.equals('review')) && (!tab.equals('shipping')) && (!tab.equals('trancate'))}">-->
+        <!--            <a class="link" th:href="@{./userEdit (tab=info)}">-->
+        <!--                <span class="text">회원정보 관리</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
+        <!--        <li class="item" th:selected="tab != null && tab.equals('qna')">-->
+        <!--            <a class="link" th:href="@{./userEdit (tab=qna)}">-->
+        <!--                <span class="text">작성한 Q&A</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
+        <!--        <li class="item" th:selected="tab != null && tab.equals('review')">-->
+        <!--            <a class="link" th:href="@{./userEdit (tab=)}">-->
+        <!--                <span class="text">작성한 상품 리뷰</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
+        <!--        <li class="item" th:selected="tab != null && tab.equals('shipping')">-->
+        <!--            <a class="link" th:href="@{./userEdit (tab=shipping)}">-->
+        <!--                <span class="text">주문현황/배송조회</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
+        <!--        <li class="item" th:selected="tab != null && tab.equals('truncate')">-->
+        <!--            <a class="link" th:href="@{./userEdit (tab=truncate)}">-->
+        <!--                <span class="text">회원탈퇴</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
+    </ul>
     <section class="info-section box">
         <h2 class="title">회원정보</h2>
-        <form class="info-form">
+        <form class="info-form" id="infoForm">
             <table class="table">
                 <tbody class="tbody">
                     <tr class="tr">
@@ -72,11 +103,11 @@
                             <section class="section-container">
                                 <span hidden>주소</span>
                                 <div class="address-container address-postal-wrapper">
-                                    <input class="_object-input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" readonly type="text" th:value="${session.memberUser.getAddressPostal()}">
+                                    <input class="_object-input address-postal" maxlength="5" name="addressPostal" placeholder="우편번호" disabled type="text" th:value="${session.memberUser.getAddressPostal()}">
                                     <input class="_object-input button" type="button" value="주소 변경" data-func="openAddressSearch">
                                 </div>
                                 <div class="address-container">
-                                    <input class="_object-input address-primary" maxlength="100" name="addressPrimary" readonly placeholder="주소" type="text" th:value="${session.memberUser.getAddressPrimary()}">
+                                    <input class="_object-input address-primary" maxlength="100" name="addressPrimary" disabled placeholder="주소" type="text" th:value="${session.memberUser.getAddressPrimary()}">
                                 </div>
                                 <div class="address-container">
                                     <input class="_object-input address-secondary" maxlength="100" name="addressSecondary" placeholder="상세주소" type="text" th:value="${session.memberUser.getAddressSecondary()}">
@@ -94,11 +125,6 @@
                                     th:value="${telecom.getValue()}"
                                     th:text="${telecom.getText()}"
                                     th:selected="${telecom.getValue().equals(session.memberUser.getTelecomValue())}"></option>
-<!--                                    <option disabled selected redonly value="-1">통신사</option>-->
-<!--                                    <option value="1">SKT</option>-->
-<!--                                    <option value="2">KT</option>-->
-<!--                                    <option value="3">LGU+</option>-->
-<!--                                    <option value="4">알뜰폰</option>-->
                                 </select>
                             </label>
                         </td>
@@ -120,7 +146,7 @@
                                     <input class="_object-input input" disabled maxlength="6" name="contactAuthCode" placeholder="인증번호" type="text">
                                     <input class="_object-button button" disabled name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
                                 </div>
-                            <div class="text">• 연락처 변경 희망 시 <span class="mark">재인증</span>을 진행해 주세요.</div>
+                            <div class="text">• 연락처 변경은 새로운 연락처 입력 후 <span class="mark">재인증</span>을 진행해 주세요.</div>
                             </label>
                         </td>
                     </tr>

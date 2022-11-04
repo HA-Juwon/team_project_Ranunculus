@@ -237,11 +237,11 @@
         <label class="input-container">
             <span class="text">연락처 통신사</span>
             <select class="_object-input input" name="telecomValue">
-                <option disabled selected redonly value="-1">통신사</option>
-                <option value="1">SKT</option>
-                <option value="2">KT</option>
-                <option value="3">LGU+</option>
-                <option value="4">알뜰폰</option>
+                <!--/*@thymesVar id="telecom" type="team.ranunculus.entities.member.TelecomEntity"*/-->
+                <option th:each="telecom : ${memberTelecoms}"
+                        th:value="${telecom.getValue()}"
+                        th:text="${telecom.getText()}">
+                </option>
             </select>
         </label>
         <label class="contact-container contact-container-first">

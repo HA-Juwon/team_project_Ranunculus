@@ -89,6 +89,8 @@ public class MemberController {
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
     public ModelAndView getUserRegister(ModelAndView modelAndView) {
+        TelecomEntity[] telecoms = this.memberService.getTelecoms();
+        modelAndView.addObject(TelecomEntity.ATTRIBUTE_NAME_PLURAL, telecoms);
         modelAndView.setViewName("member/userRegister");
         return modelAndView;
     }
