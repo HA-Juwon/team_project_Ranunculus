@@ -2,13 +2,12 @@ package team.ranunculus.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.ranunculus.entities.board.BoardEntity;
+import team.ranunculus.entities.board.QnaEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.mappers.IBoardMapper;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -31,24 +30,28 @@ public class BoardService {
     }
 
 
-    public IResult putArticle(BoardEntity board) {
+    public IResult putArticle(QnaEntity board) {
         return this.boardMapper.insertArticle(board) > 0
                 ? CommonResult.SUCCESS
                 : CommonResult.FAILURE;
     }
 
-    public List<BoardEntity> getList() {
+    public List<QnaEntity> getList() {
         return this.boardMapper.getList();
     }
-
-    public List<BoardEntity> getIndex() {
-        return this.boardMapper.getIndex();
+    public QnaEntity selectBoardByIndex(int id) {
+        return this.boardMapper.selectBoardByIndex(id);
     }
 
-    public  List<BoardEntity> search(String search, String keyword) {
-        System.out.println(search);
+    public List<QnaEntity> getIndex() {
+        return this.boardMapper.getIndex();
+    }
+    public QnaEntity getIndex2(int boardIndex) {
+        return this.boardMapper.selectBoardByIndex(boardIndex);
+    }
+
+    public  List<QnaEntity> search(String search, String keyword) {
         if (search.equals("name"))  {
-            System.out.println("서치네임작동");
             return this.boardMapper.searchName(keyword);
         } else if (search.equals("title")) {
             return this.boardMapper.searchTitle(keyword);

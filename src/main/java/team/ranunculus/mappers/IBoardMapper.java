@@ -1,22 +1,25 @@
 package team.ranunculus.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
-import team.ranunculus.entities.board.BoardEntity;
+import team.ranunculus.entities.board.QnaEntity;
 import team.ranunculus.entities.member.UserEntity;
 
 import java.util.List;
 
 @Mapper
 public interface IBoardMapper {
-    int insertArticle(BoardEntity board);
+    int insertArticle(QnaEntity board);
 
     UserEntity selectUserAdminCheckByEmail(UserEntity user);
 
-    List<BoardEntity> getList();
+    List<QnaEntity> getList();
 
-    List<BoardEntity> getIndex();
+    QnaEntity selectBoardByIndex(int id);
 
-    List<BoardEntity> searchTitle(String keyword);
-    List<BoardEntity> searchContent(String keyword);
-    List<BoardEntity> searchName(String keyword);
+
+    List<QnaEntity> getIndex();
+
+    List<QnaEntity> searchTitle(String keyword);
+    List<QnaEntity> searchContent(String keyword);
+    List<QnaEntity> searchName(String keyword);
 }

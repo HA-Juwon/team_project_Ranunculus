@@ -6,7 +6,7 @@
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
-            parameterType="team.ranunculus.entities.board.BoardEntity">
+            parameterType="team.ranunculus.entities.board.QnaEntity">
         INSERT INTO `ranunculus_boards`.`qna` (`writer`, `password`, `title`, `content`, `created_at`,
                                                `email_admin_flag`)
         VALUES (#{writer}, #{password}, #{title}, #{content}, #{createdAt}, #{emailAdminFlag})
@@ -34,7 +34,7 @@
     </select>
 
     <select id="getList"
-            resultType="team.ranunculus.entities.board.BoardEntity">
+            resultType="team.ranunculus.entities.board.QnaEntity">
         SELECT `index`            AS `index`,
                `writer`           AS `writer`,
                `password`         AS `password`,
@@ -46,46 +46,73 @@
         ORDER BY `index` DESC
     </select>
 
+    <select id="getList2"
+            resultType="team.ranunculus.entities.board.QnaEntity">
+        SELECT `index`            AS `index`,
+               `writer`           AS `writer`,
+               `password`         AS `password`,
+               `title`            AS `title`,
+               `content`          AS `content`,
+               `created_at`       AS `createdAt`,
+               `email_admin_flag` AS `emailAdminFlag`
+        FROM `ranunculus_boards`.`qna`
+        LIMIT 1
+    </select>
+
     <select id="getIndex"
-            resultType="team.ranunculus.entities.board.BoardEntity">
+            resultType="team.ranunculus.entities.board.QnaEntity">
         SELECT `index` AS `index`
         FROM `ranunculus_boards`.`qna`
         ORDER BY `index` DESC
     </select>
 
-    <select id="searchName"
-            resultType="team.ranunculus.entities.board.BoardEntity">
+    <select id="selectBoardByIndex"
+            resultType="team.ranunculus.entities.board.QnaEntity">
         SELECT `index`            AS `index`,
                `writer`           AS `writer`,
+               `password`         AS `password`,
                `title`            AS `title`,
-               `created_at`       AS `createdAt`
+               `content`          AS `content`,
+               `created_at`       AS `createdAt`,
+               `email_admin_flag` AS `emailAdminFlag`
         FROM `ranunculus_boards`.`qna`
-        WHERE `writer` = #{keyword}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <select id="searchName"
+            resultType="team.ranunculus.entities.board.QnaEntity"
+            parameterType="String">
+        SELECT `index`      AS `index`,
+               `writer`     AS `writer`,
+               `title`      AS `title`,
+               `created_at` AS `createdAt`
+        FROM `ranunculus_boards`.`qna`
+        WHERE `writer` LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY `index` DESC
-        LIMIT ? OFFSET ?
     </select>
 
     <select id="searchTitle"
-            resultType="team.ranunculus.entities.board.BoardEntity">
-        SELECT `index`            AS `index`,
-               `writer`           AS `writer`,
-               `title`            AS `title`,
-               `created_at`       AS `createdAt`
+            resultType="team.ranunculus.entities.board.QnaEntity"
+            parameterType="String">
+        SELECT `index`      AS `index`,
+               `writer`     AS `writer`,
+               `title`      AS `title`,
+               `created_at` AS `createdAt`
         FROM `ranunculus_boards`.`qna`
-        WHERE `title` LIKE CONCAT('%',?,'%')
+        WHERE `title` LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY `index` DESC
-        LIMIT ? OFFSET ?
     </select>
 
     <select id="searchContent"
-            resultType="team.ranunculus.entities.board.BoardEntity">
-        SELECT `index`            AS `index`,
-               `writer`           AS `writer`,
-               `title`            AS `title`,
-               `created_at`       AS `createdAt`
+            resultType="team.ranunculus.entities.board.QnaEntity"
+            parameterType="String">
+        SELECT `index`      AS `index`,
+               `writer`     AS `writer`,
+               `title`      AS `title`,
+               `created_at` AS `createdAt`
         FROM `ranunculus_boards`.`qna`
-        WHERE `content` LIKE CONCAT('%',?,'%')
+        WHERE `content` LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY `index` DESC
-        LIMIT ? OFFSET ?
     </select>
 </mapper>

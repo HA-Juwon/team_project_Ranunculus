@@ -237,17 +237,27 @@
         <label class="input-container">
             <span class="text">연락처 통신사</span>
             <select class="_object-input input" name="telecomValue">
-                <option disabled selected redonly value="-1">통신사</option>
-                <option value="1">SKT</option>
-                <option value="2">KT</option>
-                <option value="3">LGU+</option>
-                <option value="4">알뜰폰</option>
+                <!--/*@thymesVar id="telecom" type="team.ranunculus.entities.member.TelecomEntity"*/-->
+                <option th:each="telecom : ${memberTelecoms}"
+                        th:value="${telecom.getValue()}"
+                        th:text="${telecom.getText()}">
+                </option>
             </select>
         </label>
-        <label class="input-container">
+        <label class="contact-container contact-container-first">
             <span class="text">연락처</span>
-            <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)"
-                   type="text">
+            <div class="input-container">
+                <input class="_object-input input" maxlength="12" name="contact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text">
+                <input name="contactAuthSalt" type="hidden">
+                <input class="_object-button" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
+            </div>
+        </label>
+        <label class="contact-container">
+            <span hidden class="text">연락처 인증번호</span>
+            <div class="input-container">
+                <input class="_object-input input" disabled maxlength="6" name="contactAuthCode" placeholder="인증번호" type="text">
+                <input class="_object-button" disabled name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
+            </div>
         </label>
         <div class="register-warning" id="registerWarning"></div>
         <section class="section-container">

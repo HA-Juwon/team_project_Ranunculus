@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import team.ranunculus.components.SmsComponent;
 import team.ranunculus.entities.member.ContactAuthEntity;
+import team.ranunculus.entities.member.TelecomEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.enums.member.UserLoginResult;
@@ -62,12 +63,15 @@ public class MemberService {
         if (contactAuth.isExpired() || new Date().compareTo(contactAuth.getExpiresAt()) > 0) {
             return CommonResult.EXPIRED;
         }
-//        System.out.println("debug"+contactAuth.getIndex());
         contactAuth.setExpired(true);
         if (this.memberMapper.updateContactAuth(contactAuth) == 0) {
            return CommonResult.FAILURE;
         }
         return CommonResult.SUCCESS;
+    }
+
+    public TelecomEntity[] getTelecoms() {
+        return this.memberMapper.selectTelecoms();
     }
 
     @Transactional
@@ -88,6 +92,37 @@ public class MemberService {
         }
         user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
         if (this.memberMapper.insertUser(user) == 0) {
+            return CommonResult.FAILURE;
+        }
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public IResult registerUserEmailAuth(ContactAuthEntity contactAuth) throws
+            IOException,
+            InvalidKeyException,
+            NoSuchAlgorithmException,
+            UnexpectedRollbackException {
+        Date createdAt = new Date();
+        Date expiresAt = DateUtils.addMinutes(createdAt, 5);
+        String code = RandomStringUtils.randomNumeric(6);
+        String salt = CryptoUtils.hashSha512(String.format("%s%s%d%f%f",
+                contactAuth.getContact(),
+                code,
+                createdAt.getTime(),
+                Math.random(),
+                Math.random()));
+        contactAuth.setCode(code)
+                .setSalt(salt)
+                .setCreatedAt(createdAt)
+                .setExpiresAt(expiresAt)
+                .setExpired(false);
+        if (this.memberMapper.insertContactAuth(contactAuth) == 0) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return CommonResult.FAILURE;
+        }
+        String smsContent = String.format("[라넌큘러스] 인증번호 [%s]를 입력해 주세요.", contactAuth.getCode());
+        if (this.smsComponent.sendMessage(contactAuth.getContact(), smsContent) != 202) {
             return CommonResult.FAILURE;
         }
         return CommonResult.SUCCESS;

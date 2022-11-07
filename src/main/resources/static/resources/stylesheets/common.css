@@ -114,6 +114,10 @@ input {
 }
 
 ._object-button:hover {
+    background-color: rgba(var(--concept-color-pink), 90%);
+}
+
+._object-button:active {
     background-color: rgb(var(--concept-color-pink-dim));
 }
 

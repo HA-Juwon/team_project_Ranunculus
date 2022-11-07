@@ -3,12 +3,12 @@ package team.ranunculus.entities.board;
 import java.util.Date;
 import java.util.Objects;
 
-public class BoardEntity {
-    public static final String ATTRIBUTE_NAME = "board";
-    public static final String ATTRIBUTE_NAME_PLURAL = "boards";
+public class QnaEntity {
+    public static final String ATTRIBUTE_NAME = "boardQna";
+    public static final String ATTRIBUTE_NAME_PLURAL = "boardQna";
 
-    public static BoardEntity build() {
-        return new BoardEntity();
+    public static QnaEntity build() {
+        return new QnaEntity();
     }
 
     private int index;
@@ -19,10 +19,10 @@ public class BoardEntity {
     private Date createdAt = new Date();
     private String emailAdminFlag;
 
-    public BoardEntity() {
+    public QnaEntity() {
     }
 
-    public BoardEntity(int index, String writer, String password, String title, String content, Date createdAt, String emailAdminFlag) {
+    public QnaEntity(int index, String writer, String password, String title, String content, Date createdAt, String emailAdminFlag) {
         this.index = index;
         this.writer = writer;
         this.password = password;
@@ -36,7 +36,7 @@ public class BoardEntity {
         return index;
     }
 
-    public BoardEntity setIndex(int index) {
+    public QnaEntity setIndex(int index) {
         this.index = index;
         return this;
     }
@@ -45,7 +45,7 @@ public class BoardEntity {
         return writer;
     }
 
-    public BoardEntity setWriter(String writer) {
+    public QnaEntity setWriter(String writer) {
         this.writer = writer;
         return this;
     }
@@ -54,7 +54,7 @@ public class BoardEntity {
         return password;
     }
 
-    public BoardEntity setPassword(String password) {
+    public QnaEntity setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -63,7 +63,7 @@ public class BoardEntity {
         return title;
     }
 
-    public BoardEntity setTitle(String title) {
+    public QnaEntity setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -72,7 +72,7 @@ public class BoardEntity {
         return content;
     }
 
-    public BoardEntity setContent(String content) {
+    public QnaEntity setContent(String content) {
         this.content = content;
         return this;
     }
@@ -83,7 +83,7 @@ public class BoardEntity {
         return createdAt;
     }
 
-    public BoardEntity setCreatedAt(Date createdAt) {
+    public QnaEntity setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -92,7 +92,7 @@ public class BoardEntity {
         return emailAdminFlag;
     }
 
-    public BoardEntity setEmailAdminFlag(String emailAdminFlag) {
+    public QnaEntity setEmailAdminFlag(String emailAdminFlag) {
         this.emailAdminFlag = emailAdminFlag;
         return this;
     }
@@ -101,7 +101,7 @@ public class BoardEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BoardEntity that = (BoardEntity) o;
+        QnaEntity that = (QnaEntity) o;
         return index == that.index;
     }
 
