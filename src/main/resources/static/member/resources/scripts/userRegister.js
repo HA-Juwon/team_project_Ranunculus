@@ -72,7 +72,7 @@ const functions = {
         cover.show('인증번호를 전송하고 있습니다.\n\n잠시만 기다려 주세요.');
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `./userRegisterAuth?contact=${registerForm['contact'].value}`);
+        xhr.open('GET', `./userContactAuth?contact=${registerForm['contact'].value}`);
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 cover.hide();
@@ -118,7 +118,7 @@ const functions = {
         formData.append('contact', registerForm['contact'].value);
         formData.append('code', registerForm['contactAuthCode'].value);
         formData.append('salt', registerForm['contactAuthSalt'].value);
-        xhr.open('POST', './userRegisterAuth');
+        xhr.open('POST', './userContactAuth');
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 cover.hide();
@@ -187,6 +187,7 @@ registerForm['email'].addEventListener('focusout', () => {
             emailChecked = false;
             return false;
         }
+        registerWarning.hide();
         cover.show();
         const xhr = new XMLHttpRequest();
         xhr.open('GET', `./userEmailCheck?email=${registerForm['email'].value}`);
@@ -199,7 +200,6 @@ registerForm['email'].addEventListener('focusout', () => {
                         case 'success':
                             registerForm['password'].focus();
                             emailChecked = true;
-                            registerWarning.hide();
                             break;
                         case 'duplicate':
                             alert('입력하신 이메일은 이미 사용 중입니다.');
@@ -307,6 +307,8 @@ registerForm.onsubmit = e => {
         alert('연락처 인증을 완료해 주세요.');
         return false;
     }
+
+    registerWarning.hide();
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();

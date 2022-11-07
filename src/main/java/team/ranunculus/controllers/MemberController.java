@@ -12,9 +12,7 @@ import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Optional;
@@ -111,9 +109,9 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "userRegisterAuth", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "userContactAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getUserRegisterAuth(ContactAuthEntity contactAuth) {
+    public String getUserContactAuth(ContactAuthEntity contactAuth) {
         IResult result;
         try {
             result = this.memberService.registerUserEmailAuth(contactAuth);
@@ -129,9 +127,9 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "userRegisterAuth", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "userContactAuth", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String postUserRegisterAuth(ContactAuthEntity contactAuth) throws Exception {
+    public String postUserContactAuth(ContactAuthEntity contactAuth) throws Exception {
         return this.postUserRecoverAuth(contactAuth);
     }
 
@@ -271,7 +269,7 @@ public class MemberController {
         if (user == null) {
             modelAndView.setViewName("redirect:/member/userLogin");
         }
-        if (tab == null || tab.equals("info") || (!tab.equals("qna")) && (!tab.equals("review")) && (!tab.equals("shipping")) && (!tab.equals("truncate"))) {
+        if (tab == null || tab.equals("info") || (!tab.equals("qna") && !tab.equals("review") && !tab.equals("shipping") && !tab.equals("truncate"))) {
             TelecomEntity[] telecoms = this.memberService.getTelecoms();
             modelAndView.addObject(TelecomEntity.ATTRIBUTE_NAME_PLURAL, telecoms);
         }
