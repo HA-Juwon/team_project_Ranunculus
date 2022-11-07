@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import team.ranunculus.components.SmsComponent;
 import team.ranunculus.entities.member.ContactAuthEntity;
+import team.ranunculus.entities.member.TelecomEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.enums.member.UserLoginResult;
@@ -62,12 +63,15 @@ public class MemberService {
         if (contactAuth.isExpired() || new Date().compareTo(contactAuth.getExpiresAt()) > 0) {
             return CommonResult.EXPIRED;
         }
-//        System.out.println("debug"+contactAuth.getIndex());
         contactAuth.setExpired(true);
         if (this.memberMapper.updateContactAuth(contactAuth) == 0) {
            return CommonResult.FAILURE;
         }
         return CommonResult.SUCCESS;
+    }
+
+    public TelecomEntity[] getTelecoms() {
+        return this.memberMapper.selectTelecoms();
     }
 
     @Transactional

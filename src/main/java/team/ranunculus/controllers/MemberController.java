@@ -7,13 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import team.ranunculus.entities.member.ContactAuthEntity;
+import team.ranunculus.entities.member.TelecomEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Optional;
@@ -88,6 +87,8 @@ public class MemberController {
 
     @RequestMapping(value = "userRegister", method = RequestMethod.GET)
     public ModelAndView getUserRegister(ModelAndView modelAndView) {
+        TelecomEntity[] telecoms = this.memberService.getTelecoms();
+        modelAndView.addObject(TelecomEntity.ATTRIBUTE_NAME_PLURAL, telecoms);
         modelAndView.setViewName("member/userRegister");
         return modelAndView;
     }
@@ -108,9 +109,9 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "userRegisterAuth", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "userContactAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getUserRegisterAuth(ContactAuthEntity contactAuth) {
+    public String getUserContactAuth(ContactAuthEntity contactAuth) {
         IResult result;
         try {
             result = this.memberService.registerUserEmailAuth(contactAuth);
@@ -126,9 +127,9 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "userRegisterAuth", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "userContactAuth", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String postUserRegisterAuth(ContactAuthEntity contactAuth) throws Exception {
+    public String postUserContactAuth(ContactAuthEntity contactAuth) throws Exception {
         return this.postUserRecoverAuth(contactAuth);
     }
 
@@ -262,7 +263,16 @@ public class MemberController {
 
     @RequestMapping(value = "userEdit", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView getUserEdit(ModelAndView modelAndView) {
+    public ModelAndView getUserEdit(@SessionAttribute(UserEntity.ATTRIBUTE_NAME) UserEntity user,
+                                    @RequestParam(value = "tab", required = false, defaultValue = "info") String tab,
+                                    ModelAndView modelAndView) {
+        if (user == null) {
+            modelAndView.setViewName("redirect:/member/userLogin");
+        }
+        if (tab == null || tab.equals("info") || (!tab.equals("qna") && !tab.equals("review") && !tab.equals("shipping") && !tab.equals("truncate"))) {
+            TelecomEntity[] telecoms = this.memberService.getTelecoms();
+            modelAndView.addObject(TelecomEntity.ATTRIBUTE_NAME_PLURAL, telecoms);
+        }
         modelAndView.setViewName("member/userEdit");
         return modelAndView;
     }

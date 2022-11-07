@@ -1,12 +1,11 @@
 package team.ranunculus.controllers;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import team.ranunculus.entities.board.BoardEntity;
+import team.ranunculus.entities.board.QnaEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
@@ -29,7 +28,7 @@ public class BoardController {
     @RequestMapping(value = "qna", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView getIndex(ModelAndView modelAndView) {
-        List<BoardEntity> list = this.boardService.getList();
+        List<QnaEntity> list = this.boardService.getList();
         modelAndView.addObject("list", list);
         modelAndView.setViewName("board/index");
         return modelAndView;
@@ -39,7 +38,7 @@ public class BoardController {
     public ModelAndView postIndex(ModelAndView modelAndView,
                                   @RequestParam(value = "search", required = false) String search,
                                   @RequestParam(value = "keyword", required = false) String keyword) {
-        List<BoardEntity> list = this.boardService.search(search, keyword);
+        List<QnaEntity> list = this.boardService.search(search, keyword);
         modelAndView.clear();
         modelAndView.addObject("list", list);
         modelAndView.setViewName("board/index");
@@ -59,7 +58,7 @@ public class BoardController {
                             @RequestParam(value = "password") String password,
                             @RequestParam(value = "title") String title,
                             @RequestParam(value = "content") String content,
-                            BoardEntity board) {
+                            QnaEntity board) {
         String hashPassword = CryptoUtils.hashSha512(board.getPassword());
         board.setIndex(-1)
                 .setWriter(writer)

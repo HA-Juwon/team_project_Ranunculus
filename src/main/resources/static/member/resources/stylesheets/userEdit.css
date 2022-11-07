@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.mark {
+    color: rgb(231, 76, 60);
+}
+
 body {
     align-items: center;
     display: flex;
@@ -7,13 +11,48 @@ body {
     justify-content: center;
 }
 
+body > .address-search-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 80%);
+    display: none;
+    position: fixed;
+    z-index: 8;
+}
+
+body > .address-search-container > .dialog {
+    top: 50%;
+    left: 50%;
+    max-width: calc(100% - 2rem);
+    max-height: calc(100% - 2rem);
+    background-color: rgb(255, 255, 255);
+    overflow: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+body.searching {
+    overflow: hidden;
+}
+body.searching > .address-search-container {
+    display: block;
+}
+
 body > .main {
     width: var(--content-width-default);
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    line-height: 125%;
+    padding: 2rem 0;
+}
+
+body > .main > .box {
+    border: 0.0625rem solid rgb(230, 230, 230);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
 }
 
 body > .main > .nav {
@@ -22,16 +61,157 @@ body > .main > .nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /*margin-right: 3rem;*/
+    margin-right: 3rem;
 }
 
-body > .main > .nav > .profile-container {
+body > .main > .nav > .profile-wrap {
     cursor: default;
     font-size: 1.25rem;
     font-weight: 500;
-    margin-bottom: 0.75rem;
+    margin: 0 0 0.75rem 2rem;
 }
 
 body > .main > .nav > .item {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .nav > .item > .link {
+    border: 0.0625rem solid rgb(230, 230, 230);
+    border-radius: 0.5rem;
+    font-weight: 400;
     margin-top: 0.75rem;
+    padding: 1rem;
+}
+
+body > .main > .nav > .item[selected] > .link {
+    background-color: rgba(var(--concept-color-pink), 65%);
+    border: 0.125rem solid rgb(var(--concept-color-pink));
+    font-weight: 500;
+    color: rgb(var(--concept-color-pink-dim));
+}
+
+body > .main > .total-section {
+    flex: 1;
+}
+
+body > .main > .total-section > .content > .title {
+    border-bottom: 0.0625rem solid rgb(230, 230, 230);
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-bottom: 1rem;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table {
+    border-collapse: collapse;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr:not(:nth-last-child(1), :nth-last-child(2)) {
+    border-bottom: 0.0625rem solid rgb(230, 230, 230);
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr:not(:last-of-type) > * {
+    padding: 1rem;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .th {
+    font: inherit;
+    padding-right: 1rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .label > .text {
+    margin-top: 0.325rem;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > *:not(:first-of-type),
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container:not(:first-of-type) > .input-container > * {
+    margin-top: 0.325rem;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-postal-wrapper {
+    max-width: 75%;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > * {
+    display: none;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > *.visible {
+    display: flex;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button {
+    display: inline-block;
+    background-color: rgb(var(--concept-color-pink));
+    margin-left: 0.325rem;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button:hover {
+    background-color: rgba(var(--concept-color-pink), 90%);
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button:active {
+    background-color: rgb(var(--concept-color-pink-dim));
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input {
+    border: 0.125rem solid rgb(var(--concept-color-pink));
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input:not(:placeholder-shown) {
+    background-color: rgba(var(--concept-color-pink), 65%);
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input:focus {
+    background-color: rgba(var(--concept-color-blue), 50%);
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td ._object-input[disabled] {
+    -webkit-touch-callout: none;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > ._object-button {
+    margin-left: 0.325rem;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .warning-container > .td > .warning {
+    display: none;
+    color: rgb(231, 76, 60);
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .warning-container > .td > .warning.visible {
+    display: flex;
+    text-align: center;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .submit-container > .td > .submit-button {
+    margin-top: 0.325rem;
+    float: right;
 }
