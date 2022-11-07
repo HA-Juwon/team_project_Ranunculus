@@ -14,6 +14,9 @@ public interface IBoardMapper {
 
     List<QnaEntity> getList();
 
+    QnaEntity selectBoardByIndex(int id);
+
+
     List<QnaEntity> getIndex();
 
     List<QnaEntity> searchTitle(String keyword);

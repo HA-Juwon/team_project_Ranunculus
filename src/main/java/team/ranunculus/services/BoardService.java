@@ -39,9 +39,15 @@ public class BoardService {
     public List<QnaEntity> getList() {
         return this.boardMapper.getList();
     }
+    public QnaEntity selectBoardByIndex(int id) {
+        return this.boardMapper.selectBoardByIndex(id);
+    }
 
     public List<QnaEntity> getIndex() {
         return this.boardMapper.getIndex();
+    }
+    public QnaEntity getIndex2(int boardIndex) {
+        return this.boardMapper.selectBoardByIndex(boardIndex);
     }
 
     public  List<QnaEntity> search(String search, String keyword) {
