@@ -6,11 +6,9 @@ import java.util.Objects;
 public class UserEntity {
     public static final String ATTRIBUTE_NAME = "memberUser";
     public static final String ATTRIBUTE_NAME_PLURAL = "memberUsers";
-
     public static UserEntity build() {
         return new UserEntity();
     }
-
     private String email;
     private String password;
     private String name;
@@ -25,12 +23,13 @@ public class UserEntity {
     private String statusValue;
     private Date registeredAt = new Date();
     private boolean isAdmin = false;
+    private String sessionId;
+    private Date limitDate=new Date();
 
     public UserEntity() {
     }
 
-    public UserEntity(String email, String password, String name, String addressPostal, String addressPrimary, String addressSecondary, String telecomValue, String contact, Date policyTermsAt, Date policyPrivacyAt, Date policyMarketingAt, String statusValue, Date registeredAt, boolean isAdmin) {
-
+    public UserEntity(String email, String password, String name, String addressPostal, String addressPrimary, String addressSecondary, String telecomValue, String contact, Date policyTermsAt, Date policyPrivacyAt, Date policyMarketingAt, String statusValue, Date registeredAt, boolean isAdmin, String sessionId, Date limitDate) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -45,6 +44,8 @@ public class UserEntity {
         this.statusValue = statusValue;
         this.registeredAt = registeredAt;
         this.isAdmin = isAdmin;
+        this.sessionId = sessionId;
+        this.limitDate = limitDate;
     }
 
     public String getEmail() {
@@ -171,6 +172,24 @@ public class UserEntity {
 
     public UserEntity setAdmin(boolean admin) {
         isAdmin = admin;
+        return this;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public UserEntity setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+        return this;
+    }
+
+    public Date getLimitDate() {
+        return limitDate;
+    }
+
+    public UserEntity setLimitDate(Date limitDate) {
+        this.limitDate = limitDate;
         return this;
     }
 

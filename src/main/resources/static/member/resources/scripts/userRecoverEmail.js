@@ -145,7 +145,7 @@ recoverEmailForm.onsubmit = e =>{
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             cover.hide();
-            console.log('되나?');
+            // console.log('되나?');
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
