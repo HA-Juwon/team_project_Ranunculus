@@ -1,117 +1,99 @@
-
+<!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html>
 <head>
-    <meta charset="UTF-8">
-    <title>상세페이지</title>
+    <meta charset="utf-8">
+    <title>상품상세보기</title>
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/shop/resources/stylesheets/detailpage.css}">
     <script defer th:src="@{/shop/resources/scripts/detailpage.js}"></script>
+    <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="wrap">
-
-        <div class="top_area">
-            <!-- 로고영역 -->
-            <div class="logo_area">
-                <a href="/main"><img src="https://airweb.co.kr/data/file/logo_portfolio/3035080643_i2nQZ4mX_43e02da1a0213af7ae7d9865593749522145e212.jpg"></a>
-            </div>
-            <div class="search_area">
-                <div class="search_wrap">
-                    <form id="searchForm" action="/search" method="get">
-                        <div class="search_input">
-                            <select name="type">
-                                <option value="T">상품이름</option>
-                                <option value="A">브랜드</option>
-                            </select>
-                            <input type="text" name="keyword">
-                            <button class='btn search_btn'>검 색</button>
-                        </div>
-                    </form>
+<div class="product_view">
+    <h2>페르몬 향수 </h2>
+    <table>
+        <caption>
+            <details class="hide">
+                <summary>상품정보</summary>
+                판매가, 상품코드, 옵션 및 결제금액 안내
+            </details>
+        </caption>
+        <colgroup>
+            <col style="width:173px;">
+            <col>
+        </colgroup>
+        <tbody>
+        <tr>
+            <th>판매가</th>
+            <td class="price">78,000</td>
+        </tr>
+        <tr>
+            <th>상품코드</th>
+            <td>C004843</td>
+        </tr>
+        <tr>
+            <th>브랜드/판매점</th>
+            <td>노블래스/올리브영</td>
+        </tr>
+        <tr>
+            <th>구매수량</th>
+            <td>
+                <div class="length">
+                    <input type="number" min="1" value="1">
+                    <a href="#a">증가</a>
+                    <a href="#a">감소</a>
                 </div>
+            </td>
+        </tr>
+        <tr>
+            <th>사용가능쿠폰</th>
+            <td>0개</td>
+        </tr>
+        <tr>
+            <th>옵션선택</th>
+            <td>
+                <select>
+                    <option>기본(+0)</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>배송비</th>
+            <td>무료배송</td>
+        </tr>
+        <tr>
+            <th>결제금액</th>
+            <td class="total"><b>78,000</b>원</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="img">
+        <img src="http://www.su-studio.co.kr/files/attach/images/239/134/058/70ee64ed99bc08f24b20df650855e8b5.jpg" alt="">
+        <ul>
+            <li class="on"><a href="#a"><img src="http://www.su-studio.co.kr/files/attach/images/239/134/058/70ee64ed99bc08f24b20df650855e8b5.jpg" alt=""></a></li>
+            <li><a href="#a"><img src="http://www.su-studio.co.kr/files/attach/images/239/134/058/70ee64ed99bc08f24b20df650855e8b5.jpg" alt=""></a></li>
+        </ul>
+    </div>
+    <div class="btns">
+        <a href="#a" class="btn1" th:href="@{/shop/basket}">장바구니</a>
+        <a href="#a" class="btn2">구매하기</a>
+        <div> <a href="#a" id="contents" class="btn3">상품설명</a> </div>
+        <div id="popup">
+            <div id="popmenu">
+                <p>안녕하세요!2</p>
+                <div class="exit">닫기</div>
             </div>
-
-            <div class="clearfix"></div>
-        </div>
-        <div class="navi_bar_area">
-            <div class="dropdown">
-                <button class="dropbtn">국내
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <c:forEach items="${cate1}" var="cate">
-                        <a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
-                    </c:forEach>
-                </div>
-            </div>
-            <div class="dropdown">
-                <button class="dropbtn">국외
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <c:forEach items="${cate2}" var="cate">
-                        <a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
-                    </c:forEach>
-                </div>
-            </div>
-        </div>
-        <div class="content_area">
-
-            <div class="slide_div_wrap">
-                <div class="slide_div">
-                    <div>
-                        <a>
-                            <img src="../resources/img/bnA_w01_a8daff.jpg">
-                        </a>
-                    </div>
-                    <div>
-                        <a>
-                            <img src="../resources/img/bnD_w01_c3c5f7.jpg">
-                        </a>
-                    </div>
-                    <div>
-                        <a>
-                            <img src="../resources/img/bnK_w01_c3c5f7.jpg">
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ls_wrap">
-                <div class="ls_div_subject">
-                    평점순 상품
-                </div>
-                <div class="ls_div">
-                    <c:forEach items="${ls}" var="ls">
-                        <a href="/goodsDetail/${ls.bookId}">
-                            <div class="ls_div_content_wrap">
-                                <div class="ls_div_content">
-                                    <div class="image_wrap" data-bookid="${ls.imageList[0].bookId}" data-path="${ls.imageList[0].uploadPath}" data-uuid="${ls.imageList[0].uuid}" data-filename="${ls.imageList[0].fileName}">
-                                        <img>
-                                    </div>
-                                    <div class="ls_category">
-                                        ${ls.cateName}
-                                    </div>
-                                    <div class="ls_rating">
-                                        ${ls.ratingAvg}
-                                    </div>
-                                    <div class="ls_bookName">
-                                        ${ls.bookName}
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </c:forEach>
-                </div>
-            </div>
-
         </div>
 
-        <!-- Footer 영역 -->
+    </div>
 
+</div>
 
+</body>
+<footer>
+    <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</footer>
+</html>
+[출처] detailpage.html|작성자 코린이스타트
 
-    </div>	<!-- class="wrap" -->
-</div>	<!-- class="wrapper" -->
