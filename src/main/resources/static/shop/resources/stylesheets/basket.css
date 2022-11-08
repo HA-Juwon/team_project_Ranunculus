@@ -25,7 +25,8 @@ body > * {
     float: left;
     width: 100%;
 }
-.basketdiv .data .empty{
+
+.basketdiv .data .empty {
     text-align: center;
     padding: 12px 0;
 }
@@ -54,6 +55,7 @@ body > * {
     flex-direction: row;
     justify-content: space-around;
 }
+
 .basketdiv .row > .subdiv:nth-child(3) {
     width: 25%;
     align-items: center;
@@ -61,12 +63,15 @@ body > * {
     flex-direction: row;
     justify-content: center;
 }
+
 .basketdiv2 .row > .subdiv:nth-child(1) {
     width: 60%;
 }
+
 .basketdiv2 .row > .subdiv:nth-child(2) {
     width: 40%;
 }
+
 .basketdiv .row > div > div {
     display: block;
     float: left;
@@ -74,13 +79,15 @@ body > * {
     margin: 0;
     padding: 12px 0;
 }
+
+
 .basketdiv .row.data > div > div {
     align-items: center;
     display: flex;
     justify-content: center;
     height: 60px;
-    line-height: 60px;
 }
+
 .basketdiv .data .num .updown {
     color: rgb(var(--concept-color-pink-dim));
     align-items: center;
@@ -104,7 +111,8 @@ body > * {
     justify-content: center;
     margin-left: 1rem;
 }
-.basketdiv .pname{
+
+.basketdiv .pname {
     width: 70%;
 }
 
@@ -120,13 +128,16 @@ body > * {
     justify-content: center;
     min-width: 105px;
 }
+
 .basketdiv .sum {
     max-width: 80px;
     color: #0000aa;
 }
+
 .basketdiv .point {
     width: 50%;
 }
+
 .basketdiv2 .basketprice {
     width: 25%;
 }
@@ -143,9 +154,7 @@ body > * {
 .basketdiv2 .point {
     width: 25%;
 }
-.basketdiv .basketcmd{
-    width: 100%;
-}
+
 .basketdiv .data .pname {
     align-items: center;
     display: flex;
@@ -154,29 +163,35 @@ body > * {
     text-align: left !important;
     line-height: 1.2 !important;
 }
+
 .basketdiv .data .price, .basketdiv .data .sum, .basketdiv .data .point {
     text-align: center;
 }
+
 .baseform > tbody > tr > td:first-child {
     width: 100px;
 }
 
 .buttongroup {
     padding: 11px 0;
-    margin: 50px 0;
 }
-.narrowbuttongroup{
+
+.narrowbuttongroup {
     margin: 15px 0;
 }
+
 .buttongroup.center {
     text-align: center;
 }
+
 .buttongroup input[type=text], .buttongroup input[type=password] {
     height: 30px;
 }
+
 .buttongroup button, .buttongroup a {
     margin-right: 5px;
 }
+
 .buttongroup button:last-child, .buttongroup a:last-child {
     margin-right: 0;
 }
@@ -206,10 +221,12 @@ body > * {
 .red {
     color: #b00;
 }
+
 .blue {
     color: #0075ff;
 }
-.basketrowcmd, .sumcount, .summoney{
+
+.basketrowcmd, .sumcount, .summoney {
     text-align: right;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -221,18 +238,22 @@ body > * {
     font-size: 1.25em;
     font-weight: bold;
 }
-.buttongroup{
+
+.buttongroup {
     text-align: center;
 }
-.buttongroup a{
+
+.buttongroup a {
+    border-radius: 0.25rem;
     text-decoration: none;
 }
+
 .cmd a, .cmd span {
     padding: 12px 30px;
     box-sizing: border-box;
     margin-top: 10px;
     font-size: 1.2em;
-    color: #000;
+    color: rgb(120, 120, 120);
     background-color: #f4f4f4;
     border: 1px solid #e0e0e0;
     text-align: center;
