@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품관리</title>
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <link rel="stylesheet" th:href="@{/product/resources/stylesheets/managementProd.css}">
+    <script defer th:src="@{/product/resources/scripts/managementProd.js}"></script>
+</head>
+<body class="_layout-hmf">
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<main class="_main main">
+    <div class="a">
+        <div class="b">
+            <h1 class="title">
+                <span class="text">상품목록보기</span>
+            </h1>
+        </div>
+        <div class="b">
+            <div class="fieldset">
+                <form class="submitForm" id="submitForm">
+                    <label class="input-container">
+
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+    <table class="division-line product-container">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>상품이미지</th>
+            <th>상품옵션</th>
+            <th>상품상세</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="no-inquiry-td" colspan="4" th:if="${list == null || list.size() == 0}">DB에 상품이 추가되지 않았습니다.</td>
+        </tr>
+
+        <tr th:each="list : ${list}">
+            <td>
+                <a th:text="${list.getIndex()}"></a>
+            </td>
+            <td>
+<!--                <img th:src="${list.get}" alt="첨부이미지" th:if="${list.imgUrl != null}">-->
+            </td>
+            <td>
+                <a th:text="${list.getName()}"></a>
+            </td>
+            </td>
+            <td>
+                <a th:text="${list.getCapacityOption()}"></a>
+            </td>
+            <td>
+                <a th:href="@{'/product/managementProd/' + ${list.getIndex()}}">상세페이지로</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</body>
+</html>

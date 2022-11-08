@@ -77,7 +77,6 @@
         WHERE `email` = #{email}
         LIMIT 1;
     </select>
-
     <select id="selectUserByContact"
             parameterType="team.ranunculus.entities.member.UserEntity"
             resultType="team.ranunculus.entities.member.UserEntity">
@@ -95,7 +94,6 @@
         WHERE `contact` = #{contact}
         LIMIT 1
     </select>
-
     <select id="selectContactAuthByContactCodeSalt"
             parameterType="team.ranunculus.entities.member.ContactAuthEntity"
             resultType="team.ranunculus.entities.member.ContactAuthEntity">
@@ -112,6 +110,30 @@
           AND `salt` = #{salt}
         LIMIT 1
     </select>
+
+    <select id="selectUserBySessionId"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        select `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `address_postal`      AS `addressPostal`,
+               `address_primary`     AS `addressPrimary`,
+               `address_secondary`   AS `addressSecondary`,
+               `telecom_value`       AS `telecomValue`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`,
+               `session_id`          AS `sessionId`,
+               `limit_date`          AS `limitDate`
+        from ranunculus_members.member
+        where `session_id` = #{sessionId}
+    </select>
+
 
     <select id="selectUserBySessionId"
             parameterType="team.ranunculus.entities.member.UserEntity"

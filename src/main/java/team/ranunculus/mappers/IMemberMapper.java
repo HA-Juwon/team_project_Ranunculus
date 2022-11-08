@@ -5,6 +5,8 @@ import team.ranunculus.entities.member.ContactAuthEntity;
 import team.ranunculus.entities.member.TelecomEntity;
 import team.ranunculus.entities.member.UserEntity;
 
+import java.util.Map;
+
 @Mapper
 public interface IMemberMapper {
     int insertContactAuth(ContactAuthEntity contactAuth);
@@ -12,6 +14,10 @@ public interface IMemberMapper {
     int insertUser(UserEntity user);
 
     UserEntity selectUserByEmail(UserEntity user);
+
+    UserEntity selectUserBySessionId(UserEntity user);
+
+    void updateAutoLogin(Map<String,Object>map);
 
     UserEntity selectUserByEmailPassword(UserEntity user);
 

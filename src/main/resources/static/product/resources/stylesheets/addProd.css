@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+label.contact {
+    display: flex;
+    flex-direction: row;
+}
+
+body > .main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 1rem;
+}
+
+
+body > .main > .addProduct-form
+{
+    width: 25rem;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .addProduct-form > * + *{
+    margin-top: 0.625rem;
+}
+
+body > .main > .addProduct-form > .title
+{
+    align-self: center;
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+body > .main > .addProduct-form >._object-button{
+    margin-top: 0.625rem;
+    display: table;
+}
+
+body>.main>.addProduct-form>.content-container.capacity{
+    display: flex;
+}
+
+body>.main>.addProduct-form>.content-container.capacity>.button{
+    background-color: rgb(var(--concept-color-pink));
+    padding: 0 1.625rem;
+}
+
+body>.main>.addProduct-form>.content-container>select{
+    width: 25rem;
+}

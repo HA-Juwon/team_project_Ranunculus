@@ -14,6 +14,7 @@ import team.ranunculus.utils.CryptoUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller(value = "team.ranunculus.controllers.BoardController")
 @RequestMapping(value = "/board")
@@ -35,14 +36,17 @@ public class BoardController {
     }
 
     @RequestMapping(value = "qna", method = RequestMethod.POST)
-    public ModelAndView postIndex(ModelAndView modelAndView,
-                                  @RequestParam(value = "search", required = false) String search,
-                                  @RequestParam(value = "keyword", required = false) String keyword) {
+    public String postIndex(ModelAndView modelAndView,
+                            @RequestParam(value = "search", required = false) String search,
+                            @RequestParam(value = "keyword", required = false) String keyword,
+                            @RequestParam(name = "page", required = false) Optional<Integer> optionalPage) {
         List<QnaEntity> list = this.boardService.search(search, keyword);
         modelAndView.clear();
         modelAndView.addObject("list", list);
         modelAndView.setViewName("board/index");
-        return modelAndView;
+        JSONObject responseJson = new JSONObject();
+        responseJson.put("list", modelAndView);
+        return responseJson.toString();
     }
 
     @RequestMapping(value = "write", method = RequestMethod.GET)
@@ -82,6 +86,8 @@ public class BoardController {
     @RequestMapping(value = "read/{id}", method = RequestMethod.GET)
     public ModelAndView getRead(@PathVariable(value = "id") int id,
                                 ModelAndView modelAndView) {
+        QnaEntity board = this.boardService.selectBoardByIndex(id);
+        modelAndView.addObject("list", board);
         modelAndView.setViewName("board/read");
         return modelAndView;
     }

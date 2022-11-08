@@ -81,9 +81,18 @@
 
     </table>
     <div class="page-container">
-        <div></div>
         <div class="number-button">
-            123456789
+<!--            <a th:each="page : ${#numbers.sequence(paging.boundStartPage, paging.boundEndPage)}"-->
+<!--               th:class="${'page' + (page == paging.requestPage ? ' selected' : '')}"-->
+<!--               th:text="${page}"-->
+<!--               th:href="@{'./' (page = ${page})}"-->
+<!--               th:if="${criteria == null || keyword == null}"></a>-->
+
+<!--            <a th:each="page : ${#numbers.sequence(paging.boundStartPage, paging.boundEndPage)}"-->
+<!--               th:class="${'page' + (page == paging.requestPage ? ' selected' : '')}"-->
+<!--               th:text="${page}"-->
+<!--               th:href="@{'./' (page = ${page}, criteria = ${criteria}, keyword = ${keyword})}"-->
+<!--               th:if="${criteria != null && keyword != null}"></a>-->
         </div>
         <div class="write-container">
             <a class="write" th:href="@{/board/write}">WRITE</a>
