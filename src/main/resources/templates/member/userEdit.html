@@ -69,7 +69,7 @@
                             <td class="td">
                                 <label class="label">
                                     <span hidden>이메일</span>
-                                    <input class="_object-input" th:value="${session.memberUser.getEmail()}" disabled>
+                                    <input class="_object-input" name="email" th:value="${session.memberUser.getEmail()}" disabled>
                                 </label>
                             </td>
                         </tr>
@@ -106,7 +106,7 @@
                             <td class="td">
                                 <label class="label">
                                     <span hidden>이름</span>
-                                    <input class="_object-input" th:value="${session.memberUser.getName()}" disabled>
+                                    <input class="_object-input" name="name" th:value="${session.memberUser.getName()}" disabled>
                                     <div class="text">• 개명으로 인한 이름 변경 시 <span class="mark">고객 센터</span>에 문의해 주세요.</div>
                                 </label>
                             </td>
@@ -152,7 +152,7 @@
                                 <label class="label contact-container contact-container-first">
                                     <span hidden class="text">연락처</span>
                                     <div class="input-container">
-                                        <input class="_object-input input" maxlength="12" name="contact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text" th:value="${session.memberUser.getContact()}">
+                                        <input class="_object-input input" maxlength="12" name="oldContact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text" th:value="${session.memberUser.getContact()}">
                                         <input name="contactAuthSalt" type="hidden">
                                         <input class="_object-button button" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
                                     </div>

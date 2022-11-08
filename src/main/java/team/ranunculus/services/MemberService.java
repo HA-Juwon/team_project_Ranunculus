@@ -49,7 +49,6 @@ public class MemberService {
     @Transactional
     public IResult checkContactAuth(ContactAuthEntity contactAuth) throws
             Exception {
-//        System.out.println(contactAuth);
         if (contactAuth.getContact() == null ||
                 contactAuth.getCode() == null ||
                 contactAuth.getSalt() == null ||

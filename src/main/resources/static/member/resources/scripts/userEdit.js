@@ -28,7 +28,7 @@ const functions = {
 
         window.document.body.classList.add('searching');
     },
-    requestContactAuthCode : (params) => {
+    requestContactAuthCode: (params) => {
         if (infoForm['contact'].value === '') {
             editWarning.show('연락처를 입력해 주세요.');
             infoForm['contact'].focus();
@@ -73,7 +73,7 @@ const functions = {
         };
         xhr.send();
     },
-    checkContactAuthCode : (params) => {
+    checkContactAuthCode: (params) => {
         if (infoForm['contactAuthCode'].value === '') {
             editWarning.show('인증번호를 입력해 주세요.');
             infoForm['contactAuthCode'].focus();
@@ -130,12 +130,12 @@ const functions = {
 }
 
 const editWarning = {
-    getElement : () => window.document.getElementById('warning'),
-    show : (text) => {
+    getElement: () => window.document.getElementById('warning'),
+    show: (text) => {
         editWarning.getElement().innerText = text;
         editWarning.getElement().classList.add('visible');
     },
-    hide : () => {
+    hide: () => {
         editWarning.getElement().classList.remove('visible');
     }
 }
@@ -143,18 +143,94 @@ const editWarning = {
 window.document.body.querySelectorAll('[data-func]').forEach(element => {
     element.addEventListener('click', event => {
         const dataFunc = element.dataset.func;
-        if (typeof(dataFunc) === 'string' && typeof(functions[dataFunc]) === 'function') {
-            functions[dataFunc] ({
-                element : element,
-                event : event
+        if (typeof (dataFunc) === 'string' && typeof (functions[dataFunc]) === 'function') {
+            functions[dataFunc]({
+                element: element,
+                event: event
             });
         }
     });
 });
 
-infoForm.onsubmit = () => {
+infoForm.onsubmit = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('email', infoForm['email'].value);
+    formData.append('password', infoForm['oldPassword'].value);
+    formData.append('name', infoForm['name'].value);
+    formData.append('addressPostal', infoForm['oldAddressPostal'].value);
+    formData.append('addressPrimary', infoForm['oldAddressPrimary'].value);
+    formData.append('addressSecondary', infoForm['oldAddressSecondary'].value);
+
+
     if (infoForm['oldPassword'].value === "") {
         editWarning.show("개인정보 수정을 위해서 현재 비밀번호를 입력해 주세요.");
         return false;
     }
+
+    if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(infoForm['oldPassword'].value)) {
+        editWarning.show('현재 비밀번호를 올바르게 입력해 주세요.');
+        infoForm['oldPassword'].focusAndSelect();
+        return false;
+    }
+
+    if (infoForm['newPassword'].value !== "") {
+        if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(infoForm['newPassword'].value)) {
+            editWarning.show('새로운 비밀번호를 올바르게 입력해 주세요.');
+            infoForm['newPassword'].focusAndSelect();
+            return false;
+        }
+
+        if (infoForm['newPassword'].value !== infoForm['newPasswordCheck'].value) {
+            editWarning.show('새로운 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.');
+            infoForm['newPasswordCheck'].focusAndSelect();
+            return false;
+        }
+        formData.append('newPassword', infoForm['newPassword'].value);
+    }
+
+    if (infoForm['newAddressPostal'].value !== "" &&
+        infoForm['newAddressPrimary'].value !== "") {
+        if (infoForm['newAddressSecondary'].value === "") {
+            editWarning.show('상세 주소를 입력해 주세요.');
+            infoForm['newAddressSecondary'].focus();
+            return false;
+        }
+        formData.append('newAddressPostal', infoForm['newAddressPostal'].value);
+        formData.append('newAddressPrimary', infoForm['newAddressPrimary'.value]);
+        formData.append('newAddressSecondary', infoForm['newAddressSecondary'].value);
+    }
+
+    if (infoForm['contactAuthRequestButton'].disabled) {
+        if (!infoForm['contactAuthCheckButton'].disabled || !infoForm['contactAuthRequestButton'].disabled) {
+            editWarning.show('연락처 인증을 완료해 주세요.');
+            return false;
+        }
+        formData.append('telecomValue', infoForm['telecomValue'].value);
+        formData.append('contact', infoForm['contact'].value);
+    }
+
+    if (infoForm['newPassword'].value === "" &&
+        infoForm['newAddressPostal'].value === "" &&
+        infoForm['newAddressPrimary'].value === "" &&
+        !infoForm['contactAuthRequestButton'].disabled) {
+        editWarning.show('개인정보 수정 사항이 없습니다. 다시 시도해 주세요.');
+        return false;
+    }
+
+    const xhr = new XMLHttpRequest();
+    cover.show();
+    xhr.open('POST', './userEdit?tab=info');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            cover.hide();
+            if (xhr.status >= 200 && xhr.status < 300) {
+
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
 };
