@@ -54,7 +54,7 @@ input[type="radio"] { vertical-align:text-bottom;}
 @charset "utf-8";
 body { padding: 50px;}
 
-.product_view { position: relative;padding: 0 0 0 395px; width: 962px; box-sizing: border-box;}
+.product_view { position: relative;padding: 0 0 0 395px; width: 962px; box-sizing: border-box; margin-left: 10%}
 .product_view .img { position: absolute; left: 0; top: 0;}
 .product_view .img > img { width: 368px; height: 370px; border:1px solid #e8e8e8; }
 .product_view .img li:after { content: ""; display: block; clear: both;}
@@ -78,8 +78,50 @@ body { padding: 50px;}
 .product_view .btns > a { display: inline-block; width: 136px; height: 42px;border-radius: 2px; font-size: 16px; color:#fff; line-height: 42px; }
 .product_view .btns > a.btn1 { background: #666;}
 .product_view .btns > a.btn2 { background: #0a56a9;}
+.product_view .btns > a.btn3 { background: #c56767;}
 
+#popup {
+    display: none; /*숨기기*/
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+}
 
+#popmenu {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    background: #fff;
+}
+
+#popmenu p {
+    margin-top: 80px;
+}
+
+.exit {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%,0);
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background: #007AAE;
+    cursor: pointer;
+}
+
+#contents {
+    text-align: center;
+    color: #fff;
+    background: #555;
+    cursor: pointer;
+}
 
 
 
