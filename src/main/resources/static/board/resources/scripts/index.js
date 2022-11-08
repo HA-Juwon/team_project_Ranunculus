@@ -28,15 +28,16 @@ submitForm.onsubmit = e => {
     }
 
     const formData = new FormData();
-
     formData.append('search', submitForm['search'].value);
     formData.append('keyword', submitForm['keyword'].value);
+
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `./qna`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('불러오기성공')
+                alert('불러오기성공');
+                console.log(submitForm['keyword'].value)
 
             } else {
                 alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');

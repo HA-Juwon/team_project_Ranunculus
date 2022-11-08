@@ -321,7 +321,6 @@ registerForm.onsubmit = e => {
     formData.append('telecomValue', registerForm['telecomValue'].value);
     formData.append('contact', registerForm['contact'].value);
     formData.append('policyMarketing', agreeAd.checked);
-
     cover.show();
     xhr.open('POST', './userRegister');
     xhr.onreadystatechange = () => {

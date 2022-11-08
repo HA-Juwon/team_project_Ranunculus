@@ -46,11 +46,38 @@
         ORDER BY `index` DESC
     </select>
 
+    <select id="getList2"
+            resultType="team.ranunculus.entities.board.QnaEntity">
+        SELECT `index`            AS `index`,
+               `writer`           AS `writer`,
+               `password`         AS `password`,
+               `title`            AS `title`,
+               `content`          AS `content`,
+               `created_at`       AS `createdAt`,
+               `email_admin_flag` AS `emailAdminFlag`
+        FROM `ranunculus_boards`.`qna`
+        LIMIT 1
+    </select>
+
     <select id="getIndex"
             resultType="team.ranunculus.entities.board.QnaEntity">
         SELECT `index` AS `index`
         FROM `ranunculus_boards`.`qna`
         ORDER BY `index` DESC
+    </select>
+
+    <select id="selectBoardByIndex"
+            resultType="team.ranunculus.entities.board.QnaEntity">
+        SELECT `index`            AS `index`,
+               `writer`           AS `writer`,
+               `password`         AS `password`,
+               `title`            AS `title`,
+               `content`          AS `content`,
+               `created_at`       AS `createdAt`,
+               `email_admin_flag` AS `emailAdminFlag`
+        FROM `ranunculus_boards`.`qna`
+        WHERE `index` = #{index}
+        LIMIT 1
     </select>
 
     <select id="searchName"

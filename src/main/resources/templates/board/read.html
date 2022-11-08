@@ -14,20 +14,35 @@
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="_main main">
-    <ul class="page-container">
-        <li class="page-wrap">
-            <a class="link page selected">1</a>
-        </li>
-        <li class="page-wrap">
-            <a class="link page" >2</a>
-        </li>
-        <li class="page-wrap">
-            <a class="link page" >3</a>
-        </li>
-        <li class="page-wrap">
-            <a class="link page" >4</a>
-        </li>
-    </ul>
+    <div class="panel" style="margin-left:1px;">
+        <div id="contAreaBox">
+            <div class="panel">
+                <div class="panel-body">
+                    <tr id="list2" th:each="list : ${list}">
+                        <td>
+                            <a id="list3" th:text="${list.getIndex()}"></a>
+                        </td>
+                        <td>
+                            <a id="list4" th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
+                        </td>
+                        <td>
+                            <a id="list5" th:text="${list.getTitle()}" th:href="@{'/board/read/' + ${list.getIndex()}}"></a>
+                        </td>
+                        <td>
+                            <a id="list6" th:text="${list.getWriter()}"></a>
+                        </td>
+                    </tr>
+                    <div style="margin-left:1px;">
+                        <a href="/board/qna" class="btn btn-primary">목록</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="_object-button modify" id="modifyButton">수정하기</button>
+    <button class="_object-button delete" id="deleteButton">삭제하기</button>
+    </aside>
+    </div>
 </main>
 <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </body>
