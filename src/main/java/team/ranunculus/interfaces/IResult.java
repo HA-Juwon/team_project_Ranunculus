@@ -5,4 +5,5 @@ public interface IResult {
     String ATTRIBUTE_NAME_PLURAL = "results";
 
     String name();
+    //질문하기
 }
