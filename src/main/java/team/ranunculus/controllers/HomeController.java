@@ -42,7 +42,7 @@ public class HomeController {
                     .setPolicyMarketingAt(null)
                     .setStatusValue(null)
                     .setRegisteredAt(null);
-            //자동로그인 부분
+            //자동로그인 부분 z
             Cookie cookie = WebUtils.getCookie(request, "loginCookie");
             if (cookie != null) { //로그인 쿠키라는 쿠키값이 있으면
                 user.setSessionId(cookie.getValue());
