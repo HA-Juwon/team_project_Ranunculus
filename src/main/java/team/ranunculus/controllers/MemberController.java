@@ -151,6 +151,12 @@ public class MemberController {
         return responseJson.toString();
     }
 
+    @RequestMapping(value = "userRegisterDone", method = RequestMethod.GET)
+    public ModelAndView getUserRegisterDone(ModelAndView modelAndView) {
+        modelAndView.setViewName("member/userRegisterDone");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "userContactAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String getUserContactAuth(ContactAuthEntity contactAuth) {

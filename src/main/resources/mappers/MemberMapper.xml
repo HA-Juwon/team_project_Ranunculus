@@ -33,28 +33,6 @@
                 #{registeredAt}, #{isAdmin}, #{sessionId}, #{limitDate})
     </insert>
 
-    <select id="selectUserByEmail"
-            parameterType="team.ranunculus.entities.member.UserEntity"
-            resultType="team.ranunculus.entities.member.UserEntity">
-        SELECT `email`               AS `email`,
-               `password`            AS `password`,
-               `name`                AS `name`,
-               `address_postal`      AS `addressPostal`,
-               `address_primary`     AS `addressPrimary`,
-               `address_secondary`   AS `addressSecondary`,
-               `telecom_value`       AS `telecomValue`,
-               `contact`             AS `contact`,
-               `policy_terms_at`     AS `policyTermsAt`,
-               `policy_privacy_at`   AS `policyPrivacyAt`,
-               `policy_marketing_at` AS `policyMarketingAt`,
-               `status_value`        AS `statusValue`,
-               `registered_at`       AS `registeredAt`,
-               `admin_flag`          AS `isAdmin`
-        FROM `ranunculus_members`.`member`
-        WHERE `email` = #{email}
-        LIMIT 1;
-    </select>
-
     <select id="selectUserByEmailPassword"
             parameterType="team.ranunculus.entities.member.UserEntity"
             resultType="team.ranunculus.entities.member.UserEntity">
@@ -76,6 +54,28 @@
         WHERE `email` = #{email}
           AND `password` = #{password}
         LIMIT 1
+    </select>
+
+    <select id="selectUserByEmail"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `address_postal`      AS `addressPostal`,
+               `address_primary`     AS `addressPrimary`,
+               `address_secondary`   AS `addressSecondary`,
+               `telecom_value`       AS `telecomValue`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`
+        FROM `ranunculus_members`.`member`
+        WHERE `email` = #{email}
+        LIMIT 1;
     </select>
     <select id="selectUserByContact"
             parameterType="team.ranunculus.entities.member.UserEntity"
@@ -111,12 +111,27 @@
         LIMIT 1
     </select>
 
-    <select id="selectTelecoms"
-            resultType="team.ranunculus.entities.member.TelecomEntity">
-        SELECT `value` AS `value`,
-               `text`  AS `text`
-        FROM `ranunculus_members`.`telecoms`
-        ORDER BY `value`
+    <select id="selectUserBySessionId"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        select `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `address_postal`      AS `addressPostal`,
+               `address_primary`     AS `addressPrimary`,
+               `address_secondary`   AS `addressSecondary`,
+               `telecom_value`       AS `telecomValue`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`,
+               `session_id`          AS `sessionId`,
+               `limit_date`          AS `limitDate`
+        from ranunculus_members.member
+        where `session_id` = #{sessionId}
     </select>
 
 
@@ -155,6 +170,7 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
+
     <update id="updateUser"
             parameterType="team.ranunculus.entities.member.UserEntity">
         UPDATE `ranunculus_members`.member
@@ -170,4 +186,13 @@
         WHERE `email` = #{email}
         LIMIT 1
     </update>
+
+    <update id="updateAutoLogin"
+            parameterType="team.ranunculus.entities.member.UserEntity">
+        update ranunculus_members.member
+        set `session_id`=#{sessionId},
+            `limit_date`=#{limitDate}
+        where `email` = #{email};
+    </update>
+
 </mapper>
