@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>상품추가</title>
+    <link rel="stylesheet" th:href="@{/product/resources/stylesheets/addProd.css}">
+    <script defer th:src="@{/product/resources/scripts/addProd.js}"></script>
+    <script src="https://kit.fontawesome.com/ac2617ecb2.js" crossorigin="anonymous"></script>
+</head>
+<body class="_layout-hmf">
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<main class="_main main">
+    <form class="addProduct-form" id="addProductForm" enctype="multipart/form-data" method="post">
+        <div class="title-box">
+            <h1 class="title">상품 추가 창</h1>
+        </div>
+        <label class="content-container capacity">
+            <span hidden>용량 추가하기</span>
+            <input class="_object-input content" name="appendCapacity"
+                   id="appendCapacity" placeholder="용량을 추가하려면 입력 후 새로고침하세요" type="number">
+            <input class="button" type="button" value="추가" name="appendCapacityButton" onclick="capacityAppend()">
+        </label>
+
+        <label class="content-container">
+            <span hidden>상품용량</span>
+            <select th:field="*{capacity}" name="prodCapacity" id="prodCapacity" onchange="capacityHandleOnChange(this)" size="3">
+                <option value="" disabled>=====================용량 선택=====================</option>
+                <option th:each="i : ${capacity}" th:value="${i.getValue()}"
+                        th:text="${i.getText()}">-</option>
+            </select>
+            <div id='capacityTexts'></div>
+        </label>
+
+        <label class="content-container">
+            <span hidden>카테고리</span>
+            <select th:field="*{category}" name="prodCategory" id="prodCategory" onchange="categoryHandleOnChange(this)" size="3">
+                <option value="" disabled>===================카테고리 선택===================</option>
+                <option th:each="i : ${category}" th:value="${i.getValue()}"
+                        th:text="${i.getText()}">-</option>
+            </select>
+            <div id='categoryTexts'></div>
+        </label>
+
+        <label class="content-container">
+            <span hidden>상품이름</span>
+            <input class="_object-input content" maxlength="50" name="prodName" id="prodName" placeholder="상품이름 (50자 이내)" type="text">
+        </label>
+
+        <label class="content-container">
+            <span hidden>원가</span>
+            <input class="_object-input content" name="costPrice" id="costPrice" placeholder="상품원가" type="number">
+        </label>
+
+
+        <label class="content-container">
+            <span hidden>정가</span>
+            <input class="_object-input content" name="netPrice" id="netPrice" placeholder="상품정가" type="number">
+        </label>
+
+        <div class="title-box">
+            <h2 class="title">상품이미지(썸네일)</h2>
+        </div>
+        <label class="content-container">
+            <span hidden>상품이미지</span>
+            <input class="_object-input content" name="prodImage" id="prodImage" placeholder="상품사진" type="file" accept="image/*">
+        </label>
+
+        <div class="title-box">
+            <h2 class="title">상품 상세사진</h2>
+        </div>
+        <label class="content-container">
+            <span hidden>상품 상세사진</span>
+            <input class="_object-input content" name="prodDetailImage" id="prodDetailImage" placeholder="상품 상세사진" type="file" accept="image/*">
+        </label>
+
+        <label class="content-container">
+            <span hidden>재고</span>
+            <input class="_object-input content" name="stock" id="stock" placeholder="재고" type="number">
+        </label>
+
+
+        <span class="warning" id="warning"></span>
+        <div class="button-container">
+            <input class="_object-button" type="submit" value="상품 추가">
+        </div>
+
+    </form>
+
+</main>
+<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</body>
+</html>

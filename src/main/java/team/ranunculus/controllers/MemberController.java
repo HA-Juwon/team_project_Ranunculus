@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 import team.ranunculus.entities.member.ContactAuthEntity;
 import team.ranunculus.entities.member.TelecomEntity;
 import team.ranunculus.entities.member.UserEntity;
@@ -14,6 +15,9 @@ import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.MemberService;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -50,7 +54,8 @@ public class MemberController {
     public String postUserLogin(@RequestParam(value = "autosign", required = false)
                                     Optional<Boolean> autosignOptional,
                                 HttpSession session,
-                                UserEntity member) {
+                                UserEntity member,
+                                HttpServletResponse response) throws NoSuchAlgorithmException {
         boolean autosign = autosignOptional.orElse(false);
         member.setName(null)
                 .setAddressPostal(null)
@@ -66,10 +71,18 @@ public class MemberController {
         IResult result = this.memberService.loginUser(member);
         if (result == CommonResult.SUCCESS) {
             session.setAttribute(UserEntity.ATTRIBUTE_NAME, member);
-            if (autosign) {
-                session.setAttribute("id",session.getId());
-                System.out.println(session.getId());
-
+            if (autosign) { //오토로그인이 체크된 채로 로그인하면
+                long second = 60 * 60 * 24 * 90; //오토로그인 작동 시간을 3달로 설정할 예정
+                Cookie cookie = new Cookie("loginCookie",session.getId());
+                cookie.setPath("/");
+                cookie.setMaxAge((int)second);
+                response.addCookie(cookie);
+                //3개월뒤의 밀리초를 날짜로 변환
+                long millis = System.currentTimeMillis() + (second * 1000);
+                Date limitDate = new Date(millis);
+//                System.out.println(limitDate);
+                //DB에 세션아이디,쿠키만료날짜,회원 아이디 전달
+                memberService.pushAutoLogin(session.getId(),limitDate,member.getEmail());
             }
         }
         JSONObject responseJson = new JSONObject();
@@ -79,7 +92,33 @@ public class MemberController {
 
     @RequestMapping(value = "userLogout", method = RequestMethod.GET)
     public ModelAndView getUserLogout(ModelAndView modelAndView,
-                                      HttpSession session) {
+                                      HttpSession session,
+                                      UserEntity member,
+                                      HttpServletRequest request,
+                                      HttpServletResponse response) {
+        member.setEmail(null)
+                .setPassword(null)
+                .setName(null)
+                .setAddressPostal(null)
+                .setAddressPrimary(null)
+                .setAddressSecondary(null)
+                .setTelecomValue(null)
+                .setContact(null)
+                .setPolicyTermsAt(null)
+                .setPolicyPrivacyAt(null)
+                .setPolicyMarketingAt(null)
+                .setStatusValue(null)
+                .setRegisteredAt(null);
+        Cookie cookie = WebUtils.getCookie(request,"loginCookie");
+        if(cookie != null) {//만약에 쿠키가 남아있다면(오토로그인을 켠 사용자가 로그아웃을 누르면) 그 세션의 유효기간을 현재까지로 바꾸고 세션아이디를 none로 바꾼다.
+            cookie.setPath("/");
+            cookie.setMaxAge(0); //쿠키의 유효기간을 지금까지로
+            response.addCookie(cookie);
+//            System.out.println("[getUserLogout]쿠키의 세션 키값"+cookie.getValue());
+            member.setSessionId(cookie.getValue());
+            this.memberService.autoLoginLogout(member);
+        }
+
         session.removeAttribute(UserEntity.ATTRIBUTE_NAME);
         modelAndView.setViewName("redirect:/");
         return modelAndView;
@@ -162,7 +201,6 @@ public class MemberController {
 
     @RequestMapping(value = "userRecoverPassword", method = RequestMethod.GET)
     public ModelAndView getUserRecoverPassword(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user, ModelAndView modelAndView) {
-
         if (user != null) {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
@@ -201,7 +239,6 @@ public class MemberController {
         return modelAndView;
     }
 
-
     @RequestMapping(value = "userResetPassword", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String postUserResetPassword(UserEntity user) {
@@ -223,7 +260,10 @@ public class MemberController {
 
     @RequestMapping(value = "userRecoverAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getUserRecoverAuth(UserEntity user, ContactAuthEntity contactAuth) {
+    public String getUserRecoverAuth(UserEntity user, ContactAuthEntity contactAuth) throws
+            IOException,
+            InvalidKeyException,
+            NoSuchAlgorithmException {
         user.setEmail(null)
                 .setPassword(null)
                 .setPolicyTermsAt(null)
@@ -276,5 +316,4 @@ public class MemberController {
         modelAndView.setViewName("member/userEdit");
         return modelAndView;
     }
-
 }

@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service(value = "team.ranunculus.services.MemberService")
 public class MemberService {
@@ -47,7 +49,7 @@ public class MemberService {
     @Transactional
     public IResult checkContactAuth(ContactAuthEntity contactAuth) throws
             Exception {
-        System.out.println(contactAuth);
+//        System.out.println(contactAuth);
         if (contactAuth.getContact() == null ||
                 contactAuth.getCode() == null ||
                 contactAuth.getSalt() == null ||
@@ -159,8 +161,73 @@ public class MemberService {
         if (member.getStatusValue().equals("SUS")) {
             return UserLoginResult.SUSPENDED;
         }
+
         return CommonResult.SUCCESS;
     }
+
+    public void pushAutoLogin(String sessionId, Date limitDate, String email){
+        Map<String,Object> map=new HashMap<>();
+        map.put("sessionId",sessionId);
+        map.put("limitDate",limitDate);
+        map.put("email",email);
+//        System.out.println(map);
+        memberMapper.updateAutoLogin(map);
+    }
+
+    //홈컨트롤러에서 호출하는 함수.
+    //쿠키에서 세션 아이디를 확인해 해당 세션 아이디를 가진 유저 찾은 뒤
+    //세션의 값을 이용해 로그인
+    public IResult autoLogin(UserEntity user){
+
+//        System.out.println("[autoLogin] 오토로그인 함수 작동함");
+        if(user.getSessionId()==null){
+//            System.out.println("[autoLogin] 세션 아이디가 없음");
+            return CommonResult.FAILURE;
+        }
+
+        UserEntity existingMember=this.memberMapper.selectUserBySessionId(user);
+        if (existingMember == null) {
+//            System.out.println("[autoLogin]오토로그인 실패");
+            return CommonResult.FAILURE;
+        }
+
+        user.setEmail(existingMember.getEmail())
+                .setPassword(existingMember.getPassword())
+                .setName(existingMember.getName())
+                .setAddressPostal(existingMember.getAddressPostal())
+                .setAddressPrimary(existingMember.getAddressPrimary())
+                .setAddressSecondary(existingMember.getAddressSecondary())
+                .setTelecomValue(existingMember.getTelecomValue())
+                .setContact(existingMember.getContact())
+                .setPolicyTermsAt(existingMember.getPolicyTermsAt())
+                .setPolicyPrivacyAt(existingMember.getPolicyPrivacyAt())
+                .setPolicyMarketingAt(existingMember.getPolicyMarketingAt())
+                .setStatusValue(existingMember.getStatusValue())
+                .setRegisteredAt(existingMember.getRegisteredAt())
+                .setAdmin(existingMember.isAdmin());
+
+        if (user.getStatusValue().equals("SUS")) {
+            return UserLoginResult.SUSPENDED;
+        }
+
+//        System.out.println("[autoLogin]오토로그인 성공");
+        return CommonResult.SUCCESS;
+    }
+
+    //오토로그인을 하는 유저가 로그아웃을 선택하면 해당 유저의 LimitDate를 현재까지로 설정
+    public void autoLoginLogout(UserEntity user){
+        user= this.memberMapper.selectUserBySessionId(user);
+        if(user!=null) {
+//            System.out.println("로그아웃하는 유저의 이메일" + user.getEmail());
+            Map<String, Object> map = new HashMap<>();
+            map.put("sessionId", "none");
+            map.put("limitDate", new Date());
+            map.put("email", user.getEmail());
+//        System.out.println(map);
+            memberMapper.updateAutoLogin(map);
+        }
+    }
+
     @Transactional
     public IResult recoverUserEmailAuth(UserEntity user, ContactAuthEntity contactAuth) throws
             IOException,
@@ -193,8 +260,8 @@ public class MemberService {
             return CommonResult.FAILURE;
         }
         String smsContent = String.format("[라넌큘러스] 인증번호 [%s]를 입력해 주세요.", contactAuth.getCode());
-        System.out.println(contactAuth.getContact()+ smsContent);
-        System.out.println(this.smsComponent.sendMessage (contactAuth.getContact(), smsContent));
+//        System.out.println(contactAuth.getContact()+ smsContent);
+//        System.out.println(this.smsComponent.sendMessage (contactAuth.getContact(), smsContent));
         if (this.smsComponent.sendMessage(contactAuth.getContact(), smsContent) != 202) {
             return CommonResult.FAILURE;
         }
@@ -227,7 +294,7 @@ public class MemberService {
     @Transactional
     public IResult resetPassword(UserEntity user){
         user.setEmail(user.getEmail());
-        System.out.println(user.getEmail());
+//        System.out.println(user.getEmail());
         UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
         if (existingUser == null) {
             return CommonResult.FAILURE;
