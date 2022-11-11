@@ -197,6 +197,16 @@ body > .main > .total-section > .info-section > .info-form > .table > .tbody > .
     -webkit-user-select: none;
 }
 
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > .input,
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > .button {
+    display: none;
+}
+
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > .input.visible,
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > .button.visible {
+    display: flex;
+}
+
 body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container > .input-container > ._object-button {
     margin-left: 0.325rem;
 }

@@ -28,16 +28,25 @@ const functions = {
 
         window.document.body.classList.add('searching');
     },
+    contactChange: (params) => {
+        infoForm['oldContact'].classList.remove('visible');
+        infoForm['contactChange'].classList.remove('visible');
+        infoForm['newContact'].classList.add('visible');
+        infoForm['contactAuthRequestButton'].classList.add('visible');
+        infoForm['contactAuthCode'].classList.add('visible');
+        infoForm['contactAuthCheckButton'].classList.add('visible');
+        infoForm['telecomValue'].removeAttribute('disabled');
+    },
     requestContactAuthCode: (params) => {
-        if (infoForm['contact'].value === '') {
+        if (infoForm['newContact'].value === '') {
             editWarning.show('연락처를 입력해 주세요.');
-            infoForm['contact'].focus();
+            infoForm['newContact'].focus();
             return;
         }
 
-        if (!new RegExp('^(\\d{8,12})$').test(infoForm['contact'].value)) {
+        if (!new RegExp('^(\\d{8,12})$').test(infoForm['newContact'].value)) {
             editWarning.show('올바른 연락처를 입력해 주세요.');
-            infoForm['contact'].focus();
+            infoForm['newContact'].focus();
             return;
         }
 
@@ -45,7 +54,7 @@ const functions = {
         cover.show('인증번호를 전송하고 있습니다.\n\n잠시만 기다려 주세요.');
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `./userContactAuth?contact=${infoForm['contact'].value}`);
+        xhr.open('GET', `./userContactAuth?contact=${infoForm['newContact'].value}`);
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 cover.hide();
@@ -55,7 +64,7 @@ const functions = {
                         case 'success':
                             alert('입력하신 연락처로 인증번호를 포함한 문자를 전송하였습니다. 5분 내로 문자로 전송된 인증번호를 확인해 주세요.');
                             infoForm['contactAuthSalt'].value = responseJson['salt'];
-                            infoForm['contact'].setAttribute('disabled', 'disabled');
+                            infoForm['newContact'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthRequestButton'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthCheckButton'].removeAttribute('disabled');
                             infoForm['contactAuthCode'].removeAttribute('disabled');
@@ -63,11 +72,11 @@ const functions = {
                             break;
                         default:
                             alert('알 수 없는 이유로 문자를 전송하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                            infoForm['contact'].focus();
+                            infoForm['newContact'].focus();
                     }
                 } else {
                     alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                    infoForm['contact'].focus();
+                    infoForm['newContact'].focus();
                 }
             }
         };
@@ -90,7 +99,7 @@ const functions = {
 
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
-        formData.append('contact', infoForm['contact'].value);
+        formData.append('contact', infoForm['newContact'].value);
         formData.append('code', infoForm['contactAuthCode'].value);
         formData.append('salt', infoForm['contactAuthSalt'].value);
         xhr.open('POST', './userContactAuth');
@@ -102,13 +111,13 @@ const functions = {
                     switch (responseJson['result']) {
                         case 'expired':
                             alert('입력한 인증번호가 만료되었습니다. 인증번호를 다시 요청하여 인증해 주세요.');
-                            infoForm['contact'].removeAttribute('disabled');
+                            infoForm['newContact'].removeAttribute('disabled');
                             infoForm['contactAuthRequestButton'].removeAttribute('disabled');
                             infoForm['contactAuthCode'].value = '';
                             infoForm['contactAuthCode'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthCheckButton'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthSalt'].value = '';
-                            infoForm['contact'].focusAndSelect();
+                            infoForm['newContact'].focusAndSelect();
                             break;
                         case 'success':
                             infoForm['contactAuthCode'].setAttribute('disabled', 'disabled');
@@ -162,6 +171,8 @@ infoForm.onsubmit = e => {
     formData.append('addressPostal', infoForm['oldAddressPostal'].value);
     formData.append('addressPrimary', infoForm['oldAddressPrimary'].value);
     formData.append('addressSecondary', infoForm['oldAddressSecondary'].value);
+    formData.append('telecomValue', infoForm['telecomValue'].value);
+    formData.append('newContact', infoForm['newContact'].value);
 
 
     if (infoForm['oldPassword'].value === "") {

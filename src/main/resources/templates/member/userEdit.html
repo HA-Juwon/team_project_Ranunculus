@@ -137,7 +137,7 @@
                             <td class="td">
                                 <label class="label">
                                     <span hidden>연락처 통신사</span>
-                                    <select class="_object-input" name="telecomValue">
+                                    <select class="_object-input" name="telecomValue" disabled>
                                         <option th:each="telecom : ${memberTelecoms}"
                                                 th:value="${telecom.getValue()}"
                                                 th:text="${telecom.getText()}"
@@ -152,8 +152,10 @@
                                 <label class="label contact-container contact-container-first">
                                     <span hidden class="text">연락처</span>
                                     <div class="input-container">
-                                        <input class="_object-input input" maxlength="12" name="oldContact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text" th:value="${session.memberUser.getContact()}">
+                                        <input class="_object-input input visible" disabled name="oldContact" th:value="${session.memberUser.getContact()}">
+                                        <input class="_object-input input" maxlength="12" name="newContact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text" th:value="${session.memberUser.getContact()}">
                                         <input name="contactAuthSalt" type="hidden">
+                                        <input class="_object-button button visible" name="contactChange" type="button" value="연락처 변경" data-func="contactChange">
                                         <input class="_object-button button" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
                                     </div>
                                 </label>
@@ -163,7 +165,7 @@
                                         <input class="_object-input input" disabled maxlength="6" name="contactAuthCode" placeholder="인증번호" type="text">
                                         <input class="_object-button button" disabled name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
                                     </div>
-                                    <div class="text">• 연락처 변경은 새로운 연락처 입력 후 <span class="mark">재인증</span>을 진행해 주세요.</div>
+                                    <div class="text visible">• 연락처 변경은 새로운 연락처 입력 후 <span class="mark">재인증</span>을 진행해 주세요.</div>
                                 </label>
                             </td>
                         </tr>
