@@ -33,7 +33,7 @@ const functions = {
         infoForm['contactChange'].classList.remove('visible');
         infoForm['newContact'].classList.add('visible');
         infoForm['contactAuthRequestButton'].classList.add('visible');
-        infoForm['contactAuthCode'].classList.add('visible');
+        infoForm['newContactAuthCode'].classList.add('visible');
         infoForm['contactAuthCheckButton'].classList.add('visible');
         infoForm['telecomValue'].removeAttribute('disabled');
     },
@@ -63,12 +63,12 @@ const functions = {
                     switch (responseJson['result']) {
                         case 'success':
                             alert('입력하신 연락처로 인증번호를 포함한 문자를 전송하였습니다. 5분 내로 문자로 전송된 인증번호를 확인해 주세요.');
-                            infoForm['contactAuthSalt'].value = responseJson['salt'];
+                            infoForm['newContactAuthSalt'].value = responseJson['salt'];
                             infoForm['newContact'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthRequestButton'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthCheckButton'].removeAttribute('disabled');
-                            infoForm['contactAuthCode'].removeAttribute('disabled');
-                            infoForm['contactAuthCode'].focus();
+                            infoForm['newContactAuthCode'].removeAttribute('disabled');
+                            infoForm['newContactAuthCode'].focus();
                             break;
                         default:
                             alert('알 수 없는 이유로 문자를 전송하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
@@ -83,14 +83,14 @@ const functions = {
         xhr.send();
     },
     checkContactAuthCode: (params) => {
-        if (infoForm['contactAuthCode'].value === '') {
+        if (infoForm['newContactAuthCode'].value === '') {
             editWarning.show('인증번호를 입력해 주세요.');
-            infoForm['contactAuthCode'].focus();
+            infoForm['newContactAuthCode'].focus();
             return;
         }
-        if (!new RegExp('^(\\d{6})$').test(infoForm['contactAuthCode'].value)) {
+        if (!new RegExp('^(\\d{6})$').test(infoForm['newContactAuthCode'].value)) {
             editWarning.show('올바른 인증번호를 입력해 주세요.');
-            infoForm['contactAuthCode'].focusAndSelect();
+            infoForm['newContactAuthCode'].focusAndSelect();
             return;
         }
 
@@ -100,8 +100,8 @@ const functions = {
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
         formData.append('contact', infoForm['newContact'].value);
-        formData.append('code', infoForm['contactAuthCode'].value);
-        formData.append('salt', infoForm['contactAuthSalt'].value);
+        formData.append('code', infoForm['newContactAuthCode'].value);
+        formData.append('salt', infoForm['newContactAuthSalt'].value);
         xhr.open('POST', './userContactAuth');
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -113,24 +113,24 @@ const functions = {
                             alert('입력한 인증번호가 만료되었습니다. 인증번호를 다시 요청하여 인증해 주세요.');
                             infoForm['newContact'].removeAttribute('disabled');
                             infoForm['contactAuthRequestButton'].removeAttribute('disabled');
-                            infoForm['contactAuthCode'].value = '';
-                            infoForm['contactAuthCode'].setAttribute('disabled', 'disabled');
+                            infoForm['newContactAuthCode'].value = '';
+                            infoForm['newContactAuthCode'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthCheckButton'].setAttribute('disabled', 'disabled');
-                            infoForm['contactAuthSalt'].value = '';
+                            infoForm['newContactAuthSalt'].value = '';
                             infoForm['newContact'].focusAndSelect();
                             break;
                         case 'success':
-                            infoForm['contactAuthCode'].setAttribute('disabled', 'disabled');
+                            infoForm['newContactAuthCode'].setAttribute('disabled', 'disabled');
                             infoForm['contactAuthCheckButton'].setAttribute('disabled', 'disabled');
                             alert('연락처가 성공적으로 인증되었습니다.');
                             break;
                         default:
-                            infoForm['contactAuthCode'].focusAndSelect();
+                            infoForm['newContactAuthCode'].focusAndSelect();
                             alert('입력한 인증번호가 올바르지 않습니다.');
                     }
                 } else {
                     alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                    infoForm['contactAuthCode'].focusAndSelect();
+                    infoForm['newContactAuthCode'].focusAndSelect();
                 }
             }
         };
@@ -166,17 +166,10 @@ infoForm.onsubmit = e => {
 
     const formData = new FormData();
     formData.append('email', infoForm['email'].value);
-    formData.append('password', infoForm['oldPassword'].value);
-    formData.append('name', infoForm['name'].value);
-    formData.append('addressPostal', infoForm['oldAddressPostal'].value);
-    formData.append('addressPrimary', infoForm['oldAddressPrimary'].value);
-    formData.append('addressSecondary', infoForm['oldAddressSecondary'].value);
-    formData.append('telecomValue', infoForm['telecomValue'].value);
-    formData.append('newContact', infoForm['newContact'].value);
-
+    formData.append('oldPassword', infoForm['oldPassword'].value);
 
     if (infoForm['oldPassword'].value === "") {
-        editWarning.show("개인정보 수정을 위해서 현재 비밀번호를 입력해 주세요.");
+        editWarning.show("회원정보 수정을 위해서 현재 비밀번호를 입력해 주세요.");
         return false;
     }
 
@@ -209,7 +202,7 @@ infoForm.onsubmit = e => {
             return false;
         }
         formData.append('newAddressPostal', infoForm['newAddressPostal'].value);
-        formData.append('newAddressPrimary', infoForm['newAddressPrimary'.value]);
+        formData.append('newAddressPrimary', infoForm['newAddressPrimary'].value);
         formData.append('newAddressSecondary', infoForm['newAddressSecondary'].value);
     }
 
@@ -218,15 +211,17 @@ infoForm.onsubmit = e => {
             editWarning.show('연락처 인증을 완료해 주세요.');
             return false;
         }
-        formData.append('telecomValue', infoForm['telecomValue'].value);
-        formData.append('contact', infoForm['contact'].value);
+        formData.append('newTelecomValue', infoForm['telecomValue'].value);
+        formData.append('newContact', infoForm['newContact'].value);
+        formData.append('newContactAuthCode', infoForm['newContactAuthCode'].value);
+        formData.append('newContactAuthSalt', infoForm['newContactAuthSalt'].value);
     }
 
     if (infoForm['newPassword'].value === "" &&
         infoForm['newAddressPostal'].value === "" &&
         infoForm['newAddressPrimary'].value === "" &&
         !infoForm['contactAuthRequestButton'].disabled) {
-        editWarning.show('개인정보 수정 사항이 없습니다. 다시 시도해 주세요.');
+        editWarning.show('회원정보 수정 사항이 없습니다. 다시 시도해 주세요.');
         return false;
     }
 
@@ -237,7 +232,7 @@ infoForm.onsubmit = e => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
-
+                // window.location.href
             } else {
                 alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
             }

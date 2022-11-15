@@ -1,4 +1,5 @@
 package team.ranunculus.services;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import java.util.Map;
 public class MemberService {
     private final IMemberMapper memberMapper;
     private final SmsComponent smsComponent;
+
     @Autowired
     public MemberService(IMemberMapper memberMapper, SmsComponent smsComponent) {
         this.memberMapper = memberMapper;
@@ -66,7 +68,7 @@ public class MemberService {
         }
         contactAuth.setExpired(true);
         if (this.memberMapper.updateContactAuth(contactAuth) == 0) {
-           return CommonResult.FAILURE;
+            return CommonResult.FAILURE;
         }
         return CommonResult.SUCCESS;
     }
@@ -164,11 +166,11 @@ public class MemberService {
         return CommonResult.SUCCESS;
     }
 
-    public void pushAutoLogin(String sessionId, Date limitDate, String email){
-        Map<String,Object> map=new HashMap<>();
-        map.put("sessionId",sessionId);
-        map.put("limitDate",limitDate);
-        map.put("email",email);
+    public void pushAutoLogin(String sessionId, Date limitDate, String email) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("sessionId", sessionId);
+        map.put("limitDate", limitDate);
+        map.put("email", email);
 //        System.out.println(map);
         memberMapper.updateAutoLogin(map);
     }
@@ -176,15 +178,15 @@ public class MemberService {
     //홈컨트롤러에서 호출하는 함수.
     //쿠키에서 세션 아이디를 확인해 해당 세션 아이디를 가진 유저 찾은 뒤
     //세션의 값을 이용해 로그인
-    public IResult autoLogin(UserEntity user){
+    public IResult autoLogin(UserEntity user) {
 
 //        System.out.println("[autoLogin] 오토로그인 함수 작동함");
-        if(user.getSessionId()==null){
+        if (user.getSessionId() == null) {
 //            System.out.println("[autoLogin] 세션 아이디가 없음");
             return CommonResult.FAILURE;
         }
 
-        UserEntity existingMember=this.memberMapper.selectUserBySessionId(user);
+        UserEntity existingMember = this.memberMapper.selectUserBySessionId(user);
         if (existingMember == null) {
 //            System.out.println("[autoLogin]오토로그인 실패");
             return CommonResult.FAILURE;
@@ -214,9 +216,9 @@ public class MemberService {
     }
 
     //오토로그인을 하는 유저가 로그아웃을 선택하면 해당 유저의 LimitDate를 현재까지로 설정
-    public void autoLoginLogout(UserEntity user){
-        user= this.memberMapper.selectUserBySessionId(user);
-        if(user!=null) {
+    public void autoLoginLogout(UserEntity user) {
+        user = this.memberMapper.selectUserBySessionId(user);
+        if (user != null) {
 //            System.out.println("로그아웃하는 유저의 이메일" + user.getEmail());
             Map<String, Object> map = new HashMap<>();
             map.put("sessionId", "none");
@@ -225,6 +227,61 @@ public class MemberService {
 //        System.out.println(map);
             memberMapper.updateAutoLogin(map);
         }
+    }
+
+    //TODO : 주소값 기입안되는 현상 조치, 현재 패스워드와 신규 패스워드 동일할시 Password Duplicate 반환
+    @Transactional
+    public IResult editUser(UserEntity currentUser, UserEntity newUser, String oldPassword, ContactAuthEntity contactAuth)
+            throws Exception {
+        if (currentUser == null ||
+                currentUser.getPassword() == null ||
+                oldPassword == null ||
+                !CryptoUtils.hashSha512(oldPassword).equals(currentUser.getPassword())) {
+            return CommonResult.FAILURE;
+        }
+        // 접속 유저와 현재 입력한 비밀번호가 미일치 되었을 때
+        if (newUser.getPassword() != null && !newUser.getPassword().matches(MemberRegex.USER_PASSWORD)) {
+            return CommonResult.FAILURE;
+        }
+        // 신규 비밀번호 정규화 실패
+
+
+        // 신규 주소 정규화 실패
+        if (newUser.getContact() != null && (!newUser.getContact().matches(MemberRegex.USER_CONTACT) ||
+        this.checkContactAuth(contactAuth) != CommonResult.EXPIRED)) {
+            return CommonResult.EXPIRED;
+        }
+        // 신규 연락처 정규화 실패 혹은 인증 실패
+
+        String backupCurrentPassword = currentUser.getPassword();
+        String backupCurrentAddressPostal = currentUser.getAddressPostal();
+        String backupCurrentAddressPrimary = currentUser.getAddressPrimary();
+        String backupCurrentAddressSecondary = currentUser.getAddressSecondary();
+        String backupCurrentCurrentContact = currentUser.getContact();
+        // 업데이트 실패시 세션 복원 값
+
+        if (newUser.getPassword() != null) {
+            currentUser.setPassword(CryptoUtils.hashSha512(newUser.getPassword()));
+        }
+        if (newUser.getAddressPostal() != null &&
+        newUser.getAddressPrimary() != null &&
+        newUser.getAddressSecondary() != null) {
+            currentUser.setAddressPostal(newUser.getAddressPostal())
+                    .setAddressPrimary(newUser.getAddressPrimary())
+                    .setAddressSecondary(newUser.getAddressSecondary());
+        }
+        if (newUser.getContact() != null) {
+            currentUser.setContact(newUser.getContact());
+        }
+        int record = this.memberMapper.updateUser(currentUser);
+        if (record == 0) {
+            currentUser.setPassword(backupCurrentPassword)
+                    .setAddressPostal(backupCurrentAddressPostal)
+                    .setAddressPrimary(backupCurrentAddressPrimary)
+                    .setAddressSecondary(backupCurrentAddressSecondary)
+                    .setContact(backupCurrentCurrentContact);
+        }
+        return CommonResult.SUCCESS;
     }
 
     @Transactional
@@ -291,7 +348,7 @@ public class MemberService {
     }
 
     @Transactional
-    public IResult resetPassword(UserEntity user){
+    public IResult resetPassword(UserEntity user) {
         user.setEmail(user.getEmail());
 //        System.out.println(user.getEmail());
         UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
