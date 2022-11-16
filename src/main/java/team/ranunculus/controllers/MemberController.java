@@ -47,6 +47,7 @@ public class MemberController {
     public ModelAndView getUserLogin(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity member, ModelAndView modelAndView) {
         if (member != null) {
             modelAndView.setViewName("redirect:/");
+            return modelAndView;
         }
         modelAndView.setViewName("member/userLogin");
         return modelAndView;
@@ -269,10 +270,7 @@ public class MemberController {
 
     @RequestMapping(value = "userRecoverAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getUserRecoverAuth(UserEntity user, ContactAuthEntity contactAuth) throws
-            IOException,
-            InvalidKeyException,
-            NoSuchAlgorithmException {
+    public String getUserRecoverAuth(UserEntity user, ContactAuthEntity contactAuth) {
         user.setEmail(null)
                 .setPassword(null)
                 .setPolicyTermsAt(null)
@@ -312,11 +310,12 @@ public class MemberController {
 
     @RequestMapping(value = "userEdit", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView getUserEdit(@SessionAttribute(UserEntity.ATTRIBUTE_NAME) UserEntity user,
+    public ModelAndView getUserEdit(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
                                     @RequestParam(value = "tab", required = false, defaultValue = "info") String tab,
                                     ModelAndView modelAndView) {
         if (user == null) {
             modelAndView.setViewName("redirect:/member/userLogin");
+            return modelAndView;
         }
         if (tab == null || tab.equals("info") || (!tab.equals("qna") && !tab.equals("review") && !tab.equals("shipping") && !tab.equals("truncate"))) {
             TelecomEntity[] telecoms = this.memberService.getTelecoms();
@@ -326,9 +325,9 @@ public class MemberController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "userEdit", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "userEditInfo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postUserEdit(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME) UserEntity currentUser,
+    public String postUserEditInfo(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME) UserEntity currentUser,
                                @RequestParam(value = "oldPassword") String oldPassword,
                                @RequestParam(value = "newPassword", required = false) String newPassword,
                                @RequestParam(value = "newAddressPostal", required = false) String newAddressPostal,
@@ -361,6 +360,7 @@ public class MemberController {
                 .setSalt(newContactAuthSalt);
         IResult result = this.memberService.editUser(currentUser, newUser, oldPassword, contactAuth);
         JSONObject responseJson = new JSONObject();
+        System.out.println(result);
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
     }

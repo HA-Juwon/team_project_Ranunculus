@@ -180,15 +180,12 @@ public class MemberService {
     //세션의 값을 이용해 로그인
     public IResult autoLogin(UserEntity user) {
 
-//        System.out.println("[autoLogin] 오토로그인 함수 작동함");
         if (user.getSessionId() == null) {
-//            System.out.println("[autoLogin] 세션 아이디가 없음");
             return CommonResult.FAILURE;
         }
 
         UserEntity existingMember = this.memberMapper.selectUserBySessionId(user);
         if (existingMember == null) {
-//            System.out.println("[autoLogin]오토로그인 실패");
             return CommonResult.FAILURE;
         }
 
@@ -211,7 +208,6 @@ public class MemberService {
             return UserLoginResult.SUSPENDED;
         }
 
-//        System.out.println("[autoLogin]오토로그인 성공");
         return CommonResult.SUCCESS;
     }
 
@@ -219,7 +215,6 @@ public class MemberService {
     public void autoLoginLogout(UserEntity user) {
         user = this.memberMapper.selectUserBySessionId(user);
         if (user != null) {
-//            System.out.println("로그아웃하는 유저의 이메일" + user.getEmail());
             Map<String, Object> map = new HashMap<>();
             map.put("sessionId", "none");
             map.put("limitDate", new Date());
@@ -229,7 +224,6 @@ public class MemberService {
         }
     }
 
-    //TODO : 주소값 기입안되는 현상 조치, 현재 패스워드와 신규 패스워드 동일할시 Password Duplicate 반환
     @Transactional
     public IResult editUser(UserEntity currentUser, UserEntity newUser, String oldPassword, ContactAuthEntity contactAuth)
             throws Exception {
@@ -239,14 +233,15 @@ public class MemberService {
                 !CryptoUtils.hashSha512(oldPassword).equals(currentUser.getPassword())) {
             return CommonResult.FAILURE;
         }
-        // 접속 유저와 현재 입력한 비밀번호가 미일치 되었을 때
+        // 현재 입력한 비밀번호가 아닐 때
         if (newUser.getPassword() != null && !newUser.getPassword().matches(MemberRegex.USER_PASSWORD)) {
             return CommonResult.FAILURE;
         }
         // 신규 비밀번호 정규화 실패
-
-
-        // 신규 주소 정규화 실패
+        if (currentUser.getPassword().matches(CryptoUtils.hashSha512(newUser.getPassword()))) {
+            return CommonResult.DUPLICATE;
+        }
+        // 현재 비밀번호와 신규 비밀번호가 동일 할 시
         if (newUser.getContact() != null && (!newUser.getContact().matches(MemberRegex.USER_CONTACT) ||
         this.checkContactAuth(contactAuth) != CommonResult.EXPIRED)) {
             return CommonResult.EXPIRED;
@@ -257,7 +252,8 @@ public class MemberService {
         String backupCurrentAddressPostal = currentUser.getAddressPostal();
         String backupCurrentAddressPrimary = currentUser.getAddressPrimary();
         String backupCurrentAddressSecondary = currentUser.getAddressSecondary();
-        String backupCurrentCurrentContact = currentUser.getContact();
+        String backupCurrentTelecomValue = currentUser.getTelecomValue();
+        String backupCurrentContact = currentUser.getContact();
         // 업데이트 실패시 세션 복원 값
 
         if (newUser.getPassword() != null) {
@@ -270,7 +266,9 @@ public class MemberService {
                     .setAddressPrimary(newUser.getAddressPrimary())
                     .setAddressSecondary(newUser.getAddressSecondary());
         }
-        if (newUser.getContact() != null) {
+        if (newUser.getTelecomValue() != null &&
+                newUser.getContact() != null) {
+            currentUser.setTelecomValue(newUser.getTelecomValue());
             currentUser.setContact(newUser.getContact());
         }
         int record = this.memberMapper.updateUser(currentUser);
@@ -279,7 +277,8 @@ public class MemberService {
                     .setAddressPostal(backupCurrentAddressPostal)
                     .setAddressPrimary(backupCurrentAddressPrimary)
                     .setAddressSecondary(backupCurrentAddressSecondary)
-                    .setContact(backupCurrentCurrentContact);
+                    .setTelecomValue(backupCurrentTelecomValue)
+                    .setContact(backupCurrentContact);
         }
         return CommonResult.SUCCESS;
     }
@@ -316,8 +315,6 @@ public class MemberService {
             return CommonResult.FAILURE;
         }
         String smsContent = String.format("[라넌큘러스] 인증번호 [%s]를 입력해 주세요.", contactAuth.getCode());
-//        System.out.println(contactAuth.getContact()+ smsContent);
-//        System.out.println(this.smsComponent.sendMessage (contactAuth.getContact(), smsContent));
         if (this.smsComponent.sendMessage(contactAuth.getContact(), smsContent) != 202) {
             return CommonResult.FAILURE;
         }
@@ -350,7 +347,6 @@ public class MemberService {
     @Transactional
     public IResult resetPassword(UserEntity user) {
         user.setEmail(user.getEmail());
-//        System.out.println(user.getEmail());
         UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
         if (existingUser == null) {
             return CommonResult.FAILURE;

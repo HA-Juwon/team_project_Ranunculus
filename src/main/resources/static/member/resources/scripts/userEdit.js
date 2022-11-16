@@ -226,15 +226,30 @@ infoForm.onsubmit = e => {
     }
 
     const xhr = new XMLHttpRequest();
-    cover.show();
-    xhr.open('POST', './userEdit?tab=info');
+    cover.show('회원정보 변경 사항을 적용중입니다.');
+    xhr.open('POST', './userEditInfo');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             cover.hide();
             if (xhr.status >= 200 && xhr.status < 300) {
-                // window.location.href
+                const responseJson = JSON.parse(xhr.responseText);
+                switch (responseJson['result']) {
+                    case 'success' :
+                        alert('회원정보 변경 사항이 적용되었습니다.');
+                        window.location.reload();
+                        break;
+                    case 'duplicate' :
+                        editWarning.show('현재 비밀번호와 동일한 신규 비밀번호를 입력하였습니다. 다시 입력해 주세요.');
+                        infoForm['newPassword'].select();
+                        break;
+                    case 'expired' :
+                        editWarning.show('올바른 연락처가 아니거나 연락처 인증을 미진행 하였습니다.');
+                        break;
+                    default :
+                        editWarning.show('알 수 없는 이유로 회원정보를 변경하지 못하였습니다. 잠시 후 다시 시도해 주세요.')
+                }
             } else {
-                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                editWarning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
             }
         }
     };

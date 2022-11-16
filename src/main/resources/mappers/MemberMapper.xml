@@ -168,16 +168,21 @@
 
     <update id="updateUser"
             parameterType="team.ranunculus.entities.member.UserEntity">
-        UPDATE `ranunculus_members`.member
+        UPDATE `ranunculus_members`.`member`
         SET `password`            = #{password},
-            `name`                = #{name},
+            `address_postal`      = #{addressPostal},
+            `address_primary`     = #{addressPrimary},
+            `address_secondary`   = #{addressSecondary},
+            `telecom_value`       = #{telecomValue},
             `contact`             = #{contact},
             `policy_terms_at`     = #{policyTermsAt},
             `policy_privacy_at`   = #{policyPrivacyAt},
             `policy_marketing_at` = #{policyMarketingAt},
             `status_value`        = #{statusValue},
             `registered_at`       = #{registeredAt},
-            `admin_flag`          = #{isAdmin}
+            `admin_flag`          = #{isAdmin},
+            `session_id`          = #{sessionId},
+            `limit_date`          = #{limitDate}
         WHERE `email` = #{email}
         LIMIT 1
     </update>

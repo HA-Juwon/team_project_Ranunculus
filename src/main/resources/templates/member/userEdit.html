@@ -56,8 +56,17 @@
             <section class="content shipping-section" th:case="'shipping'">
                 <h2 class="title">주문현황/배송조회</h2>
             </section>
+<!--            TODO : 회원탈퇴 html 구현 필요-->
             <section class="content truncate-section" th:case="'truncate'">
                 <h2 class="title">회원탈퇴</h2>
+                <pre>
+
+                </pre>
+                <form>
+                    <label>
+                        <input type="button" data-func="??">
+                    </label>
+                </form>
             </section>
             <section class="content info-section" th:case="*">
                 <h2 class="title">회원정보</h2>
