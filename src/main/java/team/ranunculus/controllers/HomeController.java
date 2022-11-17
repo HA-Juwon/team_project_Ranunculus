@@ -25,7 +25,7 @@ public class HomeController {
                                  UserEntity user,
                                  HttpServletRequest request,
                                  HttpSession session) {
-        //멤버는 세션에서 받아온 유저엔타타
+        //멤버는 세션에서 받아온 유저엔타티티임
         //유저는 로그인에 사용할 유저엔티티임
         if(member==null) {
             //로그인되어있지 않은 상태면
@@ -42,9 +42,10 @@ public class HomeController {
                     .setPolicyMarketingAt(null)
                     .setStatusValue(null)
                     .setRegisteredAt(null);
-            //자동로그인 부분 z
+            //자동로그인 부분
             Cookie cookie = WebUtils.getCookie(request, "loginCookie");
             if (cookie != null) { //로그인 쿠키라는 쿠키값이 있으면
+                System.out.println("작동함");
                 user.setSessionId(cookie.getValue());
                 session.setAttribute(UserEntity.ATTRIBUTE_NAME, user);
                 this.memberService.autoLogin(user);
