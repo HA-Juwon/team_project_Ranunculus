@@ -56,8 +56,20 @@
             <section class="content shipping-section" th:case="'shipping'">
                 <h2 class="title">주문현황/배송조회</h2>
             </section>
+<!--            TODO : 회원탈퇴 html 구현 필요-->
             <section class="content truncate-section" th:case="'truncate'">
                 <h2 class="title">회원탈퇴</h2>
+                <pre>
+                    지금까지 라넌큘러스 서비스를 이용해주셔서 감사합니다.
+                    회원을 탈퇴하시면 사이트 이용이 원활하지 않을 수 있으며
+                    모든 데이터는 복구가 불가능합니다.
+                </pre>
+
+                <form>
+                    <label>
+                        <input type="button" data-func="??">
+                    </label>
+                </form>
             </section>
             <section class="content info-section" th:case="*">
                 <h2 class="title">회원정보</h2>
@@ -69,7 +81,7 @@
                             <td class="td">
                                 <label class="label">
                                     <span hidden>이메일</span>
-                                    <input class="_object-input" th:value="${session.memberUser.getEmail()}" disabled>
+                                    <input class="_object-input" name="email" th:value="${session.memberUser.getEmail()}" disabled>
                                 </label>
                             </td>
                         </tr>
@@ -106,7 +118,7 @@
                             <td class="td">
                                 <label class="label">
                                     <span hidden>이름</span>
-                                    <input class="_object-input" th:value="${session.memberUser.getName()}" disabled>
+                                    <input class="_object-input" name="name" th:value="${session.memberUser.getName()}" disabled>
                                     <div class="text">• 개명으로 인한 이름 변경 시 <span class="mark">고객 센터</span>에 문의해 주세요.</div>
                                 </label>
                             </td>
@@ -137,7 +149,7 @@
                             <td class="td">
                                 <label class="label">
                                     <span hidden>연락처 통신사</span>
-                                    <select class="_object-input" name="telecomValue">
+                                    <select class="_object-input" name="telecomValue" disabled>
                                         <option th:each="telecom : ${memberTelecoms}"
                                                 th:value="${telecom.getValue()}"
                                                 th:text="${telecom.getText()}"
@@ -152,18 +164,20 @@
                                 <label class="label contact-container contact-container-first">
                                     <span hidden class="text">연락처</span>
                                     <div class="input-container">
-                                        <input class="_object-input input" maxlength="12" name="contact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text" th:value="${session.memberUser.getContact()}">
-                                        <input name="contactAuthSalt" type="hidden">
+                                        <input class="_object-input input visible" disabled name="oldContact" th:value="${session.memberUser.getContact()}">
+                                        <input class="_object-input input" maxlength="12" name="newContact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text">
+                                        <input name="newContactAuthSalt" type="hidden">
+                                        <input class="_object-button button visible" name="contactChange" type="button" value="연락처 변경" data-func="contactChange">
                                         <input class="_object-button button" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
                                     </div>
                                 </label>
                                 <label class="label contact-container">
                                     <span hidden class="text">연락처 인증번호</span>
                                     <div class="input-container">
-                                        <input class="_object-input input" disabled maxlength="6" name="contactAuthCode" placeholder="인증번호" type="text">
+                                        <input class="_object-input input" disabled maxlength="6" name="newContactAuthCode" placeholder="인증번호" type="text">
                                         <input class="_object-button button" disabled name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
                                     </div>
-                                    <div class="text">• 연락처 변경은 새로운 연락처 입력 후 <span class="mark">재인증</span>을 진행해 주세요.</div>
+                                    <div class="text visible">• 연락처 변경은 새로운 연락처 입력 후 <span class="mark">재인증</span>을 진행해 주세요.</div>
                                 </label>
                             </td>
                         </tr>

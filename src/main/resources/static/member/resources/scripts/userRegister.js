@@ -6,7 +6,7 @@ const agreeAd = window.document.getElementById('agreeAd');
 
 const functions = {
     termsAllCheck : (params) => {
-        if (!agreeService.checked || !agreePrivacy.checked) {
+        if (!agreeService.checked || !agreePrivacy.checked || !agreeAd.checked) {
             agreeService.checked = "true";
             agreePrivacy.checked = "true";
             agreeAd.checked = "true";
