@@ -78,7 +78,14 @@
     <div class="btns">
         <a href="#a" class="btn1" th:href="@{/shop/basket}">장바구니</a>
         <a href="#a" class="btn2">구매하기</a>
-        <div> <a href="#a" id="contents" class="btn3">상품설명</a> </div>
+        <input id="check-btn" type="checkbox" />
+        <label for="check-btn"  class="btn3"><a id="contents" class="btn3">상품설명</a></label>
+        <ul class="menubars">
+            <div><img src="http://link.webhard.co.kr/img/HDD_IDAONCOSPER_FD201307101014516768182F5"></div>
+        </ul>
+
+
+
         <div id="popup">
             <div id="popmenu">
                 <p>안녕하세요!2</p>
@@ -88,6 +95,7 @@
 
     </div>
 
+
 </div>
 
 </body>
@@ -95,5 +103,3 @@
     <th:block th:replace="~{fragments/footer.html :: content}"></th:block>
 </footer>
 </html>
-[출처] detailpage.html|작성자 코린이스타트
-
