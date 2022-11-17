@@ -39,6 +39,7 @@ public class BoardService {
     public List<QnaEntity> getList() {
         return this.boardMapper.getList();
     }
+
     public QnaEntity selectBoardByIndex(int id) {
         return this.boardMapper.selectBoardByIndex(id);
     }
@@ -46,20 +47,35 @@ public class BoardService {
     public List<QnaEntity> getIndex() {
         return this.boardMapper.getIndex();
     }
+
     public QnaEntity getIndex2(int boardIndex) {
         return this.boardMapper.selectBoardByIndex(boardIndex);
     }
 
-    public  List<QnaEntity> search(String search, String keyword) {
-        if (search.equals("name"))  {
+    public List<QnaEntity> search(String search, String keyword) {
+        if (search.equals("name")) {
             return this.boardMapper.searchName(keyword);
         } else if (search.equals("title")) {
             return this.boardMapper.searchTitle(keyword);
-        } else if (search.equals("content")){
+        } else if (search.equals("content")) {
             return this.boardMapper.searchContent(keyword);
         } else {
             return null;
         }
     }
+
+    public IResult deleteArticle(int index) {
+        return this.boardMapper.deleteArticle(index) > 0
+                ? CommonResult.SUCCESS
+                : CommonResult.FAILURE;
+    }
+
+    //TODO : 밑에수정
+    public IResult modifyArticle(QnaEntity board) {
+        return this.boardMapper.updateArticle(board) > 0
+                ? CommonResult.SUCCESS
+                : CommonResult.FAILURE;
+    }
+
 
 }

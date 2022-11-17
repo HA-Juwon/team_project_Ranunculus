@@ -2,14 +2,20 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.ranunculus.mappers.IBoardMapper">
+    <delete id="deleteArticle">
+        DELETE
+        FROM `ranunculus_boards`.`qna`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </delete>
     <insert id="insertArticle"
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
             parameterType="team.ranunculus.entities.board.QnaEntity">
-        INSERT INTO `ranunculus_boards`.`qna` (`writer`, `password`, `title`, `content`, `created_at`,
+        INSERT INTO `ranunculus_boards`.`qna` (`writer`, `email`, `password`, `title`, `content`, `created_at`,
                                                `email_admin_flag`)
-        VALUES (#{writer}, #{password}, #{title}, #{content}, #{createdAt}, #{emailAdminFlag})
+        VALUES (#{writer}, #{email}, #{password}, #{title}, #{content}, #{createdAt}, #{emailAdminFlag})
     </insert>
 
     <select id="selectUserAdminCheckByEmail"
@@ -70,6 +76,7 @@
             resultType="team.ranunculus.entities.board.QnaEntity">
         SELECT `index`            AS `index`,
                `writer`           AS `writer`,
+               `email`            AS `email`,
                `password`         AS `password`,
                `title`            AS `title`,
                `content`          AS `content`,
@@ -115,4 +122,18 @@
         WHERE `content` LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY `index` DESC
     </select>
+    <update id="updateArticle"
+            parameterType="team.ranunculus.entities.board.QnaEntity">
+        UPDATE `ranunculus_boards`.`qna`
+        SET `index` = #{index},
+            `writer` = #{writer},
+            `email` = #{email},
+            `password` = #{password},
+            `title` = #{title},
+            `content` = #{content},
+            `created_at` = #{createdAt},
+            `email_admin_flag` = #{emailAdminFlag}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
 </mapper>

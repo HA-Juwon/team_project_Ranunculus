@@ -6,7 +6,7 @@
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <link rel="stylesheet" th:href="@{/board/resources/stylesheets/write.css}">
     <script defer th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
-    <script defer th:src="@{/board/resources/scripts/write.js}"></script>
+    <script defer th:src="@{/board/resources/scripts/modify.js}"></script>
 </head>
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
@@ -19,7 +19,7 @@
             <label class="_object-label rowbox">
                 <span hidden>이름</span>
                 <span class="rowboxspan a">이름</span>
-                <input th:value="${name}" class="_object-input" maxlength="5" name="name" placeholder="작성자 이름을 입력해 주세요." type="text">
+                <input th:value="${qna.getWriter()}" class="_object-input" maxlength="5" name="name" placeholder="작성자 이름을 입력해 주세요." type="text">
             </label>
             <label class="_object-label rowbox">
                 <span hidden>비밀번호</span>
@@ -30,16 +30,16 @@
 
         <label class="_object-label">
             <span hidden>제목</span>
-            <input class="_object-input" maxlength="100" name="title" placeholder="제목을 입력해 주세요. (100자 이내)" type="text">
+            <input th:value="${qna.getTitle()}"class="_object-input" maxlength="100" name="title" placeholder="제목을 입력해 주세요. (100자 이내)" type="text">
         </label>
         <label class="content-container">
             <span hidden>내용</span>
-            <textarea class="_object-input content" maxlength="1000" name="content" placeholder="내용을 입력해 주세요. (1000자 이내)"></textarea>
+            <textarea th:value="${qna.getContent()}" class="_object-input content" maxlength="1000" name="content" placeholder="내용을 입력해 주세요. (1000자 이내)"></textarea>
         </label>
         <span class="warning" id="warning"></span>
         <div class="button-container">
-            <input class="_object-button back" name="back" type="button" value="돌아가기">
-            <input class="_object-button" type="submit" value="작성완료">
+            <input id="back" class="_object-button back" name="back" type="button" value="돌아가기">
+            <input id="modifyButton" class="_object-button" type="submit" value="수정완료">
         </div>
 
     </form>

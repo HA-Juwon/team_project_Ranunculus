@@ -161,7 +161,7 @@ const registerWarning = {
         registerWarning.getElement().classList.add('visible');
     },
     hide : () => {
-      registerWarning.getElement().classList.remove('visible');
+        registerWarning.getElement().classList.remove('visible');
     }
 }
 

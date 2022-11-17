@@ -1,6 +1,7 @@
 package team.ranunculus.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import team.ranunculus.entities.board.QnaEntity;
 import team.ranunculus.entities.member.UserEntity;
 
@@ -22,4 +23,9 @@ public interface IBoardMapper {
     List<QnaEntity> searchTitle(String keyword);
     List<QnaEntity> searchContent(String keyword);
     List<QnaEntity> searchName(String keyword);
+
+    int deleteArticle(@Param(value = "index") int index);
+
+    int updateArticle(QnaEntity board);
+
 }

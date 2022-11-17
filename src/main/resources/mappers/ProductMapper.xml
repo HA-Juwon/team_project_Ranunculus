@@ -23,11 +23,11 @@
 
     <select id="selectAllProduct"
             resultType="team.ranunculus.entities.product.ProductEntity">
-        SELECT `index` AS `index`,
-               `name` AS `name`,
-               `image` AS `image`,
+        SELECT `index`      AS `index`,
+               `name`       AS `name`,
+               `image`      AS `image`,
                `image_mime` AS `image`,
-               `capacity` AS `capacity`
+               `capacity`   AS `capacity`
         from `ranunculus_products`.products
         order by `index` DESC
     </select>
@@ -39,3 +39,4 @@
         FROM ranunculus_products.product_capacity
         ORDER BY `text`
     </select>
+</mapper>

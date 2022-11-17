@@ -44,7 +44,8 @@ public class MemberController {
     }
 
     @RequestMapping(value = "userLogin", method = RequestMethod.GET)
-    public ModelAndView getUserLogin(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity member, ModelAndView modelAndView) {
+    public ModelAndView getUserLogin(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity member,
+                                     ModelAndView modelAndView) {
         if (member != null) {
             modelAndView.setViewName("redirect:/");
             return modelAndView;

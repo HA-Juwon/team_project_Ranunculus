@@ -1,14 +1,24 @@
 const id = parseInt(window.location.href.split('/').at(-1).split('?')[0]);
 const modifyButton = window.document.getElementById('modifyButton');
-const deleteButton = window.document.getElementById('deleteButton');
+const back = window.document.getElementById('back');
 
-deleteButton.addEventListener('click', () => {
-    if (!confirm('글을 삭제 하시겠습니까?')) {
+back.addEventListener('click', () => {
+    window.location.href = `../qna`;
+});
+
+modifyButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!confirm('글을 수정 하시겠습니까?')) {
         return;
     }
-    cover.show('글을 삭제하고 있습니다.\n\n잠시만 기다려 주세요.');
+    cover.show();
     const xhr = new XMLHttpRequest();
-    xhr.open('DELETE', window.location.href);
+    const formData = new FormData();
+    formData.append('writer', form['name'].value);
+    formData.append('password', form['password'].value);
+    formData.append('title', form['title'].value);
+    formData.append('content', form['content'].value);
+    xhr.open('POST', window.location.href);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             cover.hide();
@@ -16,11 +26,11 @@ deleteButton.addEventListener('click', () => {
                 const responseJson = JSON.parse(xhr.responseText);
                 switch (responseJson['result']) {
                     case 'success':
-                        alert('글을 성공적으로 삭제하였습니다.');
-                        window.location.href = '../qna';
+                        alert('글을 성공적으로 수정하였습니다.');
+                        window.location.href = `../read/${id}`;
                         break;
                     case 'k':
-                        alert('자신의 글만 삭제 하실수 있습니다.');
+                        alert('비밀번호가 올바르지 않습니다.')
                         break;
                     default:
                         alert('알 수 없는 이유로 글을 삭제하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
@@ -30,9 +40,5 @@ deleteButton.addEventListener('click', () => {
             }
         }
     };
-    xhr.send();
-});
-
-modifyButton.addEventListener('click', () => {
-    window.location.href = `../modify/${id}`;
-});
+    xhr.send(formData);
+})

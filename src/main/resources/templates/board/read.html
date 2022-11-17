@@ -7,41 +7,50 @@
     <th:block th:insert="~{fragments/head.html :: content}"></th:block>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Q&A</title>
-    <link rel="stylesheet" th:href="@{/board/resources/stylesheets/index.css}">
-    <script defer th:src="@{/board/resources/scripts/index.js}"></script>
+    <link rel="stylesheet" th:href="@{/board/resources/stylesheets/read.css}">
+    <script defer th:src="@{/board/resources/scripts/read.js}"></script>
     <script src="https://kit.fontawesome.com/ac2617ecb2.js" crossorigin="anonymous"></script>
 </head>
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="_main main">
-    <div class="panel" style="margin-left:1px;">
-        <div id="contAreaBox">
-            <div class="panel">
-                <div class="panel-body">
-                    <tr id="list2" th:each="list : ${list}">
-                        <td>
-                            <a id="list3" th:text="${list.getIndex()}"></a>
-                        </td>
-                        <td>
-                            <a id="list4" th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
-                        </td>
-                        <td>
-                            <a id="list5" th:text="${list.getTitle()}" th:href="@{'/board/read/' + ${list.getIndex()}}"></a>
-                        </td>
-                        <td>
-                            <a id="list6" th:text="${list.getWriter()}"></a>
-                        </td>
-                    </tr>
-                    <div style="margin-left:1px;">
-                        <a href="/board/qna" class="btn btn-primary">목록</a>
-                    </div>
-                </div>
-            </div>
+    <table class="division-line inquiry-container">
+        <thead>
+        <tr>
+            <th>NO.</th>
+            <th>DATE</th>
+            <th>CONTENT</th>
+            <th>NAME</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="list2" th:each="list : ${list}">
+            <td>
+                <a id="list3" th:text="${list.getIndex()}"></a>
+            </td>
+            <td>
+                <a id="list4" th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
+            </td>
+            <td>
+                <a id="list5" th:text="${list.getContent()}"></a>
+            </td>
+            <td>
+                <a id="list6" th:text="${list.getWriter()}"></a>
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+    <div class="button-container">
+        <div class="left">
+            <a href="/board/qna" class="_object-button listButton">목록</a>
         </div>
-    </div>
-    <button class="_object-button modify" id="modifyButton">수정하기</button>
-    <button class="_object-button delete" id="deleteButton">삭제하기</button>
-    </aside>
+        <div class="right">
+            <button class="_object-button" id="modifyButton">수정하기</button>
+            <button class="_object-button" id="deleteButton">삭제하기</button>
+        </div>
+
     </div>
 </main>
 <th:block th:replace="~{fragments/footer.html :: content}"></th:block>

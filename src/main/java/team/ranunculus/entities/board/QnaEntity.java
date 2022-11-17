@@ -13,6 +13,7 @@ public class QnaEntity {
 
     private int index;
     private String writer;
+    private String email;
     private String password;
     private String title;
     private String content;
@@ -22,9 +23,10 @@ public class QnaEntity {
     public QnaEntity() {
     }
 
-    public QnaEntity(int index, String writer, String password, String title, String content, Date createdAt, String emailAdminFlag) {
+    public QnaEntity(int index, String writer, String email, String password, String title, String content, Date createdAt, String emailAdminFlag) {
         this.index = index;
         this.writer = writer;
+        this.email = email;
         this.password = password;
         this.title = title;
         this.content = content;
@@ -47,6 +49,15 @@ public class QnaEntity {
 
     public QnaEntity setWriter(String writer) {
         this.writer = writer;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public QnaEntity setEmail(String email) {
+        this.email = email;
         return this;
     }
 
@@ -77,8 +88,6 @@ public class QnaEntity {
         return this;
     }
 
-
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -101,8 +110,8 @@ public class QnaEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        QnaEntity that = (QnaEntity) o;
-        return index == that.index;
+        QnaEntity qna = (QnaEntity) o;
+        return index == qna.index;
     }
 
     @Override
