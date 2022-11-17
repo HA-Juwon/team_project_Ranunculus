@@ -9,7 +9,7 @@ public final class MemberRegex {
     public static final String CONTACT_AUTH_CODE = "^(\\d{6})$";
     public static final String CONTACT_AUTH_SALT = "^([\\da-z]{128})$";
 
-    public static final String EMAIL_AUTH_CODE = "^([\\da-z]{128})$";
+
 
     private MemberRegex() {
     }

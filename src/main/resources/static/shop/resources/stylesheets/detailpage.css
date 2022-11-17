@@ -123,6 +123,7 @@ body { padding: 50px;}
     background: #555;
     cursor: pointer;
 }
+
 #check-btn { display: none; }
 #check-btn:checked ~ .menubars { display: block; }
 .menubars { display: none; }
@@ -136,10 +137,4 @@ body { padding: 50px;}
     transform: translate(-150%,0);
 
 }
-
-
-
-
-
-
 

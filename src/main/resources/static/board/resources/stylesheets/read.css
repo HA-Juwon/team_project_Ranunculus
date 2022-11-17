@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+body > .main {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 3rem 0;
+}
+
+body > .main > .cover-image {
+    height: 20rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    object-position: center;
+}
+
+body > .main > .content-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 3rem;
+}
+
+body > .main > .content-container > .content {
+    align-items: stretch;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .content-container > .content > .title {
+    font-size: 1.625rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+body > .main > .content-container > .content > .spec-container {
+    align-items: stretch;
+    border: 0.0625rem solid rgb(230, 230, 230);
+    border-radius: 0.33rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+}
+
+body > .main > .content-container > .content > .spec-container > .row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .main > .content-container > .content > .spec-container > .row + .row {
+    margin-top: 0.5rem;
+}
+
+body > .main > .content-container > .content > .spec-container > .row > .caption {
+    color: rgb(var(--body-color-inactive));
+    font-weight: 500;
+    margin: 0 0.5rem 0 0.625rem;
+}
+
+body > .main > .content-container > .content > .spec-container > .row > .dash {
+    margin: 0 0.375rem;
+}
+
+body > .main > .content-container > .content > .spec-container > .row > .caption:first-of-type {
+    margin-left: 0;
+}
+
+body > .main > .content-container > .content > .content {
+
+}
+
+body > .main > .content-container > .content > .content * {
+    max-width: 100%;
+}
+
+body > .main > .content-container > .content > .content figure {
+    margin: unset;
+}
+
+body > .main > .content-container > .content > .content img {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+body > .main > .content-container > .content > .created-at {
+    color: rgb(var(--body-color-inactive));
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+body > .main > .content-container > .aside {
+    width: 20rem;
+    align-items: stretch;
+    align-self: flex-start;
+    border: 0.0625rem solid rgb(230, 230, 230);
+    border-radius: 0.33rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 2rem;
+    padding: 1rem 1.5rem;
+}
+
+body > .main > .content-container > .aside > * + * {
+    margin-top: 0.5rem;
+}
+
+body > .main > .content-container > .aside > .request {
+    display: none;
+}
+
+body > .main > .content-container > .aside > .request.visible {
+    display: inline-block;
+}
+
+body > .main > .content-container > .aside > .retract {
+    background-color: rgb(231, 76, 60);
+    display: none;
+}
+
+body > .main > .content-container > .aside > .retract:hover {
+    background-color: rgb(203, 67, 53);
+}
+
+body > .main > .content-container > .aside > .retract.visible {
+    display: inline-block;
+}
+
+body > .main > .content-container > .aside > .modify {
+    background-color: rgb(52, 152, 219);
+    display: none;
+}
+
+body > .main > .content-container > .aside > .modify.visible {
+    display: inline-block;
+}
+
+body > .main > .content-container > .aside > .modify:hover {
+    background-color: rgb(46, 134, 193);
+}
+
+body > .main > .content-container > .aside > .delete {
+    background-color: rgb(231, 76, 60);
+    display: none;
+}
+
+body > .main > .content-container > .aside > .delete.visible {
+    display: inline-block;
+}
+
+body > .main > .content-container > .aside > .delete:hover {
+    background-color: rgb(203, 67, 53);
+}
+
+body > .main > .content-container > .aside > .user-container {
+    align-items: center;
+    border-bottom: 0.0625rem solid rgb(230, 230, 230);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+body > .main > .content-container > .aside > .user-container > .thumbnail {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: rgb(230, 230, 230);
+    border-radius: 50%;
+    margin-right: 1.25rem;
+}
+
+body > .main > .content-container > .aside > .user-container > .name {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+
+
