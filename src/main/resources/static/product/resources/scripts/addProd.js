@@ -89,7 +89,29 @@ addProductForm.onsubmit = e =>{
     formData.append('prodDetailImage',addProductForm['prodDetailImage'].files[0]);
     formData.append('stock',addProductForm['stock'].value);
 
+
     xhr.open('POST', './addProd');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            // cover.hide();
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseJson = JSON.parse(xhr.responseText);
+                console.log(responseJson['result']);
+                switch (responseJson['result']) {
+                    case 'success':
+                        // cover.show();
+                        // cover.hide();
+                        alert('상품 추가가 완료되었습니다.');
+                        break;
+                    default:
+                        alert('상품을 추가하지 못하였습니다. 상품 정보를 정확히 입력해 주십시오.');
+                        break;
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
     xhr.send(formData);
 }
 

@@ -15,13 +15,13 @@ public interface IMemberMapper {
 
     UserEntity selectUserByEmail(UserEntity user);
 
-    UserEntity selectUserBySessionId(UserEntity user);
-
-    void updateAutoLogin(Map<String,Object>map);
-
     UserEntity selectUserByEmailPassword(UserEntity user);
 
     UserEntity selectUserByContact(UserEntity user);
+
+    UserEntity selectUserBySessionId(UserEntity user);
+
+    void updateAutoLogin(Map<String,Object>map);
 
     ContactAuthEntity selectContactAuthByContactCodeSalt(ContactAuthEntity contactAuth);
 

@@ -31,6 +31,7 @@
         <tr>
             <th>id</th>
             <th>상품이미지</th>
+            <th>상품이름</th>
             <th>상품옵션</th>
             <th>상품상세</th>
         </tr>
@@ -50,9 +51,8 @@
             <td>
                 <a th:text="${list.getName()}"></a>
             </td>
-            </td>
             <td>
-                <a th:text="${list.getCapacityOption()}"></a>
+                <a th:text="${list.getCapacity()}"></a>
             </td>
             <td>
                 <a th:href="@{'/product/managementProd/' + ${list.getIndex()}}">상세페이지로</a>
