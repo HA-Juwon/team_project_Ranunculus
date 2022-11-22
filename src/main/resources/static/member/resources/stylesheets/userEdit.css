@@ -36,6 +36,7 @@ body > .address-search-container > .dialog {
 body.searching {
     overflow: hidden;
 }
+
 body.searching > .address-search-container {
     display: block;
 }
@@ -104,6 +105,66 @@ body > .main > .total-section > .content > .title {
     padding-bottom: 1rem;
 }
 
+body > .main > .total-section > .truncate-section > .comment-container {
+    /*height: 10rem;*/
+    border: 0.0625rem solid rgb(180, 180, 180);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 125%;
+    overflow: hidden auto;
+    padding: 1.625rem;
+    margin: 1rem 0;
+}
+
+body > .main > .total-section > .truncate-section > .comment-container > .color-red {
+    color: rgb(231, 76, 60);
+}
+
+body > .main > .total-section > .truncate-section > .check-container {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    user-select: none;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+}
+
+body > .main > .total-section > .truncate-section > .check-container > .checker-container {
+    width: 1.25rem;
+    height: 1.25rem;
+    align-items: center;
+    background-color: rgb(215, 215, 215);
+    border: none;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .main > .total-section > .truncate-section > .check-container > .check-input:checked ~ .checker-container {
+    background-color: rgb(var(--concept-color-pink));
+
+}
+
+body > .main > .total-section > .truncate-section > .check-container > .checker-container > .checker {
+    width: 1.25rem;
+    height: 1.25rem;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    border-radius: 0.15rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .main > .total-section > .truncate-section > .check-container > .text {
+    margin-left: 0.5rem;
+    font-size: 0.825rem;
+    font-weight: 500;
+}
+
 body > .main > .total-section > .info-section > .info-form > .table {
     border-collapse: collapse;
 }
@@ -148,18 +209,18 @@ body > .main > .total-section > .info-section > .info-form > .table > .tbody > .
     display: flex;
 }
 
-body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button {
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > ._object-button {
     display: inline-block;
     background-color: rgb(var(--concept-color-pink));
     margin-left: 0.325rem;
 }
 
-body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button:hover {
-    background-color: rgba(var(--concept-color-pink), 90%);
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > ._object-button:hover {
+    background-color: rgb(var(--concept-color-pink-dim));
 }
 
-body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > .button:active {
-    background-color: rgb(var(--concept-color-pink-dim));
+body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .section-container > .address-container > ._object-button:active {
+    background-color: rgba(var(--concept-color-pink), 95%);
 }
 
 body > .main > .total-section > .info-section > .info-form > .table > .tbody > .tr > .td > .contact-container {
