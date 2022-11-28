@@ -108,29 +108,7 @@ public class BoardController {
         return modelAndView;
     }
 
-    //TODO : 이미지넣기 구현
-//    @RequestMapping(value = "image", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public String postImage(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME) UserEntity user,
-//                            @RequestParam(value = "upload") MultipartFile upload) throws
-//            IOException {
-//        ImageEntity image = ImageEntity.build()
-//                .setUserEmail(user.getEmail())
-//                .setCreatedAt(new Date())
-//                .setName(upload.getOriginalFilename())
-//                .setMime(upload.getContentType())
-//                .setData(upload.getBytes());
-//        IResult result = this.accompanyService.uploadImage(image);
-//        JSONObject responseJson = new JSONObject();
-//        if (result == CommonResult.SUCCESS) {
-//            responseJson.put("url", String.format("http://localhost:8080/accompany/image/%d", image.getIndex()));
-//        } else {
-//            JSONObject errorJson = new JSONObject();
-//            errorJson.put("message", "이미지 업로드에 실패하였습니다. 잠시 후 다시 시도해 주세요.");
-//            responseJson.put("error", errorJson);
-//        }
-//        return responseJson.toString();
-//    }
+
     @RequestMapping(value = "read/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteRead(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
@@ -148,7 +126,7 @@ public class BoardController {
         IResult result = this.boardService.deleteArticle(id);
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
-    }   //TODO :  댓글기능 추가
+    }
 
     @RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
     public ModelAndView getModify(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
@@ -194,6 +172,6 @@ public class BoardController {
             responseJson.put(IResult.ATTRIBUTE_NAME, "k");
             return responseJson.toString();
         }
-        // TODO : 비밀번호 다를때 수정불가
+
     }
 }

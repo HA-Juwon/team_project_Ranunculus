@@ -106,7 +106,6 @@ body > .main > .total-section > .content > .title {
 }
 
 body > .main > .total-section > .truncate-section > .comment-container {
-    /*height: 10rem;*/
     border: 0.0625rem solid rgb(180, 180, 180);
     font-size: 1rem;
     font-weight: 300;
