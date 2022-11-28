@@ -107,8 +107,6 @@ body > .main > .total-section > .content > .title {
 
 body > .main > .total-section > .truncate-section > .comment-container {
     border: 0.0625rem solid rgb(180, 180, 180);
-    font-size: 1rem;
-    font-weight: 300;
     line-height: 125%;
     overflow: hidden auto;
     padding: 1.625rem;
