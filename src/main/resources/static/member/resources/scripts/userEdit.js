@@ -1,6 +1,20 @@
+const truncateForm = window.document.getElementById('truncateForm');
 const infoForm = window.document.getElementById('infoForm');
 
 const functions = {
+    truncateCheck: (parmas) => {
+        if (truncateForm['truncatePassword'].value === '') {
+            truncateForm['truncatePassword'].focus();
+            return;
+        }
+
+        if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(truncateForm['truncatePassword'].value)) {
+            truncateForm['truncatePassword'].focusAndSelect();
+            return;
+        }
+        // TODO : truncate js 작성
+        // truncateForm[]
+    },
     closeAddressSearch: (params) => {
         window.document.body.classList.remove('searching');
     },

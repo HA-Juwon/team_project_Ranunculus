@@ -60,32 +60,43 @@
 
             <section class="content truncate-section" th:case="'truncate'">
                 <h2 class="title">회원탈퇴</h2>
-                <!-- TODO  이현 : 회원 탈퇴 구현 -->
-                <div class="comment-container">
-                    <pre class="color-red">회원 탈퇴 시 사이트 이용이 원활하지 않을 수 있으며 라넌큘러스에서 만들어진 모든 데이터는 복구가 불가능합니다.</pre>
-                </div>
-<!--                <form>-->
-<!--                    <label>-->
-<!--                        <input class="_object-button" type="button" value="다음" data-func="??">-->
-<!--                    </label>-->
-<!--                </form>-->
-<!--                <label class="check-container">-->
-<!--                    <input class="check-input" hidden type="checkbox">-->
-<!--                    <span class="checker-container">-->
-<!--                    <i class="checker fa fa-check"></i>-->
-<!--                </span>-->
-<!--                    <span class="text">해당 내용을 모두 확인했으며, 회원 탈퇴에 동의합니다.</span>-->
-<!--                </label>-->
-                <!-- TODO 이현 : js if confirm 표기 -->
-<!--                <pre class="text">-->
-<!--                    회원탈퇴 시 사이트 이용이 원활하지 않을 수 있으며-->
-<!--                    모든 데이터는 복구가 불가능합니다.-->
-<!--                </pre>-->
-<!--                <form>-->
-<!--                    <label>-->
-<!--                        <input class="_object-button" type="button" value="회원 탈퇴" data-func="??">-->
-<!--                    </label>-->
-<!--                </form>-->
+                <form class="truncate-form" id="truncateForm">
+                    <div class="first-section visible">
+                        <label class="input-container">
+                        <span class="text">이메일</span>
+                        <input class="_object-input input" readonly th:value="${session.memberUser.getEmail()}">
+                        </label>
+                        <label class="input-container">
+                            <span class="text">비밀번호</span>
+                            <input class="_object-input input" autofocus maxlength="50" name="truncatePassword" placeholder="현재 비밀번호" type="password">
+                        </label>
+                        <div class="button-container">
+                            <div class="serious">회원 탈퇴를 희망하신다면 현재 비밀번호를 입력해주세요.</div>
+                            <input class="_object-button" type="button" value="다음" data-func="truncateCheck">
+                        </div>
+                    </div>
+                    <div class="second-section">
+                        <div class="comment-container">
+                            <div class="serious">회원탈퇴 시 안내 사항을 반드시 확인해 주세요.</div>
+                            <pre>
+• 회원정보는 관련법령에 따라 보관 의무가 있는 경우를 제외하고는 탈퇴시 즉시 삭제됩니다.
+
+• 회원 탈퇴 시 사이트 이용이 원활하지 않을 수 있으며 라넌큘러스에서 만들어진 모든 데이터는 복구가 불가능합니다.
+
+• 완료되지 않은 주문/반품/교환이 있는경우 탈퇴가 불가합니다.</pre>
+                        </div>
+                        <div class="check-container">
+                            <label class="check-wrap">
+                                <input class="check-input" hidden type="checkbox">
+                                <span class="checker-container">
+                                    <i class="checker fa fa-check"></i>
+                                </span>
+                            <span class="text">해당 내용을 모두 확인했으며, 회원 탈퇴에 동의합니다.</span>
+                            </label>
+                            <input class="_object-button" type="submit" value="회원탈퇴" data-func="??">
+                        </div>
+                    </div>
+                </form>
             </section>
 
             <section class="content info-section" th:case="*">
