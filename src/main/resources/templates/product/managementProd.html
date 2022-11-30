@@ -46,16 +46,17 @@
                 <a th:text="${list.getIndex()}"></a>
             </td>
             <td>
-<!--                <img th:src="${list.get}" alt="첨부이미지" th:if="${list.imgUrl != null}">-->
+                <img th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(list.getImage())}" alt="첨부이미지">
             </td>
             <td>
                 <a th:text="${list.getName()}"></a>
             </td>
+<!--    {1:10},{2,20}        -->
             <td>
-                <a th:text="${list.getCapacity()}"></a>
+                <a th:each="capacity:${capacityList}" th:text="${capacity.getText()}" th:if="${capacity.getValue().equals(list.getCapacity())}"></a>
             </td>
             <td>
-                <a th:href="@{'/product/managementProd/' + ${list.getIndex()}}">상세페이지로</a>
+                <a th:href="@{'/product/detail/' + ${list.getIndex()}}">상세페이지로</a>
             </td>
         </tr>
         </tbody>

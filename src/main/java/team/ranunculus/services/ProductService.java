@@ -2,6 +2,7 @@ package team.ranunculus.services;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import team.ranunculus.entities.board.QnaEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.entities.product.CapacityEntity;
 import team.ranunculus.entities.product.CategoryEntity;
@@ -21,6 +22,11 @@ public class ProductService {
     public ProductService(IProductMapper productMapper, IMemberMapper memberMapper) {
         this.productMapper = productMapper;
         this.memberMapper = memberMapper;
+    }
+
+    public ProductEntity readProductByIndex(int id)
+    {
+        return this.productMapper.selectProductByIndex(id);
     }
 
     @Transactional

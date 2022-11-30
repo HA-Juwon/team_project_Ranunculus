@@ -11,8 +11,10 @@ import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.entities.product.CapacityEntity;
 import team.ranunculus.entities.product.CategoryEntity;
 import team.ranunculus.entities.product.ProductEntity;
+import team.ranunculus.enums.CommonResult;
 import team.ranunculus.interfaces.IResult;
 import team.ranunculus.services.ProductService;
+import team.ranunculus.utils.ImageUtils;
 
 import java.io.IOException;
 import java.util.Date;
@@ -31,7 +33,6 @@ public class ProductController {
     @RequestMapping(value = "addProd", method = RequestMethod.GET)
     public ModelAndView getAddProd(ModelAndView modelAndView,
                                    @SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user) {
-//        System.out.println(productService.);
         if(user==null){
 //            System.out.println("로그인 상태가 아닌 유저가 상품 추가를 시도하면");
             modelAndView.setViewName("redirect:/member/userLogin");
@@ -75,14 +76,26 @@ public class ProductController {
         return responseJson.toString();
     }
 
-
     @RequestMapping(value = "managementProd", method = RequestMethod.GET)
     public ModelAndView getManagementProd(ModelAndView modelAndView) {
         List<ProductEntity> productList=this.productService.getProductList();
+        List<CapacityEntity> capacityList=this.productService.loadCapacityOptions();
+        modelAndView.addObject("capacityList",capacityList);
         modelAndView.addObject("list", productList);
+        modelAndView.addObject("imgUtil", new ImageUtils());
         modelAndView.setViewName("product/managementProd");
         return modelAndView;
     }
+
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
+    public ModelAndView getdetail(@PathVariable(value = "id") int id,
+                                ModelAndView modelAndView) {
+        ProductEntity product = this.productService.readProductByIndex(id);
+        modelAndView.addObject("product", product);
+        modelAndView.setViewName("product/detail");
+        return modelAndView;
+    }
+
 
 
     //옵션 추가하기 버튼을 누르면 작동함

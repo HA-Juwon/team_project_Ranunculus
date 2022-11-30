@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class ProductEntity {
-
     public static final String ATTRIBUTE_NAME = "product";
     public static final String ATTRIBUTE_NAME_PLURAL = "products";
-
     public static ProductEntity build() {
         return new ProductEntity();
     }
@@ -18,18 +16,14 @@ public class ProductEntity {
     private int netPrice;
     private byte[] image;
     private String mime;
-
     private byte[] prodDetailImage;
-
     private String prodDetailImageMime;
-
     private int capacity;
     private int category;
     private Date launchingDate;
     private int stock;
     private Date stockUpdate;
     private int salesQuantity;
-
     public int getIndex() {
         return index;
     }
@@ -47,7 +41,6 @@ public class ProductEntity {
         this.name = name;
         return this;
     }
-
     public int getCostPrice() {
         return costPrice;
     }
@@ -56,7 +49,6 @@ public class ProductEntity {
         this.costPrice = costPrice;
         return this;
     }
-
     public int getNetPrice() {
         return netPrice;
     }

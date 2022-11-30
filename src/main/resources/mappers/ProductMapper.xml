@@ -5,11 +5,9 @@
 <mapper namespace="team.ranunculus.mappers.IProductMapper">
     <insert id="insertProduct"
             parameterType="team.ranunculus.entities.product.ProductEntity">
-
         INSERT INTO `ranunculus_products`.`products`(`name`, `cost_price`, `net_price`, `image`, `capacity`, `category`,
                                                      `launching_date`, `stock`, `stock_update`, `sales_quantity`,
                                                      `image_mime`, `detail_image`, `detail_image_mime`)
-
         VALUES (#{name}, #{costPrice}, #{netPrice}, #{image}, #{capacity}, #{category}, #{launchingDate}, #{stock},
                 #{stockUpdate}, #{salesQuantity}, #{mime}, #{prodDetailImage}, #{prodDetailImageMime})
     </insert>
@@ -20,6 +18,33 @@
         VALUES (#{text})
     </insert>
 
+    <select id="selectCapacityByValue"
+            resultType="team.ranunculus.entities.product.CapacityEntity">
+        select `value` as `value`,
+               `text`  as `text`
+        from ranunculus_products.product_capacity
+        where `value` = #{value}
+    </select>
+
+    <select id="selectProductByIndex"
+            resultType="team.ranunculus.entities.product.ProductEntity">
+        select `index` as `index`,
+               `name`,
+               `cost_price`,
+               `net_price`,
+               `image`,
+               `capacity`,
+               `category`,
+               `launching_date`,
+               `stock`,
+               `stock_update`,
+               `sales_quantity`,
+               `image_mime`,
+               `detail_image`,
+               `detail_image_mime`
+        from ranunculus_products.products
+        where `index` = #{index}
+    </select>
 
     <select id="selectAllProduct"
             resultType="team.ranunculus.entities.product.ProductEntity">
@@ -39,4 +64,14 @@
         FROM ranunculus_products.product_capacity
         ORDER BY `text`
     </select>
+
+    <select id="selectCategory"
+            resultType="team.ranunculus.entities.product.CategoryEntity">
+        SELECT `value` AS `value`,
+               `text`  AS `text`
+        FROM ranunculus_products.product_category
+        ORDER BY `text`
+    </select>
+
+
 </mapper>
