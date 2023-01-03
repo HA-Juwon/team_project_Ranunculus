@@ -1,19 +1,44 @@
 const truncateForm = window.document.getElementById('truncateForm');
+const firstSection = window.document.getElementById('firstSection');
+const secondSection = window.document.getElementById('secondSection');
 const infoForm = window.document.getElementById('infoForm');
 
 const functions = {
-    truncateCheck: (parmas) => {
-        if (truncateForm['truncatePassword'].value === '') {
-            truncateForm['truncatePassword'].focus();
+    truncateCheck: () => {
+        if (truncateForm['oldPassword'].value === '') {
+            truncateForm['oldPassword'].focus();
             return;
         }
 
-        if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(truncateForm['truncatePassword'].value)) {
-            truncateForm['truncatePassword'].focusAndSelect();
+        if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(truncateForm['oldPassword'].value)) {
+            truncateForm['oldPassword'].focusAndSelect();
+            alert('입력된 패스워드가 일치하지 않습니다.');
             return;
         }
-        // TODO : truncate js 작성
-        // truncateForm[]
+
+        cover.show('입력하신 비밀번호를 확인하고 있습니다.');
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `./userTruncate?oldPassword=${truncateForm['oldPassword'].value}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                cover.hide();
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseJson = JSON.parse(xhr.responseText);
+                    switch (responseJson['result']) {
+                        case 'success':
+                            firstSection.classList.remove('visible');
+                            secondSection.classList.add('visible');
+                            break;
+                        default:
+                            alert('알 수 없는 이유로 확인하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                    }
+                } else {
+                    alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            }
+        };
+        xhr.send();
     },
     closeAddressSearch: (params) => {
         window.document.body.classList.remove('searching');
@@ -175,97 +200,103 @@ window.document.body.querySelectorAll('[data-func]').forEach(element => {
     });
 });
 
-infoForm.onsubmit = e => {
+truncateForm.onsubmit = e => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('email', infoForm['email'].value);
-    formData.append('oldPassword', infoForm['oldPassword'].value);
-
-    if (infoForm['oldPassword'].value === "") {
-        editWarning.show("회원정보 수정을 위해서 현재 비밀번호를 입력해 주세요.");
-        return false;
-    }
-
-    if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(infoForm['oldPassword'].value)) {
-        editWarning.show('현재 비밀번호를 올바르게 입력해 주세요.');
-        infoForm['oldPassword'].focusAndSelect();
-        return false;
-    }
-
-    if (infoForm['newPassword'].value !== "") {
-        if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(infoForm['newPassword'].value)) {
-            editWarning.show('새로운 비밀번호를 올바르게 입력해 주세요.');
-            infoForm['newPassword'].focusAndSelect();
-            return false;
-        }
-
-        if (infoForm['newPassword'].value !== infoForm['newPasswordCheck'].value) {
-            editWarning.show('새로운 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.');
-            infoForm['newPasswordCheck'].focusAndSelect();
-            return false;
-        }
-        formData.append('newPassword', infoForm['newPassword'].value);
-    }
-
-    if (infoForm['newAddressPostal'].value !== "" &&
-        infoForm['newAddressPrimary'].value !== "") {
-        if (infoForm['newAddressSecondary'].value === "") {
-            editWarning.show('상세 주소를 입력해 주세요.');
-            infoForm['newAddressSecondary'].focus();
-            return false;
-        }
-        formData.append('newAddressPostal', infoForm['newAddressPostal'].value);
-        formData.append('newAddressPrimary', infoForm['newAddressPrimary'].value);
-        formData.append('newAddressSecondary', infoForm['newAddressSecondary'].value);
-    }
-
-    if (infoForm['contactAuthRequestButton'].disabled) {
-        if (!infoForm['contactAuthCheckButton'].disabled || !infoForm['contactAuthRequestButton'].disabled) {
-            editWarning.show('연락처 인증을 완료해 주세요.');
-            return false;
-        }
-        formData.append('newTelecomValue', infoForm['telecomValue'].value);
-        formData.append('newContact', infoForm['newContact'].value);
-        formData.append('newContactAuthCode', infoForm['newContactAuthCode'].value);
-        formData.append('newContactAuthSalt', infoForm['newContactAuthSalt'].value);
-    }
-
-    if (infoForm['newPassword'].value === "" &&
-        infoForm['newAddressPostal'].value === "" &&
-        infoForm['newAddressPrimary'].value === "" &&
-        !infoForm['contactAuthRequestButton'].disabled) {
-        editWarning.show('회원정보 수정 사항이 없습니다. 다시 시도해 주세요.');
-        return false;
-    }
-
-    const xhr = new XMLHttpRequest();
-    cover.show('회원정보 변경 사항을 적용중입니다.');
-    xhr.open('POST', './userEditInfo');
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            cover.hide();
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseJson = JSON.parse(xhr.responseText);
-                switch (responseJson['result']) {
-                    case 'success' :
-                        alert('회원정보 변경 사항이 적용되었습니다.');
-                        window.location.reload();
-                        break;
-                    case 'duplicate' :
-                        editWarning.show('현재 비밀번호와 동일한 신규 비밀번호를 입력하였습니다. 다시 입력해 주세요.');
-                        infoForm['newPassword'].select();
-                        break;
-                    case 'expired' :
-                        editWarning.show('올바른 연락처가 아니거나 연락처 인증을 미진행 하였습니다.');
-                        break;
-                    default :
-                        editWarning.show('알 수 없는 이유로 회원정보를 변경하지 못하였습니다. 잠시 후 다시 시도해 주세요.')
-                }
-            } else {
-                editWarning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-            }
-        }
-    };
-    xhr.send(formData);
 };
+
+if (infoForm !== null) {
+    infoForm.onsubmit = e => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('email', infoForm['email'].value);
+        formData.append('oldPassword', infoForm['oldPassword'].value);
+
+        if (infoForm['oldPassword'].value === "") {
+            editWarning.show("회원정보 수정을 위해서 현재 비밀번호를 입력해 주세요.");
+            return false;
+        }
+
+        if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(infoForm['oldPassword'].value)) {
+            editWarning.show('현재 비밀번호를 올바르게 입력해 주세요.');
+            infoForm['oldPassword'].focusAndSelect();
+            return false;
+        }
+
+        if (infoForm['newPassword'].value !== "") {
+            if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(infoForm['newPassword'].value)) {
+                editWarning.show('새로운 비밀번호를 올바르게 입력해 주세요.');
+                infoForm['newPassword'].focusAndSelect();
+                return false;
+            }
+
+            if (infoForm['newPassword'].value !== infoForm['newPasswordCheck'].value) {
+                editWarning.show('새로운 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.');
+                infoForm['newPasswordCheck'].focusAndSelect();
+                return false;
+            }
+            formData.append('newPassword', infoForm['newPassword'].value);
+        }
+
+        if (infoForm['newAddressPostal'].value !== "" &&
+            infoForm['newAddressPrimary'].value !== "") {
+            if (infoForm['newAddressSecondary'].value === "") {
+                editWarning.show('상세 주소를 입력해 주세요.');
+                infoForm['newAddressSecondary'].focus();
+                return false;
+            }
+            formData.append('newAddressPostal', infoForm['newAddressPostal'].value);
+            formData.append('newAddressPrimary', infoForm['newAddressPrimary'].value);
+            formData.append('newAddressSecondary', infoForm['newAddressSecondary'].value);
+        }
+
+        if (infoForm['contactAuthRequestButton'].disabled) {
+            if (!infoForm['contactAuthCheckButton'].disabled || !infoForm['contactAuthRequestButton'].disabled) {
+                editWarning.show('연락처 인증을 완료해 주세요.');
+                return false;
+            }
+            formData.append('newTelecomValue', infoForm['telecomValue'].value);
+            formData.append('newContact', infoForm['newContact'].value);
+            formData.append('newContactAuthCode', infoForm['newContactAuthCode'].value);
+            formData.append('newContactAuthSalt', infoForm['newContactAuthSalt'].value);
+        }
+
+        if (infoForm['newPassword'].value === "" &&
+            infoForm['newAddressPostal'].value === "" &&
+            infoForm['newAddressPrimary'].value === "" &&
+            !infoForm['contactAuthRequestButton'].disabled) {
+            editWarning.show('회원정보 수정 사항이 없습니다. 다시 시도해 주세요.');
+            return false;
+        }
+
+        const xhr = new XMLHttpRequest();
+        cover.show('회원정보 변경 사항을 적용중입니다.');
+        xhr.open('POST', './userEditInfo');
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                cover.hide();
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseJson = JSON.parse(xhr.responseText);
+                    switch (responseJson['result']) {
+                        case 'success' :
+                            alert('회원정보 변경 사항이 적용되었습니다.');
+                            window.location.reload();
+                            break;
+                        case 'duplicate' :
+                            editWarning.show('현재 비밀번호와 동일한 신규 비밀번호를 입력하였습니다. 다시 입력해 주세요.');
+                            infoForm['newPassword'].select();
+                            break;
+                        case 'expired' :
+                            editWarning.show('올바른 연락처가 아니거나 연락처 인증을 미진행 하였습니다.');
+                            break;
+                        default :
+                            editWarning.show('알 수 없는 이유로 회원정보를 변경하지 못하였습니다. 잠시 후 다시 시도해 주세요.')
+                    }
+                } else {
+                    editWarning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            }
+        };
+        xhr.send(formData);
+    };
+}

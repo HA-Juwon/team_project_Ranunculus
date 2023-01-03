@@ -52,7 +52,6 @@
                `admin_flag`          AS `isAdmin`
         FROM `ranunculus_members`.`member`
         WHERE `email` = #{email}
-          AND `password` = #{password}
         LIMIT 1
     </select>
 

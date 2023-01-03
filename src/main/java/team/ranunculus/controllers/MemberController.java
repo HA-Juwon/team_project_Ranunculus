@@ -18,8 +18,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
@@ -239,36 +237,6 @@ public class MemberController {
         return responseJson.toString();
     }
 
-    @RequestMapping(value = "userResetPassword", method = RequestMethod.GET)
-    public ModelAndView getUserResetPassword(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
-                                             ModelAndView modelAndView) {
-        if (user != null) {
-            modelAndView.setViewName("redirect:/");
-            return modelAndView;
-        }
-        modelAndView.setViewName("member/userResetPassword");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "userResetPassword", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
-    public String postUserResetPassword(UserEntity user) {
-        user.setContact(null)
-                .setPolicyTermsAt(null)
-                .setPolicyPrivacyAt(null)
-                .setPolicyMarketingAt(null)
-                .setStatusValue(null)
-                .setRegisteredAt(null)
-                .setAdmin(false);
-        IResult result;
-
-        result = this.memberService.resetPassword(user);
-
-        JSONObject responseJson = new JSONObject();
-        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
-        return responseJson.toString();
-    }
-
     @RequestMapping(value = "userRecoverAuth", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String getUserRecoverAuth(UserEntity user, ContactAuthEntity contactAuth) {
@@ -361,7 +329,16 @@ public class MemberController {
                 .setSalt(newContactAuthSalt);
         IResult result = this.memberService.editUser(currentUser, newUser, oldPassword, contactAuth);
         JSONObject responseJson = new JSONObject();
-        System.out.println(result);
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        return responseJson.toString();
+    }
+
+    @RequestMapping(value="userTruncate", method = RequestMethod.GET)
+    @ResponseBody
+    public String getUserTruncate(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user,
+                                  @RequestParam(value="oldPassword") String oldPassword) {
+        IResult result = this.memberService.checkUserPassword(user, oldPassword);
+        JSONObject responseJson = new JSONObject();
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
     }

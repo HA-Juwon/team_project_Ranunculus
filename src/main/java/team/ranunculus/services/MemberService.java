@@ -133,7 +133,6 @@ public class MemberService {
 
     @Transactional
     public IResult loginUser(UserEntity member) {
-//        System.out.println(member.getEmail());
         if (member.getEmail() == null ||
                 member.getPassword() == null ||
                 !member.getEmail().matches(MemberRegex.USER_EMAIL) ||
@@ -227,12 +226,8 @@ public class MemberService {
     @Transactional
     public IResult editUser(UserEntity currentUser, UserEntity newUser, String oldPassword, ContactAuthEntity contactAuth)
             throws Exception {
-        if (currentUser == null ||
-                currentUser.getPassword() == null ||
-                oldPassword == null ||
-                !CryptoUtils.hashSha512(oldPassword).equals(currentUser.getPassword())) {
-            return CommonResult.FAILURE;
-        }
+
+        this.checkUserPassword(currentUser, oldPassword);
         // 현재 입력한 비밀번호가 아닐 때
         if (newUser.getPassword() != null && !newUser.getPassword().matches(MemberRegex.USER_PASSWORD)) {
             return CommonResult.FAILURE;
@@ -345,19 +340,13 @@ public class MemberService {
     }
 
     @Transactional
-    public IResult resetPassword(UserEntity user) {
-        user.setEmail(user.getEmail());
-        UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
-        if (existingUser == null) {
+    public IResult checkUserPassword(UserEntity currentUser, String oldPassword) {
+        if (currentUser == null ||
+                currentUser.getPassword() == null ||
+                oldPassword == null ||
+                !CryptoUtils.hashSha512(oldPassword).equals(currentUser.getPassword())) {
             return CommonResult.FAILURE;
         }
-        existingUser.setPassword(CryptoUtils.hashSha512(user.getPassword()));
-
-        if (this.memberMapper.updateUser(existingUser) == 0) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return CommonResult.FAILURE;
-        }
-
         return CommonResult.SUCCESS;
     }
 }
