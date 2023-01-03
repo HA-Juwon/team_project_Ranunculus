@@ -78,7 +78,7 @@ body { padding: 50px;}
 .product_view .btns > a { display: inline-block; width: 136px; height: 42px;border-radius: 2px; font-size: 16px; color:#fff; line-height: 42px; }
 .product_view .btns > a.btn1 { background: #666;}
 .product_view .btns > a.btn2 { background: #0a56a9;}
-.product_view .btns > a.btn3 { background: #c56767;}
+.product_view .btns > a.btn3 { background: #c56767; left: 50%}
 .product_view  label > a.btn3 { display: inline-block; width: 136px; height: 42px;border-radius: 2px; font-size: 16px; color:#fff; line-height: 42px; }
 
 #popup {
