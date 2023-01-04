@@ -1,7 +1,6 @@
 package team.ranunculus.entities.product;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class ProductEntity {
@@ -57,7 +56,6 @@ public class ProductEntity {
         this.netPrice = netPrice;
         return this;
     }
-
     public byte[] getImage() {
         return image;
     }

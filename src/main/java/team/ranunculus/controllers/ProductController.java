@@ -91,12 +91,18 @@ public class ProductController {
     public ModelAndView getdetail(@PathVariable(value = "id") int id,
                                 ModelAndView modelAndView) {
         ProductEntity product = this.productService.readProductByIndex(id);
+        List<CapacityEntity> capacityList=this.productService.loadCapacityOptions();
+        List<CategoryEntity> categoryList=this.productService.loadCategoryOptions();
+
+        System.out.println(product.getProdDetailImage());
+        modelAndView.addObject("capacityList",capacityList);
+        modelAndView.addObject("categoryList",categoryList);
+        modelAndView.addObject("imgUtil", new ImageUtils());
         modelAndView.addObject("product", product);
         modelAndView.setViewName("product/detail");
+//        System.out.println("aaa");
         return modelAndView;
     }
-
-
 
     //옵션 추가하기 버튼을 누르면 작동함
     @RequestMapping(value = "appendOption", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -361,7 +361,7 @@ public class MemberController {
                 .setSalt(newContactAuthSalt);
         IResult result = this.memberService.editUser(currentUser, newUser, oldPassword, contactAuth);
         JSONObject responseJson = new JSONObject();
-        System.out.println(result);
+//        System.out.println(result);
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
     }

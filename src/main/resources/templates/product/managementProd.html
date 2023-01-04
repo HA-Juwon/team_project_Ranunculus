@@ -51,7 +51,6 @@
             <td>
                 <a th:text="${list.getName()}"></a>
             </td>
-<!--    {1:10},{2,20}        -->
             <td>
                 <a th:each="capacity:${capacityList}" th:text="${capacity.getText()}" th:if="${capacity.getValue().equals(list.getCapacity())}"></a>
             </td>

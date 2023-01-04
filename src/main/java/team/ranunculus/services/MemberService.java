@@ -347,7 +347,10 @@ public class MemberService {
     @Transactional
     public IResult resetPassword(UserEntity user) {
         user.setEmail(user.getEmail());
+//        System.out.println(user.getEmail());
         UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
+
+        System.out.println(existingUser);
         if (existingUser == null) {
             return CommonResult.FAILURE;
         }
