@@ -19,7 +19,6 @@ public class BoardService {
         this.boardMapper = boardMapper;
     }
 
-    //TODO : 댓글구현 할 때 참고
     public IResult userAdminCheck(UserEntity user) {
         UserEntity existingUser = this.boardMapper.selectUserAdminCheckByEmail(user);
         if (existingUser.getEmail() == null ||
@@ -70,7 +69,6 @@ public class BoardService {
                 : CommonResult.FAILURE;
     }
 
-    //TODO : 밑에수정
     public IResult modifyArticle(QnaEntity board) {
         return this.boardMapper.updateArticle(board) > 0
                 ? CommonResult.SUCCESS

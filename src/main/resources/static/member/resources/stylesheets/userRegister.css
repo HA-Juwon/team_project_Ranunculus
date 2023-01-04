@@ -164,7 +164,6 @@ body > .main > .register-form > .input-container{
     width: 25rem;
     align-items: stretch;
     display: flex;
-
     flex-direction: column;
     justify-content: flex-start;
 }

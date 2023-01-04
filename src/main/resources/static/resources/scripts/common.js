@@ -11,7 +11,7 @@ HTMLInputElement.prototype.focusAndSelect = function () {
 
 const cover = {
     getElement: () => window.document.body.querySelector(':scope > .loading'),
-    show: () => {
+    show: (message) => {
         body.classList.add('scrollLock');
         const coverElementDiv = window.document.createElement('div');
         coverElementDiv.classList.add('loading');
@@ -22,7 +22,13 @@ const cover = {
         addImg.setAttribute('src', '/images/loading.progress.image.png');
         const coverElementA = window.document.createElement('span');
         coverElementA.classList.add('myFont');
-        coverElementA.innerText = '잠시만 기다려 주세요.';
+
+        if(message === undefined) {
+            coverElementA.style.display = 'none';
+        } else {
+            coverElementA.innerText = message;
+        }
+
         coverElementDiv.append(coverElementDivTwo);
         coverElementDiv.append(coverElementA);
         coverElementDivTwo.append(addImg);
