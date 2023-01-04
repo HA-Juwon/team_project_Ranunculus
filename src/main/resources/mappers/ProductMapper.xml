@@ -18,6 +18,35 @@
         VALUES (#{text})
     </insert>
 
+    <select id="selectCapacityByValue"
+            resultType="team.ranunculus.entities.product.CapacityEntity">
+        select `value` as `value`,
+               `text`  as `text`
+        from ranunculus_products.product_capacity
+        where `value` = #{value}
+    </select>
+
+    <select id="selectProductByIndex"
+            resultType="team.ranunculus.entities.product.ProductEntity">
+        select `index` as `index`,
+               `name` as `name`,
+               `cost_price` as `costPrice`,
+               `net_price` as netPrice,
+               `image` as `image`,
+               `capacity` as `capacity`,
+               `category` as `category`,
+               `launching_date` as `launchingDate`,
+               `stock` as `stock`,
+               `stock_update` as `stockUpdate`,
+               `sales_quantity` as `salesQuantity`,
+               `image_mime` as imageMime,
+               `detail_image` as detailImage,
+               `detail_image_mime` as detailImageMime
+        from ranunculus_products.products
+        where `index` = #{index}
+    </select>
+
+
     <select id="selectAllProduct"
             resultType="team.ranunculus.entities.product.ProductEntity">
         SELECT `index` AS `index`,

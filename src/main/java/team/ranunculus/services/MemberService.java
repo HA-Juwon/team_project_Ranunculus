@@ -338,15 +338,24 @@ public class MemberService {
         user.setEmail(foundUser.getEmail());
         return CommonResult.SUCCESS;
     }
+    
+   @Transactional
+    public IResult resetPassword(UserEntity user) {
+        user.setEmail(user.getEmail());
+//        System.out.println(user.getEmail());
+        UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
 
-    @Transactional
-    public IResult checkUserPassword(UserEntity currentUser, String oldPassword) {
-        if (currentUser == null ||
-                currentUser.getPassword() == null ||
-                oldPassword == null ||
-                !CryptoUtils.hashSha512(oldPassword).equals(currentUser.getPassword())) {
+        System.out.println(existingUser);
+        if (existingUser == null) {
             return CommonResult.FAILURE;
         }
+        existingUser.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+
+        if (this.memberMapper.updateUser(existingUser) == 0) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return CommonResult.FAILURE;
+        }
+
         return CommonResult.SUCCESS;
     }
 }
