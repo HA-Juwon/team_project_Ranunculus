@@ -1,6 +1,7 @@
 const truncateForm = window.document.getElementById('truncateForm');
 const firstSection = window.document.getElementById('firstSection');
 const secondSection = window.document.getElementById('secondSection');
+const agreeTruncate = window.document.getElementById('agreeTruncate');
 const infoForm = window.document.getElementById('infoForm');
 
 const functions = {
@@ -12,7 +13,7 @@ const functions = {
 
         if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{8,50})$').test(truncateForm['oldPassword'].value)) {
             truncateForm['oldPassword'].focusAndSelect();
-            alert('입력된 패스워드가 일치하지 않습니다.');
+            alert('올바른 비밀번호가 아닙니다.');
             return;
         }
 
@@ -31,7 +32,7 @@ const functions = {
                             secondSection.classList.add('visible');
                             break;
                         default:
-                            alert('알 수 없는 이유로 확인하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                            alert('비밀번호가 일치하지 않습니다. 확인 후 다시 시도해 주세요.');
                     }
                 } else {
                     alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
@@ -202,6 +203,37 @@ window.document.body.querySelectorAll('[data-func]').forEach(element => {
 
 truncateForm.onsubmit = e => {
     e.preventDefault();
+
+    if (!agreeTruncate.checked) {
+        alert('회원탈퇴 희망 시 안내 사항 필독 후 동의해주세요.');
+        return;
+    }
+
+    if (!confirm('정말 탈퇴하시겠습니까?')){
+        window.location.href = '/member/userEdit';
+    } else {
+        cover.show('회원 탈퇴를 진행중 입니다.');
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `./userTruncate`);
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === XMLHttpRequest.DONE) {
+                cover.hide();
+                if(xhr.status >= 200 && xhr.status < 300) {
+                    const responseJson = JSON.parse(xhr.responseText);
+                    switch (responseJson['result']) {
+                        case 'success':
+                            window.location.href = '/member/userTruncateDone';
+                            break;
+                        default:
+                            alert('알 수 없는 이유로 탈퇴를 진행하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                    }
+                } else {
+                    alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            }
+        };
+        xhr.send();
+    }
 };
 
 if (infoForm !== null) {

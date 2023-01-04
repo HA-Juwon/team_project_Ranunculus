@@ -187,4 +187,8 @@
         LIMIT 1
     </update>
 
+    <delete id="deleteUser">
+        DELETE FROM `ranunculus_members`.`member`
+        WHERE `email` = #{email}
+    </delete>
 </mapper>

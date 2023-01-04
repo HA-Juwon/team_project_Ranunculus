@@ -1,5 +1,6 @@
 package team.ranunculus.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.ranunculus.entities.board.QnaEntity;
@@ -19,6 +20,7 @@ public class ProductService {
     private final IProductMapper productMapper;
     private final IMemberMapper memberMapper;
 
+    @Autowired
     public ProductService(IProductMapper productMapper, IMemberMapper memberMapper) {
         this.productMapper = productMapper;
         this.memberMapper = memberMapper;

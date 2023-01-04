@@ -30,4 +30,6 @@ public interface IMemberMapper {
     int updateContactAuth(ContactAuthEntity contactAuth);
 
     int updateUser(UserEntity user);
+
+    int deleteUser(UserEntity user);
 }
