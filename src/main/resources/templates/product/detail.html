@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <th:block th:insert="~{fragments/head.html :: content}"></th:block>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>상품 상세보기</title>
+    <link rel="stylesheet" th:href="@{/product/resources/stylesheets/detail.css}">
+    <script defer th:src="@{/product/resources/scripts/detail.js}"></script>
+    <script src="https://kit.fontawesome.com/ac2617ecb2.js" crossorigin="anonymous"></script>
+</head>
+<body class="_layout-hmf">
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<main class="_main main">
+    <table border="2">
+        <tr>
+            <th>상품명</th>
+            <th th:text="${product.getName()}"></th>
+        </tr>
+        <tr>
+            <td>상품 id</td>
+            <td th:text="${product.getIndex()}"></td>
+        </tr>
+        <tr>
+            <td>원가</td>
+            <td th:text="${product.getCostPrice()}"></td>
+        </tr>
+        <tr>
+            <td>정가</td>
+            <td th:text="${product.getNetPrice()}"></td>
+        </tr>
+        <tr>
+            <td>상품 사진</td>
+            <td>
+                <img class="image" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(product.getImage())}" alt="상품 썸네일">
+            </td>
+        </tr>
+        <tr>
+            <td>상품 상세사진</td>
+            <td>
+                <img class="image" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(product.getProdDetailImage())}" alt="상품 상세사진">
+            </td>
+        </tr>
+        <tr>
+            <td>카테고리</td>
+            <td>
+                <a th:each="category:${categoryList}" th:text="${category.getText()}" th:if="${category.getValue().equals(product.getCategory())}"></a>
+            </td>
+        </tr>
+        <tr>
+            <td>용량</td>
+            <td>
+                <a th:each="capacity:${capacityList}" th:text="|${capacity.getText()}ml|" th:if="${capacity.getValue().equals(product.getCapacity())}"></a>
+            </td>
+        </tr>
+        <tr>
+            <td>판매 개시일</td>
+            <td th:text="${product.getLaunchingDate()}"></td>
+        </tr>
+        <tr>
+            <td>재고</td>
+            <td th:text="${product.getStock()}"></td>
+        </tr>
+        <tr>
+            <td>재고 갱신일</td>
+            <td th:text="${product.getStockUpdate()}"></td>
+        </tr>
+        <tr>
+            <td>총 판매량</td>
+            <td th:text="${product.getSalesQuantity()}"></td>
+        </tr>
+    </table>
+
+</main>
+<th:block th:replace="~{fragments/footer.html :: content}"></th:block>
+</body>
+</html>

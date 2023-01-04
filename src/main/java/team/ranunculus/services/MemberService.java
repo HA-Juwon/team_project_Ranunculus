@@ -238,7 +238,7 @@ public class MemberService {
         }
         // 현재 비밀번호와 신규 비밀번호가 동일 할 시
         if (newUser.getContact() != null && (!newUser.getContact().matches(MemberRegex.USER_CONTACT) ||
-        this.checkContactAuth(contactAuth) != CommonResult.EXPIRED)) {
+                this.checkContactAuth(contactAuth) != CommonResult.EXPIRED)) {
             return CommonResult.EXPIRED;
         }
         // 신규 연락처 정규화 실패 혹은 인증 실패
@@ -255,8 +255,8 @@ public class MemberService {
             currentUser.setPassword(CryptoUtils.hashSha512(newUser.getPassword()));
         }
         if (newUser.getAddressPostal() != null &&
-        newUser.getAddressPrimary() != null &&
-        newUser.getAddressSecondary() != null) {
+                newUser.getAddressPrimary() != null &&
+                newUser.getAddressSecondary() != null) {
             currentUser.setAddressPostal(newUser.getAddressPostal())
                     .setAddressPrimary(newUser.getAddressPrimary())
                     .setAddressSecondary(newUser.getAddressSecondary());
@@ -338,24 +338,15 @@ public class MemberService {
         user.setEmail(foundUser.getEmail());
         return CommonResult.SUCCESS;
     }
-    
-   @Transactional
-    public IResult resetPassword(UserEntity user) {
-        user.setEmail(user.getEmail());
-//        System.out.println(user.getEmail());
-        UserEntity existingUser = this.memberMapper.selectUserByEmail(user);
 
-        System.out.println(existingUser);
-        if (existingUser == null) {
+    @Transactional
+    public IResult checkUserPassword(UserEntity currentUser, String oldPassword) {
+        if (currentUser == null ||
+                currentUser.getPassword() == null ||
+                oldPassword == null ||
+                !CryptoUtils.hashSha512(oldPassword).equals(currentUser.getPassword())) {
             return CommonResult.FAILURE;
         }
-        existingUser.setPassword(CryptoUtils.hashSha512(user.getPassword()));
-
-        if (this.memberMapper.updateUser(existingUser) == 0) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return CommonResult.FAILURE;
-        }
-
         return CommonResult.SUCCESS;
     }
 }

@@ -48,6 +48,7 @@ public class ProductEntity {
         this.costPrice = costPrice;
         return this;
     }
+
     public int getNetPrice() {
         return netPrice;
     }
