@@ -349,4 +349,19 @@ public class MemberService {
         }
         return CommonResult.SUCCESS;
     }
+
+    @Transactional
+    public IResult deleteUser(UserEntity user) {
+        if (user == null ||
+        user.getEmail() == null ||
+        !user.getEmail().matches(MemberRegex.USER_EMAIL)) {
+            return CommonResult.FAILURE;
+        }
+
+        if (this.memberMapper.deleteUser(user) == 0) {
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
 }

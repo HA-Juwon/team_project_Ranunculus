@@ -344,4 +344,21 @@ public class MemberController {
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
         return responseJson.toString();
     }
+
+    @RequestMapping(value="userTruncate", method = RequestMethod.POST)
+    @ResponseBody
+    public String postUserTruncate(@SessionAttribute(value = UserEntity.ATTRIBUTE_NAME, required = false) UserEntity user) {
+        IResult result = this.memberService.deleteUser(user);
+        JSONObject responseJson = new JSONObject();
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        return responseJson.toString();
+    }
+
+    @RequestMapping(value = "userTruncateDone", method = RequestMethod.GET)
+    public ModelAndView getUserTruncateDone(HttpSession session,
+                                            ModelAndView modelAndView) {
+        modelAndView.setViewName("member/userTruncateDone");
+        session.removeAttribute(UserEntity.ATTRIBUTE_NAME);
+        return modelAndView;
+    }
 }

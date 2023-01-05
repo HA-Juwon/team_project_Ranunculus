@@ -40,8 +40,8 @@
                `stock_update` as `stockUpdate`,
                `sales_quantity` as `salesQuantity`,
                `image_mime` as imageMime,
-               `detail_image` as detailImage,
-               `detail_image_mime` as detailImageMime
+               `detail_image` as prodDetailImage,
+               `detail_image_mime` as prodDetailImageMime
         from ranunculus_products.products
         where `index` = #{index}
     </select>

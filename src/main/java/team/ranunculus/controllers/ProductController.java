@@ -1,6 +1,7 @@
 package team.ranunculus.controllers;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
@@ -88,19 +90,18 @@ public class ProductController {
     }
 
     @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
-    public ModelAndView getdetail(@PathVariable(value = "id") int id,
+    public ModelAndView getDetail(@PathVariable(value = "id") int id,
                                 ModelAndView modelAndView) {
         ProductEntity product = this.productService.readProductByIndex(id);
         List<CapacityEntity> capacityList=this.productService.loadCapacityOptions();
         List<CategoryEntity> categoryList=this.productService.loadCategoryOptions();
-
+        System.out.println(product.getImage());
         System.out.println(product.getProdDetailImage());
         modelAndView.addObject("capacityList",capacityList);
         modelAndView.addObject("categoryList",categoryList);
         modelAndView.addObject("imgUtil", new ImageUtils());
         modelAndView.addObject("product", product);
         modelAndView.setViewName("product/detail");
-//        System.out.println("aaa");
         return modelAndView;
     }
 
