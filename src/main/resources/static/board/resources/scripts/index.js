@@ -1,4 +1,4 @@
-const submitForm = window.document.getElementById('submitform');
+const submitForm = window.document.getElementById('submitForm');
 const searchInput = window.document.getElementById('searchInput');
 const list1 = window.document.getElementById('list1')
 const list2 = window.document.getElementById('list2')
