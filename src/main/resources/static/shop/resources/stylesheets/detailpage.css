@@ -136,6 +136,9 @@ body { padding: 50px;}
     transform: translate(-150%,0);
 
 }
+.hide{
+    transform: translate(150%, 0);
+}
 
 
 
