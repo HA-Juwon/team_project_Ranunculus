@@ -1,16 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.ranunculus.mappers.IMemberMapper">
+    <insert id="insertContactAuth"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="team.ranunculus.entities.member.ContactAuthEntity">
+        INSERT INTO ranunculus_members.contact_auths (`contact`, `code`, `salt`, `created_at`, `expires_at`, `expires_flag`)
+        VALUES (#{contact}, #{code}, #{salt}, #{createdAt}, #{expiresAt}, #{isExpired})
+    </insert>
+
     <insert id="insertUser"
             parameterType="team.ranunculus.entities.member.UserEntity">
-        INSERT INTO `ranunculus_members`.`member`(`email`, `password`, `name`, `address_postal`, `address_primary`,
-                                                  `address_secondary`, `telecom_value`, `contact`, `policy_terms_at`,
-                                                  `policy_privacy_at`, `policy_marketing_at`, `status_value`,
-                                                  `registered_at`, `admin_flag`)
+        INSERT INTO `ranunculus_members`.`member`(`email`,
+                                                  `password`,
+                                                  `name`,
+                                                  `address_postal`,
+                                                  `address_primary`,
+                                                  `address_secondary`,
+                                                  `telecom_value`,
+                                                  `contact`,
+                                                  `policy_terms_at`,
+                                                  `policy_privacy_at`,
+                                                  `policy_marketing_at`,
+                                                  `status_value`,
+                                                  `registered_at`,
+                                                  `admin_flag`,
+                                                  `session_id`,
+                                                  `limit_date`)
         VALUES (#{email}, #{password}, #{name}, #{addressPostal}, #{addressPrimary}, #{addressSecondary},
                 #{telecomValue}, #{contact}, #{policyTermsAt}, #{policyPrivacyAt}, #{policyMarketingAt}, #{statusValue},
-                #{registeredAt}, #{isAdmin})
+                #{registeredAt}, #{isAdmin}, #{sessionId}, #{limitDate})
     </insert>
+
+    <select id="selectUserByEmail"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `address_postal`      AS `addressPostal`,
+               `address_primary`     AS `addressPrimary`,
+               `address_secondary`   AS `addressSecondary`,
+               `telecom_value`       AS `telecomValue`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`
+        FROM `ranunculus_members`.`member`
+        WHERE `email` = #{email}
+        LIMIT 1;
+    </select>
 
     <select id="selectUserByEmailPassword"
             parameterType="team.ranunculus.entities.member.UserEntity"
@@ -35,10 +78,28 @@
         LIMIT 1
     </select>
 
-    <select id="selectUserByEmail"
+    <select id="selectUserByContact"
             parameterType="team.ranunculus.entities.member.UserEntity"
             resultType="team.ranunculus.entities.member.UserEntity">
         SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `contact`             AS `contact`,
+               `policy_terms_at`     AS `policyTermsAt`,
+               `policy_privacy_at`   AS `policyPrivacyAt`,
+               `policy_marketing_at` AS `policyMarketingAt`,
+               `status_value`        AS `statusValue`,
+               `registered_at`       AS `registeredAt`,
+               `admin_flag`          AS `isAdmin`
+        FROM `ranunculus_members`.member
+        WHERE `contact` = #{contact}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserBySessionId"
+            parameterType="team.ranunculus.entities.member.UserEntity"
+            resultType="team.ranunculus.entities.member.UserEntity">
+        select `email`               AS `email`,
                `password`            AS `password`,
                `name`                AS `name`,
                `address_postal`      AS `addressPostal`,
@@ -51,9 +112,79 @@
                `policy_marketing_at` AS `policyMarketingAt`,
                `status_value`        AS `statusValue`,
                `registered_at`       AS `registeredAt`,
-               `admin_flag`          AS `isAdmin`
-        FROM `ranunculus_members`.`member`
-        WHERE `email` = #{email}
-        LIMIT 1;
+               `admin_flag`          AS `isAdmin`,
+               `session_id`          AS `sessionId`,
+               `limit_date`          AS `limitDate`
+        from ranunculus_members.member
+        where `session_id` = #{sessionId}
     </select>
+
+    <update id="updateAutoLogin"
+            parameterType="team.ranunculus.entities.member.UserEntity">
+        update ranunculus_members.member
+        set `session_id`=#{sessionId},
+            `limit_date`=#{limitDate}
+        where `email` = #{email};
+    </update>
+
+    <select id="selectContactAuthByContactCodeSalt"
+            parameterType="team.ranunculus.entities.member.ContactAuthEntity"
+            resultType="team.ranunculus.entities.member.ContactAuthEntity">
+        SELECT `index`        AS `index`,
+               `contact`      AS `contact`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_at`   AS `createdAt`,
+               `expires_at`   AS `expiresAt`,
+               `expires_flag` AS `isExpired`
+        FROM ranunculus_members.contact_auths
+        WHERE `contact` = #{contact}
+          AND `code` = #{code}
+          AND `salt` = #{salt}
+        LIMIT 1
+    </select>
+
+    <select id="selectTelecoms"
+            parameterType="team.ranunculus.entities.member.TelecomEntity"
+            resultType="team.ranunculus.entities.member.TelecomEntity">
+        SELECT `value` AS `value`,
+               `text`  AS `text`
+        FROM `ranunculus_members`.`telecoms`
+        ORDER BY `value`
+    </select>
+
+    <update id="updateContactAuth"
+            parameterType="team.ranunculus.entities.member.ContactAuthEntity">
+        UPDATE `ranunculus_members`.contact_auths
+        SET `contact`      = #{contact},
+            `code`         = #{code},
+            `salt`         = #{salt},
+            `created_at`   = #{createdAt},
+            `expires_at`   = #{expiresAt},
+            `expires_flag` = #{isExpired}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+    <update id="updateUser"
+            parameterType="team.ranunculus.entities.member.UserEntity">
+        UPDATE `ranunculus_members`.`member`
+        SET `password`            = #{password},
+            `address_postal`      = #{addressPostal},
+            `address_primary`     = #{addressPrimary},
+            `address_secondary`   = #{addressSecondary},
+            `telecom_value`       = #{telecomValue},
+            `contact`             = #{contact},
+            `policy_terms_at`     = #{policyTermsAt},
+            `policy_privacy_at`   = #{policyPrivacyAt},
+            `policy_marketing_at` = #{policyMarketingAt},
+            `status_value`        = #{statusValue},
+            `registered_at`       = #{registeredAt},
+            `admin_flag`          = #{isAdmin},
+            `session_id`          = #{sessionId},
+            `limit_date`          = #{limitDate}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
 </mapper>

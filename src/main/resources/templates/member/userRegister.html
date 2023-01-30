@@ -36,7 +36,7 @@
                 제 1 장 총 칙
 
                 제 1 조 (목적)
-                이 약관은 {COMPANY_NAME}(이하 "사이트"라 합니다)에서 제공하는 인터넷서비스(이하 "서비스"라 합니다)의
+                이 약관은 { Ranunculus }(이하 "사이트"라 합니다)에서 제공하는 인터넷서비스(이하 "서비스"라 합니다)의
                 이용 조건 및 절차에 관한 기본적인 사항을 규정함을 목적으로 합니다.
                 제 2 조 (약관의 효력 및 변경)
                 ① 이 약관은 서비스 화면이나 기타의 방법으로 이용고객에게 공지함으로써 효력을 발생합니다.
@@ -154,17 +154,15 @@
             - 이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.
             ① 개인정보 수집 항목 및 수집·이용 목적
             가) 수집 항목 (필수항목)
-            - 성명, 주소, 전화번호(휴대전화), 이메일 등 지원
-            신청서에 기재된 정보 또는 신청자가 제공한 정보
+            - 성명, 주소, 전화번호(휴대전화), 이메일, 연락처 등
+            사이트에 기재된 정보 또는 신청자가 제공한 정보
             나) 수집 및 이용 목적
-            - 하이트진로 장학생 선발 전형 진행
-            - 하이트진로 장학생과의 연락 및 자격확인
-            - 하이트진로 장학생 자원관리
+            - Ranunculus 사이트 이용
             ② 개인정보 보유 및 이용기간
-            - 수집·이용 동의일로부터 개인정보의 수집·이용목적을 달성할 때까지
+            - 수집·이용 동의일로부터 개인정보의 수집·이용 목적을 달성할 때까지
             ③ 동의거부관리
             - 귀하께서는 본 안내에 따른 개인정보 수집, 이용에 대하여 동의를 거부하실 권리가 있습니다. 다만,
-            귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 Ranunculus 서비스 일부분이 불가 할 수 있습니다.
+              귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 서비스 이용이 불가 할 수 있습니다.
             </pre>
             <label class="check-container">
                 <input class="check-input" hidden id="agreePrivacy" name="agreePrivacy" type="checkbox">
@@ -237,17 +235,27 @@
         <label class="input-container">
             <span class="text">연락처 통신사</span>
             <select class="_object-input input" name="telecomValue">
-                <option disabled selected redonly value="-1">통신사</option>
-                <option value="1">SKT</option>
-                <option value="2">KT</option>
-                <option value="3">LGU+</option>
-                <option value="4">알뜰폰</option>
+                <!--/*@thymesVar id="telecom" type="team.ranunculus.entities.member.TelecomEntity"*/-->
+                <option th:each="telecom : ${memberTelecoms}"
+                        th:value="${telecom.getValue()}"
+                        th:text="${telecom.getText()}">
+                </option>
             </select>
         </label>
-        <label class="input-container">
+        <label class="contact-container contact-container-first">
             <span class="text">연락처</span>
-            <input class="_object-input input" maxlength="11" name="contact" placeholder="연락처 (- 없이 입력해주세요.)"
-                   type="text">
+            <div class="input-container">
+                <input class="_object-input input" maxlength="12" name="contact" placeholder="연락처 ( - 없이 입력해주세요.)" type="text">
+                <input name="contactAuthSalt" type="hidden">
+                <input class="_object-button" name="contactAuthRequestButton" type="button" value="인증번호 요청" data-func="requestContactAuthCode">
+            </div>
+        </label>
+        <label class="contact-container">
+            <span hidden class="text">연락처 인증번호</span>
+            <div class="input-container">
+                <input class="_object-input input" disabled maxlength="6" name="contactAuthCode" placeholder="인증번호" type="text">
+                <input class="_object-button" disabled name="contactAuthCheckButton" type="button" value="인증번호 확인" data-func="checkContactAuthCode">
+            </div>
         </label>
         <div class="register-warning" id="registerWarning"></div>
         <section class="section-container">

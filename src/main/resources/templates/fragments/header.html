@@ -17,6 +17,18 @@
                     <a class="link" th:href="@{/notice/}">공지사항</a>
                 </li>
             </ul>
+
+            <ul class="admin menu" th:if="${session.memberUser != null && session.memberUser.isAdmin()}">
+                <li class="item">
+                    <a class="link" th:href="@{/product/addProd}">상품추가</a>
+                </li>
+                <li class="item">
+                    <a class="link" th:href="@{/product/managementProd}">상품관리</a>
+                </li>
+                <li class="item">
+                    <a class="link" th:href="@{/admin/managementUser}">유저관리</a>
+                </li>
+            </ul>
         </div>
         <a class="logo-container" th:href="@{/}">
             <!--    로고 생기면 넣기      -->

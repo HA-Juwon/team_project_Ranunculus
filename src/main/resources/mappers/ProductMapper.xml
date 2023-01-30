@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.ranunculus.mappers.IProductMapper">
+    <insert id="insertProduct"
+            parameterType="team.ranunculus.entities.product.ProductEntity">
+
+        INSERT INTO `ranunculus_products`.`products`(`name`, `cost_price`, `net_price`, `image`, `capacity`, `category`,
+                                                     `launching_date`, `stock`, `stock_update`, `sales_quantity`,
+                                                     `image_mime`, `detail_image`, `detail_image_mime`)
+
+        VALUES (#{name}, #{costPrice}, #{netPrice}, #{image}, #{capacity}, #{category}, #{launchingDate}, #{stock},
+                #{stockUpdate}, #{salesQuantity}, #{mime}, #{prodDetailImage}, #{prodDetailImageMime})
+    </insert>
+
+    <insert id="insertCapacityOption"
+            parameterType="team.ranunculus.entities.product.CapacityEntity">
+        INSERT INTO `ranunculus_products`.product_capacity(`text`)
+        VALUES (#{text})
+    </insert>
+
+
+    <select id="selectAllProduct"
+            resultType="team.ranunculus.entities.product.ProductEntity">
+        SELECT `index` AS `index`,
+               `name` AS `name`,
+               `image` AS `image`,
+               `image_mime` AS `image`,
+               `capacity` AS `capacity`
+        from `ranunculus_products`.products
+        order by `index` DESC
+    </select>
+
+    <select id="selectCapacity"
+            resultType="team.ranunculus.entities.product.CapacityEntity">
+        SELECT `value` AS `value`,
+               `text`  AS `text`
+        FROM ranunculus_products.product_capacity
+        ORDER BY `text`
+    </select>

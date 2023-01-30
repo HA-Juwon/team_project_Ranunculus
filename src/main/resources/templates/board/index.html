@@ -53,29 +53,46 @@
         <tr>
             <th>NO.</th>
             <th>DATE</th>
-            <th>CONTENT</th>
+            <th>TITLE</th>
             <th>NAME</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td class="no-inquiry-td" colspan="4">표시할 문의가 없습니다.</td>
+            <td id="list1" class="no-inquiry-td" colspan="4" th:if="${list == null || list.size() == 0}">표시할 문의가 없습니다.</td>
         </tr>
 
-        <tr>
-            <td>1</td>
-            <td>2222,11,22</td>
-            <td>너무 힘들어요 힘들어</td>
-            <td>김깔깔깔깔</td>
+        <tr id="list2" th:each="list : ${list}">
+            <td>
+                <a id="list3" th:text="${list.getIndex()}"></a>
+            </td>
+            <td>
+                <a id="list4" th:text="${#dates.format(list.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></a>
+            </td>
+            <td>
+                <a id="list5" th:text="${list.getTitle()}" th:href="@{'/board/read/' + ${list.getIndex()}}"></a>
+            </td>
+            <td>
+                <a id="list6" th:text="${list.getWriter()}"></a>
+            </td>
         </tr>
         </tbody>
 
 
     </table>
     <div class="page-container">
-        <div></div>
         <div class="number-button">
-            123456789
+<!--            <a th:each="page : ${#numbers.sequence(paging.boundStartPage, paging.boundEndPage)}"-->
+<!--               th:class="${'page' + (page == paging.requestPage ? ' selected' : '')}"-->
+<!--               th:text="${page}"-->
+<!--               th:href="@{'./' (page = ${page})}"-->
+<!--               th:if="${criteria == null || keyword == null}"></a>-->
+
+<!--            <a th:each="page : ${#numbers.sequence(paging.boundStartPage, paging.boundEndPage)}"-->
+<!--               th:class="${'page' + (page == paging.requestPage ? ' selected' : '')}"-->
+<!--               th:text="${page}"-->
+<!--               th:href="@{'./' (page = ${page}, criteria = ${criteria}, keyword = ${keyword})}"-->
+<!--               th:if="${criteria != null && keyword != null}"></a>-->
         </div>
         <div class="write-container">
             <a class="write" th:href="@{/board/write}">WRITE</a>
