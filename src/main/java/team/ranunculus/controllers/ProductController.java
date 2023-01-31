@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import team.ranunculus.entities.member.ContactAuthEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.entities.product.CapacityEntity;
 import team.ranunculus.entities.product.CategoryEntity;
@@ -96,7 +97,7 @@ public class ProductController {
         List<CapacityEntity> capacityList=this.productService.loadCapacityOptions();
         List<CategoryEntity> categoryList=this.productService.loadCategoryOptions();
         System.out.println(product.getImage());
-        System.out.println(product.getProdDetailImage());
+//        System.out.println(product.getProdDetailImage());
         modelAndView.addObject("capacityList",capacityList);
         modelAndView.addObject("categoryList",categoryList);
         modelAndView.addObject("imgUtil", new ImageUtils());
@@ -105,11 +106,75 @@ public class ProductController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "modifyProdDetail/{id}", method = RequestMethod.GET)
+    public ModelAndView getModifyProdDetail(@PathVariable(value = "id") int id, ModelAndView modelAndView){
+
+        ProductEntity product = this.productService.readProductByIndex(id);
+        List<CapacityEntity> capacityList=this.productService.loadCapacityOptions();
+        List<CategoryEntity> categoryList=this.productService.loadCategoryOptions();
+
+
+        modelAndView.addObject("capacityList",capacityList);
+        modelAndView.addObject("categoryList",categoryList);
+        modelAndView.addObject("product", product);
+        modelAndView.setViewName("product/modifyProdDetail");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "modifyProdDetail/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postModifyProdDetail(@PathVariable(value = "id") int id,
+                                   @RequestParam(value = "newName") String newName,
+                                   @RequestParam(value = "newCostPrice", required = false, defaultValue = "-1") int newCostPrice,
+                                   @RequestParam(value = "newNetPrice", required = false, defaultValue = "-1") int newNetPrice,
+                                   @RequestParam(value = "newImage", required = false) byte[] newImage,
+                                   @RequestParam(value = "newDetailImage", required = false) byte[] newDetailImage,
+                                   @RequestParam(value = "newCapacity", required = false, defaultValue = "-1") int newCapacity,
+                                   @RequestParam(value = "newCategory", required = false, defaultValue = "-1") int newCategory,
+                                   @RequestParam(value = "newStock",required = false, defaultValue = "-1") int newStock)
+            throws Exception {
+        ProductEntity currentProd = this.productService.readProductByIndex(id);
+
+        System.out.println(currentProd.getIndex());
+        ProductEntity newProduct = ProductEntity.build();
+        if (newName != null) {
+            newProduct.setName(newName);
+        }
+        if (newImage != null) {
+            newProduct.setImage(newImage);
+        }
+        if (newDetailImage != null){
+            newProduct.setProdDetailImage(newDetailImage);
+        }
+        if (newCostPrice != -1){
+            newProduct.setCostPrice(newCostPrice);
+        }
+        if (newNetPrice != -1){
+            newProduct.setNetPrice(newNetPrice);
+        }
+        if (newCapacity !=-1){
+            newProduct.setCapacity(newCapacity);
+        }
+        if (newCategory !=-1){
+            newProduct.setCategory(newCategory);
+        }
+        if (newStock != -1){
+            newProduct.setStock(newCategory);
+        }
+
+        JSONObject responseJson = new JSONObject();
+
+        IResult result = this.productService.editProd(currentProd,newProduct);
+
+        responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());
+        return responseJson.toString();
+    }
+
     //옵션 추가하기 버튼을 누르면 작동함
     @RequestMapping(value = "appendOption", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getAppendOption(CapacityEntity capacity) {
-        System.out.println(capacity.getText());
+//        System.out.println(capacity.getText());
         IResult result = this.productService.addCapacity(capacity);
         JSONObject responseJson = new JSONObject();
         responseJson.put(IResult.ATTRIBUTE_NAME, result.name().toLowerCase());

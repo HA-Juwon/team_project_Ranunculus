@@ -3,7 +3,6 @@ package team.ranunculus.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import team.ranunculus.entities.board.QnaEntity;
 import team.ranunculus.entities.member.UserEntity;
 import team.ranunculus.entities.product.CapacityEntity;
 import team.ranunculus.entities.product.CategoryEntity;
@@ -66,13 +65,15 @@ public class ProductService {
             return CommonResult.FAILURE;
         }
         if(this.productMapper.insertCapacityOption(capacity)==0){
-//            System.out.println("추가에 실패했다!");
             return CommonResult.FAILURE;
         }
-//        System.out.println("성공했다!");
         return CommonResult.SUCCESS;
     }
 
+    public IResult editProd(ProductEntity currentProd,ProductEntity newProd){
+
+        return CommonResult.SUCCESS;
+    }
     public List<ProductEntity> getProductList(){
         return this.productMapper.selectAllProduct();
     }

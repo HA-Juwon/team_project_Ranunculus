@@ -151,6 +151,7 @@ body > .main > .total-section > .truncate-section > .truncate-form > .first-sect
     background-color: rgba(var(--concept-color-blue), 50%);
 }
 
+
 body > .main > .total-section > .truncate-section > .truncate-form > .first-section > .button-container {
     align-items: center;
     display: flex;

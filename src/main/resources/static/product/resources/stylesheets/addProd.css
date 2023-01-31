@@ -14,7 +14,8 @@ body > .main {
 }
 
 
-body > .main > .addProduct-form
+body > .main > .addProduct-form,
+body > .main > .modifyProduct-form
 {
     width: 25rem;
     align-items: stretch;
@@ -23,11 +24,14 @@ body > .main > .addProduct-form
     justify-content: flex-start;
 }
 
-body > .main > .addProduct-form > * + *{
+body > .main > .addProduct-form > * + *,
+body > .main > .modifyProduct-form > * + *
+{
     margin-top: 0.625rem;
 }
 
 body > .main > .addProduct-form > .title
+body > .main > .modifyProduct-form > .title
 {
     align-self: center;
     font-size: 1.875rem;
@@ -36,20 +40,26 @@ body > .main > .addProduct-form > .title
     margin-top: 2.5rem;
 }
 
-body > .main > .addProduct-form >._object-button{
+body > .main > .addProduct-form >._object-button,
+body > .main > .modifyProduct-form >._object-button
+{
     margin-top: 0.625rem;
     display: table;
 }
 
-body>.main>.addProduct-form>.content-container.capacity{
+body>.main>.addProduct-form>.content-container.capacity,
+body>.main>.modifyProduct-form>.content-container.capacity{
     display: flex;
 }
 
-body>.main>.addProduct-form>.content-container.capacity>.button{
+body>.main>.addProduct-form>.content-container.capacity>.button,
+body>.main>.modifyProduct-form>.content-container.capacity>.button{
     background-color: rgb(var(--concept-color-pink));
     padding: 0 1.625rem;
 }
 
-body>.main>.addProduct-form>.content-container>select{
+body>.main>.addProduct-form>.content-container>select,
+body>.main>.modifyProduct-form>.content-container>select
+{
     width: 25rem;
 }

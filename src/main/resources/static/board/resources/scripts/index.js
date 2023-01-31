@@ -46,5 +46,3 @@ submitForm.onsubmit = e => {
     };
     xhr.send(formData);
 }
-
-

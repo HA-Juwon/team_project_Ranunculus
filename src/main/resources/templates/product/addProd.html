@@ -14,7 +14,9 @@
 <body class="_layout-hmf">
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="_main main">
-    <form class="addProduct-form" id="addProductForm" enctype="multipart/form-data" method="post">
+    <form class="addProduct-form"
+          id="addProductForm"
+          enctype="multipart/form-data" method="post">
         <div class="title-box">
             <h1 class="title">상품 추가 창</h1>
         </div>
@@ -88,6 +90,7 @@
             <input class="_object-button" type="submit" value="상품 추가">
         </div>
 
+        <a class="link" th:href="|@{/product/modifyProdDetail/}|">로그인</a>
     </form>
 
 </main>
