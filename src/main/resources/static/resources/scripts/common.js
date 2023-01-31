@@ -51,6 +51,7 @@ searchButton.addEventListener('click', () => {
         searchForm.classList.add("visible");
     }
 });
+
 myButton.addEventListener('click', () => {
     if (myMenu.classList.contains("visible")) {
         myMenu.classList.remove("visible");
@@ -62,5 +63,5 @@ myButton.addEventListener('click', () => {
 searchForm.onsubmit = e => {
     e.preventDefault();
 
-
+    // const
 };

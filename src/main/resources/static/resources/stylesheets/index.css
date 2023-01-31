@@ -102,8 +102,7 @@
 }
 
 .hero-header{
-    height: 300px;
-    background-image: url("https://airweb.co.kr/data/file/logo_portfolio/3035080643_i2nQZ4mX_43e02da1a0213af7ae7d9865593749522145e212.jpg");
+    padding-top: 1.325rem;
     background-repeat: no-repeat;
     background-size: auto;
     background-position: center;

@@ -31,7 +31,7 @@
         select `index` as `index`,
                `name` as `name`,
                `cost_price` as `costPrice`,
-               `net_price` as netPrice,
+               `net_price` as `netPrice`,
                `image` as `image`,
                `capacity` as `capacity`,
                `category` as `category`,
@@ -51,10 +51,11 @@
             resultType="team.ranunculus.entities.product.ProductEntity">
         SELECT `index` AS `index`,
                `name` AS `name`,
+               `net_price` AS `netPrice`,
                `image` AS `image`,
                `image_mime` AS `image`,
                `capacity` AS `capacity`
-        from `ranunculus_products`.products
+        from `ranunculus_products`.`products`
         order by `index` DESC
     </select>
 
