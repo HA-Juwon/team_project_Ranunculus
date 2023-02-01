@@ -12,6 +12,7 @@ public interface IProductMapper {
     int insertProduct(ProductEntity productEntity);
     int insertCapacityOption(CapacityEntity capacity);
     ProductEntity selectProductByIndex(int index);
+    List<ProductEntity> selectProductByName();
     List<ProductEntity> selectAllProduct();
     List<CapacityEntity> selectCapacity();
     List<CategoryEntity> selectCategory();

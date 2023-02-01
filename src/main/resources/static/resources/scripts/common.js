@@ -63,5 +63,6 @@ myButton.addEventListener('click', () => {
 searchForm.onsubmit = e => {
     e.preventDefault();
 
+    window.location.href = "/shop/search";
     // const
 };
