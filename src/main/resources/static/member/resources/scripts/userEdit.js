@@ -201,40 +201,42 @@ window.document.body.querySelectorAll('[data-func]').forEach(element => {
     });
 });
 
-truncateForm.onsubmit = e => {
-    e.preventDefault();
+if (truncateForm !== null) {
+    truncateForm.onsubmit = e => {
+        e.preventDefault();
 
-    if (!agreeTruncate.checked) {
-        alert('회원탈퇴 희망 시 안내 사항 필독 후 동의해주세요.');
-        return;
-    }
+        if (!agreeTruncate.checked) {
+            alert('회원탈퇴 희망 시 안내 사항 필독 후 동의해주세요.');
+            return;
+        }
 
-    if (!confirm('정말 탈퇴하시겠습니까?')){
-        window.location.href = '/member/userEdit';
-    } else {
-        cover.show('회원 탈퇴를 진행중 입니다.');
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', `./userTruncate`);
-        xhr.onreadystatechange = () => {
-            if(xhr.readyState === XMLHttpRequest.DONE) {
-                cover.hide();
-                if(xhr.status >= 200 && xhr.status < 300) {
-                    const responseJson = JSON.parse(xhr.responseText);
-                    switch (responseJson['result']) {
-                        case 'success':
-                            window.location.href = '/member/userTruncateDone';
-                            break;
-                        default:
-                            alert('알 수 없는 이유로 탈퇴를 진행하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+        if (!confirm('정말 탈퇴하시겠습니까?')){
+            window.location.href = '/member/userEdit';
+        } else {
+            cover.show('회원 탈퇴를 진행중 입니다.');
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `./userTruncate`);
+            xhr.onreadystatechange = () => {
+                if(xhr.readyState === XMLHttpRequest.DONE) {
+                    cover.hide();
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        const responseJson = JSON.parse(xhr.responseText);
+                        switch (responseJson['result']) {
+                            case 'success':
+                                window.location.href = '/member/userTruncateDone';
+                                break;
+                            default:
+                                alert('알 수 없는 이유로 탈퇴를 진행하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                        }
+                    } else {
+                        alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
                     }
-                } else {
-                    alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
                 }
-            }
-        };
-        xhr.send();
-    }
-};
+            };
+            xhr.send();
+        }
+    };
+}
 
 if (infoForm !== null) {
     infoForm.onsubmit = e => {

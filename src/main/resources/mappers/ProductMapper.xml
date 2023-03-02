@@ -28,33 +28,55 @@
 
     <select id="selectProductByIndex"
             resultType="team.ranunculus.entities.product.ProductEntity">
-        select `index` as `index`,
-               `name` as `name`,
-               `cost_price` as `costPrice`,
-               `net_price` as netPrice,
-               `image` as `image`,
-               `capacity` as `capacity`,
-               `category` as `category`,
-               `launching_date` as `launchingDate`,
-               `stock` as `stock`,
-               `stock_update` as `stockUpdate`,
-               `sales_quantity` as `salesQuantity`,
-               `image_mime` as imageMime,
-               `detail_image` as prodDetailImage,
+        select `index`             as `index`,
+               `name`              as `name`,
+               `cost_price`        as `costPrice`,
+               `net_price`         as `netPrice`,
+               `image`             as `image`,
+               `capacity`          as `capacity`,
+               `category`          as `category`,
+               `launching_date`    as `launchingDate`,
+               `stock`             as `stock`,
+               `stock_update`      as `stockUpdate`,
+               `sales_quantity`    as `salesQuantity`,
+               `image_mime`        as imageMime,
+               `detail_image`      as prodDetailImage,
                `detail_image_mime` as prodDetailImageMime
         from ranunculus_products.products
         where `index` = #{index}
     </select>
 
+    <select id="selectProductByName"
+            resultType="team.ranunculus.entities.product.ProductEntity">
+        SELECT `index`             AS `index`,
+               `name`              AS `name`,
+               `net_price`         AS `netPrice`,
+               `image`             AS `image`,
+               `image_mime`        AS `imageMime`,
+               `capacity`          AS `capacity`,
+               `category`          AS `category`,
+               `launching_date`    AS `launchingDate`,
+               `stock`             AS `stock`,
+               `stock_update`      AS `stockUpdate`,
+               `sales_quantity`    AS `salesQuantitu`,
+               `detail_image`      AS `detailImage`,
+               `detail_image_mime` AS `detailImageMime`
+        FROM `ranunculus_products`.`products`
+        #         WHERE `name` = #{name}
+#         OR ;
+    </select>
 
     <select id="selectAllProduct"
             resultType="team.ranunculus.entities.product.ProductEntity">
-        SELECT `index` AS `index`,
-               `name` AS `name`,
-               `image` AS `image`,
-               `image_mime` AS `image`,
-               `capacity` AS `capacity`
-        from `ranunculus_products`.products
+        SELECT `index`      AS `index`,
+               `name`       AS `name`,
+               `net_price`  AS `netPrice`,
+               `image`      AS `image`,
+               `image_mime` AS `imageMime`,
+               `category`   AS `category`,
+               `capacity`   AS `capacity`,
+               `stock`      AS `stock`
+        from `ranunculus_products`.`products`
         order by `index` DESC
     </select>
 

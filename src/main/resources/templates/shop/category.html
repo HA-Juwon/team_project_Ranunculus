@@ -37,158 +37,19 @@
 </nav>
 <main class="main">
     <div class="product-container">
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
+        <a class="link" href="#" th:each="list : ${list}">
+            <img class="image" alt="향수이미지" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(list.getImage())}">
+                <div class="product-name" th:text="${list.getName()}"></div>
+            <div class="product-detail">
+                <div th:each="capacity:${capacity}" th:text="[+ ${capacity.getText()} + ml]" th:if="${capacity.getValue().equals(list.getCapacity())}"></div>
+                <div th:each="category:${category}" th:text="${category.getText()}" th:if="${category.getValue().equals(list.getCategory())}"></div>
             </div>
-            <div class="product-price">
-                1,000
-            </div>
+                <div class="product-price" th:text="${list.getNetPrice()} + 원"></div>
         </a>
 
         <a class="link" href="#">
             <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
-            <div class="product-name">
-                향수
-            </div>
-            <div class="product-price">
-                1,000
-            </div>
-        </a>
-
-        <a class="link" href="#">
-            <img class="image" alt="" src="https://t1.daumcdn.net/cfile/tistory/9975564B5D807BBA16">
+            <img class="sold-out" alt="sold-out" src="/images/sold_out.png">
             <div class="product-name">
                 향수
             </div>
