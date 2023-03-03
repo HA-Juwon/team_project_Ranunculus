@@ -66,8 +66,15 @@ body > .main > .product-container > .link {
     position: relative;
 }
 
-body > .main > .product-container > .link:hover {
-    text-decoration: underline;
+body > .main > .product-container > .link > .sold-out {
+    top: -5px;
+    width: 15rem;
+    height: 15rem;
+    border: 0.325rem solid red;
+    border-radius: 0.25rem;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
 }
 
 body > .main > .product-container > .link > .image {
@@ -79,6 +86,13 @@ body > .main > .product-container > .link > .image {
 
 body > .main > .product-container > .link:hover > .image {
     box-shadow: 0 0 0.25rem 0.125rem rgba(60, 60, 60, 50%);
+}
+
+body > .main > .product-container > .link:hover > .sold-out ~ * {
+    box-shadow: none;
+    cursor: none;
+    pointer-events: none;
+    user-select: none;
 }
 
 body > .main > .product-container > .link > .product-name {
@@ -135,16 +149,4 @@ body > .page-container > .page-wrap:first-of-type > .page {
 body > .page-container > .page-wrap:last-of-type > .page {
     border-top-right-radius: 0.325rem;
     border-bottom-right-radius: 0.325rem;
-}
-
-
-.sold-out {
-    top: 0;
-    width: 15rem;
-    height: 15rem;
-    background-size: contain;
-    opacity: 0.6;
-    position: absolute;
-    pointer-events: none;
-    user-select: none;
 }
